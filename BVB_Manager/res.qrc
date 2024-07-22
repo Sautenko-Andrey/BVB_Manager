@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>ball.png</file>
+        <file>pdf.png</file>
+        <file>exit.png</file>
+        <file>add_player.png</file>
+        <file>change_player.png</file>
+        <file>delete_all_players.png</file>
+        <file>delete_player.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BVB_Manager</class>
+ <widget class="QMainWindow" name="BVB_Manager">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1366</width>
+    <height>768</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>BVB_Manager</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_6">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Date:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_2">
+            <property name="maximumSize">
+             <size>
+              <width>475</width>
+              <height>450</height>
+             </size>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <item>
+              <widget class="QCalendarWidget" name="calendarWidget">
+               <property name="maximumSize">
+                <size>
+                 <width>450</width>
+                 <height>301</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Time:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout">
+               <item>
+                <widget class="QTimeEdit" name="trainingTime"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>378</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>408</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>868</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1366</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionNew_training"/>
+    <addaction name="actiontp_PDF"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionAdd_a_new_player"/>
+    <addaction name="actionDelete_a_player"/>
+    <addaction name="actionChange_a_player"/>
+    <addaction name="actionDelete_all_players"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>LeftToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNew_training"/>
+   <addaction name="actiontp_PDF"/>
+   <addaction name="actionExit"/>
+   <addaction name="separator"/>
+   <addaction name="actionAdd_a_new_player"/>
+   <addaction name="actionDelete_a_player"/>
+   <addaction name="actionChange_a_player"/>
+   <addaction name="actionDelete_all_players"/>
+  </widget>
+  <action name="actionNew_training">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/ball.png</normaloff>:/images/ball.png</iconset>
+   </property>
+   <property name="text">
+    <string>New training</string>
+   </property>
+  </action>
+  <action name="actiontp_PDF">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/pdf.png</normaloff>:/images/pdf.png</iconset>
+   </property>
+   <property name="text">
+    <string>to PDF</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/exit.png</normaloff>:/images/exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionAdd_a_new_player">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/add_player.png</normaloff>:/images/add_player.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add a new player</string>
+   </property>
+  </action>
+  <action name="actionDelete_a_player">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/delete_player.png</normaloff>:/images/delete_player.png</iconset>
+   </property>
+   <property name="text">
+    <string>Delete a player</string>
+   </property>
+  </action>
+  <action name="actionChange_a_player">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/change_player.png</normaloff>:/images/change_player.png</iconset>
+   </property>
+   <property name="text">
+    <string>Change a player</string>
+   </property>
+  </action>
+  <action name="actionDelete_all_players">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/delete_all_players.png</normaloff>:/images/delete_all_players.png</iconset>
+   </property>
+   <property name="text">
+    <string>Delete all players</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
+ <connections/>
+</ui>
