@@ -11,7 +11,7 @@ class DeleteOnePlayer;
 }
 
 struct Player {
-
+    int id;
     QString first_name;
     QString last_name;
     int age;
@@ -39,9 +39,17 @@ private:
 
     QVector<Player> all_players;
 
+    QVector<int> marked_rows;
+
+    QVector<int> marked_indexes;
+
+    QVector<QString> removed_names;
+
     QSqlDatabase *db{nullptr};
 
     QStandardItemModel *model{nullptr};
+
+    //int db_index{0};
 };
 
 #endif // DELETEONEPLAYER_H
