@@ -26,6 +26,8 @@ private slots:
 
     void on_actionDelete_a_player_triggered();
 
+    void on_actionDelete_all_players_triggered();
+
 private:
     Ui::BVB_Manager *ui;
 

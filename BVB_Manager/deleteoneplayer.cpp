@@ -5,7 +5,6 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QDir>
-#include <QMap>
 
 DeleteOnePlayer::DeleteOnePlayer(QSqlDatabase &database, QWidget *parent)
     : QDialog(parent)

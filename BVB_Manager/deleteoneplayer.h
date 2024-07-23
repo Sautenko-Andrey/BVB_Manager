@@ -39,17 +39,15 @@ private:
 
     QVector<Player> all_players;
 
-    QVector<int> marked_rows;
+    QVector<int> marked_rows;   // for view
 
-    QVector<int> marked_indexes;
+    QVector<int> marked_indexes;   // for database
 
-    QVector<QString> removed_names;
+    QVector<QString> removed_names;   // for pics folder
 
     QSqlDatabase *db{nullptr};
 
     QStandardItemModel *model{nullptr};
-
-    //int db_index{0};
 };
 
 #endif // DELETEONEPLAYER_H
