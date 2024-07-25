@@ -7,5 +7,8 @@
         <file>change_player.png</file>
         <file>delete_all_players.png</file>
         <file>delete_player.png</file>
+        <file>add_exercise.png</file>
+        <file>delete_exercise.png</file>
+        <file>change_exercise.png</file>
     </qresource>
 </RCC>

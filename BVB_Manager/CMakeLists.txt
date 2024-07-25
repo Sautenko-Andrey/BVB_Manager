@@ -31,6 +31,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         databasemanager.h databasemanager.cpp
         addplayer.h addplayer.cpp addplayer.ui
         deleteoneplayer.h deleteoneplayer.cpp deleteoneplayer.ui
+        changeplayer.h changeplayer.cpp changeplayer.ui
+        addexercise.h addexercise.cpp addexercise.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET BVB_Manager APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

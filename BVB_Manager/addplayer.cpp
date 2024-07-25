@@ -17,7 +17,10 @@ enum class DefaultWidgetValues {
     MaximumHeight = 235
 };
 
-AddPlayer::AddPlayer(QSqlDatabase &database, QWidget *parent)
+AddPlayer::AddPlayer(QSqlDatabase &database,
+                     QWidget *parent,
+                     bool add_mode,
+                     const QString &player_index)
     : QDialog(parent)
     , ui(new Ui::AddPlayer)
 {
@@ -26,26 +29,98 @@ AddPlayer::AddPlayer(QSqlDatabase &database, QWidget *parent)
     // pointer on database
     db = &database;
 
-    // Age box settings
-    ui->ageSpinBox->setValue(static_cast<int>(DefaultWidgetValues::DefaultAge));
-    ui->ageSpinBox->setMinimum(static_cast<int>(DefaultWidgetValues::MinimumAge));
-    ui->ageSpinBox->setMaximum(static_cast<int>(DefaultWidgetValues::MaximumAge));
+    // save mode for future purpose
+    mode = add_mode;
 
-    // Sex radio buttons settings
-    ui->maleRadioButton->setChecked(true);
+    //save player's index
+    index = player_index;
 
-    // Height box settings
-    ui->heightSpinBox->setMinimum(static_cast<int>(DefaultWidgetValues::MinimumHeight));
-    ui->heightSpinBox->setMaximum(static_cast<int>(DefaultWidgetValues::MaximumHeight));
-    ui->heightSpinBox->setValue(static_cast<int>(DefaultWidgetValues::DefaultHeight));
+    // if flag add_mode is false it means this widget will be filling
+    // with arguments
+    if(!add_mode){
 
-    // Make focus on the first name line
-    ui->firstNameLine->setFocus();
+        // make a preview settings for lines and other widgets
+        previewSettings(false);
+
+        // fill the widget
+        // let's make a query and get all player's data
+        QSqlQuery query(database);
+
+        query.prepare("SELECT "
+                      "first_name, last_name, age, sex, height, hometown, phone, picture"
+                      " FROM Players"
+                      " WHERE id = :player_id;");
+
+        query.bindValue(":player_id", player_index);
+
+        if(!query.exec()){
+            QMessageBox::warning(this, "Database error", "Couldn't load player's data");
+            return;
+        }
+        else{
+
+            while(query.next()){
+                ui->firstNameLine->setText(query.value(0).toString()); // first name
+                ui->lastNameLine->setText(query.value(1).toString());  // last name
+                ui->ageSpinBox->setValue(query.value(2).toInt());      // age
+
+                if(query.value(3).toInt()){                            // gender
+                    ui->maleRadioButton->setChecked(true);
+                }
+                else{
+                    ui->femaleRadioButton->setChecked(true);
+                }
+
+                ui->heightSpinBox->setValue(query.value(4).toInt());   // height
+                ui->hometownLine->setText(query.value(5).toString());  // hometown
+                ui->phoneLine->setText(query.value(6).toString());     // phone
+
+                if(!image.load(query.value(7).toString())){            // image
+                    QMessageBox::warning(this, "File error!",
+                                         "Couldn't load player's image!");
+                }
+
+                // displaying player's image
+                ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+
+                ui->imageLabel->setScaledContents(true);
+            }
+        }
+    // regular adding a new player
+    }
+    else{
+        // make a preview settings for lines and other widgets
+        previewSettings();
+    }
 }
 
 AddPlayer::~AddPlayer()
 {
     delete ui;
+}
+
+// Preview settings for all lines
+void AddPlayer::previewSettings(bool regular){
+
+    if(regular){
+
+        ui->ageSpinBox->setValue(static_cast<int>(DefaultWidgetValues::DefaultAge));
+
+        // Sex radio buttons settings
+        ui->maleRadioButton->setChecked(true);
+        ui->heightSpinBox->setValue(static_cast<int>(DefaultWidgetValues::DefaultHeight));
+
+        // Make focus on the first name line
+        ui->firstNameLine->setFocus();
+    }
+
+    // Age box settings
+    ui->ageSpinBox->setMinimum(static_cast<int>(DefaultWidgetValues::MinimumAge));
+    ui->ageSpinBox->setMaximum(static_cast<int>(DefaultWidgetValues::MaximumAge));
+
+    // Height box settings
+    ui->heightSpinBox->setMinimum(static_cast<int>(DefaultWidgetValues::MinimumHeight));
+    ui->heightSpinBox->setMaximum(static_cast<int>(DefaultWidgetValues::MaximumHeight));
 }
 
 void AddPlayer::on_deleteImageButton_clicked()
@@ -56,7 +131,8 @@ void AddPlayer::on_deleteImageButton_clicked()
 
 void AddPlayer::on_addImageButton_clicked()
 {
-    const QString player_img_path = QFileDialog::getOpenFileName(this, "Select an image");
+    const QString player_img_path = QFileDialog::getOpenFileName(this,
+                                                    "Select an image");
 
     if(!image.load(player_img_path)){
         QMessageBox::warning(this, "File error!", "Couldn't load an image!");
@@ -123,13 +199,29 @@ void AddPlayer::on_savePlayerButton_clicked()
         QMessageBox::warning(this, "Image error!", "Couldn't save an image!");
     }
 
+
     // making a query
     QSqlQuery query(*db);
 
-    query.prepare("INSERT INTO Players"
-        "(first_name, last_name, age, sex, height, hometown, phone, picture)"
-        "VALUES"
-        "(:f_name, :l_name, :p_age, :p_sex, :p_height, :p_city, :p_phone, :p_img);");
+    // depends of mode we do a following logic
+    if(mode){
+        // simply add a new player
+        query.prepare("INSERT INTO Players"
+            "(first_name, last_name, age, sex, height, hometown, phone, picture)"
+            "VALUES"
+            "(:f_name, :l_name, :p_age, :p_sex, :p_height, :p_city, :p_phone, :p_img);");
+    }
+    else{
+        query.prepare("UPDATE Players "
+                      "SET "
+                      "first_name = :f_name, last_name = :l_name, "
+                      "age = :p_age, sex = :p_sex, height = :p_height, "
+                      "hometown = :p_city, phone = :p_phone, picture = :p_img"
+                      " WHERE id = :player_id;");
+
+        query.bindValue(":player_id", index);
+
+    }
 
     query.bindValue(":f_name", player_first_name);
     query.bindValue(":l_name", player_last_name);
@@ -141,7 +233,7 @@ void AddPlayer::on_savePlayerButton_clicked()
     query.bindValue(":p_img", image_name);
 
     if(!query.exec()){
-        QMessageBox::warning(this, "Database problem", "Couldn't save a new player.");
+        QMessageBox::warning(this, "Database problem", "Couldn't save player's data.");
         return;
     }
     else{

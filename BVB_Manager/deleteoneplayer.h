@@ -5,21 +5,22 @@
 #include <QSqlDatabase>
 #include <QStandardItemModel>
 #include <QVector>
+#include "utils.h"
 
 namespace Ui {
 class DeleteOnePlayer;
 }
 
-struct Player {
-    int id;
-    QString first_name;
-    QString last_name;
-    int age;
-    int gender;
-    int height;
-    QString hometown;
-    QString phone;
-};
+// struct Player {
+//     int id;
+//     QString first_name;
+//     QString last_name;
+//     int age;
+//     int gender;
+//     int height;
+//     QString hometown;
+//     QString phone;
+// };
 
 class DeleteOnePlayer : public QDialog
 {
@@ -33,6 +34,8 @@ private slots:
     void on_markButton_clicked();
 
     void on_deleteButton_clicked();
+
+    void on_helpButton_clicked();
 
 private:
     Ui::DeleteOnePlayer *ui;

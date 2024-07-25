@@ -132,6 +132,11 @@ access.txt
 build-BVB_Manager-Desktop_Qt_6_7_0-Debug/
 build-BVB_Manager-Desktop_Qt_6_7_0-Profile/
 
+#images
+*.jpeg
+*.png
+*.gif
+
 src/contacts/qtcontactsversion.h
 src/organizer/qtorganizerversion.h
 src/versit/qtversitversion.h

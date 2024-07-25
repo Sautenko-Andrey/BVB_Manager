@@ -158,6 +158,9 @@
     <addaction name="actionDelete_a_player"/>
     <addaction name="actionChange_a_player"/>
     <addaction name="actionDelete_all_players"/>
+    <addaction name="actionAdd_a_new_exercise"/>
+    <addaction name="actionDelete_an_exercise"/>
+    <addaction name="actionChange_an_exercise"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -187,6 +190,10 @@
    <addaction name="actionDelete_a_player"/>
    <addaction name="actionChange_a_player"/>
    <addaction name="actionDelete_all_players"/>
+   <addaction name="separator"/>
+   <addaction name="actionAdd_a_new_exercise"/>
+   <addaction name="actionDelete_an_exercise"/>
+   <addaction name="actionChange_an_exercise"/>
   </widget>
   <action name="actionNew_training">
    <property name="icon">
@@ -249,6 +256,33 @@
    </property>
    <property name="text">
     <string>Delete all players</string>
+   </property>
+  </action>
+  <action name="actionAdd_a_new_exercise">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/add_exercise.png</normaloff>:/images/add_exercise.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add a new exercise</string>
+   </property>
+  </action>
+  <action name="actionDelete_an_exercise">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/delete_exercise.png</normaloff>:/images/delete_exercise.png</iconset>
+   </property>
+   <property name="text">
+    <string>Delete an exercise</string>
+   </property>
+  </action>
+  <action name="actionChange_an_exercise">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/change_exercise.png</normaloff>:/images/change_exercise.png</iconset>
+   </property>
+   <property name="text">
+    <string>Change an exercise</string>
    </property>
   </action>
  </widget>

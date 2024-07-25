@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QImage>
 #include <QSqlDatabase>
+#include <QStringList>
 
 
 namespace Ui {
@@ -15,7 +16,11 @@ class AddPlayer : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddPlayer(QSqlDatabase &database, QWidget *parent = nullptr);
+
+    explicit AddPlayer(QSqlDatabase &database,
+                       QWidget *parent = nullptr,
+                       bool add_mode = true,
+                       const QString &player_index = "None");
     ~AddPlayer();
 
 private slots:
@@ -31,11 +36,17 @@ private:
 
     void clearAllLines();
 
+    void previewSettings(bool regular = true);
+
     Ui::AddPlayer *ui;
 
     QSqlDatabase *db{nullptr};
 
     QImage image;
+
+    bool mode{true};
+
+    QString index{"None"};
 };
 
 #endif // ADDPLAYER_H
