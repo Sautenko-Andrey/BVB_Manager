@@ -37,6 +37,8 @@ private slots:
 
     void on_helpButton_clicked();
 
+    void deleteModeChanged();
+
 private:
     Ui::DeleteOnePlayer *ui;
 
@@ -51,6 +53,14 @@ private:
     QSqlDatabase *db{nullptr};
 
     QStandardItemModel *model{nullptr};
+
+    bool mode{true};
+
+    int row_for_del{0};
+
+    int db_index_for_del{0};
+
+    QString name_for_del{"Unknown"};
 };
 
 #endif // DELETEONEPLAYER_H
