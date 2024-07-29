@@ -8,6 +8,8 @@
 #include "deleteoneplayer.h"
 #include "changeplayer.h"
 #include "addexercise.h"
+#include "deleteexercise.h"
+#include "changeexercise.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -41,14 +43,18 @@ private slots:
 private:
     Ui::BVB_Manager *ui;
 
-    DatabaseManager dataBaseManager;
+    DatabaseManager database_manager;
 
-    std::unique_ptr<AddPlayer> addPlayer{nullptr};
+    std::unique_ptr<AddPlayer> add_player{nullptr};
 
-    std::unique_ptr<DeleteOnePlayer> deletePlayer{nullptr};
+    std::unique_ptr<DeleteOnePlayer> delete_player{nullptr};
 
-    std::unique_ptr<ChangePlayer> changePlayer{nullptr};
+    std::unique_ptr<ChangePlayer> change_player{nullptr};
 
-    std::unique_ptr<AddExercise> addExercise{nullptr};
+    std::unique_ptr<AddExercise> add_exercise{nullptr};
+
+    std::unique_ptr<DeleteExercise> delete_exercise{nullptr};
+
+    std::unique_ptr<ChangeExercise> change_exercise{nullptr};
 };
 #endif // BVB_MANAGER_H

@@ -10,9 +10,17 @@ enum class Sizes {
     MainWindowWidth = 1366,
     MainWindowHeight = 768,
     ChangePlayerWindowWidth = 600,
-    ChangePlayerWindowHeight = 400
+    ChangePlayerWindowHeight = 400,
+    DeleteExerciseWindowWidth = 350,
+    DeleteExerciseWindowHeight = 300,
+    DeleteExerciseWindowMaxWidth = 400
 };
 
+enum class TrainingTypeIndexes {
+    Warming_up, Gym, Cardio, Tactical_technical
+};
+
+extern const QStringList training_types;
 
 extern const QString BACKGROUND_COLOR;
 

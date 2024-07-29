@@ -27,18 +27,18 @@ BVB_Manager::~BVB_Manager()
 void BVB_Manager::on_actionAdd_a_new_player_triggered()
 {
     // add a new player
-    addPlayer = std::make_unique<AddPlayer>(dataBaseManager.getDatabase(), this);
-    addPlayer->setWindowTitle("New player");
-    addPlayer->show();
+    add_player = std::make_unique<AddPlayer>(database_manager.getDatabase(), this);
+    add_player->setWindowTitle("New player");
+    add_player->show();
 }
 
 
 void BVB_Manager::on_actionDelete_a_player_triggered()
 {
     // delete a desired player
-    deletePlayer = std::make_unique<DeleteOnePlayer>(dataBaseManager.getDatabase(), this);
-    deletePlayer->setWindowTitle("Delete a player");
-    deletePlayer->show();
+    delete_player = std::make_unique<DeleteOnePlayer>(database_manager.getDatabase(), this);
+    delete_player->setWindowTitle("Delete a player");
+    delete_player->show();
 }
 
 
@@ -54,7 +54,7 @@ void BVB_Manager::on_actionDelete_all_players_triggered()
     if(reply == QMessageBox::Yes){
 
         //deletin data from the database
-        QSqlQuery query(dataBaseManager.getDatabase());
+        QSqlQuery query(database_manager.getDatabase());
         if(!query.exec("DELETE FROM Players")){
             QMessageBox::warning(this, "Error",
                                 "Error occured when deleting all players from the database");
@@ -84,34 +84,47 @@ void BVB_Manager::on_actionDelete_all_players_triggered()
 void BVB_Manager::on_actionChange_a_player_triggered()
 {
     // player editor
-    changePlayer = std::make_unique<ChangePlayer>(dataBaseManager.getDatabase(), this);
-    changePlayer->setWindowTitle("Change a player/players");
-    changePlayer->setGeometry(0, 0,
+    change_player = std::make_unique<ChangePlayer>(database_manager.getDatabase(), this);
+    change_player->setWindowTitle("Change a player/players");
+    change_player->setGeometry(0, 0,
                               static_cast<int>(Sizes::ChangePlayerWindowWidth),
                               static_cast<int>(Sizes::ChangePlayerWindowHeight));
-    changePlayer->setMaximumWidth(static_cast<int>(Sizes::ChangePlayerWindowWidth));
-    changePlayer->setMinimumWidth(static_cast<int>(Sizes::ChangePlayerWindowWidth));
-    changePlayer->show();
+    change_player->setMaximumWidth(static_cast<int>(Sizes::ChangePlayerWindowWidth));
+    change_player->setMinimumWidth(static_cast<int>(Sizes::ChangePlayerWindowWidth));
+    change_player->show();
 }
 
 
 void BVB_Manager::on_actionAdd_a_new_exercise_triggered()
 {
     // adding a new exercise
-    addExercise = std::make_unique<AddExercise>(dataBaseManager.getDatabase(), this);
-    addExercise->setWindowTitle("Add a new exercise");
-    addExercise->show();
+    add_exercise = std::make_unique<AddExercise>(database_manager.getDatabase(), this);
+    add_exercise->setWindowTitle("Add a new exercise");
+    add_exercise->show();
 }
 
 
 void BVB_Manager::on_actionDelete_an_exercise_triggered()
 {
     // deleting an exercise
+    delete_exercise = std::make_unique<DeleteExercise>(database_manager.getDatabase(),
+                                                       this);
+    delete_exercise->setWindowTitle("Delete an exercise");
+    delete_exercise->setGeometry(0,0,
+                                 static_cast<int>(Sizes::DeleteExerciseWindowWidth),
+                                 static_cast<int>(Sizes::DeleteExerciseWindowHeight));
+    delete_exercise->setMaximumWidth(static_cast<int>(Sizes::DeleteExerciseWindowMaxWidth));
+    delete_exercise->show();
 }
 
 
 void BVB_Manager::on_actionChange_an_exercise_triggered()
 {
     // upgrading an exercise
+    change_exercise = std::make_unique<ChangeExercise>(database_manager.getDatabase(),
+                                                       this);
+    change_exercise->setWindowTitle("Change an exercise");
+    change_exercise->show();
+
 }
 
