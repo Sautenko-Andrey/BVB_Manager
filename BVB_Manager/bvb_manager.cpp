@@ -84,14 +84,23 @@ void BVB_Manager::on_actionDelete_all_players_triggered()
 void BVB_Manager::on_actionChange_a_player_triggered()
 {
     // player editor
-    change_player = std::make_unique<ChangePlayer>(database_manager.getDatabase(), this);
-    change_player->setWindowTitle("Change a player/players");
-    change_player->setGeometry(0, 0,
-                              static_cast<int>(Sizes::ChangePlayerWindowWidth),
-                              static_cast<int>(Sizes::ChangePlayerWindowHeight));
-    change_player->setMaximumWidth(static_cast<int>(Sizes::ChangePlayerWindowWidth));
-    change_player->setMinimumWidth(static_cast<int>(Sizes::ChangePlayerWindowWidth));
-    change_player->show();
+    // change_player = std::make_unique<ChangePlayer>(database_manager.getDatabase(), this);
+    // change_player->setWindowTitle("Change a player/players");
+    // change_player->setGeometry(0, 0,
+    //                           static_cast<int>(Sizes::ChangePlayerWindowWidth),
+    //                           static_cast<int>(Sizes::ChangePlayerWindowHeight));
+    // change_player->setMaximumWidth(static_cast<int>(Sizes::ChangePlayerWindowWidth));
+    // change_player->setMinimumWidth(static_cast<int>(Sizes::ChangePlayerWindowWidth));
+    // change_player->show();
+
+    update_player = std::make_unique<UpdatePlayer>(database_manager.getDatabase(), this);
+    update_player->setWindowTitle("Change a player/players");
+    update_player->setGeometry(0, 0,
+                               static_cast<int>(Sizes::ChangePlayerWindowWidth),
+                               static_cast<int>(Sizes::ChangePlayerWindowHeight));
+    update_player->setMaximumWidth(static_cast<int>(Sizes::ChangePlayerWindowWidth));
+    update_player->setMinimumWidth(static_cast<int>(Sizes::ChangePlayerWindowWidth));
+    update_player->show();
 }
 
 

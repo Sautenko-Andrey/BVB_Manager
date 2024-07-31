@@ -14,7 +14,7 @@ struct Exercise {
 
     QString exercise_title;
     QString exrcise_description;
-    int exercise_type;
+    QString exercise_type;
 };
 
 enum class HeaderIndexes {

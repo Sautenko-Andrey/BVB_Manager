@@ -16,7 +16,7 @@ AddExercise::AddExercise(QSqlDatabase &database, QWidget *parent)
     // filling exercises types list
     ui->typeComboBox->addItems(training_types);
 
-
+    // signals & slots
     connect(ui->typeComboBox, SIGNAL(currentTextChanged(QString)),
             this, SLOT(trainingTypeChanged()));
 
@@ -32,20 +32,24 @@ void AddExercise::trainingTypeChanged(){
 
     switch (ui->typeComboBox->currentIndex()) {
 
-    case static_cast<int>(TrainingTypeIndexes::Warming_up):
-        current_type_index = static_cast<int>(TrainingTypeIndexes::Warming_up);
+    case static_cast<int>(TrainingTypeIndexes::Warm_up):
+        current_training_type =
+            training_types[static_cast<int>(TrainingTypeIndexes::Warm_up)];
         break;
 
     case static_cast<int>(TrainingTypeIndexes::Gym):
-        current_type_index = static_cast<int>(TrainingTypeIndexes::Gym);
+        current_training_type =
+            training_types[static_cast<int>(TrainingTypeIndexes::Gym)];
         break;
 
     case static_cast<int>(TrainingTypeIndexes::Cardio):
-        current_type_index = static_cast<int>(TrainingTypeIndexes::Cardio);
+        current_training_type =
+            training_types[static_cast<int>(TrainingTypeIndexes::Cardio)];
         break;
 
     case static_cast<int>(TrainingTypeIndexes::Tactical_technical):
-        current_type_index = static_cast<int>(TrainingTypeIndexes::Tactical_technical);
+        current_training_type =
+            training_types[static_cast<int>(TrainingTypeIndexes::Tactical_technical)];
         break;
     }
 }
@@ -56,12 +60,12 @@ void AddExercise::on_pushButton_clicked()
     QSqlQuery query(*db);
 
     query.prepare("INSERT "
-                   "INTO Exercises(title, description, type)"
+                   "INTO Exercises(title, description, exercise_type)"
                    " VALUES(:ex_title, :ex_description, :ex_type)");
 
     query.bindValue(":ex_title", ui->titleLine->text());
     query.bindValue(":ex_description", ui->description->toPlainText());
-    query.bindValue(":ex_type", current_type_index);
+    query.bindValue(":ex_type", current_training_type);
 
     if(!query.exec()){
         QMessageBox::warning(this, "Database error",
@@ -76,7 +80,7 @@ void AddExercise::on_pushButton_clicked()
     // clean lines
     ui->titleLine->clear();
     ui->description->clear();
-    ui->typeComboBox->setCurrentIndex(static_cast<int>(TrainingTypeIndexes::Warming_up));
+    ui->typeComboBox->setCurrentIndex(static_cast<int>(TrainingTypeIndexes::Warm_up));
 
     // Set focus on the title line
     ui->titleLine->setFocus();

@@ -9,15 +9,15 @@
 enum class Sizes {
     MainWindowWidth = 1366,
     MainWindowHeight = 768,
-    ChangePlayerWindowWidth = 600,
-    ChangePlayerWindowHeight = 400,
+    ChangePlayerWindowWidth = 1000,
+    ChangePlayerWindowHeight = 500,
     DeleteExerciseWindowWidth = 350,
     DeleteExerciseWindowHeight = 300,
     DeleteExerciseWindowMaxWidth = 400
 };
 
 enum class TrainingTypeIndexes {
-    Warming_up, Gym, Cardio, Tactical_technical
+    Warm_up, Gym, Cardio, Tactical_technical
 };
 
 extern const QStringList training_types;
@@ -33,6 +33,18 @@ struct Player {
     int height;
     QString hometown;
     QString phone;
+};
+
+struct Player2 {
+    int id;
+    QString first_name;
+    QString last_name;
+    int age;
+    QString gender;
+    int height;
+    QString hometown;
+    QString phone;
+    QString img;
 };
 
 

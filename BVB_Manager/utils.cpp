@@ -7,7 +7,7 @@
 const QString BACKGROUND_COLOR = "background-color:#09beb8;";
 
 const QStringList training_types{
-    "Warming up", "Gym", "Cardio", "Tactical-technical"
+    "Warm up", "Gym", "Cardio", "Tactical-technical"
 };
 
 

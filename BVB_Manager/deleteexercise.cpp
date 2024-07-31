@@ -28,39 +28,22 @@ DeleteExercise::DeleteExercise(QSqlDatabase &database, QWidget *parent)
     QSqlQuery query(*db);
 
     if(!query.exec("SELECT"
-                   " title, type"
+                   " title, exercise_type"
                    " FROM Exercises"
-                   " ORDER BY type ASC;")){
+                   " ORDER BY exercise_type ASC;")){
         QMessageBox::warning(this, "Database error", "Couldn't load exercises data");
         return;
     }
     else{
 
         while(query.next()){
-
-            QString type_name{"Unknown"};
-
-            switch (query.value(1).toInt()) {
-            case static_cast<int>(TrainingTypeIndexes::Warming_up):
-                type_name = training_types[static_cast<int>(TrainingTypeIndexes::Warming_up)];
-                break;
-            case static_cast<int>(TrainingTypeIndexes::Gym):
-                type_name = training_types[static_cast<int>(TrainingTypeIndexes::Gym)];
-                break;
-            case static_cast<int>(TrainingTypeIndexes::Cardio):
-                type_name = training_types[static_cast<int>(TrainingTypeIndexes::Cardio)];
-                break;
-            case static_cast<int>(TrainingTypeIndexes::Tactical_technical):
-                type_name = training_types[static_cast<int>(TrainingTypeIndexes::Tactical_technical)];
-                break;
-            }
-
             ui->listWidget->addItem(
-                query.value(0).toString() + " ( " + type_name + " )"
+                query.value(0).toString() + " ( " + query.value(1).toString() + " )"
             );
         }
     }
 
+    // signals & slots
     connect(ui->listWidget, SIGNAL(itemClicked(QListWidgetItem*)),
             this, SLOT(clickOnItem()));
 }

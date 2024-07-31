@@ -10,6 +10,7 @@
 #include "addexercise.h"
 #include "deleteexercise.h"
 #include "changeexercise.h"
+#include "updateplayer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -50,6 +51,9 @@ private:
     std::unique_ptr<DeleteOnePlayer> delete_player{nullptr};
 
     std::unique_ptr<ChangePlayer> change_player{nullptr};
+
+    // new
+    std::unique_ptr<UpdatePlayer> update_player{nullptr};
 
     std::unique_ptr<AddExercise> add_exercise{nullptr};
 

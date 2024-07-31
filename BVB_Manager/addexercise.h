@@ -10,10 +10,6 @@ namespace Ui {
 class AddExercise;
 }
 
-// enum class TrainingTypeIndexes {
-//     Warming_up, Gym, Cardio, Tactical_technical
-// };
-
 class AddExercise : public QDialog
 {
     Q_OBJECT
@@ -32,7 +28,8 @@ private:
 
     QSqlDatabase *db{nullptr};
 
-    int current_type_index = static_cast<int>(TrainingTypeIndexes::Warming_up);
+    QString current_training_type =
+        training_types[static_cast<int>(TrainingTypeIndexes::Warm_up)];
 };
 
 #endif // ADDEXERCISE_H
