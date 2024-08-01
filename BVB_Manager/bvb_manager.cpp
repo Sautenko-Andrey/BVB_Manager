@@ -16,12 +16,53 @@ BVB_Manager::BVB_Manager(QWidget *parent)
     ui->calendarWidget->setFirstDayOfWeek(Qt::Monday);
 
     // Training time settings
-    ui->trainingTime->setTime(QTime(12, 0));
+    ui->trainingTime->setTime(QTime(12, 01));
+
+    // Work with the calendar
+    // get a new date and update training date label
+    updateDate();
+
+    int hour = ui->trainingTime->time().hour();
+    int minute = ui->trainingTime->time().minute();
+
+    ui->timeSelectedLabel->setText("Time: " +
+                                   QString::number(hour) +
+                                   ":" +
+                                   QString::number(minute));
+
+
+    // signals & slots
+    connect(ui->calendarWidget, SIGNAL(clicked(QDate)),
+            this, SLOT(selectedDateChanged()));
+
+    connect(ui->trainingTime, SIGNAL(timeChanged(QTime)),
+            this, SLOT(selectedTimeChanged()));
 }
 
 BVB_Manager::~BVB_Manager()
 {
     delete ui;
+}
+
+void BVB_Manager::updateDate(){
+    selected_date = ui->calendarWidget->selectedDate();
+    const QString training_date = "Date: " + selected_date.toString("dd.MM.yyyy");
+    ui->dateSelectedLabel->setText(training_date);
+}
+
+void BVB_Manager::selectedDateChanged(){
+    // get a new date and update training date label
+    updateDate();
+}
+
+void BVB_Manager::selectedTimeChanged(){
+    int hour = ui->trainingTime->time().hour();
+    int minute = ui->trainingTime->time().minute();
+
+    ui->timeSelectedLabel->setText("Time: " +
+                                   QString::number(hour) +
+                                   ":" +
+                                   QString::number(minute));
 }
 
 void BVB_Manager::on_actionAdd_a_new_player_triggered()
@@ -135,5 +176,20 @@ void BVB_Manager::on_actionChange_an_exercise_triggered()
     change_exercise->setWindowTitle("Change an exercise");
     change_exercise->show();
 
+}
+
+
+void BVB_Manager::on_actionSearch_a_player_triggered()
+{
+    // Search a player tool
+    search_player = std::make_unique<SearchPlayer>(database_manager.getDatabase(),
+                                                   this);
+    search_player->setWindowTitle("Search a player");
+    search_player->setGeometry(0, 0,
+                               static_cast<int>(Sizes::SearchPlayerWindowWidth),
+                               static_cast<int>(Sizes::SearchPlayerWindowHeight));
+    search_player->setMinimumSize(static_cast<int>(Sizes::SearchPlayerWindowWidth),
+                                  static_cast<int>(Sizes::SearchPlayerWindowHeight));
+    search_player->show();
 }
 

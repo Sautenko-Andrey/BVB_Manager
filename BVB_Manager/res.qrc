@@ -10,5 +10,6 @@
         <file>add_exercise.png</file>
         <file>delete_exercise.png</file>
         <file>change_exercise.png</file>
+        <file>search_player.png</file>
     </qresource>
 </RCC>

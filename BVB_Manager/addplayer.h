@@ -20,7 +20,8 @@ public:
     explicit AddPlayer(QSqlDatabase &database,
                        QWidget *parent = nullptr,
                        bool add_mode = true,
-                       const QString &player_index = "None");
+                       const QString &player_first_name = "Unknown",
+                       const QString &player_last_name = "Unknown");
     ~AddPlayer();
 
 private slots:

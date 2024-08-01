@@ -6,6 +6,7 @@
 #include <QVector>
 #include "utils.h"
 #include <QImage>
+#include "addplayer.h"
 
 namespace Ui {
 class UpdatePlayer;
@@ -34,6 +35,8 @@ private slots:
 
 private:
     Ui::UpdatePlayer *ui;
+
+    std::unique_ptr<AddPlayer> player_window{nullptr};
 
     QVector<Player2> all_players;
 

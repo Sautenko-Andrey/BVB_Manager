@@ -14,7 +14,7 @@
    <string>BVB_Manager</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_6">
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
@@ -123,7 +123,79 @@
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>868</width>
+          <width>68</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="QFrame" name="frame_3">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_6">
+             <item>
+              <widget class="QLabel" name="dateSelectedLabel">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Date:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="timeSelectedLabel">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Time:</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>518</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>428</width>
           <height>20</height>
          </size>
         </property>
@@ -162,14 +234,15 @@
     <addaction name="actionDelete_an_exercise"/>
     <addaction name="actionChange_an_exercise"/>
    </widget>
-   <widget class="QMenu" name="menuHelp">
+   <widget class="QMenu" name="menuTools">
     <property name="title">
-     <string>Help</string>
+     <string>Tools</string>
     </property>
+    <addaction name="actionSearch_a_player"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
-   <addaction name="menuHelp"/>
+   <addaction name="menuTools"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -194,6 +267,8 @@
    <addaction name="actionAdd_a_new_exercise"/>
    <addaction name="actionDelete_an_exercise"/>
    <addaction name="actionChange_an_exercise"/>
+   <addaction name="separator"/>
+   <addaction name="actionSearch_a_player"/>
   </widget>
   <action name="actionNew_training">
    <property name="icon">
@@ -283,6 +358,15 @@
    </property>
    <property name="text">
     <string>Change an exercise</string>
+   </property>
+  </action>
+  <action name="actionSearch_a_player">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/search_player.png</normaloff>:/images/search_player.png</iconset>
+   </property>
+   <property name="text">
+    <string>Search a player</string>
    </property>
   </action>
  </widget>

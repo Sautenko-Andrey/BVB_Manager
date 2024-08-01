@@ -20,7 +20,8 @@ enum class DefaultWidgetValues {
 AddPlayer::AddPlayer(QSqlDatabase &database,
                      QWidget *parent,
                      bool add_mode,
-                     const QString &player_index)
+                     const QString &player_first_name,
+                     const QString &player_last_name)
     : QDialog(parent)
     , ui(new Ui::AddPlayer)
 {
@@ -33,7 +34,7 @@ AddPlayer::AddPlayer(QSqlDatabase &database,
     mode = add_mode;
 
     //save player's index
-    index = player_index;
+    //index = player_index;
 
     // if flag add_mode is false it means this widget will be filling
     // with arguments
@@ -49,9 +50,11 @@ AddPlayer::AddPlayer(QSqlDatabase &database,
         query.prepare("SELECT "
                       "first_name, last_name, age, sex, height, hometown, phone, picture"
                       " FROM Players"
-                      " WHERE id = :player_id;");
+                      " WHERE first_name = :f_name AND last_name = :l_name");
 
-        query.bindValue(":player_id", player_index);
+        query.bindValue(":f_name", player_first_name);
+        query.bindValue(":l_name", player_last_name);
+
 
         if(!query.exec()){
             QMessageBox::warning(this, "Database error", "Couldn't load player's data");
@@ -84,6 +87,21 @@ AddPlayer::AddPlayer(QSqlDatabase &database,
                 ui->imageLabel->setPixmap(QPixmap::fromImage(image));
 
                 ui->imageLabel->setScaledContents(true);
+
+                // change tools interface
+                ui->deleteImageButton->hide();
+                ui->addImageButton->hide();
+                ui->clearAllButton->hide();
+                ui->savePlayerButton->hide();
+                ui->ageSpinBox->setDisabled(true);
+                ui->femaleRadioButton->setDisabled(true);
+                ui->heightSpinBox->setDisabled(true);
+                ui->hometownLine->setDisabled(true);
+                ui->lastNameLine->setDisabled(true);
+                ui->maleRadioButton->setDisabled(true);
+                ui->phoneLine->setDisabled(true);
+                ui->firstNameLine->setDisabled(true);
+                //ui->frame->hide(); // frame under the image
             }
         }
     // regular adding a new player

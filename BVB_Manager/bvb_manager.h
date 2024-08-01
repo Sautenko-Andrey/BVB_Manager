@@ -2,6 +2,7 @@
 #define BVB_MANAGER_H
 
 #include <QMainWindow>
+#include <QDate>
 #include <memory>
 #include "addplayer.h"
 #include "databasemanager.h"
@@ -11,6 +12,7 @@
 #include "deleteexercise.h"
 #include "changeexercise.h"
 #include "updateplayer.h"
+#include "searchplayer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -41,6 +43,12 @@ private slots:
 
     void on_actionChange_an_exercise_triggered();
 
+    void on_actionSearch_a_player_triggered();
+
+    void selectedDateChanged();
+
+    void selectedTimeChanged();
+
 private:
     Ui::BVB_Manager *ui;
 
@@ -50,9 +58,8 @@ private:
 
     std::unique_ptr<DeleteOnePlayer> delete_player{nullptr};
 
-    std::unique_ptr<ChangePlayer> change_player{nullptr};
+    //std::unique_ptr<ChangePlayer> change_player{nullptr};
 
-    // new
     std::unique_ptr<UpdatePlayer> update_player{nullptr};
 
     std::unique_ptr<AddExercise> add_exercise{nullptr};
@@ -60,5 +67,11 @@ private:
     std::unique_ptr<DeleteExercise> delete_exercise{nullptr};
 
     std::unique_ptr<ChangeExercise> change_exercise{nullptr};
+
+    std::unique_ptr<SearchPlayer> search_player{nullptr};
+
+    QDate selected_date;
+
+    void updateDate();
 };
 #endif // BVB_MANAGER_H
