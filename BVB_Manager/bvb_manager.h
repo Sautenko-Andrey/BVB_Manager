@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QDate>
+#include <QSet>
+#include <QLabel>
 #include <memory>
 #include "addplayer.h"
 #include "databasemanager.h"
@@ -49,6 +51,8 @@ private slots:
 
     void selectedTimeChanged();
 
+    void selectedPlayer();
+
 private:
     Ui::BVB_Manager *ui;
 
@@ -70,8 +74,16 @@ private:
 
     std::unique_ptr<SearchPlayer> search_player{nullptr};
 
+    QSet<QString> marked_players;
+
     QDate selected_date;
 
+    QString combined_players;
+
     void updateDate();
+
+    void updateTime();
+
+    void markItem(QListWidgetItem *item, const QBrush &color, const QFont &font);
 };
 #endif // BVB_MANAGER_H

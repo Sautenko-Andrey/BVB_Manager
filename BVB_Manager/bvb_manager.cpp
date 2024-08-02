@@ -2,6 +2,8 @@
 #include "./ui_bvb_manager.h"
 #include <QMessageBox>
 #include <QSqlQuery>
+#include <QListWidget>
+#include <QDebug>
 
 BVB_Manager::BVB_Manager(QWidget *parent)
     : QMainWindow(parent)
@@ -19,16 +21,38 @@ BVB_Manager::BVB_Manager(QWidget *parent)
     ui->trainingTime->setTime(QTime(12, 01));
 
     // Work with the calendar
-    // get a new date and update training date label
+    // get a currnet date and update training date label
     updateDate();
 
-    int hour = ui->trainingTime->time().hour();
-    int minute = ui->trainingTime->time().minute();
+    // get a current time and update training time label
+    updateTime();
 
-    ui->timeSelectedLabel->setText("Time: " +
-                                   QString::number(hour) +
-                                   ":" +
-                                   QString::number(minute));
+    // fill players list widget
+    ui->playersListWidget->setStyleSheet(
+        "QListWidget::item{border-bottom: 1px solid grey;}");
+
+    QSqlQuery players_query(database_manager.getDatabase());
+
+    if(!players_query.exec("SELECT id, first_name, last_name, hometown"
+                           " FROM Players"
+                           " ORDER BY first_name ASC;")){
+
+        QMessageBox::warning(this, "Database error",
+                             "Couldn't load players data from the database");
+        return;
+    }
+    else{
+        while(players_query.next()){
+            ui->playersListWidget->addItem(
+                "ID: " +
+                players_query.value(0).toString() + ", " +   // id
+                players_query.value(1).toString() + " " +   // first name
+                players_query.value(2).toString() + ", ( " +   // second name
+                players_query.value(3).toString()           // hometown
+                + " )"
+            );
+        }
+    }
 
 
     // signals & slots
@@ -37,6 +61,10 @@ BVB_Manager::BVB_Manager(QWidget *parent)
 
     connect(ui->trainingTime, SIGNAL(timeChanged(QTime)),
             this, SLOT(selectedTimeChanged()));
+
+    connect(ui->playersListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
+            this, SLOT(selectedPlayer()));
+
 }
 
 BVB_Manager::~BVB_Manager()
@@ -44,10 +72,31 @@ BVB_Manager::~BVB_Manager()
     delete ui;
 }
 
+
 void BVB_Manager::updateDate(){
+    // update training date
+
     selected_date = ui->calendarWidget->selectedDate();
     const QString training_date = "Date: " + selected_date.toString("dd.MM.yyyy");
     ui->dateSelectedLabel->setText(training_date);
+}
+
+void BVB_Manager::updateTime(){
+    // update training time
+
+    int hour = ui->trainingTime->time().hour();
+    int minute = ui->trainingTime->time().minute();
+
+    QString minutes = QString::number(minute);
+
+    if(minute < 10){
+        minutes = "0" + QString::number(minute);
+    }
+
+    ui->timeSelectedLabel->setText("Time: " +
+                                   QString::number(hour) +
+                                   ":" +
+                                   minutes);
 }
 
 void BVB_Manager::selectedDateChanged(){
@@ -56,13 +105,49 @@ void BVB_Manager::selectedDateChanged(){
 }
 
 void BVB_Manager::selectedTimeChanged(){
-    int hour = ui->trainingTime->time().hour();
-    int minute = ui->trainingTime->time().minute();
+    updateTime();
+}
 
-    ui->timeSelectedLabel->setText("Time: " +
-                                   QString::number(hour) +
-                                   ":" +
-                                   QString::number(minute));
+void BVB_Manager::markItem(QListWidgetItem *item,
+                           const QBrush &color, const QFont &font){
+
+    item->setForeground(color);
+    item->setFont(font);
+}
+
+// when double clicked on the player in players list widget
+void BVB_Manager::selectedPlayer(){
+
+    const QString current_player = ui->playersListWidget->currentItem()->text();
+
+    // unmark player
+    if(marked_players.contains(current_player)){
+        // when double clicked change row text color to black (unmark a player)
+        markItem(ui->playersListWidget->currentItem(),
+                 Qt::black, QFont("Helvetica [Cronyx]", 11));
+
+        // remove the player from the marked container
+        marked_players.remove(current_player);
+    }
+    else{
+        // when double clicked change row text color to red (mark a player)
+        markItem(ui->playersListWidget->currentItem(),
+                 Qt::red, QFont("Helvetica [Cronyx]", 13));
+
+        // add marked player to the marked_players container
+        marked_players.insert(current_player);
+    }
+
+    // clear players string
+    combined_players.clear();
+
+    // add players to the label
+    for(const auto &player : marked_players){
+        combined_players += (player + "\n");
+    }
+
+    // update label
+    ui->playerNameLabel->setText(combined_players);
 }
 
 void BVB_Manager::on_actionAdd_a_new_player_triggered()
