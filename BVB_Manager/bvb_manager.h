@@ -53,6 +53,18 @@ private slots:
 
     void selectedPlayer();
 
+    void selectedExercise();
+
+    void exerciseRadioChanged();
+
+    void on_removeAllPlayersButton_clicked();
+
+    void on_addAllPlayersButton_clicked();
+
+    void on_removeAllExercisesButton_clicked();
+
+    void on_resetCurrentSettingButton_clicked();
+
 private:
     Ui::BVB_Manager *ui;
 
@@ -76,14 +88,26 @@ private:
 
     QSet<QString> marked_players;
 
+    QSet<QString> marked_exercises;
+
     QDate selected_date;
 
     QString combined_players;
+
+    QString combined_exercises;
+
+    QString current_date;
 
     void updateDate();
 
     void updateTime();
 
     void markItem(QListWidgetItem *item, const QBrush &color, const QFont &font);
+
+    void markUnmarkItem(QListWidget *list_widget, QSet<QString> &container,
+                        QString &text, QLabel *label);
+
+    void removeListWidgetItems(QLabel *label, QListWidget *widget,
+                                            QSet<QString> &container);
 };
 #endif // BVB_MANAGER_H

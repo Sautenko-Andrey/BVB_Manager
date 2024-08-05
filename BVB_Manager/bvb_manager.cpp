@@ -17,6 +17,9 @@ BVB_Manager::BVB_Manager(QWidget *parent)
     ui->calendarWidget->setVerticalHeaderFormat(QCalendarWidget::NoVerticalHeader);
     ui->calendarWidget->setFirstDayOfWeek(Qt::Monday);
 
+    // Getting today's date
+    current_date = "Date: " + ui->calendarWidget->selectedDate().toString("dd.MM.yyyy");
+
     // Training time settings
     ui->trainingTime->setTime(QTime(12, 01));
 
@@ -54,6 +57,31 @@ BVB_Manager::BVB_Manager(QWidget *parent)
         }
     }
 
+    // fill exercises list widget
+    ui->exercisesListWidget->setStyleSheet(
+        "QListWidget::item{border-bottom: 1px solid grey;}");
+
+    QSqlQuery exercises_query(database_manager.getDatabase());
+
+    if(!exercises_query.exec("SELECT title, description, exercise_type"
+                             " FROM Exercises"
+                             " ORDER BY exercise_type ASC;")){
+        QMessageBox::warning(this, "Database error",
+                             "Couldn't load exercises data from the database");
+        return;
+    }
+    else {
+        while(exercises_query.next()){
+            ui->exercisesListWidget->addItem(
+                exercises_query.value(0).toString() + " ( " +    // exercise title
+                exercises_query.value(2).toString() + " ) "      // exercise type
+            );
+        }
+    }
+
+    // make all exercises radio button checked by default
+    ui->allExercisesRadioButton->setChecked(true);
+
 
     // signals & slots
     connect(ui->calendarWidget, SIGNAL(clicked(QDate)),
@@ -64,6 +92,25 @@ BVB_Manager::BVB_Manager(QWidget *parent)
 
     connect(ui->playersListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
             this, SLOT(selectedPlayer()));
+
+    connect(ui->exercisesListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
+            this, SLOT(selectedExercise()));
+
+    // exercises list widget's radio buttons signals and slots
+    // connect(ui->allExercisesRadioButton, SIGNAL(toggled(bool)),
+    //         this, SLOT(exerciseRadioChanged()));                    !!! bug!!!
+
+    connect(ui->warmUpExercisesRadioButton, SIGNAL(toggled(bool)),
+            this, SLOT(exerciseRadioChanged()));
+
+    connect(ui->gymExercisesRadioButton, SIGNAL(toggled(bool)),
+            this, SLOT(exerciseRadioChanged()));
+
+    connect(ui->cardioExercisesRadioButton, SIGNAL(toggled(bool)),
+            this, SLOT(exerciseRadioChanged()));
+
+    connect(ui->tacticalexercisesRadioButton, SIGNAL(toggled(bool)),
+            this, SLOT(exerciseRadioChanged()));
 
 }
 
@@ -115,39 +162,50 @@ void BVB_Manager::markItem(QListWidgetItem *item,
     item->setFont(font);
 }
 
+void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QSet<QString> &container,
+                                 QString &text, QLabel *label){
+
+    const QString current_item = list_widget->currentItem()->text();
+
+    // unmark
+    if(container.contains(current_item)){
+        // when double clicked change current row text color to black
+        markItem(list_widget->currentItem(),Qt::black, QFont("Helvetica [Cronyx]", 11));
+        // remove the item from the container
+        container.remove(current_item);
+    }
+    // mark
+    else{
+        // when double clicked change current row text color to red
+        markItem(list_widget->currentItem(), Qt::red, QFont("Helvetica [Cronyx]", 13));
+        // add marked item to the container
+        container.insert(current_item);
+    }
+
+    // clear items string
+    text.clear();
+
+    // add players to the label
+    for(const auto &item : container){
+        text += (item + "\n");
+    }
+
+    // update the label
+    label->setText(text);
+}
+
 // when double clicked on the player in players list widget
 void BVB_Manager::selectedPlayer(){
 
-    const QString current_player = ui->playersListWidget->currentItem()->text();
+    markUnmarkItem(ui->playersListWidget, marked_players,
+                   combined_players, ui->playerNameLabel);
+}
 
-    // unmark player
-    if(marked_players.contains(current_player)){
-        // when double clicked change row text color to black (unmark a player)
-        markItem(ui->playersListWidget->currentItem(),
-                 Qt::black, QFont("Helvetica [Cronyx]", 11));
+void BVB_Manager::selectedExercise(){
 
-        // remove the player from the marked container
-        marked_players.remove(current_player);
-    }
-    else{
-        // when double clicked change row text color to red (mark a player)
-        markItem(ui->playersListWidget->currentItem(),
-                 Qt::red, QFont("Helvetica [Cronyx]", 13));
+    markUnmarkItem(ui->exercisesListWidget, marked_exercises,
+                   combined_exercises, ui->exerciseLabel);
 
-        // add marked player to the marked_players container
-        marked_players.insert(current_player);
-    }
-
-    // clear players string
-    combined_players.clear();
-
-    // add players to the label
-    for(const auto &player : marked_players){
-        combined_players += (player + "\n");
-    }
-
-    // update label
-    ui->playerNameLabel->setText(combined_players);
 }
 
 void BVB_Manager::on_actionAdd_a_new_player_triggered()
@@ -278,3 +336,96 @@ void BVB_Manager::on_actionSearch_a_player_triggered()
     search_player->show();
 }
 
+
+void BVB_Manager::removeListWidgetItems(QLabel *label, QListWidget *widget,
+                                        QSet<QString> &container){
+    // clear label
+    label->clear();
+
+    // make all wigets on QListWidget unmarked again
+    for(auto i{0}; i < widget->count(); ++i){
+        markItem(widget->item(i),
+                 Qt::black, QFont("Helvetica [Cronyx]", 11));
+    }
+
+    // clear container
+    container.clear();
+}
+
+void BVB_Manager::on_removeAllPlayersButton_clicked()
+{
+    removeListWidgetItems(ui->playerNameLabel, ui->playersListWidget, marked_players);
+}
+
+
+void BVB_Manager::on_addAllPlayersButton_clicked()
+{
+    // first of all clear current label data
+    ui->playerNameLabel->clear();
+
+    // clear general players string
+    combined_players.clear();
+
+    // add all players
+    for(auto i{0}; i < ui->playersListWidget->count(); ++i){
+        // create a players string
+        combined_players += (ui->playersListWidget->item(i)->text() + "\n");
+
+        // make each player marked
+        markItem(ui->playersListWidget->item(i),
+                 Qt::red, QFont("Helvetica [Cronyx]", 13));
+
+        //add player to the marked_players container
+        marked_players.insert(ui->playersListWidget->item(i)->text());
+    }
+
+    // update label
+    ui->playerNameLabel->setText(combined_players);
+}
+
+
+void BVB_Manager::on_removeAllExercisesButton_clicked()
+{
+    removeListWidgetItems(ui->exerciseLabel, ui->exercisesListWidget, marked_exercises);
+}
+
+void BVB_Manager::on_resetCurrentSettingButton_clicked()
+{
+    // ask the user
+    QMessageBox::StandardButton reply;
+
+    reply = QMessageBox::question(this, "Drop all settings",
+                                  "Drop all your settings?",
+                                  QMessageBox::Yes | QMessageBox::No);
+
+    if(reply == QMessageBox::Yes){
+
+        // make a training list blank
+
+        removeListWidgetItems(ui->playerNameLabel, ui->playersListWidget, marked_players);
+
+        removeListWidgetItems(ui->exerciseLabel, ui->exercisesListWidget, marked_exercises);
+
+        ui->dateSelectedLabel->setText(current_date);
+
+        ui->trainingTime->setTime(QTime(12, 01));
+    }
+}
+
+void BVB_Manager::exerciseRadioChanged(){
+    if(ui->allExercisesRadioButton->isChecked()){
+        qDebug() << "All";
+    }
+    else if(ui->warmUpExercisesRadioButton->isChecked()){
+        qDebug() << "Warm up";
+    }
+    else if(ui->gymExercisesRadioButton->isChecked()){
+        qDebug() << "Gym";
+    }
+    else if(ui->cardioExercisesRadioButton->isChecked()){
+        qDebug() << "Cardio";
+    }
+    else if(ui->tacticalexercisesRadioButton->isChecked()){
+        qDebug() << "Tactical";
+    }
+}
