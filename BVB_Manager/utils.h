@@ -15,7 +15,7 @@ enum class Sizes {
     DeleteExerciseWindowHeight = 300,
     DeleteExerciseWindowMaxWidth = 400,
     SearchPlayerWindowWidth = 450,
-    SearchPlayerWindowHeight = 200
+    SearchPlayerWindowHeight = 280
 };
 
 enum class TrainingTypeIndexes {

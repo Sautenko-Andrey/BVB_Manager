@@ -55,7 +55,9 @@ private slots:
 
     void selectedExercise();
 
-    void exerciseRadioChanged();
+    void exerciseCheckBoxChanged();
+
+    void playersCheckBoxChanged();
 
     void on_removeAllPlayersButton_clicked();
 
@@ -109,5 +111,9 @@ private:
 
     void removeListWidgetItems(QLabel *label, QListWidget *widget,
                                             QSet<QString> &container);
+
+    void getExercises(const QString &type);
+
+    void getPlayers(bool gender);
 };
 #endif // BVB_MANAGER_H

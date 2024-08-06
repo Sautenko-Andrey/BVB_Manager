@@ -3,7 +3,7 @@
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <QListWidget>
-#include <QDebug>
+//#include <QDebug>
 
 BVB_Manager::BVB_Manager(QWidget *parent)
     : QMainWindow(parent)
@@ -38,7 +38,7 @@ BVB_Manager::BVB_Manager(QWidget *parent)
 
     if(!players_query.exec("SELECT id, first_name, last_name, hometown"
                            " FROM Players"
-                           " ORDER BY first_name ASC;")){
+                           " ORDER BY first_name ASC, sex DESC;")){
 
         QMessageBox::warning(this, "Database error",
                              "Couldn't load players data from the database");
@@ -79,8 +79,15 @@ BVB_Manager::BVB_Manager(QWidget *parent)
         }
     }
 
-    // make all exercises radio button checked by default
-    ui->allExercisesRadioButton->setChecked(true);
+    // make both players genders checked
+    ui->menCheckBox->setChecked(true);
+    ui->womenCheckBox->setChecked(true);
+
+    // make all exercises checked by default
+    ui->warmUpCheckBox->setChecked(true);
+    ui->cardioCheckBox->setChecked(true);
+    ui->gymCheckBox->setChecked(true);
+    ui->tacticalCheckBox->setChecked(true);
 
 
     // signals & slots
@@ -96,21 +103,25 @@ BVB_Manager::BVB_Manager(QWidget *parent)
     connect(ui->exercisesListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
             this, SLOT(selectedExercise()));
 
-    // exercises list widget's radio buttons signals and slots
-    // connect(ui->allExercisesRadioButton, SIGNAL(toggled(bool)),
-    //         this, SLOT(exerciseRadioChanged()));                    !!! bug!!!
+    // players list widget's check boxes signals and slots
+    connect(ui->menCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)),
+            this, SLOT(playersCheckBoxChanged()));
 
-    connect(ui->warmUpExercisesRadioButton, SIGNAL(toggled(bool)),
-            this, SLOT(exerciseRadioChanged()));
+    connect(ui->womenCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)),
+            this, SLOT(playersCheckBoxChanged()));
 
-    connect(ui->gymExercisesRadioButton, SIGNAL(toggled(bool)),
-            this, SLOT(exerciseRadioChanged()));
+    // exercises list widget's check boxes signals and slots
+    connect(ui->warmUpCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)),
+            this, SLOT(exerciseCheckBoxChanged()));
 
-    connect(ui->cardioExercisesRadioButton, SIGNAL(toggled(bool)),
-            this, SLOT(exerciseRadioChanged()));
+    connect(ui->cardioCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)),
+            this, SLOT(exerciseCheckBoxChanged()));
 
-    connect(ui->tacticalexercisesRadioButton, SIGNAL(toggled(bool)),
-            this, SLOT(exerciseRadioChanged()));
+    connect(ui->gymCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)),
+            this, SLOT(exerciseCheckBoxChanged()));
+
+    connect(ui->tacticalCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)),
+            this, SLOT(exerciseCheckBoxChanged()));
 
 }
 
@@ -120,12 +131,72 @@ BVB_Manager::~BVB_Manager()
 }
 
 
+void BVB_Manager::getExercises(const QString &type){
+
+    QSqlQuery exercises_query(database_manager.getDatabase());
+
+    exercises_query.prepare("SELECT title, description, exercise_type"
+                            " FROM Exercises WHERE exercise_type = :e_type"
+                            " ORDER BY title ASC;");
+
+    exercises_query.bindValue(":e_type", type);
+
+    if(!exercises_query.exec()){
+        QMessageBox::warning(this, "Database error",
+                              "Couldn't load exercises data from the database");
+        return;
+    }
+    else {
+        while(exercises_query.next()){
+            ui->exercisesListWidget->addItem(
+                exercises_query.value(0).toString() + " ( " +    // exercise title
+                exercises_query.value(2).toString() + " ) "      // exercise type
+            );
+        }
+    }
+}
+
+
+void BVB_Manager::getPlayers(bool gender){
+
+    QSqlQuery query(database_manager.getDatabase());
+
+    query.prepare("SELECT id, first_name, last_name, hometown"
+                  " FROM Players"
+                  " WHERE sex = :p_gender"
+                  " ORDER BY first_name ASC;");
+
+    query.bindValue(":p_gender", gender);
+
+    if(!query.exec()){
+        QMessageBox::warning(this, "Database error",
+                             "Couldn't load players data from the database");
+        return;
+    }
+    else{
+        while(query.next()){
+            ui->playersListWidget->addItem(
+                "ID: " +
+                query.value(0).toString() + ", " +   // id
+                query.value(1).toString() + " " +   // first name
+                query.value(2).toString() + ", ( " +   // second name
+                query.value(3).toString()           // hometown
+                + " )"
+            );
+        }
+    }
+}
+
 void BVB_Manager::updateDate(){
     // update training date
 
     selected_date = ui->calendarWidget->selectedDate();
     const QString training_date = "Date: " + selected_date.toString("dd.MM.yyyy");
     ui->dateSelectedLabel->setText(training_date);
+
+    //test
+    ui->dateSelectedLabel_2->setText(training_date);
+
 }
 
 void BVB_Manager::updateTime(){
@@ -141,6 +212,12 @@ void BVB_Manager::updateTime(){
     }
 
     ui->timeSelectedLabel->setText("Time: " +
+                                   QString::number(hour) +
+                                   ":" +
+                                   minutes);
+
+    //test
+    ui->timeSelectedLabel_2->setText("Time: " +
                                    QString::number(hour) +
                                    ":" +
                                    minutes);
@@ -170,14 +247,14 @@ void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QSet<QString> &contai
     // unmark
     if(container.contains(current_item)){
         // when double clicked change current row text color to black
-        markItem(list_widget->currentItem(),Qt::black, QFont("Helvetica [Cronyx]", 11));
+        markItem(list_widget->currentItem(),Qt::black, QFont("Ubuntu", 11));
         // remove the item from the container
         container.remove(current_item);
     }
     // mark
     else{
         // when double clicked change current row text color to red
-        markItem(list_widget->currentItem(), Qt::red, QFont("Helvetica [Cronyx]", 13));
+        markItem(list_widget->currentItem(), Qt::red, QFont("Ubuntu", 11));
         // add marked item to the container
         container.insert(current_item);
     }
@@ -198,13 +275,15 @@ void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QSet<QString> &contai
 void BVB_Manager::selectedPlayer(){
 
     markUnmarkItem(ui->playersListWidget, marked_players,
-                   combined_players, ui->playerNameLabel);
+                   combined_players, ui->playerNameLabel_2);   //test playerNameLabel_2
+
+
 }
 
 void BVB_Manager::selectedExercise(){
 
     markUnmarkItem(ui->exercisesListWidget, marked_exercises,
-                   combined_exercises, ui->exerciseLabel);
+                   combined_exercises, ui->exerciseLabel_2);   // test exerciseLabel_2
 
 }
 
@@ -245,7 +324,7 @@ void BVB_Manager::on_actionDelete_all_players_triggered()
         }
 
         // deleting all pics from pics folder
-        //deleting recursevly all images and folder
+        // deleting recursevly all images and folder
         // and then create the empty folder again
         QDir dir(QDir::homePath() + "/Players_images");
 
@@ -345,7 +424,7 @@ void BVB_Manager::removeListWidgetItems(QLabel *label, QListWidget *widget,
     // make all wigets on QListWidget unmarked again
     for(auto i{0}; i < widget->count(); ++i){
         markItem(widget->item(i),
-                 Qt::black, QFont("Helvetica [Cronyx]", 11));
+                 Qt::black, QFont("Ubuntu", 11));
     }
 
     // clear container
@@ -354,14 +433,15 @@ void BVB_Manager::removeListWidgetItems(QLabel *label, QListWidget *widget,
 
 void BVB_Manager::on_removeAllPlayersButton_clicked()
 {
-    removeListWidgetItems(ui->playerNameLabel, ui->playersListWidget, marked_players);
+    // test playerNameLabel_2  !!!!
+    removeListWidgetItems(ui->playerNameLabel_2, ui->playersListWidget, marked_players);
 }
 
 
 void BVB_Manager::on_addAllPlayersButton_clicked()
 {
     // first of all clear current label data
-    ui->playerNameLabel->clear();
+    ui->playerNameLabel_2->clear();                    // test !!!
 
     // clear general players string
     combined_players.clear();
@@ -373,20 +453,21 @@ void BVB_Manager::on_addAllPlayersButton_clicked()
 
         // make each player marked
         markItem(ui->playersListWidget->item(i),
-                 Qt::red, QFont("Helvetica [Cronyx]", 13));
+                 Qt::red, QFont("Ubuntu", 11));
 
         //add player to the marked_players container
         marked_players.insert(ui->playersListWidget->item(i)->text());
     }
 
     // update label
-    ui->playerNameLabel->setText(combined_players);
+    ui->playerNameLabel_2->setText(combined_players);    // test  !!!
 }
 
 
 void BVB_Manager::on_removeAllExercisesButton_clicked()
 {
-    removeListWidgetItems(ui->exerciseLabel, ui->exercisesListWidget, marked_exercises);
+    //   test !!!!!!!!!!!!!!!!!!
+    removeListWidgetItems(ui->exerciseLabel_2, ui->exercisesListWidget, marked_exercises);
 }
 
 void BVB_Manager::on_resetCurrentSettingButton_clicked()
@@ -402,30 +483,54 @@ void BVB_Manager::on_resetCurrentSettingButton_clicked()
 
         // make a training list blank
 
-        removeListWidgetItems(ui->playerNameLabel, ui->playersListWidget, marked_players);
+        // test !!!!!!!!!!!!!!!!!!!!!
 
-        removeListWidgetItems(ui->exerciseLabel, ui->exercisesListWidget, marked_exercises);
+        removeListWidgetItems(ui->playerNameLabel_2, ui->playersListWidget, marked_players);
 
-        ui->dateSelectedLabel->setText(current_date);
+        removeListWidgetItems(ui->exerciseLabel_2, ui->exercisesListWidget, marked_exercises);
+
+        ui->dateSelectedLabel_2->setText(current_date);
 
         ui->trainingTime->setTime(QTime(12, 01));
     }
 }
 
-void BVB_Manager::exerciseRadioChanged(){
-    if(ui->allExercisesRadioButton->isChecked()){
-        qDebug() << "All";
+void BVB_Manager::exerciseCheckBoxChanged(){
+
+    // first of all clear data
+    ui->exercisesListWidget->clear();
+
+    // then filling widget in case what exercises user wanna see
+
+    if(ui->warmUpCheckBox->isChecked()){
+        getExercises("Warm up");
     }
-    else if(ui->warmUpExercisesRadioButton->isChecked()){
-        qDebug() << "Warm up";
+
+    if(ui->cardioCheckBox->isChecked()){
+        getExercises("Cardio");
     }
-    else if(ui->gymExercisesRadioButton->isChecked()){
-        qDebug() << "Gym";
+
+    if(ui->gymCheckBox->isChecked()){
+        getExercises("Gym");
     }
-    else if(ui->cardioExercisesRadioButton->isChecked()){
-        qDebug() << "Cardio";
+
+    if(ui->tacticalCheckBox->isChecked()){
+        getExercises("Tactical-technical");
     }
-    else if(ui->tacticalexercisesRadioButton->isChecked()){
-        qDebug() << "Tactical";
+}
+
+
+void BVB_Manager::playersCheckBoxChanged(){
+
+    // first of all take away data from widget
+    ui->playersListWidget->clear();
+
+    // then refill widget
+    if(ui->menCheckBox->isChecked()){
+        getPlayers(true);
+    }
+
+    if(ui->womenCheckBox->isChecked()){
+        getPlayers(false);
     }
 }
