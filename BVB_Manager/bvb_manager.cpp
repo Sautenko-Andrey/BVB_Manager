@@ -3,13 +3,16 @@
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <QListWidget>
-//#include <QDebug>
+#include <QFile>
 
 BVB_Manager::BVB_Manager(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::BVB_Manager)
 {
     ui->setupUi(this);
+
+    // prepare database manager
+    database_manager.prepareManager(this);
 
     // Calendar settings
     ui->calendarWidget->setLocale(QLocale::English);
@@ -193,14 +196,14 @@ void BVB_Manager::updateDate(){
     selected_date = ui->calendarWidget->selectedDate();
     const QString training_date = "Date: " + selected_date.toString("dd.MM.yyyy");
     ui->dateSelectedLabel->setText(training_date);
-
-    //test
-    ui->dateSelectedLabel_2->setText(training_date);
-
 }
 
 void BVB_Manager::updateTime(){
     // update training time
+    timeToString();
+}
+
+QString BVB_Manager::timeToString(){
 
     int hour = ui->trainingTime->time().hour();
     int minute = ui->trainingTime->time().minute();
@@ -211,16 +214,11 @@ void BVB_Manager::updateTime(){
         minutes = "0" + QString::number(minute);
     }
 
-    ui->timeSelectedLabel->setText("Time: " +
-                                   QString::number(hour) +
-                                   ":" +
-                                   minutes);
+    QString time_str = "Time: " + QString::number(hour) + ":" + minutes;
 
-    //test
-    ui->timeSelectedLabel_2->setText("Time: " +
-                                   QString::number(hour) +
-                                   ":" +
-                                   minutes);
+    ui->timeSelectedLabel->setText(time_str);
+
+    return time_str;
 }
 
 void BVB_Manager::selectedDateChanged(){
@@ -275,16 +273,13 @@ void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QSet<QString> &contai
 void BVB_Manager::selectedPlayer(){
 
     markUnmarkItem(ui->playersListWidget, marked_players,
-                   combined_players, ui->playerNameLabel_2);   //test playerNameLabel_2
-
-
+                   combined_players, ui->playerNameLabel);
 }
 
 void BVB_Manager::selectedExercise(){
 
     markUnmarkItem(ui->exercisesListWidget, marked_exercises,
-                   combined_exercises, ui->exerciseLabel_2);   // test exerciseLabel_2
-
+                   combined_exercises, ui->exerciseLabel);
 }
 
 void BVB_Manager::on_actionAdd_a_new_player_triggered()
@@ -326,14 +321,15 @@ void BVB_Manager::on_actionDelete_all_players_triggered()
         // deleting all pics from pics folder
         // deleting recursevly all images and folder
         // and then create the empty folder again
-        QDir dir(QDir::homePath() + "/Players_images");
+        const QString dir_name = "/Players_images";
+        QDir dir(QDir::homePath() + dir_name);
 
         if(dir.exists()){
             // delete the folder and all files
             dir.removeRecursively();
 
             // create a new empty folder for players pics
-            dir.mkpath(QDir::homePath() + "/Players_images");
+            dir.mkpath(QDir::homePath() + dir_name);
         }
         else{
             QMessageBox::warning(this, "Error", "Folder for pics doesn't exist.");
@@ -397,7 +393,6 @@ void BVB_Manager::on_actionChange_an_exercise_triggered()
                                                        this);
     change_exercise->setWindowTitle("Change an exercise");
     change_exercise->show();
-
 }
 
 
@@ -433,15 +428,14 @@ void BVB_Manager::removeListWidgetItems(QLabel *label, QListWidget *widget,
 
 void BVB_Manager::on_removeAllPlayersButton_clicked()
 {
-    // test playerNameLabel_2  !!!!
-    removeListWidgetItems(ui->playerNameLabel_2, ui->playersListWidget, marked_players);
+    removeListWidgetItems(ui->playerNameLabel, ui->playersListWidget, marked_players);
 }
 
 
 void BVB_Manager::on_addAllPlayersButton_clicked()
 {
     // first of all clear current label data
-    ui->playerNameLabel_2->clear();                    // test !!!
+    ui->playerNameLabel->clear();
 
     // clear general players string
     combined_players.clear();
@@ -460,14 +454,13 @@ void BVB_Manager::on_addAllPlayersButton_clicked()
     }
 
     // update label
-    ui->playerNameLabel_2->setText(combined_players);    // test  !!!
+    ui->playerNameLabel->setText(combined_players);
 }
 
 
 void BVB_Manager::on_removeAllExercisesButton_clicked()
 {
-    //   test !!!!!!!!!!!!!!!!!!
-    removeListWidgetItems(ui->exerciseLabel_2, ui->exercisesListWidget, marked_exercises);
+    removeListWidgetItems(ui->exerciseLabel, ui->exercisesListWidget, marked_exercises);
 }
 
 void BVB_Manager::on_resetCurrentSettingButton_clicked()
@@ -481,18 +474,23 @@ void BVB_Manager::on_resetCurrentSettingButton_clicked()
 
     if(reply == QMessageBox::Yes){
 
-        // make a training list blank
-
-        // test !!!!!!!!!!!!!!!!!!!!!
-
-        removeListWidgetItems(ui->playerNameLabel_2, ui->playersListWidget, marked_players);
-
-        removeListWidgetItems(ui->exerciseLabel_2, ui->exercisesListWidget, marked_exercises);
-
-        ui->dateSelectedLabel_2->setText(current_date);
-
-        ui->trainingTime->setTime(QTime(12, 01));
+        // make the editor blank
+        clearEditor();
     }
+}
+
+void BVB_Manager::clearEditor(){
+    // make a training list blank
+
+    removeListWidgetItems(ui->playerNameLabel, ui->playersListWidget, marked_players);
+
+    removeListWidgetItems(ui->exerciseLabel, ui->exercisesListWidget, marked_exercises);
+
+    ui->dateSelectedLabel->setText(current_date);
+
+    ui->trainingTime->setTime(QTime(12, 01));
+
+    ui->NotesTextEdit->clear();
 }
 
 void BVB_Manager::exerciseCheckBoxChanged(){
@@ -533,4 +531,49 @@ void BVB_Manager::playersCheckBoxChanged(){
     if(ui->womenCheckBox->isChecked()){
         getPlayers(false);
     }
+}
+
+void BVB_Manager::on_addToscheduleButton_clicked()
+{
+    // increase counter's value
+    ++trainings_counter;
+
+    // creatin a new folder with txt files
+    const QString folder_name = "/Trainings";
+
+    QDir dir;
+
+    if(!dir.exists(QDir::homePath() + folder_name)){
+        dir.mkpath(QDir::homePath() + folder_name);
+    }
+
+    // make file name
+    QString file_name = "/" + QString::number(trainings_counter) +
+                              "_" + current_date.right(10);
+
+    // clearence
+    file_name = file_name.trimmed().replace(" ", "_").replace(".", "_");
+
+    // make a txt file with a training schema
+    const QString txt_file(QDir::homePath() + folder_name +file_name + ".txt");
+
+    // create a text for the pdf file
+
+    QStringList labels;
+    labels << current_date << timeToString()
+           << "\nPlayers: "
+           << ui->playerNameLabel->text()
+           << "Exercises:"
+           << ui->exerciseLabel->text()
+           << "Comments:"
+           << ui->NotesTextEdit->toPlainText();
+
+    QFile file(txt_file);
+    if(file.open(QFile::WriteOnly | QIODevice::Text)){
+        QTextStream stream(&file);
+        stream << labels.join("\n");
+    }
+
+    // after all clear the editor
+    clearEditor();
 }

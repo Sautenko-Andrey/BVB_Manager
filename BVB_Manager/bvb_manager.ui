@@ -14,9 +14,9 @@
    <string>BVB_Manager</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_11">
+   <layout class="QHBoxLayout" name="horizontalLayout_10">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_10">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_16">
         <item>
@@ -306,205 +306,7 @@
        </spacer>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_21">
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_19">
-          <item>
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>Training editor:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <item>
-             <widget class="QFrame" name="frame_3">
-              <property name="minimumSize">
-               <size>
-                <width>450</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>450</width>
-                <height>500</height>
-               </size>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_2">
-               <item>
-                <layout class="QVBoxLayout" name="verticalLayout_6">
-                 <item>
-                  <widget class="QLabel" name="dateSelectedLabel">
-                   <property name="minimumSize">
-                    <size>
-                     <width>150</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Date:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="timeSelectedLabel">
-                   <property name="minimumSize">
-                    <size>
-                     <width>150</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Time:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="playerLabel">
-                   <property name="minimumSize">
-                    <size>
-                     <width>150</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Player/Players:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="playerNameLabel">
-                   <property name="minimumSize">
-                    <size>
-                     <width>150</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="text">
-                    <string>Player name</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_6">
-                   <property name="font">
-                    <font>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Exercise/Exercises:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="exerciseLabel">
-                   <property name="text">
-                    <string>Exercise</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayout_10">
-              <item>
-               <layout class="QVBoxLayout" name="verticalLayout_11">
-                <item>
-                 <widget class="QPushButton" name="removeAllPlayersButton_2">
-                  <property name="text">
-                   <string>remove all players</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="addAllPlayersButton_2">
-                  <property name="text">
-                   <string>add all players</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="removeAllExercisesButton_2">
-                  <property name="text">
-                   <string>remove all exercises</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="resetCurrentSettingButton_2">
-                  <property name="text">
-                   <string>reset current settings</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <spacer name="verticalSpacer_5">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>28</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QPushButton" name="addToscheduleButton_2">
-                <property name="text">
-                 <string>add to schedule</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <spacer name="verticalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>38</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
+       <layout class="QVBoxLayout" name="verticalLayout_11">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_20">
           <item>
@@ -521,7 +323,7 @@
               <property name="minimumSize">
                <size>
                 <width>450</width>
-                <height>154</height>
+                <height>190</height>
                </size>
               </property>
               <property name="widgetResizable">
@@ -533,14 +335,14 @@
                  <x>0</x>
                  <y>0</y>
                  <width>448</width>
-                 <height>185</height>
+                 <height>188</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_18">
                 <item>
                  <layout class="QVBoxLayout" name="verticalLayout_17">
                   <item>
-                   <widget class="QLabel" name="dateSelectedLabel_2">
+                   <widget class="QLabel" name="dateSelectedLabel">
                     <property name="minimumSize">
                      <size>
                       <width>150</width>
@@ -558,7 +360,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLabel" name="timeSelectedLabel_2">
+                   <widget class="QLabel" name="timeSelectedLabel">
                     <property name="minimumSize">
                      <size>
                       <width>150</width>
@@ -594,7 +396,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLabel" name="playerNameLabel_2">
+                   <widget class="QLabel" name="playerNameLabel">
                     <property name="minimumSize">
                      <size>
                       <width>150</width>
@@ -625,7 +427,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLabel" name="exerciseLabel_2">
+                   <widget class="QLabel" name="exerciseLabel">
                     <property name="minimumSize">
                      <size>
                       <width>150</width>
@@ -711,7 +513,77 @@
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>68</height>
+            <height>58</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_6">
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Comments:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTextEdit" name="NotesTextEdit">
+              <property name="minimumSize">
+               <size>
+                <width>450</width>
+                <height>154</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_10">
+            <item>
+             <widget class="QPushButton" name="pushButton">
+              <property name="text">
+               <string>erase</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_2">
+              <property name="text">
+               <string>PushButton</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_3">
+              <property name="text">
+               <string>PushButton</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_4">
+              <property name="text">
+               <string>PushButton</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>48</height>
            </size>
           </property>
          </spacer>

@@ -67,10 +67,14 @@ private slots:
 
     void on_resetCurrentSettingButton_clicked();
 
+    void on_addToscheduleButton_clicked();
+
 private:
     Ui::BVB_Manager *ui;
 
-    DatabaseManager database_manager;
+    //DatabaseManager database_manager;
+
+    DatabaseManager &database_manager = DatabaseManager::getInstance();
 
     std::unique_ptr<AddPlayer> add_player{nullptr};
 
@@ -100,6 +104,8 @@ private:
 
     QString current_date;
 
+    int trainings_counter{0};
+
     void updateDate();
 
     void updateTime();
@@ -115,5 +121,9 @@ private:
     void getExercises(const QString &type);
 
     void getPlayers(bool gender);
+
+    QString timeToString();
+
+    void clearEditor();
 };
 #endif // BVB_MANAGER_H
