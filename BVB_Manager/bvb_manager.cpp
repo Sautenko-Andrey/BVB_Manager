@@ -4,6 +4,8 @@
 #include <QSqlQuery>
 #include <QListWidget>
 #include <QFile>
+#include <QInputDialog>
+#include <QDebug>
 
 BVB_Manager::BVB_Manager(QWidget *parent)
     : QMainWindow(parent)
@@ -19,6 +21,7 @@ BVB_Manager::BVB_Manager(QWidget *parent)
     ui->calendarWidget->setGridVisible(true);
     ui->calendarWidget->setVerticalHeaderFormat(QCalendarWidget::NoVerticalHeader);
     ui->calendarWidget->setFirstDayOfWeek(Qt::Monday);
+    ui->langComboBox->addItems({"eng", "rus", "ukr", "swe", "chi"});
 
     // Getting today's date
     current_date = "Date: " + ui->calendarWidget->selectedDate().toString("dd.MM.yyyy");
@@ -94,6 +97,16 @@ BVB_Manager::BVB_Manager(QWidget *parent)
 
 
     // signals & slots
+    // calendar's area signals & slots
+    connect(ui->gridCheckBox, SIGNAL(stateChanged(int)),
+            this, SLOT(changeGridCheckBox()));
+
+    connect(ui->weekNumsCheckBox, SIGNAL(stateChanged(int)),
+            this, SLOT(changeWeekNumsCheckBox()));
+
+    connect(ui->langComboBox, SIGNAL(currentTextChanged(QString)),
+            this, SLOT(comboLangChanged()));
+
     connect(ui->calendarWidget, SIGNAL(clicked(QDate)),
             this, SLOT(selectedDateChanged()));
 
@@ -125,6 +138,8 @@ BVB_Manager::BVB_Manager(QWidget *parent)
 
     connect(ui->tacticalCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)),
             this, SLOT(exerciseCheckBoxChanged()));
+
+
 
 }
 
@@ -240,9 +255,12 @@ void BVB_Manager::markItem(QListWidgetItem *item,
 void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QSet<QString> &container,
                                  QString &text, QLabel *label){
 
-    const QString current_item = list_widget->currentItem()->text();
+    QString current_item = list_widget->currentItem()->text();
 
     // unmark
+
+    // BUG! because it compares push_ups vs push_ups 3 x 10!!!!!!
+
     if(container.contains(current_item)){
         // when double clicked change current row text color to black
         markItem(list_widget->currentItem(),Qt::black, QFont("Ubuntu", 11));
@@ -251,6 +269,32 @@ void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QSet<QString> &contai
     }
     // mark
     else{
+
+        // new---------------------------------------------------------------------
+        qDebug() << current_item.right(6);
+
+        int sets{0};
+        int reps{0};
+
+        if(current_item.right(6) == "Gym ) "){
+            //QMessageBox::information(this, "Info", "Gym!");
+
+            bool status_1, status_2;
+            sets = QInputDialog::getInt(this, "Sets", "How many sets ?",
+                                            1, 1, 20, 1, &status_1);
+            reps = QInputDialog::getInt(this, "Reps", "How many reps ?",
+                                        1, 1, 20, 1, &status_2);
+
+            if(status_1 && status_2){
+                qDebug() << sets << " x " << reps;
+                // copy current_item
+                current_item += (" " + QString::number(sets) +
+                                 " x " +QString::number(reps));    // issue here
+            }
+        }
+
+        //--------------------------------------------------------------------end new
+
         // when double clicked change current row text color to red
         markItem(list_widget->currentItem(), Qt::red, QFont("Ubuntu", 11));
         // add marked item to the container
@@ -267,6 +311,14 @@ void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QSet<QString> &contai
 
     // update the label
     label->setText(text);
+
+    // test------------------------------------------------------
+    for(const auto &item : container){
+        qDebug() << item;
+    }
+
+    qDebug() << "-------------------------------";
+    //-----------------------------------------------------------
 }
 
 // when double clicked on the player in players list widget
@@ -576,4 +628,61 @@ void BVB_Manager::on_addToscheduleButton_clicked()
 
     // after all clear the editor
     clearEditor();
+}
+
+void BVB_Manager::on_eraseButton_clicked()
+{
+    // erase all text in comments area
+    ui->NotesTextEdit->clear();
+}
+
+
+void BVB_Manager::on_redoButton_clicked()
+{
+    ui->NotesTextEdit->redo();
+}
+
+
+void BVB_Manager::on_undoButton_clicked()
+{
+    ui->NotesTextEdit->undo();
+}
+
+void BVB_Manager::changeGridCheckBox(){
+
+    if(!ui->gridCheckBox->isChecked()){
+        ui->calendarWidget->setGridVisible(false);
+    }
+    else{
+        ui->calendarWidget->setGridVisible(true);
+    }
+}
+
+void BVB_Manager::changeWeekNumsCheckBox(){
+
+    if(ui->weekNumsCheckBox->isChecked()){
+        ui->calendarWidget->setVerticalHeaderFormat(QCalendarWidget::ISOWeekNumbers);
+    }
+    else{
+        ui->calendarWidget->setVerticalHeaderFormat(QCalendarWidget::NoVerticalHeader);
+    }
+}
+
+void BVB_Manager::comboLangChanged(){
+
+    if(ui->langComboBox->currentText() == "eng"){
+        ui->calendarWidget->setLocale(QLocale::English);
+    }
+    else if(ui->langComboBox->currentText() == "rus"){
+        ui->calendarWidget->setLocale(QLocale::Russian);
+    }
+    else if(ui->langComboBox->currentText() == "ukr"){
+        ui->calendarWidget->setLocale(QLocale::Ukrainian);
+    }
+    else if(ui->langComboBox->currentText() == "swe"){
+        ui->calendarWidget->setLocale(QLocale::Swedish);
+    }
+    else{
+        ui->calendarWidget->setLocale(QLocale::Chinese);
+    }
 }

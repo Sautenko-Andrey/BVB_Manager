@@ -69,6 +69,18 @@ private slots:
 
     void on_addToscheduleButton_clicked();
 
+    void on_eraseButton_clicked();
+
+    void on_redoButton_clicked();
+
+    void on_undoButton_clicked();
+
+    void changeGridCheckBox();
+
+    void changeWeekNumsCheckBox();
+
+    void comboLangChanged();
+
 private:
     Ui::BVB_Manager *ui;
 

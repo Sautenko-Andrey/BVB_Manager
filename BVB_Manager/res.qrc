@@ -11,5 +11,9 @@
         <file>delete_exercise.png</file>
         <file>change_exercise.png</file>
         <file>search_player.png</file>
+        <file>back.png</file>
+        <file>clear_all.png</file>
+        <file>copy.png</file>
+        <file>forward.png</file>
     </qresource>
 </RCC>
