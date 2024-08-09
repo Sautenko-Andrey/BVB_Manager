@@ -5,6 +5,7 @@
 #include <QImage>
 #include <QSqlDatabase>
 #include <QStringList>
+#include <QListWidget>
 
 
 namespace Ui {
@@ -21,7 +22,9 @@ public:
                        QWidget *parent = nullptr,
                        bool add_mode = true,
                        const QString &player_first_name = "Unknown",
-                       const QString &player_last_name = "Unknown");
+                       const QString &player_last_name = "Unknown",
+                       QListWidget *list_widget = nullptr);
+
     ~AddPlayer();
 
 private slots:
@@ -48,6 +51,8 @@ private:
     bool mode{true};
 
     QString index{"None"};
+
+    QListWidget *players_list{nullptr};
 };
 
 #endif // ADDPLAYER_H

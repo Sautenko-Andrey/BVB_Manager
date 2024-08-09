@@ -104,9 +104,11 @@ private:
 
     std::unique_ptr<SearchPlayer> search_player{nullptr};
 
-    QSet<QString> marked_players;
+    //QSet<QString> marked_players;
+    QStringList marked_players;
 
-    QSet<QString> marked_exercises;
+    //QSet<QString> marked_exercises;
+    QStringList marked_exercises;
 
     QDate selected_date;
 
@@ -116,6 +118,8 @@ private:
 
     QString current_date;
 
+    QString original_gym_exercise_name;
+
     int trainings_counter{0};
 
     void updateDate();
@@ -124,11 +128,17 @@ private:
 
     void markItem(QListWidgetItem *item, const QBrush &color, const QFont &font);
 
-    void markUnmarkItem(QListWidget *list_widget, QSet<QString> &container,
+    // void markUnmarkItem(QListWidget *list_widget, QSet<QString> &container,
+    //                     QString &text, QLabel *label);
+
+    void markUnmarkItem(QListWidget *list_widget, QStringList &container,
                         QString &text, QLabel *label);
 
+    // void removeListWidgetItems(QLabel *label, QListWidget *widget,
+    //                                         QSet<QString> &container);
+
     void removeListWidgetItems(QLabel *label, QListWidget *widget,
-                                            QSet<QString> &container);
+                               QStringList &container);
 
     void getExercises(const QString &type);
 

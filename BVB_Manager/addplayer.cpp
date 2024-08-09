@@ -21,7 +21,8 @@ AddPlayer::AddPlayer(QSqlDatabase &database,
                      QWidget *parent,
                      bool add_mode,
                      const QString &player_first_name,
-                     const QString &player_last_name)
+                     const QString &player_last_name,
+                     QListWidget *list_widget)
     : QDialog(parent)
     , ui(new Ui::AddPlayer)
 {
@@ -32,6 +33,8 @@ AddPlayer::AddPlayer(QSqlDatabase &database,
 
     // save mode for future purpose
     mode = add_mode;
+
+    players_list = list_widget;
 
     //save player's index
     //index = player_index;
@@ -260,5 +263,9 @@ void AddPlayer::on_savePlayerButton_clicked()
         //clear all lines
         clearAllLines();
     }
+
+    // we should update QListWidget with players
+    //players_list->
+
 }
 

@@ -138,9 +138,6 @@ BVB_Manager::BVB_Manager(QWidget *parent)
 
     connect(ui->tacticalCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)),
             this, SLOT(exerciseCheckBoxChanged()));
-
-
-
 }
 
 BVB_Manager::~BVB_Manager()
@@ -252,53 +249,60 @@ void BVB_Manager::markItem(QListWidgetItem *item,
     item->setFont(font);
 }
 
-void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QSet<QString> &container,
+// void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QSet<QString> &container,
+//                                  QString &text, QLabel *label){
+void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QStringList &container,
                                  QString &text, QLabel *label){
 
     QString current_item = list_widget->currentItem()->text();
 
     // unmark
-
-    // BUG! because it compares push_ups vs push_ups 3 x 10!!!!!!
-
     if(container.contains(current_item)){
+
+        // if this is a gym exercise
+        if(current_item.contains("( Gym )")){
+            // return the original name of the gymexercise
+            list_widget->currentItem()->setText(original_gym_exercise_name);
+        }
+
         // when double clicked change current row text color to black
         markItem(list_widget->currentItem(),Qt::black, QFont("Ubuntu", 11));
         // remove the item from the container
-        container.remove(current_item);
+        //container.remove(current_item);
+        container.removeAll(current_item);
     }
     // mark
     else{
-
-        // new---------------------------------------------------------------------
-        qDebug() << current_item.right(6);
-
-        int sets{0};
-        int reps{0};
+        int sets{0};   // sets amount
+        int reps{0};   // reps amount
 
         if(current_item.right(6) == "Gym ) "){
-            //QMessageBox::information(this, "Info", "Gym!");
+            // save an original name of the exercise
+            original_gym_exercise_name = current_item;
 
             bool status_1, status_2;
+            // 20 sets maximum
             sets = QInputDialog::getInt(this, "Sets", "How many sets ?",
                                             1, 1, 20, 1, &status_1);
+            // 100 reps maximum
             reps = QInputDialog::getInt(this, "Reps", "How many reps ?",
-                                        1, 1, 20, 1, &status_2);
+                                        1, 1, 100, 1, &status_2);
 
             if(status_1 && status_2){
-                qDebug() << sets << " x " << reps;
-                // copy current_item
+                // change current_item (adding sets and reps)
                 current_item += (" " + QString::number(sets) +
-                                 " x " +QString::number(reps));    // issue here
+                                 " x " +QString::number(reps));
+
+                // changing current item text
+                list_widget->currentItem()->setText(current_item);
             }
         }
-
-        //--------------------------------------------------------------------end new
 
         // when double clicked change current row text color to red
         markItem(list_widget->currentItem(), Qt::red, QFont("Ubuntu", 11));
         // add marked item to the container
-        container.insert(current_item);
+        //container.insert(current_item);
+        container.append(current_item);
     }
 
     // clear items string
@@ -311,14 +315,6 @@ void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QSet<QString> &contai
 
     // update the label
     label->setText(text);
-
-    // test------------------------------------------------------
-    for(const auto &item : container){
-        qDebug() << item;
-    }
-
-    qDebug() << "-------------------------------";
-    //-----------------------------------------------------------
 }
 
 // when double clicked on the player in players list widget
@@ -463,13 +459,22 @@ void BVB_Manager::on_actionSearch_a_player_triggered()
 }
 
 
+// void BVB_Manager::removeListWidgetItems(QLabel *label, QListWidget *widget,
+//                                         QSet<QString> &container){
 void BVB_Manager::removeListWidgetItems(QLabel *label, QListWidget *widget,
-                                        QSet<QString> &container){
+                                        QStringList &container){
     // clear label
     label->clear();
 
     // make all wigets on QListWidget unmarked again
     for(auto i{0}; i < widget->count(); ++i){
+
+        // for all gym exercises return their original names
+        if(widget->item(i)->text().contains("( Gym )")){
+            // remove sets and reps from exercise name(getting name as original)
+            QString correct_name = widget->item(i)->text().left((widget->item(i)->text().indexOf(")")) + 2);
+            widget->item(i)->setText(correct_name);
+        }
         markItem(widget->item(i),
                  Qt::black, QFont("Ubuntu", 11));
     }
@@ -502,7 +507,8 @@ void BVB_Manager::on_addAllPlayersButton_clicked()
                  Qt::red, QFont("Ubuntu", 11));
 
         //add player to the marked_players container
-        marked_players.insert(ui->playersListWidget->item(i)->text());
+        //marked_players.insert(ui->playersListWidget->item(i)->text());
+        marked_players.append(ui->playersListWidget->item(i)->text());
     }
 
     // update label
