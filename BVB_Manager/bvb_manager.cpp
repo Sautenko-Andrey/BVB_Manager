@@ -138,6 +138,11 @@ BVB_Manager::BVB_Manager(QWidget *parent)
 
     connect(ui->tacticalCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)),
             this, SLOT(exerciseCheckBoxChanged()));
+
+    // double click on date when user wants to see training on selected day
+    // via calendar
+    connect(ui->calendarWidget, SIGNAL(activated(QDate)),
+            this , SLOT(dateActivated()));
 }
 
 BVB_Manager::~BVB_Manager()
@@ -333,7 +338,9 @@ void BVB_Manager::selectedExercise(){
 void BVB_Manager::on_actionAdd_a_new_player_triggered()
 {
     // add a new player
-    add_player = std::make_unique<AddPlayer>(database_manager.getDatabase(), this);
+    add_player = std::make_unique<AddPlayer>(database_manager.getDatabase(),
+                                             this, true, "", "", ui->playersListWidget);
+
     add_player->setWindowTitle("New player");
     add_player->show();
 }
@@ -414,7 +421,8 @@ void BVB_Manager::on_actionChange_a_player_triggered()
 void BVB_Manager::on_actionAdd_a_new_exercise_triggered()
 {
     // adding a new exercise
-    add_exercise = std::make_unique<AddExercise>(database_manager.getDatabase(), this);
+    add_exercise = std::make_unique<AddExercise>(database_manager.getDatabase(),
+                                                 this, ui->exercisesListWidget);
     add_exercise->setWindowTitle("Add a new exercise");
     add_exercise->show();
 }
@@ -630,6 +638,24 @@ void BVB_Manager::on_addToscheduleButton_clicked()
     if(file.open(QFile::WriteOnly | QIODevice::Text)){
         QTextStream stream(&file);
         stream << labels.join("\n");
+
+        // adding training info to the database
+        QSqlQuery query(database_manager.getDatabase());
+
+        query.prepare("INSERT INTO Trainings (description) VALUES (:descr);");
+
+        qDebug() << labels.join("\n");
+
+        query.bindValue(":descr", labels.join("\n"));
+
+        if(!query.exec()){
+            QMessageBox::warning(this, "New training saving error",
+                                 "Training has not been saving");
+        }
+        else{
+            QMessageBox::information(this, "New training saving",
+                                     "Training has been saving");
+        }
     }
 
     // after all clear the editor
@@ -690,5 +716,42 @@ void BVB_Manager::comboLangChanged(){
     }
     else{
         ui->calendarWidget->setLocale(QLocale::Chinese);
+    }
+}
+
+void BVB_Manager::dateActivated(){
+
+
+
+    // double click / enter /return on calendar widget's date
+    // QString selected_date = ui->calendarWidget->selectedDate().toString("dd.MM.yyyy");
+    auto selected_date = ui->calendarWidget->selectedDate();
+    // make a query to getting all trainings on this date
+    QSqlQuery query(database_manager.getDatabase());
+
+    query.prepare("SELECT training_date, description"
+                  " FROM Trainings"
+                  " WHERE DATE(training_date) = DATE(:date);");
+
+    query.bindValue(":date", selected_date);
+
+    if(!query.exec()){
+        QMessageBox::warning(this, "Database error", "Couldn't load trainings");
+        return;
+    }
+    else{
+
+        // if(!query.isValid()){
+        //     QMessageBox::information(this,
+        //                              "Trainig error",
+        //                              "No training this day");
+        //     return;
+        // }
+
+        while(query.next()){
+            QMessageBox::information(this,
+                                     query.value(0).toString(),
+                                     query.value(1).toString());
+        }
     }
 }

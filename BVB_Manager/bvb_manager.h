@@ -81,6 +81,8 @@ private slots:
 
     void comboLangChanged();
 
+    void dateActivated();
+
 private:
     Ui::BVB_Manager *ui;
 

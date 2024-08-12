@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QSqlDatabase>
 #include <QStringList>
+#include <QListWidget>
 #include "utils.h"
 
 namespace Ui {
@@ -15,7 +16,9 @@ class AddExercise : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddExercise(QSqlDatabase &database, QWidget *parent = nullptr);
+    explicit AddExercise(QSqlDatabase &database,
+                         QWidget *parent = nullptr,
+                         QListWidget *exercises_list_widget = nullptr);
     ~AddExercise();
 
 private slots:
@@ -30,6 +33,8 @@ private:
 
     QString current_training_type =
         training_types[static_cast<int>(TrainingTypeIndexes::Warm_up)];
+
+    QListWidget *exercises_list_widget{nullptr};
 };
 
 #endif // ADDEXERCISE_H

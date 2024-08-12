@@ -22,19 +22,23 @@ AddPlayer::AddPlayer(QSqlDatabase &database,
                      bool add_mode,
                      const QString &player_first_name,
                      const QString &player_last_name,
-                     QListWidget *list_widget)
+                     QListWidget *players_list_widget)
     : QDialog(parent)
     , ui(new Ui::AddPlayer)
 {
     ui->setupUi(this);
+
+    // test players_list_widget
+    if(players_list_widget != nullptr){
+        this->players_list_widget = players_list_widget;
+    }
+
 
     // pointer on database
     db = &database;
 
     // save mode for future purpose
     mode = add_mode;
-
-    players_list = list_widget;
 
     //save player's index
     //index = player_index;
@@ -264,8 +268,36 @@ void AddPlayer::on_savePlayerButton_clicked()
         clearAllLines();
     }
 
-    // we should update QListWidget with players
-    //players_list->
+    // update players list widget
+    QSqlQuery players_query(*db);
 
+    if(!players_query.exec("SELECT id, first_name, last_name, hometown"
+                            " FROM Players"
+                            " ORDER BY first_name ASC;")){
+
+        QMessageBox::warning(this, "Updating players list",
+                             "Couldn't load players data");
+        return;
+    }
+    else{
+
+        // clear list widget before updating
+
+        if(players_list_widget != nullptr){
+
+            players_list_widget->clear();
+
+            while(players_query.next()){
+                players_list_widget->addItem(
+                    "ID: " +
+                    players_query.value(0).toString() + ", " +   // id
+                    players_query.value(1).toString() + " " +   // first name
+                    players_query.value(2).toString() + ", ( " +   // second name
+                    players_query.value(3).toString()           // hometown
+                    + " )"
+                );
+            }
+        }
+    }
 }
 

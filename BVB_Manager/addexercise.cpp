@@ -4,7 +4,9 @@
 #include <QMessageBox>
 #include <QDebug>
 
-AddExercise::AddExercise(QSqlDatabase &database, QWidget *parent)
+AddExercise::AddExercise(QSqlDatabase &database,
+                         QWidget *parent,
+                         QListWidget *exercises_list_widget)
     : QDialog(parent)
     , ui(new Ui::AddExercise)
 {
@@ -12,6 +14,10 @@ AddExercise::AddExercise(QSqlDatabase &database, QWidget *parent)
 
     // pointer on database
     db = &database;
+
+    if(exercises_list_widget != nullptr){
+        this->exercises_list_widget = exercises_list_widget;
+    }
 
     // filling exercises types list
     ui->typeComboBox->addItems(training_types);
@@ -84,4 +90,26 @@ void AddExercise::on_pushButton_clicked()
 
     // Set focus on the title line
     ui->titleLine->setFocus();
+
+    // updating exercises list
+    QSqlQuery update_query(*db);
+
+    if(!update_query.exec("SELECT title, description, exercise_type"
+                          " FROM Exercises"
+                          " ORDER BY title ASC;"))
+    {
+        QMessageBox::warning(this, "Exrcise List error", "Couldn't update exrcises list");
+        return;
+    }
+    else{
+
+        //clear and update exercises list
+        exercises_list_widget->clear();
+
+        while(update_query.next()){
+            exercises_list_widget->addItem(
+                update_query.value(0).toString() + " ( " +    // exercise title
+                update_query.value(2).toString() + " ) ");      // exercise type
+        }
+    }
 }

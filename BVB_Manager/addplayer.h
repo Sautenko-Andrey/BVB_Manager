@@ -23,7 +23,7 @@ public:
                        bool add_mode = true,
                        const QString &player_first_name = "Unknown",
                        const QString &player_last_name = "Unknown",
-                       QListWidget *list_widget = nullptr);
+                       QListWidget *players_list_widget = nullptr);
 
     ~AddPlayer();
 
@@ -52,7 +52,8 @@ private:
 
     QString index{"None"};
 
-    QListWidget *players_list{nullptr};
+    QListWidget *players_list_widget{nullptr};
+
 };
 
 #endif // ADDPLAYER_H
