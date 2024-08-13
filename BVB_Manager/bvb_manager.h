@@ -15,6 +15,7 @@
 #include "changeexercise.h"
 #include "updateplayer.h"
 #include "searchplayer.h"
+#include "doubleeliminationtournament.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -83,6 +84,14 @@ private slots:
 
     void dateActivated();
 
+    void dateClicked();
+
+    void on_actionTournament_16_triggered();
+
+    void on_actionTournament_32_triggered();
+
+    void on_actionTournament_64_triggered();
+
 private:
     Ui::BVB_Manager *ui;
 
@@ -105,6 +114,8 @@ private:
     std::unique_ptr<ChangeExercise> change_exercise{nullptr};
 
     std::unique_ptr<SearchPlayer> search_player{nullptr};
+
+    std::unique_ptr<DoubleEliminationTournament> double_elim_tour{nullptr};
 
     //QSet<QString> marked_players;
     QStringList marked_players;
@@ -149,5 +160,7 @@ private:
     QString timeToString();
 
     void clearEditor();
+
+    int getTrainings(const QDate &date);
 };
 #endif // BVB_MANAGER_H

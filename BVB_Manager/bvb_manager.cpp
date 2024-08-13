@@ -95,6 +95,9 @@ BVB_Manager::BVB_Manager(QWidget *parent)
     ui->gymCheckBox->setChecked(true);
     ui->tacticalCheckBox->setChecked(true);
 
+    // get trainings amount for current day
+    ui->lcdNumber->display(getTrainings(ui->calendarWidget->selectedDate()));
+
 
     // signals & slots
     // calendar's area signals & slots
@@ -139,10 +142,14 @@ BVB_Manager::BVB_Manager(QWidget *parent)
     connect(ui->tacticalCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)),
             this, SLOT(exerciseCheckBoxChanged()));
 
-    // double click on date when user wants to see training on selected day
+    // double click on the date when user wants to see training on selected day
     // via calendar
     connect(ui->calendarWidget, SIGNAL(activated(QDate)),
             this , SLOT(dateActivated()));
+
+    // one click on the date to show how many trainings scheduled in selected day
+    connect(ui->calendarWidget, SIGNAL(clicked(QDate)),
+            this, SLOT(dateClicked()));
 }
 
 BVB_Manager::~BVB_Manager()
@@ -721,8 +728,6 @@ void BVB_Manager::comboLangChanged(){
 
 void BVB_Manager::dateActivated(){
 
-
-
     // double click / enter /return on calendar widget's date
     // QString selected_date = ui->calendarWidget->selectedDate().toString("dd.MM.yyyy");
     auto selected_date = ui->calendarWidget->selectedDate();
@@ -741,17 +746,97 @@ void BVB_Manager::dateActivated(){
     }
     else{
 
-        // if(!query.isValid()){
-        //     QMessageBox::information(this,
-        //                              "Trainig error",
-        //                              "No training this day");
-        //     return;
-        // }
-
-        while(query.next()){
+        if(!query.next()){
             QMessageBox::information(this,
-                                     query.value(0).toString(),
-                                     query.value(1).toString());
+                                     "Trainig report",
+                                     "No training on this day");
+            return;
+        }
+        else{
+
+            query.previous();  // back to the first database record
+
+            while(query.next()){
+                QMessageBox::information(this,
+                                         query.value(0).toString(),
+                                         query.value(1).toString());
+            }
         }
     }
 }
+
+
+int BVB_Manager::getTrainings(const QDate &date) {
+
+    int counter{0};
+
+    // make a query
+    QSqlQuery query(database_manager.getDatabase());
+
+    query.prepare("SELECT COUNT(id)"
+                  " FROM Trainings"
+                  " WHERE DATE(training_date) = DATE(:date);");
+
+    query.bindValue(":date", date);
+
+    if(!query.exec()){
+        QMessageBox::warning(this, "Trainings amount report",
+                             "Couldn't calculate trainings on this day");
+    }
+    else{
+        if(query.next()){
+            return query.value(0).toInt();
+        }
+    }
+
+    return counter;
+}
+
+
+void BVB_Manager::dateClicked(){
+
+    // ui->trainings_count_label->setText("trainings: "
+    //         + QString::number(getTrainings(ui->calendarWidget->selectedDate())));
+
+    ui->lcdNumber->display(getTrainings(ui->calendarWidget->selectedDate()));
+}
+
+
+void BVB_Manager::on_actionTournament_16_triggered()
+{
+    // tournament of 16
+    double_elim_tour =
+        std::make_unique<DoubleEliminationTournament>(database_manager.getDatabase(),
+                                                      TournamentMode::ofSixteen,
+                                                      this);
+
+    double_elim_tour->setWindowTitle("Double elimination tournament of 16 teams");
+    double_elim_tour->show();
+}
+
+
+void BVB_Manager::on_actionTournament_32_triggered()
+{
+    // tournament of 32
+    double_elim_tour =
+        std::make_unique<DoubleEliminationTournament>(database_manager.getDatabase(),
+                                                      TournamentMode::ofThirtyTwo,
+                                                      this);
+
+    double_elim_tour->setWindowTitle("Double elimination tournament of 32 teams");
+    double_elim_tour->show();
+}
+
+
+void BVB_Manager::on_actionTournament_64_triggered()
+{
+    // tournament of 64
+    double_elim_tour =
+        std::make_unique<DoubleEliminationTournament>(database_manager.getDatabase(),
+                                                      TournamentMode::ofSixtyFour,
+                                                      this);
+
+    double_elim_tour->setWindowTitle("Double elimination tournament of 64 teams");
+    double_elim_tour->show();
+}
+

@@ -15,5 +15,8 @@
         <file>clear_all.png</file>
         <file>copy.png</file>
         <file>forward.png</file>
+        <file>tournament.png</file>
+        <file>tournament_of_16.png</file>
+        <file>tournament_of_32.png</file>
     </qresource>
 </RCC>

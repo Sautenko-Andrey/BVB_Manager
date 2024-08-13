@@ -37,6 +37,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         changeexercise.h changeexercise.cpp changeexercise.ui
         updateplayer.h updateplayer.cpp updateplayer.ui
         searchplayer.h searchplayer.cpp searchplayer.ui
+        doubleeliminationtournament.h doubleeliminationtournament.cpp doubleeliminationtournament.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET BVB_Manager APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
