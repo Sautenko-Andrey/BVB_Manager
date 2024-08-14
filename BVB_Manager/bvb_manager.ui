@@ -705,6 +705,7 @@
     <property name="title">
      <string>Tornament</string>
     </property>
+    <addaction name="actionRegister_a_team"/>
     <addaction name="actionTournament_16"/>
     <addaction name="actionTournament_32"/>
     <addaction name="actionTournament_64"/>
@@ -740,8 +741,10 @@
    <addaction name="separator"/>
    <addaction name="actionSearch_a_player"/>
    <addaction name="separator"/>
+   <addaction name="actionRegister_a_team"/>
    <addaction name="actionTournament_16"/>
    <addaction name="actionTournament_32"/>
+   <addaction name="actionTournament_64"/>
   </widget>
   <action name="actionNew_training">
    <property name="icon">
@@ -861,8 +864,21 @@
    </property>
   </action>
   <action name="actionTournament_64">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/tournament_of_64.png</normaloff>:/images/tournament_of_64.png</iconset>
+   </property>
    <property name="text">
     <string>Tournament of 64</string>
+   </property>
+  </action>
+  <action name="actionRegister_a_team">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/team_registration.png</normaloff>:/images/team_registration.png</iconset>
+   </property>
+   <property name="text">
+    <string>Register a team</string>
    </property>
   </action>
  </widget>

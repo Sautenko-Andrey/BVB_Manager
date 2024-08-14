@@ -9,7 +9,7 @@ class DoubleEliminationTournament;
 }
 
 enum class TournamentMode {
-    ofSixteen, ofThirtyTwo, ofSixtyFour
+    ofSixteen = 16, ofThirtyTwo = 32, ofSixtyFour = 64
 };
 
 class DoubleEliminationTournament : public QDialog
@@ -28,6 +28,8 @@ private:
     Ui::DoubleEliminationTournament *ui;
 
     QSqlDatabase *db{nullptr};
+
+    TournamentMode tournament_mode;
 };
 
 #endif // DOUBLEELIMINATIONTOURNAMENT_H

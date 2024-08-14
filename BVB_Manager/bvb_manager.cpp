@@ -840,3 +840,14 @@ void BVB_Manager::on_actionTournament_64_triggered()
     double_elim_tour->show();
 }
 
+
+void BVB_Manager::on_actionRegister_a_team_triggered()
+{
+    // team registration
+    team_registration = std::make_unique<TeamRegistration>(database_manager.getDatabase(),
+                                                           this);
+
+    team_registration->setWindowTitle("Team registration");
+    team_registration->show();
+}
+

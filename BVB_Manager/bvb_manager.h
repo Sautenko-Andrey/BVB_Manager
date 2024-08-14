@@ -16,6 +16,7 @@
 #include "updateplayer.h"
 #include "searchplayer.h"
 #include "doubleeliminationtournament.h"
+#include "teamregistration.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -92,6 +93,8 @@ private slots:
 
     void on_actionTournament_64_triggered();
 
+    void on_actionRegister_a_team_triggered();
+
 private:
     Ui::BVB_Manager *ui;
 
@@ -116,6 +119,8 @@ private:
     std::unique_ptr<SearchPlayer> search_player{nullptr};
 
     std::unique_ptr<DoubleEliminationTournament> double_elim_tour{nullptr};
+
+    std::unique_ptr<TeamRegistration> team_registration{nullptr};
 
     //QSet<QString> marked_players;
     QStringList marked_players;
