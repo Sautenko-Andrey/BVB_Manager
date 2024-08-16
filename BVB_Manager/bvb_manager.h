@@ -18,8 +18,10 @@
 #include "doubleeliminationtournament.h"
 #include "teamregistration.h"
 #include "addtournament.h"
-#include "selecttournament.h"
 #include "tournamentcreator.h"
+
+
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -131,14 +133,10 @@ private:
 
     std::unique_ptr<AddTournament> add_tournament{nullptr};
 
-    std::unique_ptr<SelectTournament> select_tournament{nullptr};
-
     std::unique_ptr<TournamentCreator> tournament_creator{nullptr};
 
-    //QSet<QString> marked_players;
     QStringList marked_players;
 
-    //QSet<QString> marked_exercises;
     QStringList marked_exercises;
 
     QDate selected_date;
@@ -159,14 +157,8 @@ private:
 
     void markItem(QListWidgetItem *item, const QBrush &color, const QFont &font);
 
-    // void markUnmarkItem(QListWidget *list_widget, QSet<QString> &container,
-    //                     QString &text, QLabel *label);
-
     void markUnmarkItem(QListWidget *list_widget, QStringList &container,
                         QString &text, QLabel *label);
-
-    // void removeListWidgetItems(QLabel *label, QListWidget *widget,
-    //                                         QSet<QString> &container);
 
     void removeListWidgetItems(QLabel *label, QListWidget *widget,
                                QStringList &container);

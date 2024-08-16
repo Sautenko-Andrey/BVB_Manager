@@ -21,5 +21,6 @@
         <file>tournament_of_64.png</file>
         <file>team_registration.png</file>
         <file>add_tournament.png</file>
+        <file>calendar.png</file>
     </qresource>
 </RCC>

@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include <QSqlDatabase>
+#include "calendar.h"
+#include <memory>
 
 namespace Ui {
 class TournamentCreator;
@@ -16,10 +18,17 @@ public:
     explicit TournamentCreator(QSqlDatabase *database, QWidget *parent = nullptr);
     ~TournamentCreator();
 
+private slots:
+    void on_openCalendarButton_clicked();
+
+    void tournamentDateChanged();
+
 private:
     Ui::TournamentCreator *ui;
 
     QSqlDatabase *db{nullptr};
+
+    std::unique_ptr<Calendar> calendar{nullptr};
 };
 
 #endif // TOURNAMENTCREATOR_H

@@ -6,6 +6,7 @@
 #include <QFile>
 #include <QInputDialog>
 #include <QDebug>
+#include "choosedate.h"
 
 BVB_Manager::BVB_Manager(QWidget *parent)
     : QMainWindow(parent)
@@ -804,13 +805,6 @@ void BVB_Manager::dateClicked(){
 
 void BVB_Manager::on_actionTournament_16_triggered()
 {
-    // first of all user shoud select a tournament from the database or add a new one
-    select_tournament = std::make_unique<SelectTournament>(&database_manager.getDatabase(),
-                                                           this);
-
-    select_tournament->setWindowTitle("Choose a tournamnet");
-    select_tournament->show();
-
     // tournament of 16
     double_elim_tour =
         std::make_unique<DoubleEliminationTournament>(database_manager.getDatabase(),
@@ -872,11 +866,11 @@ void BVB_Manager::on_actionAdd_a_new_tournament_triggered()
 
 void BVB_Manager::on_actionCreate_a_tournament_triggered()
 {
-    // create a new tournament
-    tournament_creator =
-        std::make_unique<TournamentCreator>(&database_manager.getDatabase(), this);
-
+    // create a tournament
+    tournament_creator = std::make_unique<TournamentCreator>(&database_manager.getDatabase(),
+                                                         this);
     tournament_creator->setWindowTitle("Create a new tournament");
     tournament_creator->show();
+
 }
 

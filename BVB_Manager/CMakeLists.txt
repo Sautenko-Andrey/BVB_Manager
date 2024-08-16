@@ -40,8 +40,11 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         doubleeliminationtournament.h doubleeliminationtournament.cpp doubleeliminationtournament.ui
         teamregistration.h teamregistration.cpp teamregistration.ui
         addtournament.h addtournament.cpp addtournament.ui
-        selecttournament.h selecttournament.cpp selecttournament.ui
         tournamentcreator.h tournamentcreator.cpp tournamentcreator.ui
+        calendar.h calendar.cpp calendar.ui
+
+
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET BVB_Manager APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
