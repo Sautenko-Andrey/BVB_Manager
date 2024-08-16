@@ -2,7 +2,8 @@
 #define CALENDAR_H
 
 #include <QDialog>
-#include <QDate>
+#include <QDateEdit>
+#include <QSpinBox>
 
 namespace Ui {
 class Calendar;
@@ -13,20 +14,26 @@ class Calendar : public QDialog
     Q_OBJECT
 
 public:
-    explicit Calendar(QWidget *parent = nullptr);
+    Calendar(QDateEdit *start_date,
+                      QDateEdit *end_date,
+                      QSpinBox *duration,
+                      QWidget *parent = nullptr);
     ~Calendar();
-
-    const QDate& getDate() const { return selected_date; }
 
 private slots:
     void on_pushButton_clicked();
 
-    void dateChanged();
+    //void dateChanged();
 
 private:
     Ui::Calendar *ui;
 
-    QDate selected_date;
+    QDateEdit *start_tour_date{nullptr};
+
+    QDateEdit *end_tour_date{nullptr};
+
+    QSpinBox *tour_duration{nullptr};
+
 };
 
 #endif // CALENDAR_H

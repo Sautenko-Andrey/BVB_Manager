@@ -34,18 +34,18 @@ TournamentCreator::~TournamentCreator()
 void TournamentCreator::tournamentDateChanged()
 {
     // change last tournament day date
-    ui->endDate->setDate(ui->beginDate->date().addDays(ui->drationSpinBox->value() - 1));
+
+    auto duration = ui->drationSpinBox->value();
+
+    ui->endDate->setDate(ui->beginDate->date().addDays(duration == 0 ? duration : --duration));
 }
 
 
 void TournamentCreator::on_openCalendarButton_clicked()
 {
     // open calendar widget
-    calendar = std::make_unique<Calendar>(this);
+    calendar = std::make_unique<Calendar>(ui->beginDate, ui->endDate,
+                                          ui->drationSpinBox, this);
     calendar->show();
-
-    auto date = calendar->getDate();   // doesn't work properly
-
-    qDebug() << date;
 }
 
