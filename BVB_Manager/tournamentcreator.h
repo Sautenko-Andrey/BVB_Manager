@@ -8,6 +8,8 @@
 #include <QStringList>
 #include <QVector>
 #include <QCheckBox>
+#include "teamregistration.h"
+#include <QBoxLayout>
 
 namespace Ui {
 class TournamentCreator;
@@ -34,6 +36,10 @@ private slots:
 
     void tourChanged();
 
+    void tabChanged();
+
+    void searchPlayer();
+
 private:
     Ui::TournamentCreator *ui;
 
@@ -52,6 +58,10 @@ private:
     QVector<QCheckBox *> teams;
 
     QString selected_tournament{"None"};
+
+    std::unique_ptr<TeamRegistration> team_registration{nullptr};
+
+    QVBoxLayout *vbox{nullptr};
 };
 
 #endif // TOURNAMENTCREATOR_H
