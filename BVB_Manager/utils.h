@@ -5,6 +5,7 @@
 #include <QStandardItemModel>
 #include <QTableView>
 #include <QSqlDatabase>
+#include <QCheckBox>
 
 enum class Sizes {
     MainWindowWidth = 1366,
@@ -47,6 +48,15 @@ struct Player2 {
     QString hometown;
     QString phone;
     QString img;
+};
+
+struct Tournament {
+    QString date_begin;
+    QString date_end;
+    QString tour_gender_type;
+    QString tour_net_type;
+    QString tour_title;
+    QVector<QCheckBox *> selected_teams;
 };
 
 

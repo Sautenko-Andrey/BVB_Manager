@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QSqlDatabase>
+#include "utils.h"
 
 namespace Ui {
 class DoubleEliminationTournament;
@@ -18,8 +19,9 @@ class DoubleEliminationTournament : public QDialog
 
 public:
     DoubleEliminationTournament(QSqlDatabase &database,
-                                         TournamentMode mode,
-                                         QWidget *parent = nullptr);
+                                TournamentMode mode,
+                                Tournament &tournament,
+                                QWidget *parent = nullptr);
     ~DoubleEliminationTournament();
 
     virtual void paintEvent(QPaintEvent *event) override;
@@ -30,6 +32,8 @@ private:
     QSqlDatabase *db{nullptr};
 
     TournamentMode tournament_mode;
+
+    Tournament current_tournament;
 };
 
 #endif // DOUBLEELIMINATIONTOURNAMENT_H

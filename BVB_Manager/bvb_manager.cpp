@@ -806,39 +806,39 @@ void BVB_Manager::dateClicked(){
 void BVB_Manager::on_actionTournament_16_triggered()
 {
     // tournament of 16
-    double_elim_tour =
-        std::make_unique<DoubleEliminationTournament>(database_manager.getDatabase(),
-                                                      TournamentMode::ofSixteen,
-                                                      this);
+    // double_elim_tour =
+    //     std::make_unique<DoubleEliminationTournament>(database_manager.getDatabase(),
+    //                                                   TournamentMode::ofSixteen,
+    //                                                   this);
 
-    double_elim_tour->setWindowTitle("Double elimination tournament of 16 teams");
-    double_elim_tour->show();
+    // double_elim_tour->setWindowTitle("Double elimination tournament of 16 teams");
+    // double_elim_tour->show();
 }
 
 
 void BVB_Manager::on_actionTournament_32_triggered()
 {
     // tournament of 32
-    double_elim_tour =
-        std::make_unique<DoubleEliminationTournament>(database_manager.getDatabase(),
-                                                      TournamentMode::ofThirtyTwo,
-                                                      this);
+    // double_elim_tour =
+    //     std::make_unique<DoubleEliminationTournament>(database_manager.getDatabase(),
+    //                                                   TournamentMode::ofThirtyTwo,
+    //                                                   this);
 
-    double_elim_tour->setWindowTitle("Double elimination tournament of 32 teams");
-    double_elim_tour->show();
+    // double_elim_tour->setWindowTitle("Double elimination tournament of 32 teams");
+    // double_elim_tour->show();
 }
 
 
 void BVB_Manager::on_actionTournament_64_triggered()
 {
     // tournament of 64
-    double_elim_tour =
-        std::make_unique<DoubleEliminationTournament>(database_manager.getDatabase(),
-                                                      TournamentMode::ofSixtyFour,
-                                                      this);
+    // double_elim_tour =
+    //     std::make_unique<DoubleEliminationTournament>(database_manager.getDatabase(),
+    //                                                   TournamentMode::ofSixtyFour,
+    //                                                   this);
 
-    double_elim_tour->setWindowTitle("Double elimination tournament of 64 teams");
-    double_elim_tour->show();
+    // double_elim_tour->setWindowTitle("Double elimination tournament of 64 teams");
+    // double_elim_tour->show();
 }
 
 
@@ -872,5 +872,14 @@ void BVB_Manager::on_actionCreate_a_tournament_triggered()
     tournament_creator->setWindowTitle("Create a new tournament");
     tournament_creator->show();
 
+}
+
+
+void BVB_Manager::on_actionDraw_triggered()
+{
+    // test tournament draw.
+    tour_draw = std::make_unique<TourDraw>(this);
+    tour_draw->setWindowTitle("Tournament draw");
+    tour_draw->show();
 }
 

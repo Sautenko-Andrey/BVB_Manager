@@ -711,6 +711,7 @@
     <addaction name="actionTournament_64"/>
     <addaction name="actionAdd_a_new_tournament"/>
     <addaction name="actionCreate_a_tournament"/>
+    <addaction name="actionDraw"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -749,6 +750,7 @@
    <addaction name="actionTournament_64"/>
    <addaction name="actionAdd_a_new_tournament"/>
    <addaction name="actionCreate_a_tournament"/>
+   <addaction name="actionDraw"/>
   </widget>
   <action name="actionNew_training">
    <property name="icon">
@@ -901,6 +903,15 @@
    </property>
    <property name="text">
     <string>Create a tournament</string>
+   </property>
+  </action>
+  <action name="actionDraw">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/ball.png</normaloff>:/images/ball.png</iconset>
+   </property>
+   <property name="text">
+    <string>Draw</string>
    </property>
   </action>
  </widget>

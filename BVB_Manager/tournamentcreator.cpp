@@ -46,6 +46,9 @@ TournamentCreator::TournamentCreator(QSqlDatabase *database, QWidget *parent)
         }
     }
 
+    // make tour by default
+    selected_tournament = ui->tourComboBox->currentText();
+
     // prepare available teams
     // make a query
     QSqlQuery teams_query(*db);
@@ -59,7 +62,6 @@ TournamentCreator::TournamentCreator(QSqlDatabase *database, QWidget *parent)
         return;
     }
     else{
-        // QVBoxLayout *vbox = new QVBoxLayout(ui->teamsScrollArea);
         vbox = new QVBoxLayout(ui->teamsScrollArea);
 
         while(teams_query.next()){
@@ -72,7 +74,9 @@ TournamentCreator::TournamentCreator(QSqlDatabase *database, QWidget *parent)
                                                 " ) , " +
                                                 teams_query.value(4).toString() +
                                                 " / " +
-                                                teams_query.value(5).toString(),
+                                                teams_query.value(5).toString() +
+                                                " , rank: " +
+                                                teams_query.value(1).toString(),
                                                 this);
 
             vbox->addWidget(checkbox);
@@ -81,7 +85,6 @@ TournamentCreator::TournamentCreator(QSqlDatabase *database, QWidget *parent)
 
         ui->groupBox->setLayout(vbox);
     }
-
 
     // signals & slots
     connect(ui->beginDate, SIGNAL(dateChanged(QDate)),
@@ -109,9 +112,6 @@ TournamentCreator::TournamentCreator(QSqlDatabase *database, QWidget *parent)
            this, SLOT(tabChanged()));
 
     // search player by name signals and slots
-    // connect(ui->searchByNameLine, SIGNAL(textChanged(QString)),
-    //         this, SLOT(searchPlayer()));
-
     connect(ui->searchByNameLine, SIGNAL(textEdited(QString)),
             this, SLOT(searchPlayer()));
 }
@@ -124,7 +124,6 @@ TournamentCreator::~TournamentCreator()
 void TournamentCreator::tournamentDateChanged()
 {
     // change last tournament day date
-
     auto duration = ui->drationSpinBox->value();
 
     ui->endDate->setDate(ui->beginDate->date().addDays(duration == 0 ? duration : --duration));
@@ -153,19 +152,23 @@ void TournamentCreator::tourTypeChanged(){
 
 void TournamentCreator::netModeChanged(){
     selected_tour_net_type = ui->netComboBox->currentText();
-    // qDebug() << "Net: " << selected_tour_net_type;
 }
 
 void TournamentCreator::on_addButton_clicked()
 {
-    int counter{0};
+    // add teams to the tournament
+    int counter{0};  // selected teams counter
+
+    // save selected teams
     for(auto team : teams){
         if(team->isChecked()){
             //qDebug() << team->text();
+            selected_teams.push_back(team);
             ++counter;
         }
     }
 
+    // check teams counter
     if(counter > selected_tour_net_type.toInt()){
         QMessageBox::warning(this, "Player amount problem",
                              "You added to much players. Net for " +
@@ -174,11 +177,56 @@ void TournamentCreator::on_addButton_clicked()
                              QString::number(teams.size()) + " players.");
         return;
     }
+
+    // Summary
+    // Test
+    // qDebug() << "Begin: " << ui->beginDate->text();
+    // qDebug() << "End: " << ui->endDate->text();
+    // qDebug() << "Gender: " << selected_tour_gender_type;
+    // qDebug() << "Net: " << selected_tour_net_type;
+    // qDebug() << "Tournament: " << selected_tournament;
+    // qDebug() << "Teams: ";
+    // for(auto team : selected_teams){
+    //     qDebug() << team->text();
+    // }
+
+    completed_tournament.date_begin = ui->beginDate->text();
+    completed_tournament.date_end = ui->endDate->text();
+    completed_tournament.tour_gender_type = selected_tour_gender_type;
+    completed_tournament.tour_net_type = selected_tour_net_type;
+    completed_tournament.tour_title = selected_tournament;
+    completed_tournament.selected_teams = selected_teams;
+
+    // then call widget with draw and net
+    // create tournament draw depends on user choice
+    if(selected_tour_net_type.toInt() == static_cast<int>(TournamentMode::ofSixteen)){
+        tour_draw =
+            std::make_unique<DoubleEliminationTournament>(*db, TournamentMode::ofSixteen,
+                                                          completed_tournament, this);
+    }
+    else if(selected_tour_net_type.toInt() == static_cast<int>(TournamentMode::ofThirtyTwo)){
+        tour_draw =
+            std::make_unique<DoubleEliminationTournament>(*db, TournamentMode::ofThirtyTwo,
+                                                          completed_tournament, this);
+    }
+    else{
+        tour_draw =
+            std::make_unique<DoubleEliminationTournament>(*db, TournamentMode::ofSixtyFour,
+                                                          completed_tournament, this);
+    }
+
+    tour_draw->setWindowTitle(completed_tournament.tour_title +
+                              " ( " +
+                              completed_tournament.date_begin +
+                              " - " +
+                              completed_tournament.date_end +
+                              " ) ");
+
+    tour_draw->show();
 }
 
 void TournamentCreator::tourChanged(){
     selected_tournament = ui->tourComboBox->currentText();
-    // qDebug() << "Tour: " << selected_tournament;
 }
 
 
@@ -215,7 +263,6 @@ void TournamentCreator::tabChanged(){
                                                     " / " +
                                                     last_team_query.value(5).toString(),
                                                     this);
-                // vbox->addWidget(checkbox);
 
                 // don't add to the teams widget already existed team
                 for(auto team : teams){
@@ -237,8 +284,12 @@ void TournamentCreator::tabChanged(){
 
 
 void TournamentCreator::searchPlayer(){
-    qDebug() << ui->searchByNameLine->text();
+    // every time print all teams widgets
+    for(auto team: teams){
+        team->show();
+    }
 
+    // every time compare team with the name filter
     for(auto team : teams){
 
         auto pos_start = team->text().indexOf("(") + 2;
@@ -249,14 +300,64 @@ void TournamentCreator::searchPlayer(){
 
         auto clear_names = text.right(text.size() - pos_start);
 
+        // looking for match with search template
         if(clear_names.contains(ui->searchByNameLine->text())){
-            qDebug() << clear_names;
-            team->setFont(QFont("Times", 10, QFont::Bold));
+            // if template is blanked string don't italicize team
+            if(ui->searchByNameLine->text() == ""){
+
+                team->setFont(QFont("Ubuntu", 11, QFont::Normal));
+            }
+            else{
+                team->setFont(QFont("Ubuntu", 11, QFont::Bold));
+            }
         }
         else{
             team->hide();
         }
-    }
 
-    //qDebug() << "-------------------------------";
+        // if team is checked make it bold
+        if(team->isChecked()){
+            team->setFont(QFont("Ubuntu", 11, QFont::Bold));
+        }
+    }
+}
+
+void TournamentCreator::on_clearSearchLineButton_clicked()
+{
+    ui->searchByNameLine->clear();
+
+    // every time print all teams widgets
+    for(auto team: teams){
+        if(team->isChecked()){
+
+            team->setFont(QFont("Ubuntu", 11, QFont::Bold));
+        }
+        else{
+            team->setFont(QFont("Ubuntu", 11, QFont::Normal));
+        }
+
+        team->show();
+    }
+}
+
+
+void TournamentCreator::on_selectAllTeamsButton_clicked()
+{
+    // select all teams
+    for(auto team : teams){
+        team->setChecked(true);
+        team->setFont(QFont("Ubuntu", 11, QFont::Bold));
+    }
+}
+
+
+void TournamentCreator::on_unselectAllTeamsButton_clicked()
+{
+    // unselect all teams
+    for(auto team : teams){
+        if(team->isChecked()){
+            team->setChecked(false);
+            team->setFont(QFont("Ubuntu", 11, QFont::Normal));
+        }
+    }
 }

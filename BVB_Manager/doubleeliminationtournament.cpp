@@ -1,12 +1,15 @@
 #include "doubleeliminationtournament.h"
 #include "ui_doubleeliminationtournament.h"
 #include <QPainter>
+#include <QDebug>
 
 DoubleEliminationTournament::DoubleEliminationTournament(QSqlDatabase &database,
                                                          TournamentMode mode,
+                                                         Tournament &tournament,
                                                          QWidget *parent)
     : QDialog(parent)
     , tournament_mode{mode}
+    , current_tournament{tournament}
     , ui(new Ui::DoubleEliminationTournament)
 {
     ui->setupUi(this);
@@ -15,6 +18,11 @@ DoubleEliminationTournament::DoubleEliminationTournament(QSqlDatabase &database,
     db = &database;
 
     //tournament_mode = mode;
+
+    for(auto team : current_tournament.selected_teams){
+        qDebug() << team->text();
+    }
+
 }
 
 DoubleEliminationTournament::~DoubleEliminationTournament()
@@ -67,7 +75,16 @@ void DoubleEliminationTournament::paintEvent(QPaintEvent *event)
     }
 
     // Drawing a text
-    my_painter.drawText(QPoint(575, 30), "Main draw ( " + teams_amount + " teams )");
+    my_painter.drawText(QPoint(300, 30),
+                        current_tournament.tour_title +
+                        ", " +
+                        current_tournament.date_begin +
+                        " - " +
+                        current_tournament.date_end +
+                        ", " +
+                        " main draw ( " + teams_amount + " teams, " +
+                        current_tournament.tour_gender_type +
+                        " )");
 
     // Drawing a line
     //my_painter.drawLine(QPoint(50, 50), QPoint(200, 200));

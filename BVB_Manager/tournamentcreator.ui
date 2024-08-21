@@ -19,7 +19,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_10">
+  <layout class="QVBoxLayout" name="verticalLayout_5">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout_4">
      <item>
@@ -288,6 +288,13 @@
              <item>
               <widget class="QLineEdit" name="searchByNameLine"/>
              </item>
+             <item>
+              <widget class="QPushButton" name="clearSearchLineButton">
+               <property name="text">
+                <string>clear</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </item>
            <item>
@@ -340,6 +347,20 @@
             </size>
            </property>
           </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="unselectAllTeamsButton">
+           <property name="text">
+            <string>unselect all</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="selectAllTeamsButton">
+           <property name="text">
+            <string>select all</string>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QPushButton" name="addButton">

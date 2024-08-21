@@ -10,6 +10,8 @@
 #include <QCheckBox>
 #include "teamregistration.h"
 #include <QBoxLayout>
+#include "utils.h"
+#include "doubleeliminationtournament.h"
 
 namespace Ui {
 class TournamentCreator;
@@ -40,6 +42,12 @@ private slots:
 
     void searchPlayer();
 
+    void on_clearSearchLineButton_clicked();
+
+    void on_selectAllTeamsButton_clicked();
+
+    void on_unselectAllTeamsButton_clicked();
+
 private:
     Ui::TournamentCreator *ui;
 
@@ -62,6 +70,12 @@ private:
     std::unique_ptr<TeamRegistration> team_registration{nullptr};
 
     QVBoxLayout *vbox{nullptr};
+
+    QVector<QCheckBox *> selected_teams;
+
+    Tournament completed_tournament;
+
+    std::unique_ptr<DoubleEliminationTournament> tour_draw{nullptr};
 };
 
 #endif // TOURNAMENTCREATOR_H

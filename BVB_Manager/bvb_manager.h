@@ -19,6 +19,7 @@
 #include "teamregistration.h"
 #include "addtournament.h"
 #include "tournamentcreator.h"
+#include "tourdraw.h"
 
 
 
@@ -104,6 +105,8 @@ private slots:
 
     void on_actionCreate_a_tournament_triggered();
 
+    void on_actionDraw_triggered();
+
 private:
     Ui::BVB_Manager *ui;
 
@@ -134,6 +137,8 @@ private:
     std::unique_ptr<AddTournament> add_tournament{nullptr};
 
     std::unique_ptr<TournamentCreator> tournament_creator{nullptr};
+
+    std::unique_ptr<TourDraw> tour_draw{nullptr};
 
     QStringList marked_players;
 
