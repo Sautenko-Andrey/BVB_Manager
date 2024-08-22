@@ -878,7 +878,7 @@ void BVB_Manager::on_actionCreate_a_tournament_triggered()
 void BVB_Manager::on_actionDraw_triggered()
 {
     // test tournament draw.
-    tour_draw = std::make_unique<TourDraw>(this);
+    tour_draw = std::make_unique<TourDraw>(Net::Sixteen ,this);
     tour_draw->setWindowTitle("Tournament draw");
     tour_draw->show();
 }
