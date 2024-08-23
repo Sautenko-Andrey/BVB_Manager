@@ -105,7 +105,7 @@ private slots:
 
     void on_actionCreate_a_tournament_triggered();
 
-    void on_actionDraw_triggered();
+    //void on_actionDraw_triggered();
 
 private:
     Ui::BVB_Manager *ui;

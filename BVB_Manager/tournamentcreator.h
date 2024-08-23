@@ -12,6 +12,7 @@
 #include <QBoxLayout>
 #include "utils.h"
 #include "doubleeliminationtournament.h"
+#include "tourdraw.h"
 
 namespace Ui {
 class TournamentCreator;
@@ -75,7 +76,9 @@ private:
 
     Tournament completed_tournament;
 
-    std::unique_ptr<DoubleEliminationTournament> tour_draw{nullptr};
+    //std::unique_ptr<DoubleEliminationTournament> tour_draw{nullptr};
+
+    std::unique_ptr<TourDraw> tour_draw{nullptr};
 };
 
 #endif // TOURNAMENTCREATOR_H

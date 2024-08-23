@@ -875,11 +875,16 @@ void BVB_Manager::on_actionCreate_a_tournament_triggered()
 }
 
 
-void BVB_Manager::on_actionDraw_triggered()
-{
-    // test tournament draw.
-    tour_draw = std::make_unique<TourDraw>(Net::Sixteen ,this);
-    tour_draw->setWindowTitle("Tournament draw");
-    tour_draw->show();
-}
+// TourDraw(QSqlDatabase &database,
+//          Net net_type,
+//          Tournament completed_tournament,
+//          QWidget *parent = nullptr);
+
+// void BVB_Manager::on_actionDraw_triggered()
+// {
+//     // test tournament draw.
+//     tour_draw = std::make_unique<TourDraw>(Net::Sixteen, this);
+//     tour_draw->setWindowTitle("Tournament draw");
+//     tour_draw->show();
+// }
 

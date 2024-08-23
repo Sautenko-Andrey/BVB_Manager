@@ -168,6 +168,14 @@ void TournamentCreator::on_addButton_clicked()
         }
     }
 
+    while(selected_teams.size() != 64){
+        QCheckBox * empty_team = new QCheckBox("None, None, None", this);
+        selected_teams.push_back(empty_team);
+    }
+
+    //????????????????????????
+    // maybe sort teams by rank here?????
+
     // check teams counter
     if(counter > selected_tour_net_type.toInt()){
         QMessageBox::warning(this, "Player amount problem",
@@ -199,20 +207,36 @@ void TournamentCreator::on_addButton_clicked()
 
     // then call widget with draw and net
     // create tournament draw depends on user choice
-    if(selected_tour_net_type.toInt() == static_cast<int>(TournamentMode::ofSixteen)){
+    // if(selected_tour_net_type.toInt() == static_cast<int>(TournamentMode::ofSixteen)){
+    //     tour_draw =
+    //         std::make_unique<DoubleEliminationTournament>(*db, TournamentMode::ofSixteen,
+    //                                                       completed_tournament, this);
+    // }
+    // else if(selected_tour_net_type.toInt() == static_cast<int>(TournamentMode::ofThirtyTwo)){
+    //     tour_draw =
+    //         std::make_unique<DoubleEliminationTournament>(*db, TournamentMode::ofThirtyTwo,
+    //                                                       completed_tournament, this);
+    // }
+    // else{
+    //     tour_draw =
+    //         std::make_unique<DoubleEliminationTournament>(*db, TournamentMode::ofSixtyFour,
+    //                                                       completed_tournament, this);
+    // }
+
+    if(selected_tour_net_type.toInt() == static_cast<int>(Net::Sixteen)){
         tour_draw =
-            std::make_unique<DoubleEliminationTournament>(*db, TournamentMode::ofSixteen,
-                                                          completed_tournament, this);
+            std::make_unique<TourDraw>(*db, Net::Sixteen,
+                                       completed_tournament, this);
     }
-    else if(selected_tour_net_type.toInt() == static_cast<int>(TournamentMode::ofThirtyTwo)){
+    else if(selected_tour_net_type.toInt() == static_cast<int>(Net::ThirtyTwo)){
         tour_draw =
-            std::make_unique<DoubleEliminationTournament>(*db, TournamentMode::ofThirtyTwo,
-                                                          completed_tournament, this);
+            std::make_unique<TourDraw>(*db, Net::ThirtyTwo,
+                                       completed_tournament, this);
     }
     else{
         tour_draw =
-            std::make_unique<DoubleEliminationTournament>(*db, TournamentMode::ofSixtyFour,
-                                                          completed_tournament, this);
+            std::make_unique<TourDraw>(*db, Net::ThirtyTwo,
+                                       completed_tournament, this);
     }
 
     tour_draw->setWindowTitle(completed_tournament.tour_title +

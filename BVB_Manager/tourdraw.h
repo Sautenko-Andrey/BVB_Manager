@@ -2,6 +2,9 @@
 #define TOURDRAW_H
 
 #include <QDialog>
+#include <QSqlDatabase>
+#include "utils.h"
+#include <QList>
 
 namespace Ui {
 class TourDraw;
@@ -13,8 +16,14 @@ class TourDraw : public QDialog
 {
     Q_OBJECT
 
+    //            std::make_unique<TourDraw>(*db, Net::Sixteen,
+                                       //completed_tournament, this);
+
 public:
-    TourDraw(Net net_type, QWidget *parent = nullptr);
+    TourDraw(QSqlDatabase &database,
+             Net net_type,
+             Tournament completed_tournament,
+             QWidget *parent = nullptr);
     ~TourDraw();
 
     virtual void paintEvent(QPaintEvent *event);
@@ -26,9 +35,17 @@ private slots:
 private:
     Ui::TourDraw *ui;
 
+    QSqlDatabase *db{nullptr};
+
+    Tournament tournament;
+
     Net draw_type = Net::Sixteen;
 
     QVector<QPushButton *> first_round_team_btns;
+
+    //QVector<QPushButton *> game_res_1r_btns;
+
+    QList<QPushButton *> game_res_1r_btns;
 };
 
 #endif // TOURDRAW_H
