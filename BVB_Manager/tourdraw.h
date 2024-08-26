@@ -30,7 +30,7 @@ public:
 
 private slots:
 
-    void showTeamInfo();
+    //void showTeamInfo();
 
 private:
     Ui::TourDraw *ui;
@@ -45,7 +45,7 @@ private:
 
     //QVector<QPushButton *> game_res_1r_btns;
 
-    QList<QPushButton *> game_res_1r_btns;
+    //QList<QPushButton *> game_res_1r_btns;
 };
 
 #endif // TOURDRAW_H
