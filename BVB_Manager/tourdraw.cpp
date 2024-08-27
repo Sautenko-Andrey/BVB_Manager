@@ -10,12 +10,13 @@
 #include <QStringList>
 
 enum class DrawGeometry{
-    coordXStartButton = 10,
-    coordYStartButton = 15,
-    // teamButtonWidth = 150,
-    teamButtonWidth = 115,
-    teamButtonHeight = 23,
-    teamButtonStep = 44
+    coordXStartBtn = 10,
+    coordYStartBtn = 15,
+    BtnWidth = 115,
+    BtnHeight = 23,
+    Step = 44,
+    StepX = 121,
+    XVerticalLine = 130
 };
 
 TourDraw::TourDraw(QSqlDatabase &database,
@@ -51,38 +52,38 @@ TourDraw::TourDraw(QSqlDatabase &database,
     qDebug() << tournament.selected_teams[0]->text();
 
 
-    // first round 16 teams buttons
-    for(int i{0}, x = static_cast<int>(DrawGeometry::coordXStartButton),
-         y = static_cast<int>(DrawGeometry::coordYStartButton);
+    // 16 teams buttons (1st column)
+    for(int i{0},
+         y = static_cast<int>(DrawGeometry::coordYStartBtn);
          i < static_cast<int>(net_type); ++i){
 
         // drawing a teams buttons
-        QPushButton *team_first_round_btn = new QPushButton(this);
+        QPushButton *btn = new QPushButton(this);
 
-        first_round_team_btns.push_back(team_first_round_btn);
+        first_round_team_btns.push_back(btn);
 
-        team_first_round_btn->setGeometry(QRect(x, y,
-                                static_cast<int>(DrawGeometry::teamButtonWidth),
-                                static_cast<int>(DrawGeometry::teamButtonHeight)));
+        btn->setGeometry(QRect(static_cast<int>(DrawGeometry::coordXStartBtn), y,
+                               static_cast<int>(DrawGeometry::BtnWidth),
+                               static_cast<int>(DrawGeometry::BtnHeight)));
 
         // getting team's name
         auto comma_index = tournament.selected_teams[i]->text().indexOf("(");
 
         QString team_name = tournament.selected_teams[i]->text().left(comma_index - 1);
 
-        team_first_round_btn->setText(team_name);
+        btn->setText(team_name);
 
         constexpr int max_symbols_amount = 24;
 
         if(team_name.size() >= max_symbols_amount){
-            team_first_round_btn->setFont(QFont("Ubuntu", 7));
+            btn->setFont(QFont("Ubuntu", 7));
         }
         else if(team_name.size() > max_symbols_amount / 2 + 1 &&
                 team_name.size() < max_symbols_amount){
-            team_first_round_btn->setFont(QFont("Ubuntu", 10));
+            btn->setFont(QFont("Ubuntu", 10));
         }
 
-        y += static_cast<int>(DrawGeometry::teamButtonStep);
+        y += static_cast<int>(DrawGeometry::Step);
     }
 
 
@@ -91,49 +92,90 @@ TourDraw::TourDraw(QSqlDatabase &database,
     // ... create two different vectors with high rank and low rank ???here???
     // our sort teams by rank in previous widget?
 
-    // second round 8 teams buttons 8 game result buttons
-    for(int i{0}, y{37}; i < static_cast<int>(draw_type) / 2; ++i){
-        QPushButton *team_sec_round_btn = new QPushButton(this);
-        team_sec_round_btn->setGeometry(QRect(131, y,
-                                        static_cast<int>(DrawGeometry::teamButtonWidth),
-                                        static_cast<int>(DrawGeometry::teamButtonHeight)));
+    // 8 teams buttons (2nd column)
+    for(int i{0}, y{static_cast<int>(DrawGeometry::coordYStartBtn) + 22};
+        i < static_cast<int>(draw_type) / 2; ++i){
 
-        team_sec_round_btn->setText("W " + QString::number(i + 1));
-        y += static_cast<int>(DrawGeometry::teamButtonStep) * 2;
+        QPushButton *btn = new QPushButton(this);
+        btn->setGeometry(QRect(static_cast<int>(DrawGeometry::coordXStartBtn) +
+                               static_cast<int>(DrawGeometry::StepX),
+                               y,
+                               static_cast<int>(DrawGeometry::BtnWidth),
+                               static_cast<int>(DrawGeometry::BtnHeight)));
 
-        // container with pointers on this buttons????
+        btn->setText("W " + QString::number(i + 1));
+        y += static_cast<int>(DrawGeometry::Step) * 2;
+
+        // container with pointers on these buttons????
     }
 
 
-    // 4 third round teams buttons
-    for(int i{0}, y{79}; i < static_cast<int>(draw_type) / 4; ++i){
-        QPushButton *team_third_round_btn = new QPushButton(this);
-        team_third_round_btn->setGeometry(QRect(251, y,
-                                                static_cast<int>(DrawGeometry::teamButtonWidth),
-                                                static_cast<int>(DrawGeometry::teamButtonHeight)));
+    // 4 teams buttons (3rd column)
+    for(int i{0}, y{static_cast<int>(DrawGeometry::coordYStartBtn) + 64};
+        i < static_cast<int>(draw_type) / 4; ++i){
 
-        team_third_round_btn->setText("W " + QString::number(i + 13));
-        y += static_cast<int>(DrawGeometry::teamButtonStep) * 4;
+        QPushButton *btn = new QPushButton(this);
+        btn->setGeometry(QRect(static_cast<int>(DrawGeometry::coordXStartBtn) +
+                               static_cast<int>(DrawGeometry::StepX) * 2,
+                               y,
+                               static_cast<int>(DrawGeometry::BtnWidth),
+                               static_cast<int>(DrawGeometry::BtnHeight)));
+
+        btn->setText("W " + QString::number(i + 9));
+        y += static_cast<int>(DrawGeometry::Step) * 4;
     }
 
-    // 2 fourth round teams buttons
-    for(int i{0}, y{162}; i < static_cast<int>(draw_type) / 8; ++i){
-        QPushButton *team_4_round_btn = new QPushButton(this);
-        team_4_round_btn->setGeometry(QRect(372, y,
-                                            static_cast<int>(DrawGeometry::teamButtonWidth),
-                                            static_cast<int>(DrawGeometry::teamButtonHeight)));
+    // 4 teams buttons (semifinal column)
+    for(int i{0}, y1{static_cast<int>(DrawGeometry::coordYStartBtn) + 147},
+        y2{static_cast<int>(DrawGeometry::coordYStartBtn) + 278};
+        i < static_cast<int>(draw_type) / 8; ++i){
 
-        team_4_round_btn->setText("W " + QString::number(i + 21));
-        y += static_cast<int>(DrawGeometry::teamButtonStep) * 8;
+        // 2 win buttons
+        QPushButton *win_btn = new QPushButton(this);
+        win_btn->setGeometry(QRect(static_cast<int>(DrawGeometry::coordXStartBtn) +
+                                   static_cast<int>(DrawGeometry::StepX) * 3,
+                                   y1,
+                                   static_cast<int>(DrawGeometry::BtnWidth),
+                                   static_cast<int>(DrawGeometry::BtnHeight)));
+
+        win_btn->setText("W " + QString::number(i + 21));
+        y1 += static_cast<int>(DrawGeometry::Step) * 8;
+
+        //2 loosers buttons
+        QPushButton *looser_btn = new QPushButton(this);
+        looser_btn->setGeometry(QRect(static_cast<int>(DrawGeometry::coordXStartBtn) +
+                                      static_cast<int>(DrawGeometry::StepX) * 3,
+                                      y2,
+                                      static_cast<int>(DrawGeometry::BtnWidth),
+                                      static_cast<int>(DrawGeometry::BtnHeight)));
+        looser_btn->setText("W " + QString::number(i + 25));
+        y2 += static_cast<int>(DrawGeometry::Step) * 2 + 7;
     }
 
-    // first final competitor from win net
-    QPushButton *team_sem_fin_btn_1 = new QPushButton(this);
+    // 2  team buttons (final column)
+    for(int i{0}, y{static_cast<int>(DrawGeometry::coordYStartBtn) + 210};
+        i < static_cast<int>(draw_type) / 8; ++i){
 
-    team_sem_fin_btn_1->setGeometry(QRect(494, 335,
-                                    static_cast<int>(DrawGeometry::teamButtonWidth),
-                                    static_cast<int>(DrawGeometry::teamButtonHeight)));
-    team_sem_fin_btn_1->setText("W 27");
+        QPushButton *btn = new QPushButton(this);
+        btn->setGeometry(QRect(static_cast<int>(DrawGeometry::coordXStartBtn) +
+                               static_cast<int>(DrawGeometry::StepX) * 4,
+                               y,
+                               static_cast<int>(DrawGeometry::BtnWidth),
+                               static_cast<int>(DrawGeometry::BtnHeight)));
+
+        btn->setText("W " + QString::number(i + 27));
+        y += static_cast<int>(DrawGeometry::Step) * 5;
+    }
+
+    // 1 team button (winner column)
+    QPushButton *btn = new QPushButton(this);
+
+    btn->setGeometry(QRect(static_cast<int>(DrawGeometry::coordXStartBtn) +
+                           static_cast<int>(DrawGeometry::StepX) * 5,
+                           static_cast<int>(DrawGeometry::coordYStartBtn) + 320,
+                           static_cast<int>(DrawGeometry::BtnWidth),
+                           static_cast<int>(DrawGeometry::BtnHeight)));
+    btn->setText("1st place");
 
     // signals & slots
     // connect(first_round_team_btns[0], SIGNAL(clicked()),
@@ -164,58 +206,91 @@ void TourDraw::paintEvent(QPaintEvent *event)
                                       tournament.tour_gender_type +
                                       " )");
 
-    // drawing 16 horizonthal lines near the first round buttons
+    // drawing 16 horizonthal lines ( 1st column )
     for(int i{0}, y{26}; i < static_cast<int>(draw_type); ++i){
         painter.drawLine(QPoint(125, y), QPoint(130, y));
-        y += static_cast<int>(DrawGeometry::teamButtonStep);
+        y += static_cast<int>(DrawGeometry::Step);
     }
 
-    // drawing 8 horizontal lines near the second round buttons
+    // drawing 8 horizontal lines ( 2nd column )
     for(int i{0}, y{47}; i < static_cast<int>(draw_type) / 2; ++i){
         painter.drawLine(QPoint(245, y), QPoint(250, y));
-        y += static_cast<int>(DrawGeometry::teamButtonStep) * 2;
+        y += static_cast<int>(DrawGeometry::Step) * 2;
     }
 
-    // drawing 4 horizontal lines near the second round buttons
+    // drawing 4 horizontal lines ( 3rd column )
     for(int i{0}, y{90}; i < static_cast<int>(draw_type) / 4; ++i){
 
         painter.drawLine(QPoint(365, y), QPoint(370, y));
-        y += static_cast<int>(DrawGeometry::teamButtonStep) * 4;
+        y += static_cast<int>(DrawGeometry::Step) * 4;
     }
 
-    // drawing 2 horizontal lines near the 4th round buttons
-    for(int i{0}, y{173}; i < static_cast<int>(draw_type) / 8; ++i){
+    // drawing 4 horizontal lines ( 4 column )
+    for(int i{0}, y1{173}, y2{300}; i < static_cast<int>(draw_type) / 8; ++i){
 
-        painter.drawLine(QPoint(487, y), QPoint(492, y));
-        y += static_cast<int>(DrawGeometry::teamButtonStep) * 8;
+        painter.drawLine(QPoint(487, y1), QPoint(492, y1));
+        y1 += static_cast<int>(DrawGeometry::Step) * 8;
+
+        painter.drawLine(QPoint(487, y2), QPoint(492, y2));
+        y2 += static_cast<int>(DrawGeometry::Step) * 2 + 10;
     }
 
-    // drawing 8 vertical lines near the first round buttons
+    // drawing 2 horizontal lines ( semifinals column )
+    for(int i{0}, y{235}; i < static_cast<int>(draw_type) / 8; ++i){
+        painter.drawLine(QPoint(607, y), QPoint(612, y));
+        y += static_cast<int>(DrawGeometry::Step) * 5;
+    }
+
+    // drawing 8 vertical lines ( 1st column )
     for(int i{0}, y1{26}, y2{70}; i < static_cast<int>(draw_type) / 2; ++i){
-        painter.drawLine(QPoint(130, y1), QPoint(130, y2));
-        y1 += static_cast<int>(DrawGeometry::teamButtonStep) * 2;
-        y2 += static_cast<int>(DrawGeometry::teamButtonStep) * 2;
+        painter.drawLine(QPoint(static_cast<int>(DrawGeometry::XVerticalLine),
+                         y1),
+                         QPoint(static_cast<int>(DrawGeometry::XVerticalLine),
+                         y2));
+        y1 += static_cast<int>(DrawGeometry::Step) * 2;
+        y2 += static_cast<int>(DrawGeometry::Step) * 2;
     }
 
 
-    // drawing 4 vertical lines near the second round buttons
+    // drawing 4 vertical lines ( 2nd column )
     for(int i{0}, y1{47}, y2{135}; i < static_cast<int>(draw_type) / 4; ++i){
 
-        painter.drawLine(QPoint(250, y1), QPoint(250, y2));
-        y1 += static_cast<int>(DrawGeometry::teamButtonStep) * 4;
-        y2 += static_cast<int>(DrawGeometry::teamButtonStep) * 4;
+        constexpr int add = 120;
+        painter.drawLine(QPoint(static_cast<int>(DrawGeometry::XVerticalLine) + add,
+                                y1),
+                         QPoint(static_cast<int>(DrawGeometry::XVerticalLine) + add,
+                                y2));
+        y1 += static_cast<int>(DrawGeometry::Step) * 4;
+        y2 += static_cast<int>(DrawGeometry::Step) * 4;
     }
 
-    // drawing 2 vertical lines near the third round buttons
-    for(int i{0}, y1{90}, y2{266}; i < static_cast<int>(draw_type) / 8; ++i){
+    // drawing 4 vertical lines ( 3rd column )
+    for(int i{0}, y1{90}, y2{266}, y3{173}, y4{299};
+        i < static_cast<int>(draw_type) / 8; ++i){
+            constexpr int add = 241;
+            painter.drawLine(QPoint(static_cast<int>(DrawGeometry::XVerticalLine) + add,
+                                y1),
+                             QPoint(static_cast<int>(DrawGeometry::XVerticalLine) + add,
+                                y2));
 
-        painter.drawLine(QPoint(371, y1), QPoint(371, y2));
-        y1 += static_cast<int>(DrawGeometry::teamButtonStep) * 8;
-        y2 += static_cast<int>(DrawGeometry::teamButtonStep) * 8;
-    }
+            y1 += static_cast<int>(DrawGeometry::Step) * 8;
+            y2 += static_cast<int>(DrawGeometry::Step) * 8;
 
-    // drawing 1 vertical line near the semifinals
-    painter.drawLine(QPoint(493, 173), QPoint(493, 525));
+            constexpr int add_2 = 362;
+            painter.drawLine(QPoint(static_cast<int>(DrawGeometry::XVerticalLine) + add_2,
+                                    y3),
+                             QPoint(static_cast<int>(DrawGeometry::XVerticalLine) + add_2,
+                                    y4));
+            y3 += static_cast<int>(DrawGeometry::Step) * 5 + 5;
+            y4 += static_cast<int>(DrawGeometry::Step) * 5 + 5;
+        }
+
+    // drawing 1 vertical line ( semifinal column )
+    constexpr int add = 483;
+    painter.drawLine(QPoint(static_cast<int>(DrawGeometry::XVerticalLine) + add,
+                                235),
+                     QPoint(static_cast<int>(DrawGeometry::XVerticalLine) + add,
+                                455));
 
 }
 
