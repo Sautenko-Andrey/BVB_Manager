@@ -5,6 +5,7 @@
 #include <QSqlDatabase>
 #include "utils.h"
 #include <QList>
+#include <QPushButton>
 
 namespace Ui {
 class TourDraw;
@@ -31,6 +32,14 @@ public:
 private slots:
 
     //void showTeamInfo();
+    void W1_clicked();
+    void W2_clicked();
+    void W3_clicked();
+    void W4_clicked();
+    void W5_clicked();
+    void W6_clicked();
+    void W7_clicked();
+    void W8_clicked();
 
 private:
     Ui::TourDraw *ui;
@@ -43,9 +52,9 @@ private:
 
     QVector<QPushButton *> first_round_team_btns;
 
-    //QVector<QPushButton *> game_res_1r_btns;
+    QVector<QPushButton *> W1_W8_buttons;
 
-    //QList<QPushButton *> game_res_1r_btns;
+    void addFunction(QVector<void (*)()> &func_vector, void (*func)());
 };
 
 #endif // TOURDRAW_H

@@ -162,7 +162,6 @@ void TournamentCreator::on_addButton_clicked()
     // save selected teams
     for(auto team : teams){
         if(team->isChecked()){
-            //qDebug() << team->text();
             selected_teams.push_back(team);
             ++counter;
         }
@@ -173,30 +172,26 @@ void TournamentCreator::on_addButton_clicked()
         selected_teams.push_back(empty_team);
     }
 
-    //????????????????????????
-    // maybe sort teams by rank here?????
-
     // check teams counter
+    // more then 16 teams selected
     if(counter > selected_tour_net_type.toInt()){
         QMessageBox::warning(this, "Player amount problem",
-                             "You added to much players. Net for " +
+                             "You added to much teams. Net for " +
                              selected_tour_net_type +
                              " , but you selected " +
-                             QString::number(teams.size()) + " players.");
+                             QString::number(teams.size()) + " teams.");
         return;
     }
 
-    // Summary
-    // Test
-    // qDebug() << "Begin: " << ui->beginDate->text();
-    // qDebug() << "End: " << ui->endDate->text();
-    // qDebug() << "Gender: " << selected_tour_gender_type;
-    // qDebug() << "Net: " << selected_tour_net_type;
-    // qDebug() << "Tournament: " << selected_tournament;
-    // qDebug() << "Teams: ";
-    // for(auto team : selected_teams){
-    //     qDebug() << team->text();
-    // }
+    // less then 8 teams selected
+    if(counter < selected_tour_net_type.toInt() / 2){
+        QMessageBox::warning(this, "Player amount problem",
+                             "You added less the 8 teams. Net for " +
+                                 selected_tour_net_type +
+                                 " must include 8 teams as minimum.");
+        return;
+    }
+
 
     completed_tournament.date_begin = ui->beginDate->text();
     completed_tournament.date_end = ui->endDate->text();
@@ -204,24 +199,6 @@ void TournamentCreator::on_addButton_clicked()
     completed_tournament.tour_net_type = selected_tour_net_type;
     completed_tournament.tour_title = selected_tournament;
     completed_tournament.selected_teams = selected_teams;
-
-    // then call widget with draw and net
-    // create tournament draw depends on user choice
-    // if(selected_tour_net_type.toInt() == static_cast<int>(TournamentMode::ofSixteen)){
-    //     tour_draw =
-    //         std::make_unique<DoubleEliminationTournament>(*db, TournamentMode::ofSixteen,
-    //                                                       completed_tournament, this);
-    // }
-    // else if(selected_tour_net_type.toInt() == static_cast<int>(TournamentMode::ofThirtyTwo)){
-    //     tour_draw =
-    //         std::make_unique<DoubleEliminationTournament>(*db, TournamentMode::ofThirtyTwo,
-    //                                                       completed_tournament, this);
-    // }
-    // else{
-    //     tour_draw =
-    //         std::make_unique<DoubleEliminationTournament>(*db, TournamentMode::ofSixtyFour,
-    //                                                       completed_tournament, this);
-    // }
 
     if(selected_tour_net_type.toInt() == static_cast<int>(Net::Sixteen)){
         tour_draw =
@@ -291,7 +268,6 @@ void TournamentCreator::tabChanged(){
                 // don't add to the teams widget already existed team
                 for(auto team : teams){
                     if(team->text() == checkbox->text()){
-                        //qDebug() << "Doubled!";
                         return;
                     }
                 }

@@ -21,15 +21,12 @@ void createPlayersTable(QStandardItemModel *model, QTableView *tableView,
     // allow table header occupy full line
     tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    model->setHorizontalHeaderItem(0, new QStandardItem(QString("ID")));
-    model->setHorizontalHeaderItem(1, new QStandardItem(QString("First name")));
-    model->setHorizontalHeaderItem(2, new QStandardItem(QString("Last name")));
-    model->setHorizontalHeaderItem(3, new QStandardItem(QString("Age")));
-    model->setHorizontalHeaderItem(4, new QStandardItem(QString("Gender")));
-    model->setHorizontalHeaderItem(5, new QStandardItem(QString("Height")));
-    model->setHorizontalHeaderItem(6, new QStandardItem(QString("Hometown")));
-    model->setHorizontalHeaderItem(7, new QStandardItem(QString("Phone")));
+    QStringList labels{
+        "ID", "First name", "Last name", "Age", "Gender", "Height", "Hometown", "Phone"
+    };
 
+    // add header labels for the table
+    model->setHorizontalHeaderLabels(labels);
     tableView->setModel(model);
 
     // adding players data to the table
