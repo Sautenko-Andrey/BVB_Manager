@@ -43,6 +43,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         tournamentcreator.h tournamentcreator.cpp tournamentcreator.ui
         calendar.h calendar.cpp calendar.ui
         tourdraw.h tourdraw.cpp tourdraw.ui
+        gameresult.h gameresult.cpp gameresult.ui
 
 
 

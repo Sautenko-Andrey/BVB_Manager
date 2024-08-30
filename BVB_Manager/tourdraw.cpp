@@ -36,19 +36,19 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
     // teams data
     // test
-    qDebug() << "Teams: ";
-    for(auto team : tournament.selected_teams){
-        qDebug() << team->text();
-        QStringList team_data = team->text().split(",");
-        for(const auto &data : team_data){
-            qDebug() << data.trimmed();
-        }
-        qDebug() << team_data[2].last(3).toInt();
+    // qDebug() << "Teams: ";
+    // for(auto team : tournament.selected_teams){
+    //     qDebug() << team->text();
+    //     QStringList team_data = team->text().split(",");
+    //     for(const auto &data : team_data){
+    //         qDebug() << data.trimmed();
+    //     }
+    //     qDebug() << team_data[2].last(3).toInt();
 
-        qDebug() << "--------------------------------------";
-    }
+    //     qDebug() << "--------------------------------------";
+    // }
 
-    qDebug() << tournament.selected_teams[0]->text();
+    // qDebug() << tournament.selected_teams[0]->text();
 
 
     // 16 teams buttons (1st column) on the left side
@@ -68,11 +68,11 @@ TourDraw::TourDraw(QSqlDatabase &database,
                                static_cast<int>(Geometry::BtnHeight)));
 
         // getting team's name
-        // auto comma_index = tournament.selected_teams[i]->text().indexOf("(");
-        auto comma_index = tournament.selected_teams[rank_baskets[i]]->text().indexOf("(");
+        auto comma_index =
+            tournament.selected_teams[rank_baskets[i]]->text().indexOf("(");
 
-        // QString team_name = tournament.selected_teams[i]->text().left(comma_index - 1);
-        QString team_name = tournament.selected_teams[rank_baskets[i]]->text().left(comma_index - 1);
+        QString team_name =
+            tournament.selected_teams[rank_baskets[i]]->text().left(comma_index - 1);
 
         btn->setText(team_name);
 
@@ -115,6 +115,7 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
         btn_right->setDisabled(true);
         btn_right->setText("L " + QString::number(j));
+        L1_L8_buttons.push_front(btn_right);
         --j;
         //------------------------------------------------------------------------
 
@@ -137,6 +138,7 @@ TourDraw::TourDraw(QSqlDatabase &database,
                                static_cast<int>(Geometry::BtnHeight)));
 
         btn_left->setText("W " + QString::number(i + 9));
+        W9_W12_buttons.push_back(btn_left);
         y += static_cast<int>(Geometry::Step) * 4;
         //----------------------------------------------------------------------
 
@@ -273,36 +275,19 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
 
     // signals & slots
-    // connect(first_round_team_btns[0], SIGNAL(clicked()),
-    //         this, SLOT(showTeamInfo()));
-
     // for(auto btn : first_round_team_btns){
     //     connect( btn, SIGNAL(clicked()), this, SLOT(showTeamInfo()));
     // }
 
     // W1 buttons has been clicked
-    //connect(W1_W8_buttons[0], SIGNAL(clicked()), this, SLOT(W1_clicked()));
-    // pointers on slots
-    // QVector<void (*)()> vector_of_slots_w1_w8 = {
-    //     W1_clicked, W2_clicked, W3_clicked, W4_clicked,
-    //     W5_clicked, W6_clicked, W7_clicked, W8_clicked
-    // };
-
-    QVector<void (*)()> vector_of_slots_w1_w8;
-    void (*w1_ptr)();
-    w1_ptr = W1_clicked;
-    addFunction(vector_of_slots_w1_w8, w1_ptr);
-    // addFunction(vector_of_slots_w1_w8, W2_clicked);
-    // addFunction(vector_of_slots_w1_w8, W3_clicked);
-    // addFunction(vector_of_slots_w1_w8, W4_clicked);
-    // addFunction(vector_of_slots_w1_w8, W5_clicked);
-    // addFunction(vector_of_slots_w1_w8, W6_clicked);
-    // addFunction(vector_of_slots_w1_w8, W7_clicked);
-    // addFunction(vector_of_slots_w1_w8, W8_clicked);
-
-    // for(int i{0}; i < W1_W8_buttons.size(); ++i){
-    //     connect(W1_W8_buttons[i], SIGNAL(clicked()), this, SLOT(vector_of_slots_w1_w8[i]));
-    // }
+    connect(W1_W8_buttons[0], SIGNAL(clicked()), this, SLOT(W1_clicked()));
+    connect(W1_W8_buttons[1], SIGNAL(clicked()), this, SLOT(W2_clicked()));
+    connect(W1_W8_buttons[2], SIGNAL(clicked()), this, SLOT(W3_clicked()));
+    connect(W1_W8_buttons[3], SIGNAL(clicked()), this, SLOT(W4_clicked()));
+    connect(W1_W8_buttons[4], SIGNAL(clicked()), this, SLOT(W5_clicked()));
+    connect(W1_W8_buttons[5], SIGNAL(clicked()), this, SLOT(W6_clicked()));
+    connect(W1_W8_buttons[6], SIGNAL(clicked()), this, SLOT(W7_clicked()));
+    connect(W1_W8_buttons[7], SIGNAL(clicked()), this, SLOT(W8_clicked()));
 }
 
 TourDraw::~TourDraw()
@@ -473,47 +458,77 @@ void TourDraw::paintEvent(QPaintEvent *event)
     painter.drawLine(QPoint(x2, 570), QPoint(x2, 659));
 }
 
+void TourDraw::gameResult(const QString team_1,
+                          const QString team_2,
+                          QPushButton *winner_basket,
+                          QPushButton *loser_basket){
+
+    game_result = std::make_unique<GameResult>(team_1, team_2,
+                                               winner_basket, loser_basket, this);
+
+    game_result->show();
+}
+
 void TourDraw::W1_clicked()
 {
-    QMessageBox::information(this, "W1", "W1 clicked!");
+    gameResult(first_round_team_btns[0]->text(),
+               first_round_team_btns[1]->text(),
+               W1_W8_buttons[0],
+               L1_L8_buttons[0]);
 }
 
 void TourDraw::W2_clicked()
 {
-    QMessageBox::information(this, "W2", "W2 clicked!");
+    gameResult(first_round_team_btns[2]->text(),
+               first_round_team_btns[3]->text(),
+               W1_W8_buttons[1],
+               L1_L8_buttons[1]);
 }
 
 void TourDraw::W3_clicked()
 {
-    QMessageBox::information(this, "W3", "W3 clicked!");
+    gameResult(first_round_team_btns[4]->text(),
+               first_round_team_btns[5]->text(),
+               W1_W8_buttons[2],
+               L1_L8_buttons[2]);
 }
 
 void TourDraw::W4_clicked()
 {
-    QMessageBox::information(this, "W4", "W4 clicked!");
+    gameResult(first_round_team_btns[6]->text(),
+               first_round_team_btns[7]->text(),
+               W1_W8_buttons[3],
+               L1_L8_buttons[3]);
 }
 
 void TourDraw::W5_clicked()
 {
-    QMessageBox::information(this, "W5", "W5 clicked!");
+    gameResult(first_round_team_btns[8]->text(),
+               first_round_team_btns[9]->text(),
+               W1_W8_buttons[4],
+               L1_L8_buttons[4]);
 }
 
 void TourDraw::W6_clicked()
 {
-    QMessageBox::information(this, "W6", "W6 clicked!");
+    gameResult(first_round_team_btns[10]->text(),
+               first_round_team_btns[11]->text(),
+               W1_W8_buttons[5],
+               L1_L8_buttons[5]);
 }
 
 void TourDraw::W7_clicked()
 {
-    QMessageBox::information(this, "W7", "W7 clicked!");
+    gameResult(first_round_team_btns[12]->text(),
+               first_round_team_btns[13]->text(),
+               W1_W8_buttons[6],
+               L1_L8_buttons[6]);
 }
 
 void TourDraw::W8_clicked()
 {
-    QMessageBox::information(this, "W8", "W8 clicked!");
+    gameResult(first_round_team_btns[14]->text(),
+               first_round_team_btns[15]->text(),
+               W1_W8_buttons[7],
+               L1_L8_buttons[7]);
 }
-
-// void TourDraw::showTeamInfo()
-// {
-//     QMessageBox::information(this, "Team", "Team info");
-// }

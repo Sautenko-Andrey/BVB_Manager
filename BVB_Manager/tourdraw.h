@@ -3,9 +3,13 @@
 
 #include <QDialog>
 #include <QSqlDatabase>
-#include "utils.h"
 #include <QList>
 #include <QPushButton>
+#include <memory>
+#include "utils.h"
+#include "gameresult.h"
+
+
 
 namespace Ui {
 class TourDraw;
@@ -16,9 +20,6 @@ enum class Net{ Sixteen = 16, ThirtyTwo = 32, SixtyFour = 64 };
 class TourDraw : public QDialog
 {
     Q_OBJECT
-
-    //            std::make_unique<TourDraw>(*db, Net::Sixteen,
-                                       //completed_tournament, this);
 
 public:
     TourDraw(QSqlDatabase &database,
@@ -52,9 +53,23 @@ private:
 
     QVector<QPushButton *> first_round_team_btns;
 
-    QVector<QPushButton *> W1_W8_buttons;
+    // QVector<QPushButton *> W1_W8_buttons;
+
+    // QVector<QPushButton *> W9_W12_buttons;
+    QList<QPushButton *> W1_W8_buttons;
+
+    QList<QPushButton *> W9_W12_buttons;
+
+    QList<QPushButton *> L1_L8_buttons;
 
     void addFunction(QVector<void (*)()> &func_vector, void (*func)());
+
+    std::unique_ptr<GameResult> game_result{nullptr};
+
+    void gameResult(const QString team_1, const QString team_2,
+                    QPushButton *result_basket, QPushButton *loser_basket);
+
+    bool result{true};
 };
 
 #endif // TOURDRAW_H
