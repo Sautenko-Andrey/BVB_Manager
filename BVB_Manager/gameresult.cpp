@@ -3,8 +3,8 @@
 #include <QDebug>
 #include <QMessageBox>
 
-GameResult::GameResult(const QString team_1,
-                       const QString team_2,
+GameResult::GameResult(QPushButton *team_1,
+                       QPushButton *team_2,
                        QPushButton *winer_basket,
                        QPushButton *loser_basket,
                        QWidget *parent)
@@ -17,10 +17,10 @@ GameResult::GameResult(const QString team_1,
 {
     ui->setupUi(this);
 
-    setWindowTitle(team_1 + " vs " + team_2);
+    setWindowTitle(team_1->text() + " vs " + team_2->text());
 
-    ui->teamLabel_1->setText(team_1);
-    ui->teamLabel_2->setText(team_2);
+    ui->teamLabel_1->setText(team_1->text());
+    ui->teamLabel_2->setText(team_2->text());
 
     // constraints
     ui->firstSpinBox->setMinimum(0);
@@ -58,20 +58,30 @@ void GameResult::resultTeam2Changed(){
 
 void GameResult::on_okButton_clicked()
 {
+    int first_team_score = ui->firstSpinBox->value();
+    int second_team_score = ui->secSpinBox->value();
+
+    QString first_team_name = first_team->text();
+    QString second_team_name = second_team->text();
+
     // match result can't be 0 : 0
-    if(ui->firstSpinBox->value() == 0 && ui->secSpinBox->value() == 0){
+    if(first_team_score == 0 && second_team_score == 0){
         QMessageBox::warning(this, "Match result error", "Match result can't be 0:0");
         return;
     }
 
-    if(ui->firstSpinBox->value() == 2){
-        winner->setText(first_team);
-        loser->setText(second_team);
+    if(first_team_score == 2){
+        winner->setText(first_team->text());
+        loser->setText(second_team->text());
     }
     else{
-        winner->setText(second_team);
-        loser->setText(first_team);
+        winner->setText(second_team->text());
+        loser->setText(first_team->text());
     }
+
+    // show game result (sets)
+    first_team->setText(first_team_name + " <" + QString::number(first_team_score) + ">");
+    second_team->setText(second_team_name + " <" + QString::number(second_team_score) + ">");
 
     QDialog::accept();
 }

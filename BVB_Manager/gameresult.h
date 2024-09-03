@@ -13,8 +13,8 @@ class GameResult : public QDialog
     Q_OBJECT
 
 public:
-    explicit GameResult(const QString team_1,
-                        const QString team_2,
+    explicit GameResult(QPushButton *team_1,
+                        QPushButton *team_2,
                         QPushButton *winer_basket,
                         QPushButton *loser_basket,
                         QWidget *parent = nullptr);
@@ -33,8 +33,8 @@ private:
     QPushButton *winner;
     QPushButton *loser;
 
-    QString first_team;
-    QString second_team;
+    QPushButton *first_team;
+    QPushButton *second_team;
 };
 
 #endif // GAMERESULT_H

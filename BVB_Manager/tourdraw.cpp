@@ -32,6 +32,9 @@ TourDraw::TourDraw(QSqlDatabase &database,
     // pointer on database
     db = &database;
 
+    loser_btn = new QPushButton(this);
+    loser_btn->hide();
+
     // drawing a tournament schema
 
     // teams data
@@ -78,15 +81,8 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
         btn->setDisabled(true);
 
-        constexpr int max_symbols_amount = 24;
-
-        if(team_name.size() >= max_symbols_amount){
-            btn->setFont(QFont("Ubuntu", 7));
-        }
-        else if(team_name.size() > max_symbols_amount / 2 + 1 &&
-                team_name.size() < max_symbols_amount){
-            btn->setFont(QFont("Ubuntu", 10));
-        }
+        // change button's font if necessary
+        fontAdapter(btn);
 
         y += static_cast<int>(Geometry::Step);
     }
@@ -103,6 +99,9 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
         btn_left->setText("W " + QString::number(i + 1));
 
+        // change button's font if necessary
+        fontAdapter(btn_left);
+
         // save pointer on the button
         W1_W8_buttons.push_back(btn_left);
         //------------------------------------------------------------------------
@@ -115,13 +114,15 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
         btn_right->setDisabled(true);
         btn_right->setText("L " + QString::number(j));
+
+        // change button's font if necessary
+        fontAdapter(btn_right);
+
         L1_L8_buttons.push_front(btn_right);
         --j;
         //------------------------------------------------------------------------
 
         y += static_cast<int>(Geometry::Step) * 2;
-
-        // container with pointers on these buttons????
     }
 
 
@@ -138,6 +139,10 @@ TourDraw::TourDraw(QSqlDatabase &database,
                                static_cast<int>(Geometry::BtnHeight)));
 
         btn_left->setText("W " + QString::number(i + 9));
+
+        // change button's font if necessary
+        fontAdapter(btn_left);
+
         W9_W12_buttons.push_back(btn_left);
         y += static_cast<int>(Geometry::Step) * 4;
         //----------------------------------------------------------------------
@@ -149,6 +154,12 @@ TourDraw::TourDraw(QSqlDatabase &database,
                                  static_cast<int>(Geometry::BtnHeight)));
 
         btn_right_1->setText("W " + QString::number(i + 13));
+
+        W13_W14_W15_W16_buttons.append(btn_right_1);
+
+        // change button's font if necessary
+        fontAdapter(btn_right_1);
+
         y2 += static_cast<int>(Geometry::Step) * 4;
         //------------------------------------------------------------------------
 
@@ -159,6 +170,11 @@ TourDraw::TourDraw(QSqlDatabase &database,
                                        static_cast<int>(Geometry::BtnHeight)));
 
         btn_right_2->setText(loosers_labels[i]);
+
+        // change button's font if necessary
+        fontAdapter(btn_right_2);
+
+        L9_L12_buttons.push_back(btn_right_2);
         y3 += 177;
         //----------------------------------------------------------------------------
 
@@ -169,6 +185,12 @@ TourDraw::TourDraw(QSqlDatabase &database,
                                          static_cast<int>(Geometry::BtnHeight)));
 
         looser_btn_3c->setText("W " + QString::number(i + 17));
+
+        W17_W18_W19_W20_buttons.append(looser_btn_3c);
+
+        // change button's font if necessary
+        fontAdapter(looser_btn_3c);
+
         y4 += 177;
         //---------------------------------------------------------------------------
     }
@@ -186,6 +208,11 @@ TourDraw::TourDraw(QSqlDatabase &database,
                                static_cast<int>(Geometry::BtnHeight)));
 
         btn->setText("W " + QString::number(i + 27));
+        W27_W28_buttons.append(btn);
+
+        // change button's font if necessary
+        fontAdapter(btn);
+
         y += static_cast<int>(Geometry::Step) * 5;
         //-----------------------------------------------------------------------
 
@@ -196,6 +223,11 @@ TourDraw::TourDraw(QSqlDatabase &database,
                                static_cast<int>(Geometry::BtnHeight)));
 
         btn_bronze_match->setText("L " + QString::number(i + 27));
+        L27_L28_buttons.append(btn_bronze_match);
+
+        // change button's font if necessary
+        fontAdapter(btn_bronze_match);
+
         btn_bronze_match->setDisabled(true);
         y5 += static_cast<int>(Geometry::Step) * 2;
         //-----------------------------------------------------------------------
@@ -207,6 +239,12 @@ TourDraw::TourDraw(QSqlDatabase &database,
                                         static_cast<int>(Geometry::BtnHeight)));
 
         btn_right->setText("W " + QString::number(i + 23));
+
+        W23_W24_buttons.append(btn_right);
+
+        // change button's font if necessary
+        fontAdapter(btn_right);
+
         y2 += 355;
         //------------------------------------------------------------------------
 
@@ -217,6 +255,14 @@ TourDraw::TourDraw(QSqlDatabase &database,
                                         static_cast<int>(Geometry::BtnHeight)));
 
         btn_right_2->setText("L " + QString::number(j));
+        btn_right_2->setDisabled(true);
+
+        L22_L21_buttons.append(btn_right_2);
+
+        // change button's font if necessary
+        fontAdapter(btn_right_2);
+
+
         y3 += 355;
         --j;
         //------------------------------------------------------------------------
@@ -228,6 +274,12 @@ TourDraw::TourDraw(QSqlDatabase &database,
                                        static_cast<int>(Geometry::BtnHeight)));
 
         btn_right_3->setText("W " + QString::number(i + 25));
+
+        W25_W26_buttons.append(btn_right_3);
+
+        // change button's font if necessary
+        fontAdapter(btn_right_3);
+
         y4 += 360;
         //--------------------------------------------------------------------------
 
@@ -238,6 +290,12 @@ TourDraw::TourDraw(QSqlDatabase &database,
                                    static_cast<int>(Geometry::BtnHeight)));
 
         win_btn->setText("W " + QString::number(i + 21));
+
+        W21_W22_buttons.append(win_btn);
+
+        // change button's font if necessary
+        fontAdapter(win_btn);
+
         y6 += static_cast<int>(Geometry::Step) * 8;
         //--------------------------------------------------------------------------
 
@@ -248,6 +306,12 @@ TourDraw::TourDraw(QSqlDatabase &database,
                                       static_cast<int>(Geometry::BtnHeight)));
 
         looser_btn->setText("W " + QString::number(i + 25));
+        W25_W26_buttons.append(looser_btn);
+        looser_btn->setDisabled(true);
+
+        // change button's font if necessary
+        fontAdapter(looser_btn);
+
         y7 += 95;
         //-----------------------------------------------------------------------------
     }
@@ -270,7 +334,11 @@ TourDraw::TourDraw(QSqlDatabase &database,
         else{
             btn->setText("3rd place");
         }
+
         y += 50;
+
+        // change button's font if necessary
+        fontAdapter(btn);
     }
 
 
@@ -279,7 +347,7 @@ TourDraw::TourDraw(QSqlDatabase &database,
     //     connect( btn, SIGNAL(clicked()), this, SLOT(showTeamInfo()));
     // }
 
-    // W1 buttons has been clicked
+    // W1 - W8 buttons
     connect(W1_W8_buttons[0], SIGNAL(clicked()), this, SLOT(W1_clicked()));
     connect(W1_W8_buttons[1], SIGNAL(clicked()), this, SLOT(W2_clicked()));
     connect(W1_W8_buttons[2], SIGNAL(clicked()), this, SLOT(W3_clicked()));
@@ -288,6 +356,40 @@ TourDraw::TourDraw(QSqlDatabase &database,
     connect(W1_W8_buttons[5], SIGNAL(clicked()), this, SLOT(W6_clicked()));
     connect(W1_W8_buttons[6], SIGNAL(clicked()), this, SLOT(W7_clicked()));
     connect(W1_W8_buttons[7], SIGNAL(clicked()), this, SLOT(W8_clicked()));
+
+    // W9 - W12 buttons
+    connect(W9_W12_buttons[0], SIGNAL(clicked()), this, SLOT(W9_clicked()));
+    connect(W9_W12_buttons[1], SIGNAL(clicked()), this, SLOT(W10_clicked()));
+    connect(W9_W12_buttons[2], SIGNAL(clicked()), this, SLOT(W11_clicked()));
+    connect(W9_W12_buttons[3], SIGNAL(clicked()), this, SLOT(W12_clicked()));
+
+    // W21, W22 buttons
+    connect(W21_W22_buttons[0], SIGNAL(clicked()), this, SLOT(W21_clicked()));
+    connect(W21_W22_buttons[1], SIGNAL(clicked()), this, SLOT(W22_clicked()));
+
+    // W27, W28
+    connect(W27_W28_buttons[0], SIGNAL(clicked()), this, SLOT(W27_clicked()));
+    connect(W27_W28_buttons[1], SIGNAL(clicked()), this, SLOT(W28_clicked()));
+
+    // W13, W14, W15, W16 buttons
+    connect(W13_W14_W15_W16_buttons[0], SIGNAL(clicked()), this, SLOT(W13_clicked()));
+    connect(W13_W14_W15_W16_buttons[1], SIGNAL(clicked()), this, SLOT(W14_clicked()));
+    connect(W13_W14_W15_W16_buttons[2], SIGNAL(clicked()), this, SLOT(W15_clicked()));
+    connect(W13_W14_W15_W16_buttons[3], SIGNAL(clicked()), this, SLOT(W16_clicked()));
+
+    // W17, W18, W19, W20 buttons
+    connect(W17_W18_W19_W20_buttons[0], SIGNAL(clicked()), this, SLOT(W17_clicked()));
+    connect(W17_W18_W19_W20_buttons[1], SIGNAL(clicked()), this, SLOT(W18_clicked()));
+    connect(W17_W18_W19_W20_buttons[2], SIGNAL(clicked()), this, SLOT(W19_clicked()));
+    connect(W17_W18_W19_W20_buttons[3], SIGNAL(clicked()), this, SLOT(W20_clicked()));
+
+    // W23, W24
+    connect(W23_W24_buttons[0], SIGNAL(clicked()), this, SLOT(W23_clicked()));
+    connect(W23_W24_buttons[1], SIGNAL(clicked()), this, SLOT(W24_clicked()));
+
+    // W25, W26
+    connect(W25_W26_buttons[0], SIGNAL(clicked()), this, SLOT(W25_clicked()));
+    connect(W25_W26_buttons[1], SIGNAL(clicked()), this, SLOT(W26_clicked()));
 }
 
 TourDraw::~TourDraw()
@@ -295,9 +397,17 @@ TourDraw::~TourDraw()
     delete ui;
 }
 
-// adding function's pointer to the vector
-void TourDraw::addFunction(QVector<void (*)()> &func_vector, void (*func)()){
-    func_vector.push_back(func);
+void TourDraw::fontAdapter(QPushButton *btn){
+
+    constexpr int max_symbols_amount = 24;
+
+    if(btn->text().size() >= max_symbols_amount){
+        btn->setFont(QFont("Ubuntu", 6));
+    }
+    else if(btn->text().size() > max_symbols_amount / 2 + 1 &&
+            btn->text().size() < max_symbols_amount){
+        btn->setFont(QFont("Ubuntu", 9));
+    }
 }
 
 void TourDraw::paintEvent(QPaintEvent *event)
@@ -458,8 +568,8 @@ void TourDraw::paintEvent(QPaintEvent *event)
     painter.drawLine(QPoint(x2, 570), QPoint(x2, 659));
 }
 
-void TourDraw::gameResult(const QString team_1,
-                          const QString team_2,
+void TourDraw::gameResult(QPushButton *team_1,
+                          QPushButton *team_2,
                           QPushButton *winner_basket,
                           QPushButton *loser_basket){
 
@@ -471,64 +581,204 @@ void TourDraw::gameResult(const QString team_1,
 
 void TourDraw::W1_clicked()
 {
-    gameResult(first_round_team_btns[0]->text(),
-               first_round_team_btns[1]->text(),
+    gameResult(first_round_team_btns[0],
+               first_round_team_btns[1],
                W1_W8_buttons[0],
                L1_L8_buttons[0]);
 }
 
 void TourDraw::W2_clicked()
 {
-    gameResult(first_round_team_btns[2]->text(),
-               first_round_team_btns[3]->text(),
+    gameResult(first_round_team_btns[2],
+               first_round_team_btns[3],
                W1_W8_buttons[1],
                L1_L8_buttons[1]);
 }
 
 void TourDraw::W3_clicked()
 {
-    gameResult(first_round_team_btns[4]->text(),
-               first_round_team_btns[5]->text(),
+    gameResult(first_round_team_btns[4],
+               first_round_team_btns[5],
                W1_W8_buttons[2],
                L1_L8_buttons[2]);
 }
 
 void TourDraw::W4_clicked()
 {
-    gameResult(first_round_team_btns[6]->text(),
-               first_round_team_btns[7]->text(),
+    gameResult(first_round_team_btns[6],
+               first_round_team_btns[7],
                W1_W8_buttons[3],
                L1_L8_buttons[3]);
 }
 
 void TourDraw::W5_clicked()
 {
-    gameResult(first_round_team_btns[8]->text(),
-               first_round_team_btns[9]->text(),
+    gameResult(first_round_team_btns[8],
+               first_round_team_btns[9],
                W1_W8_buttons[4],
                L1_L8_buttons[4]);
 }
 
 void TourDraw::W6_clicked()
 {
-    gameResult(first_round_team_btns[10]->text(),
-               first_round_team_btns[11]->text(),
+    gameResult(first_round_team_btns[10],
+               first_round_team_btns[11],
                W1_W8_buttons[5],
                L1_L8_buttons[5]);
 }
 
 void TourDraw::W7_clicked()
 {
-    gameResult(first_round_team_btns[12]->text(),
-               first_round_team_btns[13]->text(),
+    gameResult(first_round_team_btns[12],
+               first_round_team_btns[13],
                W1_W8_buttons[6],
                L1_L8_buttons[6]);
 }
 
 void TourDraw::W8_clicked()
 {
-    gameResult(first_round_team_btns[14]->text(),
-               first_round_team_btns[15]->text(),
+    gameResult(first_round_team_btns[14],
+               first_round_team_btns[15],
                W1_W8_buttons[7],
                L1_L8_buttons[7]);
+}
+
+void TourDraw::W9_clicked(){
+    gameResult(W1_W8_buttons[0],
+               W1_W8_buttons[1],
+               W9_W12_buttons[0],
+               L9_L12_buttons[1]);
+}
+
+void TourDraw::W10_clicked(){
+    gameResult(W1_W8_buttons[2],
+               W1_W8_buttons[3],
+               W9_W12_buttons[1],
+               L9_L12_buttons[0]);
+}
+
+void TourDraw::W11_clicked(){
+    gameResult(W1_W8_buttons[4],
+               W1_W8_buttons[5],
+               W9_W12_buttons[2],
+               L9_L12_buttons[3]);
+}
+
+void TourDraw::W12_clicked(){
+    gameResult(W1_W8_buttons[6],
+               W1_W8_buttons[7],
+               W9_W12_buttons[3],
+               L9_L12_buttons[2]);
+}
+
+void TourDraw::W21_clicked(){
+    gameResult(W9_W12_buttons[0],
+               W9_W12_buttons[1],
+               W21_W22_buttons[0],
+               L22_L21_buttons[1]);
+}
+
+void TourDraw::W22_clicked(){
+    gameResult(W9_W12_buttons[2],
+               W9_W12_buttons[3],
+               W21_W22_buttons[1],
+               L22_L21_buttons[0]);
+}
+
+void TourDraw::W27_clicked(){
+    gameResult(W21_W22_buttons[0],
+               W25_W26_buttons[0],
+               W27_W28_buttons[0],
+               L27_L28_buttons[0]);
+}
+
+void TourDraw::W28_clicked(){
+    gameResult(W21_W22_buttons[1],
+               W25_W26_buttons[1],
+               W27_W28_buttons[1],
+               L27_L28_buttons[1]);
+}
+
+void TourDraw::W13_clicked(){
+    gameResult(L1_L8_buttons[7],
+               L1_L8_buttons[6],
+               W13_W14_W15_W16_buttons[0],
+               loser_btn);   // team is out of tournament
+}
+
+void TourDraw::W14_clicked(){
+    gameResult(L1_L8_buttons[5],
+               L1_L8_buttons[4],
+               W13_W14_W15_W16_buttons[1],
+               loser_btn);   // team is out of tournament
+}
+
+void TourDraw::W15_clicked(){
+    gameResult(L1_L8_buttons[3],
+               L1_L8_buttons[2],
+               W13_W14_W15_W16_buttons[2],
+               loser_btn);   // team is out of tournament
+}
+
+void TourDraw::W16_clicked(){
+    gameResult(L1_L8_buttons[1],
+               L1_L8_buttons[0],
+               W13_W14_W15_W16_buttons[3],
+               loser_btn);   // team is out of tournament
+}
+
+void TourDraw::W17_clicked(){
+    gameResult(W13_W14_W15_W16_buttons[0],
+               L9_L12_buttons[0],
+               W17_W18_W19_W20_buttons[0],
+               loser_btn);   // team is out of tournament
+}
+
+void TourDraw::W18_clicked(){
+    gameResult(W13_W14_W15_W16_buttons[1],
+               L9_L12_buttons[1],
+               W17_W18_W19_W20_buttons[1],
+               loser_btn);   // team is out of tournament
+}
+
+void TourDraw::W19_clicked(){
+    gameResult(W13_W14_W15_W16_buttons[2],
+               L9_L12_buttons[2],
+               W17_W18_W19_W20_buttons[2],
+               loser_btn);   // team is out of tournament
+}
+
+void TourDraw::W20_clicked(){
+    gameResult(W13_W14_W15_W16_buttons[3],
+               L9_L12_buttons[3],
+               W17_W18_W19_W20_buttons[3],
+               loser_btn);   // team is out of tournament
+}
+
+void TourDraw::W23_clicked(){
+    gameResult(W17_W18_W19_W20_buttons[0],
+               W17_W18_W19_W20_buttons[1],
+               W23_W24_buttons[0],
+               loser_btn);   // team is out of tournament
+}
+
+void TourDraw::W24_clicked(){
+    gameResult(W17_W18_W19_W20_buttons[2],
+               W17_W18_W19_W20_buttons[3],
+               W23_W24_buttons[1],
+               loser_btn);   // team is out of tournament
+}
+
+void TourDraw::W25_clicked(){
+    gameResult(L22_L21_buttons[0],
+               W23_W24_buttons[0],
+               W25_W26_buttons[0],
+               loser_btn);   // team is out of tournament
+}
+
+void TourDraw::W26_clicked(){
+    gameResult(L22_L21_buttons[1],
+               W23_W24_buttons[1],
+               W25_W26_buttons[1],
+               loser_btn);   // team is out of tournament
 }
