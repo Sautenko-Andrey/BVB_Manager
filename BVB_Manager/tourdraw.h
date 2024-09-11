@@ -60,6 +60,8 @@ private slots:
     void W26_clicked();
     void W27_clicked();
     void W28_clicked();
+    void bronze_match_clicked();
+    void final_match_clicked();
 
 private:
     Ui::TourDraw *ui;
@@ -88,6 +90,8 @@ private:
 
     QList<QPushButton *> W25_W26_buttons;
 
+    QList<QPushButton *> W25_W26_looser_buttons;
+
     QList<QPushButton *> W27_W28_buttons;
 
     QList<QPushButton *> L27_L28_buttons;
@@ -95,6 +99,10 @@ private:
     QList<QPushButton *> W17_W18_W19_W20_buttons;
 
     QList<QPushButton *> W23_W24_buttons;
+
+    QList<QPushButton *> W_buttons;
+
+    QList<QPushButton *> final_silver_bronze_buttons;
 
     std::unique_ptr<GameResult> game_result{nullptr};
 
