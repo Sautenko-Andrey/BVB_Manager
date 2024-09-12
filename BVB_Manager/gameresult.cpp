@@ -80,8 +80,8 @@ void GameResult::on_okButton_clicked()
     }
 
     // show game result (sets)
-    first_team->setText(first_team_name + " <" + QString::number(first_team_score) + ">");
-    second_team->setText(second_team_name + " <" + QString::number(second_team_score) + ">");
+    //first_team->setText(first_team_name + " <" + QString::number(first_team_score) + ">");
+    //second_team->setText(second_team_name + " <" + QString::number(second_team_score) + ">");
 
     QDialog::accept();
 }

@@ -62,6 +62,9 @@ private:
     void fontAdapter(QPushButton *btn);
 
     QPushButton *loser_btn{nullptr};
+
+    void drawGameResultBtn(const int x, const int y);
+    void drawTeamBtn(const int x, const int y);
 };
 
 #endif // TOURDRAW_H

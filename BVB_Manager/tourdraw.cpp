@@ -14,6 +14,8 @@ enum class Geometry{
     coordYStartBtn = 15,
     BtnWidth = 115,
     BtnHeight = 23,
+    BtnResWidth = 45,
+    BtnResHeight = 17,
     Step = 44,
     StepX = 121
 };
@@ -77,7 +79,7 @@ TourDraw::TourDraw(QSqlDatabase &database,
     }
 
     // 8 teams buttons (2nd column) for the left side and the same for the right
-    for(int i{0}, j{8}, y{32};
+    for(int i{0}, j{8}, y{32}, y2{40};
         i < static_cast<int>(draw_type) / 2; ++i){
 
         // left side(winners)--------------------------------------------------------------
@@ -112,6 +114,11 @@ TourDraw::TourDraw(QSqlDatabase &database,
         //------------------------------------------------------------------------
 
         y += static_cast<int>(Geometry::Step) * 2;
+
+        //--------------------------------------------------------------------------
+        //drawing 8 game results buttons
+        drawGameResultBtn(45, y2);
+        y2 += 88;
     }
 
 
@@ -701,4 +708,20 @@ void TourDraw::click_game(QPushButton *team_1, QPushButton *team_2,
                                                winner_basket, loser_basket, this);
 
     game_result->show();
+}
+
+void TourDraw::drawGameResultBtn(const int x, const int y){
+
+    QPushButton *game_result = new QPushButton(this);
+    game_result->setGeometry(QRect(x, y,
+                                   static_cast<int>(Geometry::BtnResWidth),
+                                   static_cast<int>(Geometry::BtnResHeight)));
+    game_result->setText("0 : 0");
+    game_result->setDisabled(true);
+
+    // add button to the the list of game result buttons
+}
+
+void TourDraw::drawTeamBtn(const int x, const int y){
+
 }
