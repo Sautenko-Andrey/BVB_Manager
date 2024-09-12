@@ -43,23 +43,6 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
     // drawing a tournament schema
 
-    // teams data
-    // test
-    // qDebug() << "Teams: ";
-    // for(auto team : tournament.selected_teams){
-    //     qDebug() << team->text();
-    //     QStringList team_data = team->text().split(",");
-    //     for(const auto &data : team_data){
-    //         qDebug() << data.trimmed();
-    //     }
-    //     qDebug() << team_data[2].last(3).toInt();
-
-    //     qDebug() << "--------------------------------------";
-    // }
-
-    // qDebug() << tournament.selected_teams[0]->text();
-
-
     // 16 teams buttons (1st column) on the left side
     QList<int> rank_baskets{
         0, 15, 8, 7, 4, 11, 12, 3, 2, 13, 10, 5, 6, 9, 14, 1
@@ -109,8 +92,7 @@ TourDraw::TourDraw(QSqlDatabase &database,
         fontAdapter(btn_left);
 
         // save pointer on the button
-        W1_W8_buttons.push_back(btn_left);
-        W_buttons.push_back(btn_left);
+        W_buttons[i] = btn_left;
         //------------------------------------------------------------------------
 
         // right side(loosers)-------------------------------------------------------------
@@ -125,7 +107,7 @@ TourDraw::TourDraw(QSqlDatabase &database,
         // change button's font if necessary
         fontAdapter(btn_right);
 
-        L1_L8_buttons.push_front(btn_right);
+        L1_L12_buttons.push_front(btn_right);
         --j;
         //------------------------------------------------------------------------
 
@@ -150,8 +132,7 @@ TourDraw::TourDraw(QSqlDatabase &database,
         // change button's font if necessary
         fontAdapter(btn_left);
 
-        W9_W12_buttons.push_back(btn_left);
-        W_buttons.push_back(btn_left);
+        W_buttons[i + 8] = btn_left;
         y += static_cast<int>(Geometry::Step) * 4;
         //----------------------------------------------------------------------
 
@@ -163,8 +144,7 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
         btn_right_1->setText("W " + QString::number(i + 13));
 
-        W13_W14_W15_W16_buttons.append(btn_right_1);
-        W_buttons.push_back(btn_right_1);
+        W_buttons[i + 12] = btn_right_1;
 
         // change button's font if necessary
         fontAdapter(btn_right_1);
@@ -183,7 +163,7 @@ TourDraw::TourDraw(QSqlDatabase &database,
         // change button's font if necessary
         fontAdapter(btn_right_2);
 
-        L9_L12_buttons.push_back(btn_right_2);
+        L1_L12_buttons.push_back(btn_right_2);
         y3 += 177;
         //----------------------------------------------------------------------------
 
@@ -195,8 +175,7 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
         looser_btn_3c->setText("W " + QString::number(i + 17));
 
-        W17_W18_W19_W20_buttons.append(looser_btn_3c);
-        W_buttons.push_back(looser_btn_3c);
+        W_buttons[i + 16] = looser_btn_3c;
 
         // change button's font if necessary
         fontAdapter(looser_btn_3c);
@@ -218,7 +197,7 @@ TourDraw::TourDraw(QSqlDatabase &database,
                                static_cast<int>(Geometry::BtnHeight)));
 
         btn->setText("W " + QString::number(i + 27));
-        W27_W28_buttons.append(btn);
+
         W_buttons[i + 26] = btn;
 
         // change button's font if necessary
@@ -251,8 +230,7 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
         btn_right->setText("W " + QString::number(i + 23));
 
-        W23_W24_buttons.append(btn_right);
-        W_buttons[i + 23] = btn_right;
+        W_buttons[i + 22] = btn_right;
 
         // change button's font if necessary
         fontAdapter(btn_right);
@@ -287,8 +265,7 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
         btn_right_3->setText("W " + QString::number(i + 25));
 
-        W25_W26_buttons.append(btn_right_3);
-        W_buttons[i + 25] = btn_right_3;
+        W_buttons[i + 24] = btn_right_3;
 
         // change button's font if necessary
         fontAdapter(btn_right_3);
@@ -304,8 +281,7 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
         win_btn->setText("W " + QString::number(i + 21));
 
-        W21_W22_buttons.append(win_btn);
-        W_buttons[i + 21] = win_btn;
+        W_buttons[i + 20] = win_btn;
 
         // change button's font if necessary
         fontAdapter(win_btn);
@@ -358,62 +334,188 @@ TourDraw::TourDraw(QSqlDatabase &database,
         fontAdapter(btn);
     }
 
-    // signals & slots
-    // for(auto btn : first_round_team_btns){
-    //     connect( btn, SIGNAL(clicked()), this, SLOT(showTeamInfo()));
-    // }
+    // Signals & slots
 
-    // W1 - W8 buttons
-    connect(W1_W8_buttons[0], SIGNAL(clicked()), this, SLOT(W1_clicked()));
-    connect(W1_W8_buttons[1], SIGNAL(clicked()), this, SLOT(W2_clicked()));
-    connect(W1_W8_buttons[2], SIGNAL(clicked()), this, SLOT(W3_clicked()));
-    connect(W1_W8_buttons[3], SIGNAL(clicked()), this, SLOT(W4_clicked()));
-    connect(W1_W8_buttons[4], SIGNAL(clicked()), this, SLOT(W5_clicked()));
-    connect(W1_W8_buttons[5], SIGNAL(clicked()), this, SLOT(W6_clicked()));
-    connect(W1_W8_buttons[6], SIGNAL(clicked()), this, SLOT(W7_clicked()));
-    connect(W1_W8_buttons[7], SIGNAL(clicked()), this, SLOT(W8_clicked()));
+    //W1
+    connect(W_buttons[0], &QPushButton::clicked, this, [this](){
+        click_game(first_round_team_btns[0], first_round_team_btns[1],
+                W_buttons[0], L1_L12_buttons[0]);
+    });
 
-    // W9 - W12 buttons
-    connect(W9_W12_buttons[0], SIGNAL(clicked()), this, SLOT(W9_clicked()));
-    connect(W9_W12_buttons[1], SIGNAL(clicked()), this, SLOT(W10_clicked()));
-    connect(W9_W12_buttons[2], SIGNAL(clicked()), this, SLOT(W11_clicked()));
-    connect(W9_W12_buttons[3], SIGNAL(clicked()), this, SLOT(W12_clicked()));
+    //W2
+    connect(W_buttons[1], &QPushButton::clicked, this, [this](){
+        click_game(first_round_team_btns[2], first_round_team_btns[3],
+                W_buttons[1], L1_L12_buttons[1]);
+    });
 
-    // W21, W22 buttons
-    connect(W21_W22_buttons[0], SIGNAL(clicked()), this, SLOT(W21_clicked()));
-    connect(W21_W22_buttons[1], SIGNAL(clicked()), this, SLOT(W22_clicked()));
+    //W3
+    connect(W_buttons[2], &QPushButton::clicked, this, [this](){
+        click_game(first_round_team_btns[4], first_round_team_btns[5],
+                W_buttons[2], L1_L12_buttons[2]);
+    });
 
-    // W27, W28
-    connect(W27_W28_buttons[0], SIGNAL(clicked()), this, SLOT(W27_clicked()));
-    connect(W27_W28_buttons[1], SIGNAL(clicked()), this, SLOT(W28_clicked()));
+    //W4
+    connect(W_buttons[3], &QPushButton::clicked, this, [this](){
+        click_game(first_round_team_btns[6], first_round_team_btns[7],
+                W_buttons[3], L1_L12_buttons[3]);
+    });
 
-    // W13, W14, W15, W16 buttons
-    connect(W13_W14_W15_W16_buttons[0], SIGNAL(clicked()), this, SLOT(W13_clicked()));
-    connect(W13_W14_W15_W16_buttons[1], SIGNAL(clicked()), this, SLOT(W14_clicked()));
-    connect(W13_W14_W15_W16_buttons[2], SIGNAL(clicked()), this, SLOT(W15_clicked()));
-    connect(W13_W14_W15_W16_buttons[3], SIGNAL(clicked()), this, SLOT(W16_clicked()));
+    //W5
+    connect(W_buttons[4], &QPushButton::clicked, this, [this](){
+        click_game(first_round_team_btns[8], first_round_team_btns[9],
+                W_buttons[4],L1_L12_buttons[4]);
+    });
 
-    // W17, W18, W19, W20 buttons
-    connect(W17_W18_W19_W20_buttons[0], SIGNAL(clicked()), this, SLOT(W17_clicked()));
-    connect(W17_W18_W19_W20_buttons[1], SIGNAL(clicked()), this, SLOT(W18_clicked()));
-    connect(W17_W18_W19_W20_buttons[2], SIGNAL(clicked()), this, SLOT(W19_clicked()));
-    connect(W17_W18_W19_W20_buttons[3], SIGNAL(clicked()), this, SLOT(W20_clicked()));
+    //W6
+    connect(W_buttons[5], &QPushButton::clicked, this, [this](){
+        click_game(first_round_team_btns[10], first_round_team_btns[11],
+                W_buttons[5], L1_L12_buttons[5]);
+    });
 
-    // W23, W24
-    connect(W23_W24_buttons[0], SIGNAL(clicked()), this, SLOT(W23_clicked()));
-    connect(W23_W24_buttons[1], SIGNAL(clicked()), this, SLOT(W24_clicked()));
+    //W7
+    connect(W_buttons[6], &QPushButton::clicked, this, [this](){
+        click_game(first_round_team_btns[12], first_round_team_btns[13],
+                W_buttons[6], L1_L12_buttons[6]);
+    });
 
-    // W25, W26
-    connect(W25_W26_buttons[0], SIGNAL(clicked()), this, SLOT(W25_clicked()));
-    connect(W25_W26_buttons[1], SIGNAL(clicked()), this, SLOT(W26_clicked()));
+    //W8
+    connect(W_buttons[7], &QPushButton::clicked, this, [this](){
+        click_game(first_round_team_btns[14], first_round_team_btns[15],
+                W_buttons[7], L1_L12_buttons[7]);
+    });
+
+    //W9
+    connect(W_buttons[8], &QPushButton::clicked, this, [this](){
+        click_game(W_buttons[0], W_buttons[1],
+                W_buttons[8], L1_L12_buttons[9]);
+    });
+
+    //W10
+    connect(W_buttons[9], &QPushButton::clicked, this, [this](){
+        click_game(W_buttons[2], W_buttons[3],
+                W_buttons[9], L1_L12_buttons[8]);
+    });
+
+    //W11
+    connect(W_buttons[10], &QPushButton::clicked, this, [this](){
+        click_game(W_buttons[4], W_buttons[5],
+                W_buttons[10], L1_L12_buttons[11]);
+    });
+
+    //W12
+    connect(W_buttons[11], &QPushButton::clicked, this, [this](){
+        click_game(W_buttons[6], W_buttons[7],
+                W_buttons[11], L1_L12_buttons[10]);
+    });
+
+    //W13
+    connect(W_buttons[12], &QPushButton::clicked, this, [this](){
+        click_game(L1_L12_buttons[7], L1_L12_buttons[6],
+                W_buttons[12], loser_btn);
+    });
+
+    //W14
+    connect(W_buttons[13], &QPushButton::clicked, this, [this](){
+        click_game(L1_L12_buttons[5], L1_L12_buttons[4],
+                W_buttons[13], loser_btn);
+    });
+
+    //W15
+    connect(W_buttons[14], &QPushButton::clicked, this, [this](){
+        click_game(L1_L12_buttons[3], L1_L12_buttons[2],
+                W_buttons[14], loser_btn);
+    });
+
+    //W16
+    connect(W_buttons[15], &QPushButton::clicked, this, [this](){
+        click_game(L1_L12_buttons[1], L1_L12_buttons[0],
+                W_buttons[15], loser_btn);
+    });
+
+    //W17
+    connect(W_buttons[16], &QPushButton::clicked, this, [this](){
+        click_game(W_buttons[12], L1_L12_buttons[8],
+                W_buttons[16], loser_btn);
+    });
+
+    //W18
+    connect(W_buttons[17], &QPushButton::clicked, this, [this](){
+        click_game(W_buttons[13], L1_L12_buttons[9],
+                W_buttons[17], loser_btn);
+    });
+
+    //W19
+    connect(W_buttons[18], &QPushButton::clicked, this, [this](){
+        click_game(W_buttons[14], L1_L12_buttons[10],
+                W_buttons[18], loser_btn);
+    });
+
+    //W20
+    connect(W_buttons[19], &QPushButton::clicked, this, [this](){
+        click_game(W_buttons[15], L1_L12_buttons[11],
+                W_buttons[19], loser_btn);
+    });
+
+    //W21
+    connect(W_buttons[20], &QPushButton::clicked, this, [this](){
+        click_game(W_buttons[8], W_buttons[9],
+                W_buttons[20], L22_L21_buttons[1]);
+    });
+
+    //W22
+    connect(W_buttons[21], &QPushButton::clicked, this, [this](){
+        click_game(W_buttons[10], W_buttons[11],
+                W_buttons[21], L22_L21_buttons[0]);
+    });
+
+    //W23
+    connect(W_buttons[22], &QPushButton::clicked, this, [this](){
+        click_game(W_buttons[16], W_buttons[17],
+                W_buttons[22], loser_btn);
+    });
+
+    //W24
+    connect(W_buttons[23], &QPushButton::clicked, this, [this](){
+        click_game(W_buttons[18], W_buttons[19],
+                W_buttons[23], loser_btn);
+    });
+
+    //W25
+    connect(W_buttons[24], &QPushButton::clicked, this, [this](){
+        click_game(L22_L21_buttons[0], W_buttons[22],
+                W25_W26_looser_buttons[0], loser_btn);
+    });
+
+    //W26
+    connect(W_buttons[25], &QPushButton::clicked, this, [this](){
+        click_game(L22_L21_buttons[1], W_buttons[23],
+                W25_W26_looser_buttons[1], loser_btn);
+    });
+
+    //W27
+    connect(W_buttons[26], &QPushButton::clicked, this, [this](){
+        click_game(W_buttons[20], W25_W26_looser_buttons[0],
+                W_buttons[26], L27_L28_buttons[0]);
+    });
+
+    //W28
+    connect(W_buttons[27], &QPushButton::clicked, this, [this](){
+        click_game(W_buttons[21], W25_W26_looser_buttons[1],
+                W_buttons[27], L27_L28_buttons[1]);
+    });
 
     // bronze and golden medals matches
     // 3rd place
-    connect(final_silver_bronze_buttons[2], SIGNAL(clicked()),
-            this, SLOT(bronze_match_clicked()));
+    connect(final_silver_bronze_buttons[2], &QPushButton::clicked, this, [this](){
+        click_game(L27_L28_buttons[0], L27_L28_buttons[1],
+                final_silver_bronze_buttons[2], loser_btn);
+    });
+
     // final
-    connect(final_silver_bronze_buttons[0], SIGNAL(clicked()),
-            this, SLOT(final_match_clicked()));
+    connect(final_silver_bronze_buttons[0], &QPushButton::clicked, this, [this](){
+        click_game(W_buttons[26], W_buttons[27],
+                final_silver_bronze_buttons[0], final_silver_bronze_buttons[1]);
+    });
 }
 
 TourDraw::~TourDraw()
@@ -592,376 +694,11 @@ void TourDraw::paintEvent(QPaintEvent *event)
     painter.drawLine(QPoint(x2, 570), QPoint(x2, 659));
 }
 
-void TourDraw::gameResult(QPushButton *team_1,
-                          QPushButton *team_2,
-                          QPushButton *winner_basket,
-                          QPushButton *loser_basket){
+void TourDraw::click_game(QPushButton *team_1, QPushButton *team_2,
+                          QPushButton *winner_basket, QPushButton *loser_basket){
 
     game_result = std::make_unique<GameResult>(team_1, team_2,
                                                winner_basket, loser_basket, this);
 
     game_result->show();
-}
-
-void TourDraw::W1_clicked()
-{
-    // gameResult(first_round_team_btns[0],
-    //            first_round_team_btns[1],
-    //            W1_W8_buttons[0],
-    //            L1_L8_buttons[0]);
-
-    gameResult(first_round_team_btns[0],
-               first_round_team_btns[1],
-               W_buttons[0],
-               L1_L8_buttons[0]);
-}
-
-void TourDraw::W2_clicked()
-{
-    // gameResult(first_round_team_btns[2],
-    //            first_round_team_btns[3],
-    //            W1_W8_buttons[1],
-    //            L1_L8_buttons[1]);
-
-    gameResult(first_round_team_btns[2],
-               first_round_team_btns[3],
-               W_buttons[1],
-               L1_L8_buttons[1]);
-}
-
-void TourDraw::W3_clicked()
-{
-    // gameResult(first_round_team_btns[4],
-    //            first_round_team_btns[5],
-    //            W1_W8_buttons[2],
-    //            L1_L8_buttons[2]);
-
-    gameResult(first_round_team_btns[4],
-               first_round_team_btns[5],
-               W_buttons[2],
-               L1_L8_buttons[2]);
-}
-
-void TourDraw::W4_clicked()
-{
-    // gameResult(first_round_team_btns[6],
-    //            first_round_team_btns[7],
-    //            W1_W8_buttons[3],
-    //            L1_L8_buttons[3]);
-
-    gameResult(first_round_team_btns[6],
-               first_round_team_btns[7],
-               W_buttons[3],
-               L1_L8_buttons[3]);
-}
-
-void TourDraw::W5_clicked()
-{
-    // gameResult(first_round_team_btns[8],
-    //            first_round_team_btns[9],
-    //            W1_W8_buttons[4],
-    //            L1_L8_buttons[4]);
-
-    gameResult(first_round_team_btns[8],
-               first_round_team_btns[9],
-               W_buttons[4],
-               L1_L8_buttons[4]);
-}
-
-void TourDraw::W6_clicked()
-{
-    // gameResult(first_round_team_btns[10],
-    //            first_round_team_btns[11],
-    //            W1_W8_buttons[5],
-    //            L1_L8_buttons[5]);
-
-    gameResult(first_round_team_btns[10],
-               first_round_team_btns[11],
-               W_buttons[5],
-               L1_L8_buttons[5]);
-}
-
-void TourDraw::W7_clicked()
-{
-    // gameResult(first_round_team_btns[12],
-    //            first_round_team_btns[13],
-    //            W1_W8_buttons[6],
-    //            L1_L8_buttons[6]);
-
-    gameResult(first_round_team_btns[12],
-               first_round_team_btns[13],
-               W_buttons[6],
-               L1_L8_buttons[6]);
-}
-
-void TourDraw::W8_clicked()
-{
-    // gameResult(first_round_team_btns[14],
-    //            first_round_team_btns[15],
-    //            W1_W8_buttons[7],
-    //            L1_L8_buttons[7]);
-
-    gameResult(first_round_team_btns[14],
-               first_round_team_btns[15],
-               W_buttons[7],
-               L1_L8_buttons[7]);
-}
-
-void TourDraw::W9_clicked(){
-    // gameResult(W1_W8_buttons[0],
-    //            W1_W8_buttons[1],
-    //            W9_W12_buttons[0],
-    //            L9_L12_buttons[1]);
-
-    gameResult(W_buttons[0],
-               W_buttons[1],
-               W_buttons[8],
-               L9_L12_buttons[1]);
-}
-
-void TourDraw::W10_clicked(){
-    // gameResult(W1_W8_buttons[2],
-    //            W1_W8_buttons[3],
-    //            W9_W12_buttons[1],
-    //            L9_L12_buttons[0]);
-
-    gameResult(W_buttons[2],
-               W_buttons[3],
-               W_buttons[9],
-               L9_L12_buttons[0]);
-}
-
-void TourDraw::W11_clicked(){
-    // gameResult(W1_W8_buttons[4],
-    //            W1_W8_buttons[5],
-    //            W9_W12_buttons[2],
-    //            L9_L12_buttons[3]);
-
-    gameResult(W_buttons[4],
-               W_buttons[5],
-               W_buttons[10],
-               L9_L12_buttons[3]);
-}
-
-void TourDraw::W12_clicked(){
-    // gameResult(W1_W8_buttons[6],
-    //            W1_W8_buttons[7],
-    //            W9_W12_buttons[3],
-    //            L9_L12_buttons[2]);
-
-    gameResult(W_buttons[6],
-               W_buttons[7],
-               W_buttons[11],
-               L9_L12_buttons[2]);
-}
-
-void TourDraw::W21_clicked(){
-    // gameResult(W9_W12_buttons[0],
-    //            W9_W12_buttons[1],
-    //            W21_W22_buttons[0],
-    //            L22_L21_buttons[1]);
-
-    gameResult(W_buttons[8],
-               W_buttons[9],
-               W_buttons[20],
-               L22_L21_buttons[1]);
-}
-
-void TourDraw::W22_clicked(){
-    // gameResult(W9_W12_buttons[2],
-    //            W9_W12_buttons[3],
-    //            W21_W22_buttons[1],
-    //            L22_L21_buttons[0]);
-
-    gameResult(W_buttons[10],
-               W_buttons[11],
-               W_buttons[21],
-               L22_L21_buttons[0]);
-}
-
-void TourDraw::W27_clicked(){
-    // gameResult(W21_W22_buttons[0],
-    //            W25_W26_looser_buttons[0],
-    //            W27_W28_buttons[0],
-    //            L27_L28_buttons[0]);
-
-    gameResult(W_buttons[20],
-               W25_W26_looser_buttons[0],
-               W_buttons[26],
-               L27_L28_buttons[0]);
-}
-
-void TourDraw::W28_clicked(){
-    // gameResult(W21_W22_buttons[1],
-    //            W25_W26_looser_buttons[1],
-    //            W27_W28_buttons[1],
-    //            L27_L28_buttons[1]);
-
-    gameResult(W_buttons[21],
-               W25_W26_looser_buttons[1],
-               W_buttons[27],
-               L27_L28_buttons[1]);
-}
-
-void TourDraw::W13_clicked(){
-    // gameResult(L1_L8_buttons[7],
-    //            L1_L8_buttons[6],
-    //            W13_W14_W15_W16_buttons[0],
-    //            loser_btn);   // team is out of tournament
-
-    gameResult(L1_L8_buttons[7],
-               L1_L8_buttons[6],
-               W_buttons[12],
-               loser_btn);   // team is out of tournament
-}
-
-void TourDraw::W14_clicked(){
-    // gameResult(L1_L8_buttons[5],
-    //            L1_L8_buttons[4],
-    //            W13_W14_W15_W16_buttons[1],
-    //            loser_btn);   // team is out of tournament
-
-    gameResult(L1_L8_buttons[5],
-               L1_L8_buttons[4],
-               W_buttons[13],
-               loser_btn);   // team is out of tournament
-}
-
-void TourDraw::W15_clicked(){
-    // gameResult(L1_L8_buttons[3],
-    //            L1_L8_buttons[2],
-    //            W13_W14_W15_W16_buttons[2],
-    //            loser_btn);   // team is out of tournament
-
-    gameResult(L1_L8_buttons[3],
-               L1_L8_buttons[2],
-               W_buttons[14],
-               loser_btn);   // team is out of tournament
-}
-
-void TourDraw::W16_clicked(){
-    // gameResult(L1_L8_buttons[1],
-    //            L1_L8_buttons[0],
-    //            W13_W14_W15_W16_buttons[3],
-    //            loser_btn);   // team is out of tournament
-
-    gameResult(L1_L8_buttons[1],
-               L1_L8_buttons[0],
-               W_buttons[15],
-               loser_btn);   // team is out of tournament
-}
-
-void TourDraw::W17_clicked(){
-    // gameResult(W13_W14_W15_W16_buttons[0],
-    //            L9_L12_buttons[0],
-    //            W17_W18_W19_W20_buttons[0],
-    //            loser_btn);   // team is out of tournament
-
-    gameResult(W_buttons[12],
-               L9_L12_buttons[0],
-               W_buttons[16],
-               loser_btn);   // team is out of tournament
-}
-
-void TourDraw::W18_clicked(){
-    // gameResult(W13_W14_W15_W16_buttons[1],
-    //            L9_L12_buttons[1],
-    //            W17_W18_W19_W20_buttons[1],
-    //            loser_btn);   // team is out of tournament
-
-    gameResult(W_buttons[13],
-               L9_L12_buttons[1],
-               W_buttons[17],
-               loser_btn);   // team is out of tournament
-}
-
-void TourDraw::W19_clicked(){
-    // gameResult(W13_W14_W15_W16_buttons[2],
-    //            L9_L12_buttons[2],
-    //            W17_W18_W19_W20_buttons[2],
-    //            loser_btn);   // team is out of tournament
-
-    gameResult(W_buttons[14],
-               L9_L12_buttons[2],
-               W_buttons[18],
-               loser_btn);   // team is out of tournament
-}
-
-void TourDraw::W20_clicked(){
-    // gameResult(W13_W14_W15_W16_buttons[3],
-    //            L9_L12_buttons[3],
-    //            W17_W18_W19_W20_buttons[3],
-    //            loser_btn);   // team is out of tournament
-
-    gameResult(W_buttons[15],
-               L9_L12_buttons[3],
-               W_buttons[19],
-               loser_btn);   // team is out of tournament
-}
-
-void TourDraw::W23_clicked(){
-    // gameResult(W17_W18_W19_W20_buttons[0],
-    //            W17_W18_W19_W20_buttons[1],
-    //            W23_W24_buttons[0],
-    //            loser_btn);   // team is out of tournament
-
-    gameResult(W_buttons[16],
-               W_buttons[17],
-               W_buttons[22],
-               loser_btn);   // team is out of tournament
-}
-
-void TourDraw::W24_clicked(){
-    // gameResult(W17_W18_W19_W20_buttons[2],
-    //            W17_W18_W19_W20_buttons[3],
-    //            W23_W24_buttons[1],
-    //            loser_btn);   // team is out of tournament
-
-    gameResult(W_buttons[18],
-               W_buttons[19],
-               W_buttons[23],
-               loser_btn);   // team is out of tournament
-}
-
-void TourDraw::W25_clicked(){
-    // gameResult(L22_L21_buttons[0],
-    //            W23_W24_buttons[0],
-    //            W25_W26_looser_buttons[0],
-    //            loser_btn);   // team is out of tournament
-
-    gameResult(L22_L21_buttons[0],
-               W_buttons[22],
-               W25_W26_looser_buttons[0],
-               loser_btn);   // team is out of tournament
-}
-
-void TourDraw::W26_clicked(){
-    // gameResult(L22_L21_buttons[1],
-    //            W23_W24_buttons[1],
-    //            W25_W26_looser_buttons[1],
-    //            loser_btn);   // team is out of tournament
-
-    gameResult(L22_L21_buttons[1],
-               W_buttons[23],
-               W25_W26_looser_buttons[1],
-               loser_btn);   // team is out of tournament
-}
-
-void TourDraw::bronze_match_clicked(){
-    gameResult(L27_L28_buttons[0],
-               L27_L28_buttons[1],
-               final_silver_bronze_buttons[2],
-               loser_btn);
-}
-
-void TourDraw::final_match_clicked(){
-    // gameResult(W27_W28_buttons[0],
-    //            W27_W28_buttons[1],
-    //            final_silver_bronze_buttons[0],
-    //            final_silver_bronze_buttons[1]);
-
-    gameResult(W_buttons[26],
-               W_buttons[27],
-               final_silver_bronze_buttons[0],
-               final_silver_bronze_buttons[1]);
 }
