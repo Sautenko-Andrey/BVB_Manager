@@ -77,3 +77,16 @@ void createPlayersTable(QStandardItemModel *model, QTableView *tableView,
         ++i;
     }
 }
+
+void fontAdapter(QPushButton *btn){
+
+    constexpr int max_symbols_amount = 24;
+
+    if(btn->text().size() >= max_symbols_amount){
+        btn->setFont(QFont("Ubuntu", 6));
+    }
+    else if(btn->text().size() > max_symbols_amount / 2 + 1 &&
+             btn->text().size() < max_symbols_amount){
+        btn->setFont(QFont("Ubuntu", 9));
+    }
+}

@@ -2,17 +2,20 @@
 #include "ui_gameresult.h"
 #include <QDebug>
 #include <QMessageBox>
+#include "utils.h"
 
 GameResult::GameResult(QPushButton *team_1,
                        QPushButton *team_2,
                        QPushButton *winer_basket,
                        QPushButton *loser_basket,
+                       QPushButton *game_res_btn,
                        QWidget *parent)
     : QDialog(parent)
     , winner{winer_basket}
     , loser{loser_basket}
     , first_team{team_1}
     , second_team{team_2}
+    , game_result{game_res_btn}
     , ui(new Ui::GameResult)
 {
     ui->setupUi(this);
@@ -61,9 +64,6 @@ void GameResult::on_okButton_clicked()
     int first_team_score = ui->firstSpinBox->value();
     int second_team_score = ui->secSpinBox->value();
 
-    QString first_team_name = first_team->text();
-    QString second_team_name = second_team->text();
-
     // match result can't be 0 : 0
     if(first_team_score == 0 && second_team_score == 0){
         QMessageBox::warning(this, "Match result error", "Match result can't be 0:0");
@@ -79,9 +79,13 @@ void GameResult::on_okButton_clicked()
         loser->setText(first_team->text());
     }
 
-    // show game result (sets)
-    //first_team->setText(first_team_name + " <" + QString::number(first_team_score) + ">");
-    //second_team->setText(second_team_name + " <" + QString::number(second_team_score) + ">");
+    // change font if necessary
+    fontAdapter(winner);
+    fontAdapter(loser);
+
+    game_result->setText(QString::number(first_team_score) +
+                         " : " +
+                         QString::number(second_team_score));
 
     QDialog::accept();
 }

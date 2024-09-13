@@ -17,6 +17,7 @@ public:
                         QPushButton *team_2,
                         QPushButton *winer_basket,
                         QPushButton *loser_basket,
+                        QPushButton *game_res_btn,
                         QWidget *parent = nullptr);
     ~GameResult();
 
@@ -35,6 +36,8 @@ private:
 
     QPushButton *first_team;
     QPushButton *second_team;
+
+    QPushButton *game_result;
 };
 
 #endif // GAMERESULT_H

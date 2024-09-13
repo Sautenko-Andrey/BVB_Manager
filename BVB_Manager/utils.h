@@ -6,6 +6,7 @@
 #include <QTableView>
 #include <QSqlDatabase>
 #include <QCheckBox>
+#include <QPushButton>
 
 enum class Sizes {
     MainWindowWidth = 1366,
@@ -63,6 +64,8 @@ struct Tournament {
 void createPlayersTable(QStandardItemModel *model, QTableView *tableView,
                         QSqlDatabase *db, QVector<Player> &all_players,
                         QDialog *dialog);
+
+void fontAdapter(QPushButton *btn);
 
 
 #endif // UTILS_H

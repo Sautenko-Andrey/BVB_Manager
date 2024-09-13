@@ -32,7 +32,8 @@ public:
 private slots:
 
     void click_game(QPushButton *team_1, QPushButton *team_2,
-                    QPushButton *winner_basket, QPushButton *loser_basket);
+                    QPushButton *winner_basket, QPushButton *loser_basket,
+                    QPushButton *game_result_btn);
 
 private:
     Ui::TourDraw *ui;
@@ -57,14 +58,15 @@ private:
 
     QList<QPushButton *> final_silver_bronze_buttons;
 
-    std::unique_ptr<GameResult> game_result{nullptr};
+    QList<QPushButton *> game_result_buttons;
 
-    void fontAdapter(QPushButton *btn);
+    std::unique_ptr<GameResult> game_result{nullptr};
 
     QPushButton *loser_btn{nullptr};
 
-    void drawGameResultBtn(const int x, const int y);
-    void drawTeamBtn(const int x, const int y);
+    QPushButton* drawGameResultBtn(const int x, const int y);
+    QPushButton* drawTeamBtn(const int x, const int y,
+                             const QString &team_name, bool is_disabled = false);
 };
 
 #endif // TOURDRAW_H
