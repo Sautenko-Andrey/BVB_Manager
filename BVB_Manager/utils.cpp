@@ -10,6 +10,31 @@ const QStringList training_types{
     "Warm up", "Gym", "Cardio", "Tactical-technical"
 };
 
+const QString game_result_style = "QPushButton {"
+                                  "    background-color: #2e2e2e;"   // Dark grey color
+                                  "    color: white;"                // text for contrast
+                                  "    padding: 15px 5px;"          // Add padding to the button
+                                  "    border: 2px solid #1a1a1a;"   // Slightly darker grey border
+                                  "    border-radius: 8px;"          // Rounded corners
+                                  "    font-size: 16px;"             // Font size
+                                  "    font-weight: bold;"           // Bold text
+                                  "    text-align: center;"          // Center the text
+                                  "}";
+
+const QString team_btn_style = "QPushButton {"
+                               "background-color: DarkSlateGray;" // Normal background color
+                               "color: Aqua;"
+                               "border-radius: 10px;"
+                               "padding: 20px 5px;"
+                               "}"
+                               "QPushButton:hover {"
+                               "background-color: black;" // Background color when hovered
+                               "color: DeepPink;"
+                               "}"
+                               "QPushButton:pressed {"
+                               "background-color: #1abc9c;"  // Background color when pressed
+                               "}";
+
 
 void createPlayersTable(QStandardItemModel *model, QTableView *tableView,
                         QSqlDatabase *db, QVector<Player> &all_players,

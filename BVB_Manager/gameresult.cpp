@@ -20,6 +20,26 @@ GameResult::GameResult(QPushButton *team_1,
 {
     ui->setupUi(this);
 
+    ui->okButton->setStyleSheet("QPushButton {"
+            "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, "
+            "    stop:0 rgba(50, 50, 50, 255), stop:1 rgba(10, 10, 10, 255));"
+            "    border: 2px solid #555;"
+            "    border-radius: 10px;"
+            "    color: Aqua;"
+            "    padding: 5px 10px;"
+            "    font-size: 16px;"
+            "}"
+            "QPushButton:hover {"
+            "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, "
+            "    stop:0 rgba(70, 70, 70, 255), stop:1 rgba(20, 20, 20, 255));"
+            "}"
+            "QPushButton:pressed {"
+            "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, "
+            "    stop:0 rgba(30, 30, 30, 255), stop:1 rgba(5, 5, 5, 255));"
+            "}");
+
+    this->setStyleSheet("background-color: DarkSlateGray; color : Aqua");
+
     setWindowTitle(team_1->text() + " vs " + team_2->text());
 
     ui->teamLabel_1->setText(team_1->text());
@@ -86,6 +106,16 @@ void GameResult::on_okButton_clicked()
     game_result->setText(QString::number(first_team_score) +
                          " : " +
                          QString::number(second_team_score));
+    game_result->setStyleSheet("QPushButton {"
+                               "    background-color: #2e2e2e;"   // Dark grey color
+                               "    color: DeepPink;"                // text for contrast
+                               "    padding: 15px 5px;"          // Add padding to the button
+                               "    border: 2px solid #1a1a1a;"   // Slightly darker grey border
+                               "    border-radius: 8px;"          // Rounded corners
+                               "    font-size: 16px;"             // Font size
+                               "    font-weight: bold;"           // Bold text
+                               "    text-align: center;"          // Center the text
+                               "}");
 
     QDialog::accept();
 }

@@ -4,7 +4,6 @@
 #include <QPainter>
 #include <QTextDocument>
 #include <QLine>
-//#include <QList>
 #include <QVector>
 #include <QMessageBox>
 #include <QStringList>
@@ -30,6 +29,9 @@ TourDraw::TourDraw(QSqlDatabase &database,
     , ui(new Ui::TourDraw)
 {
     ui->setupUi(this);
+
+    // change dialog's background color
+    this->setStyleSheet("background-color: azure;");
 
     // pointer on database
     db = &database;
@@ -436,18 +438,11 @@ void TourDraw::paintEvent(QPaintEvent *event)
 
     // drawing a tournament title
     painter.setFont(QFont("Times", 15));
-    painter.drawText(QPoint(400, 20), tournament.tour_title +
-                                      " ( " +
-                                      tournament.date_begin +
-                                      " - " +
-                                      tournament.date_end +
-                                      ") MAIN DRAW ( " +
-                                      tournament.tour_gender_type +
-                                      " )");
 
     // final text
     painter.setFont(QFont("Times", 12));
     painter.drawText(QPoint(505, 340), "Final match");
+
     // bronze medal text
     painter.drawText(QPoint(505, 615), "3rd place match");
 
@@ -608,6 +603,7 @@ QPushButton* TourDraw::drawGameResultBtn(const int x, const int y){
                                    static_cast<int>(Geometry::BtnResHeight)));
     game_result_btn->setText("0 : 0");
     game_result_btn->setDisabled(true);
+    game_result_btn->setStyleSheet(game_result_style);
 
     return game_result_btn;
 }
@@ -625,6 +621,8 @@ QPushButton* TourDraw::drawTeamBtn(const int x, const int y,
     team_btn->setText(team_name);
 
     team_btn->setDisabled(is_disabled);
+
+    team_btn->setStyleSheet(team_btn_style);
 
     // change button's font if necessary
     fontAdapter(team_btn);

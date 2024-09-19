@@ -28,6 +28,10 @@ extern const QStringList training_types;
 
 extern const QString BACKGROUND_COLOR;
 
+extern const QString game_result_style;
+
+extern const QString team_btn_style;
+
 struct Player {
     int id;
     QString first_name;
