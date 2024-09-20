@@ -22,7 +22,27 @@ BVB_Manager::BVB_Manager(QWidget *parent)
     ui->calendarWidget->setGridVisible(true);
     ui->calendarWidget->setVerticalHeaderFormat(QCalendarWidget::NoVerticalHeader);
     ui->calendarWidget->setFirstDayOfWeek(Qt::Monday);
+    ui->calendarWidget->setStyleSheet(calendar_style);
+
+    // Language combobox settings
     ui->langComboBox->addItems({"eng", "rus", "ukr", "swe", "chi"});
+    ui->langComboBox->setStyleSheet(combobox_style);
+
+    // Grid checkbox settings
+    ui->gridCheckBox->setStyleSheet(checkbox_style);
+
+    // Weeks checkbox settings
+    ui->weekNumsCheckBox->setStyleSheet(checkbox_style);
+
+    // LCD number settings
+    ui->lcdNumber->setStyleSheet(lcd_number_style);
+
+    // Training time settings
+    ui->trainingTime->setStyleSheet(time_edit_style);
+
+    // list widgets style
+    //ui->playersListWidget->setStyleSheet(list_widget_style_2);
+    //ui->exercisesListWidget->setStyleSheet(list_widget_style);
 
     // Getting today's date
     current_date = "Date: " + ui->calendarWidget->selectedDate().toString("dd.MM.yyyy");
@@ -85,6 +105,10 @@ BVB_Manager::BVB_Manager(QWidget *parent)
             );
         }
     }
+
+    // list widgets style
+    ui->playersListWidget->setStyleSheet(list_widget_style);
+    ui->exercisesListWidget->setStyleSheet(list_widget_style);
 
     // make both players genders checked
     ui->menCheckBox->setChecked(true);

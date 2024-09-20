@@ -24,13 +24,37 @@ enum class TrainingTypeIndexes {
     Warm_up, Gym, Cardio, Tactical_technical
 };
 
+// Styles-----------------------------------
 extern const QStringList training_types;
 
 extern const QString BACKGROUND_COLOR;
 
 extern const QString game_result_style;
 
+extern const QString game_result_style_2;
+
+extern const QString game_result_spinbox_style;
+
 extern const QString team_btn_style;
+
+extern const QString ok_button_style;
+
+extern const QString team_label_style;
+
+extern const QString calendar_style;
+
+extern const QString combobox_style;
+
+extern const QString checkbox_style;
+
+extern const QString lcd_number_style;
+
+extern const QString time_edit_style;
+
+extern const QString list_widget_style;
+
+
+//----------------------------------------
 
 struct Player {
     int id;
