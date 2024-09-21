@@ -24,25 +24,62 @@ BVB_Manager::BVB_Manager(QWidget *parent)
     ui->calendarWidget->setFirstDayOfWeek(Qt::Monday);
     ui->calendarWidget->setStyleSheet(calendar_style);
 
-    // Language combobox settings
+    // Language combobox style settings
     ui->langComboBox->addItems({"eng", "rus", "ukr", "swe", "chi"});
     ui->langComboBox->setStyleSheet(combobox_style);
 
-    // Grid checkbox settings
+    // Grid checkbox style settings
     ui->gridCheckBox->setStyleSheet(checkbox_style);
 
-    // Weeks checkbox settings
+    // Weeks checkbox style settings
     ui->weekNumsCheckBox->setStyleSheet(checkbox_style);
 
-    // LCD number settings
+    // LCD number style settings
     ui->lcdNumber->setStyleSheet(lcd_number_style);
 
-    // Training time settings
+    // Training time style settings
     ui->trainingTime->setStyleSheet(time_edit_style);
 
-    // list widgets style
-    //ui->playersListWidget->setStyleSheet(list_widget_style_2);
-    //ui->exercisesListWidget->setStyleSheet(list_widget_style);
+    // Players checkbox style settings
+    ui->menCheckBox->setStyleSheet(checkbox_style);
+    ui->womenCheckBox->setStyleSheet(checkbox_style);
+
+    // Exercises checkbox settings
+    ui->warmUpCheckBox->setStyleSheet(checkbox_style);
+    ui->gymCheckBox->setStyleSheet(checkbox_style);
+    ui->tacticalCheckBox->setStyleSheet(checkbox_style);
+    ui->cardioCheckBox->setStyleSheet(checkbox_style);
+
+    // Push buttons style settings
+    ui->removeAllPlayersButton->setStyleSheet(pushbtn_style);
+    ui->addAllPlayersButton->setStyleSheet(pushbtn_style);
+    ui->removeAllExercisesButton->setStyleSheet(pushbtn_style);
+    ui->resetCurrentSettingButton->setStyleSheet(pushbtn_style);
+    ui->addToscheduleButton->setStyleSheet(pushbtn_style);
+    ui->eraseButton->setStyleSheet(pushbtn_style);
+    ui->redoButton->setStyleSheet(pushbtn_style);
+    ui->undoButton->setStyleSheet(pushbtn_style);
+
+    // Scroll area style settings
+    ui->scrollArea->setStyleSheet(scroll_area_style);
+
+    // Edit area labels style settings
+    ui->dateSelectedLabel->setStyleSheet(label_style_hover);
+    ui->timeSelectedLabel->setStyleSheet(label_style_hover);
+    ui->playerPlayersLabel->setStyleSheet(label_style_hover);
+    ui->playerNameLabel->setStyleSheet(label_style_hover);
+    ui->exrciseExercisesLabel->setStyleSheet(label_style_hover);
+    ui->exerciseLabel->setStyleSheet(label_style_hover);
+
+    // Install event filter on the QLabel
+    ui->dateSelectedLabel->installEventFilter(this);
+    ui->timeSelectedLabel->installEventFilter(this);
+    ui->playerNameLabel->installEventFilter(this);
+    ui->exerciseLabel->installEventFilter(this);
+
+    // Notes text edit style settings
+    ui->NotesTextEdit->setStyleSheet(text_edit_style);
+
 
     // Getting today's date
     current_date = "Date: " + ui->calendarWidget->selectedDate().toString("dd.MM.yyyy");
@@ -58,8 +95,8 @@ BVB_Manager::BVB_Manager(QWidget *parent)
     updateTime();
 
     // fill players list widget
-    ui->playersListWidget->setStyleSheet(
-        "QListWidget::item{border-bottom: 1px solid grey;}");
+    // ui->playersListWidget->setStyleSheet(
+    //     "QListWidget::item{border-bottom: 1px solid grey;}");
 
     QSqlQuery players_query(database_manager.getDatabase());
 
@@ -279,15 +316,24 @@ void BVB_Manager::selectedTimeChanged(){
     updateTime();
 }
 
-void BVB_Manager::markItem(QListWidgetItem *item,
-                           const QBrush &color, const QFont &font){
+void BVB_Manager::markItem(QListWidgetItem *item,const QBrush &color, bool is_bold){
+
+    QFont item_font;
 
     item->setForeground(color);
-    item->setFont(font);
+
+    // when marking item we apply this
+    if (is_bold){
+        item_font.setBold(true);
+        item_font.setItalic(true);
+        item_font.setPointSize(12);
+    }
+
+    item->setFont(item_font);
+
 }
 
-// void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QSet<QString> &container,
-//                                  QString &text, QLabel *label){
+
 void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QStringList &container,
                                  QString &text, QLabel *label){
 
@@ -303,9 +349,9 @@ void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QStringList &containe
         }
 
         // when double clicked change current row text color to black
-        markItem(list_widget->currentItem(),Qt::black, QFont("Ubuntu", 11));
+        markItem(list_widget->currentItem(), Qt::black, false);
+
         // remove the item from the container
-        //container.remove(current_item);
         container.removeAll(current_item);
     }
     // mark
@@ -336,7 +382,7 @@ void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QStringList &containe
         }
 
         // when double clicked change current row text color to red
-        markItem(list_widget->currentItem(), Qt::red, QFont("Ubuntu", 11));
+        markItem(list_widget->currentItem(), Qt::red);
         // add marked item to the container
         //container.insert(current_item);
         container.append(current_item);
@@ -499,8 +545,6 @@ void BVB_Manager::on_actionSearch_a_player_triggered()
 }
 
 
-// void BVB_Manager::removeListWidgetItems(QLabel *label, QListWidget *widget,
-//                                         QSet<QString> &container){
 void BVB_Manager::removeListWidgetItems(QLabel *label, QListWidget *widget,
                                         QStringList &container){
     // clear label
@@ -516,7 +560,7 @@ void BVB_Manager::removeListWidgetItems(QLabel *label, QListWidget *widget,
             widget->item(i)->setText(correct_name);
         }
         markItem(widget->item(i),
-                 Qt::black, QFont("Ubuntu", 11));
+                 Qt::black, false);
     }
 
     // clear container
@@ -544,7 +588,7 @@ void BVB_Manager::on_addAllPlayersButton_clicked()
 
         // make each player marked
         markItem(ui->playersListWidget->item(i),
-                 Qt::red, QFont("Ubuntu", 11));
+                 Qt::red);
 
         //add player to the marked_players container
         //marked_players.insert(ui->playersListWidget->item(i)->text());
@@ -911,4 +955,3 @@ void BVB_Manager::on_actionCreate_a_tournament_triggered()
 //     tour_draw->setWindowTitle("Tournament draw");
 //     tour_draw->show();
 // }
-

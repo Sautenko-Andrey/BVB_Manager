@@ -53,6 +53,16 @@ extern const QString time_edit_style;
 
 extern const QString list_widget_style;
 
+extern const QString pushbtn_style;
+
+extern const QString scroll_area_style;
+
+extern const QString label_style;
+
+extern const QString label_style_hover;
+
+extern const QString text_edit_style;
+
 
 //----------------------------------------
 

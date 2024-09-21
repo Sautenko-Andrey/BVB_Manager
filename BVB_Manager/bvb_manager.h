@@ -20,7 +20,7 @@
 #include "addtournament.h"
 #include "tournamentcreator.h"
 #include "tourdraw.h"
-
+#include <QEvent>
 
 
 
@@ -160,7 +160,7 @@ private:
 
     void updateTime();
 
-    void markItem(QListWidgetItem *item, const QBrush &color, const QFont &font);
+    void markItem(QListWidgetItem *item, const QBrush &color, bool is_bold = true);
 
     void markUnmarkItem(QListWidget *list_widget, QStringList &container,
                         QString &text, QLabel *label);
@@ -177,5 +177,27 @@ private:
     void clearEditor();
 
     int getTrainings(const QDate &date);
+
+    // Event filter to catch hover events
+    bool eventFilter(QObject *obj, QEvent *event) override {
+        QLabel *label = qobject_cast<QLabel*>(obj);  // Cast the object to QLabel
+        if (label) {
+            if (event->type() == QEvent::Enter) {
+                // Mouse hover event
+                QFont font = label->font();
+                font.setPointSize(12);  // Increase font size
+                label->setFont(font);
+                label->setStyleSheet("background-color: #a0a0ff; color: black; font-weight: bold; padding: 10px; border-radius: 5px;");
+            } else if (event->type() == QEvent::Leave) {
+                // Mouse leave event
+                QFont font = label->font();
+                font.setPointSize(11);  // Reset font size
+                label->setFont(font);
+                label->setStyleSheet("background-color: AntiqueWhite; color: black; padding: 10px; border-radius: 5px;");
+            }
+        }
+        // Pass the event on to the base class
+        return QWidget::eventFilter(obj, event);
+    }
 };
 #endif // BVB_MANAGER_H

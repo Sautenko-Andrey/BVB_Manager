@@ -9,7 +9,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     BVB_Manager manager;
     manager.setWindowTitle("BVB Manager");
-    manager.setStyleSheet(BACKGROUND_COLOR);
+    //manager.setStyleSheet(BACKGROUND_COLOR);
+    manager.setStyleSheet("background-color: #2c3e50; color : white");
     manager.setAutoFillBackground( true );
     manager.setGeometry(QRect(0, 0,
                               static_cast<int>(Sizes::MainWindowWidth),

@@ -234,7 +234,7 @@ const QString combobox_style =
                               "background-color: #2e3440;"
                               "}";
 
-const QString checkbox_style = "QCheckBox { color: Aqua; }";
+const QString checkbox_style = "QCheckBox { color: white; }";
 
 const QString lcd_number_style = "QLCDNumber {"
                 "background-color: #2e3440;"    // Background of the LCD number
@@ -263,7 +263,7 @@ const QString time_edit_style = "QTimeEdit {"
 
 const QString list_widget_style = "QListWidget {"
                                   "background-color: #2e3440;"
-                                  "border: 1px solid #b0b0b0;"
+                                  "border: 2px solid Aqua;"
                                   "border-radius: 10px;"
                                   "padding: 5px;"
                                   "}"
@@ -271,8 +271,9 @@ const QString list_widget_style = "QListWidget {"
                                   "QListWidget::item {"
                                   "padding: 10px;"
                                   "margin: 5px;"
-                                  "background-color: Aqua;"
+                                  "background-color: AntiqueWhite;"
                                   "border-radius: 5px;"
+                                  "color: black;"
                                   "}"
                                   "QListWidget::item:hover {"
                                   "background-color: #a0a0ff;"
@@ -280,7 +281,6 @@ const QString list_widget_style = "QListWidget {"
                                   "QListWidget::item:selected {"
                                   "background-color: DeepPink;"
                                   "color: black;"
-                                  "font-weight: bold;"
                                   "}"
 
                                   "QScrollBar:vertical {"
@@ -298,5 +298,71 @@ const QString list_widget_style = "QListWidget {"
                                   "QScrollBar::handle:horizontal {"
                                   "background: #888;"
                                   "}";
+
+const QString pushbtn_style = "QPushButton {"
+                                 "background-color: transparent;"            // Transparent background
+                                 "color: Aqua;"                           // Text color
+                                 "font-weight: bold;"
+                                 "border: 3px solid Aqua;"                // Border with custom color
+                                 "border-radius: 5px;"                       // Rounded corners
+                                 "padding: 10px 10px;"                       // Padding
+                                 "font-size: 14px;"
+                                 "}"
+
+                                 "QPushButton:hover {"
+                                 "background-color: DeepPink;"                // Background fills on hover
+                                 "color: white;"                             // Text turns white on hover
+                                 "}"
+
+                                 "QPushButton:pressed {"
+                                 "color: Aqua;"
+                                 "background-color: black;"                // Darker background when pressed
+                                 "}";
+
+const QString scroll_area_style = "QScrollArea {"
+                                  "    background-color: Aqua;"        // Light background color
+                                  "    border: 1px solid #bdc3c7;"        // Border around the scroll area
+                                  "    border-radius: 10px;"              // Rounded corners for the scroll area
+                                  "    padding: 10px;"                    // Padding inside the scroll area
+                                  "}"
+
+                                  "QScrollBar:vertical {"
+                                  "    border: none;"
+                                  "    background-color: #e0e0e0;"        // Scrollbar background color
+                                  "    width: 12px;"
+                                  "    margin: 0px;"
+                                  "    border-radius: 6px;"               // Rounded scrollbar for a modern look
+                                  "}"
+
+                                  "QScrollBar::handle:vertical {"
+                                  "    background-color: #888;"        // Handle color
+                                  "    border-radius: 6px;"
+                                  "    min-height: 20px;"                 // Minimum height for the handle
+                                  "}";
+
+const QString label_style = "QLabel {"
+                            "    background-color: #ecf0f1;"      // Light gray background
+                            "    color: #2c3e50;"                 // Dark gray text color
+                            "    border: 2px solid #3498db;"      // Blue border
+                            "    border-radius: 10px;"            // Rounded corners
+                            "    padding: 10px;"                  // Padding for a clean look
+                            "    font-size: 14px;"                // Text size
+                            "}";
+
+const QString label_style_hover = "QLabel {"
+                                  "    background-color: AntiqueWhite;"         // Initial background color
+                                  "    color: black;"                      // Text color
+                                  "    padding: 10px;"
+                                  "    border-radius: 5px;"                // Rounded corners
+                                  "}";
+
+const QString text_edit_style = "QTextEdit {"
+                                "    background-color: #2c3e50;"       // Dark background
+                                "    color: #ecf0f1;"                  // Light text color
+                                "    border: 2px solid Aqua;"       // Neon blue border
+                                "    padding: 10px;"                   // Padding inside the text edit
+                                "    font-size: 16px;"                 // Font size
+                                "    font-family: 'Courier New';"      // Custom font
+                                "}";
 
 //------------------------------------------------------------------------------------
