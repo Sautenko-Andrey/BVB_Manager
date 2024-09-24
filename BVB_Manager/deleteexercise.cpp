@@ -21,7 +21,7 @@ DeleteExercise::DeleteExercise(QSqlDatabase &database, QWidget *parent)
     ui->listWidget->setMaximumWidth(static_cast<int>(Sizes::DeleteExerciseWindowMaxWidth));
 
     ui->listWidget->setStyleSheet(
-        "QListWidget::item{border-bottom: 2px solid green;}"
+        "QListWidget::item{border-bottom: 1px solid Aqua;}"
     );
 
     // get data from the database

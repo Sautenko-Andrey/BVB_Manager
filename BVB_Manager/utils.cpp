@@ -80,9 +80,9 @@ void createPlayersTable(QStandardItemModel *model, QTableView *tableView,
 
 void fontAdapter(QPushButton *btn){
 
-    constexpr int max_symbols_amount = 24;
+    //constexpr int max_symbols_amount = 24;
 
-    if(btn->text().size() >= max_symbols_amount){
+    if(constexpr int max_symbols_amount = 24; btn->text().size() >= max_symbols_amount){
         btn->setFont(QFont("Ubuntu", 6));
     }
     else if(btn->text().size() > max_symbols_amount / 2 + 1 &&
@@ -90,6 +90,26 @@ void fontAdapter(QPushButton *btn){
         btn->setFont(QFont("Ubuntu", 9));
     }
 }
+
+void changeTableItemStyle(QTableWidget *table, const QColor color,
+                          bool is_bold){
+
+    // make  aqua color and bold text of horizontal headers
+    for(int i{0}; i < table->columnCount(); ++i){
+        // auto header_item = table->horizontalHeaderItem(i);
+        if(auto header_item = table->horizontalHeaderItem(i); header_item){
+            // change color
+            header_item->setForeground(color);
+            // make text bold
+            if(is_bold){
+                auto font = header_item->font();
+                font.setBold(true);
+                header_item->setFont(font);
+            }
+        }
+    }
+}
+
 
 
 // Styles----------------------------------------------------------------------------

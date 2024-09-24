@@ -13,6 +13,7 @@
 #include "utils.h"
 #include "doubleeliminationtournament.h"
 #include "tourdraw.h"
+#include <QCloseEvent>
 
 namespace Ui {
 class TournamentCreator;
@@ -49,6 +50,8 @@ private slots:
 
     void on_unselectAllTeamsButton_clicked();
 
+    void selectedTeamsChanged();
+
 private:
     Ui::TournamentCreator *ui;
 
@@ -56,7 +59,7 @@ private:
 
     std::unique_ptr<Calendar> calendar{nullptr};
 
-    const QStringList tour_net_types{"16", "32", "64"};
+    const QStringList tour_net_types{"16", "24", "32"};
 
     const QStringList tour_gender_types{"men", "women", "mix"};
 
@@ -79,6 +82,7 @@ private:
     //std::unique_ptr<DoubleEliminationTournament> tour_draw{nullptr};
 
     std::unique_ptr<TourDraw> tour_draw{nullptr};
+
 };
 
 #endif // TOURNAMENTCREATOR_H

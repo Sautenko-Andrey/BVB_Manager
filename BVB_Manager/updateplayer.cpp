@@ -19,6 +19,9 @@ UpdatePlayer::UpdatePlayer(QSqlDatabase &database, QWidget *parent)
     ui->tableWidget->setColumnCount(header_labels.size());
     ui->tableWidget->setHorizontalHeaderLabels(header_labels);
 
+    // make  aqua color and bold text of horizontal headers
+    changeTableItemStyle(ui->tableWidget, QColor("aqua"), true);
+
     // getting players data from the database
     QSqlQuery query(database);
 
@@ -88,7 +91,7 @@ UpdatePlayer::~UpdatePlayer()
 void UpdatePlayer::picClicked(){
     // when user double clicks on image column
     if(ui->tableWidget->currentColumn() == static_cast<int>(Headers::Image)){
-        //qDebug() << "Clicked image cell!";
+
         const QString player_image_path = QFileDialog::getOpenFileName(this,
                                                            "Select an image");
         if(!image.load(player_image_path)){
@@ -155,7 +158,6 @@ void UpdatePlayer::picClicked(){
 
 void UpdatePlayer::saveID(){
     player_id = ui->tableWidget->item(ui->tableWidget->currentRow(), 0)->text();
-    //qDebug() << "Player's ID: " << player_id;
 }
 
 void UpdatePlayer::changeCell(){

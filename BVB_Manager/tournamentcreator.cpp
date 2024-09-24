@@ -4,7 +4,8 @@
 #include <QSqlQuery>
 #include <QMessageBox>
 #include <QCheckBox>
-// #include <QBoxLayout>
+#include <algorithm>
+
 
 TournamentCreator::TournamentCreator(QSqlDatabase *database, QWidget *parent)
     : QDialog(parent)
@@ -12,6 +13,9 @@ TournamentCreator::TournamentCreator(QSqlDatabase *database, QWidget *parent)
     , ui(new Ui::TournamentCreator)
 {
     ui->setupUi(this);
+
+    // make save button disabled till user select at least 8 teams
+    ui->addButton->setDisabled(true);
 
     // make default starting and finishing date (current)
     ui->beginDate->setDate(QDate::currentDate());
@@ -114,6 +118,12 @@ TournamentCreator::TournamentCreator(QSqlDatabase *database, QWidget *parent)
     // search player by name signals and slots
     connect(ui->searchByNameLine, SIGNAL(textEdited(QString)),
             this, SLOT(searchPlayer()));
+
+    // for selected teams counter
+    for(auto team : teams){
+        connect(team, &QCheckBox::toggled,
+                this, &TournamentCreator::selectedTeamsChanged);
+    }
 }
 
 TournamentCreator::~TournamentCreator()
@@ -151,47 +161,32 @@ void TournamentCreator::tourTypeChanged(){
 }
 
 void TournamentCreator::netModeChanged(){
+
     selected_tour_net_type = ui->netComboBox->currentText();
+
+    // change teams counter value
+    ui->teamsCounterLabel->setText("Selected teams total: 0 / " + selected_tour_net_type);
+
+    // drop all previous actions  ??? HERE IS A BUG!!!!FIX IT!
+    std::for_each(teams.begin(), teams.end(), [](QCheckBox *box){
+        box->setChecked(false);
+    });
 }
 
 void TournamentCreator::on_addButton_clicked()
 {
     // add teams to the tournament
-    int counter{0};  // selected teams counter
-
     // save selected teams
     for(auto team : teams){
         if(team->isChecked()){
             selected_teams.push_back(team);
-            ++counter;
         }
     }
 
-    while(selected_teams.size() != 64){
+    while(selected_teams.size() != 32){
         QCheckBox * empty_team = new QCheckBox("None, None, None", this);
         selected_teams.push_back(empty_team);
     }
-
-    // check teams counter
-    // more then 16 teams selected
-    if(counter > selected_tour_net_type.toInt()){
-        QMessageBox::warning(this, "Player amount problem",
-                             "You added to much teams. Net for " +
-                             selected_tour_net_type +
-                             " , but you selected " +
-                             QString::number(teams.size()) + " teams.");
-        return;
-    }
-
-    // less then 8 teams selected
-    if(counter < selected_tour_net_type.toInt() / 2){
-        QMessageBox::warning(this, "Player amount problem",
-                             "You added less the 8 teams. Net for " +
-                                 selected_tour_net_type +
-                                 " must include 8 teams as minimum.");
-        return;
-    }
-
 
     completed_tournament.date_begin = ui->beginDate->text();
     completed_tournament.date_end = ui->endDate->text();
@@ -224,6 +219,14 @@ void TournamentCreator::on_addButton_clicked()
                               " ) ");
 
     tour_draw->show();
+
+    // make all child widget disabled for security purpose
+    QList<QWidget*> sub_widgets = this->findChildren<QWidget *>();
+
+    std::for_each(sub_widgets.begin(), sub_widgets.end(), [](QWidget *widget){
+        widget->setDisabled(true);
+    });
+
 }
 
 void TournamentCreator::tourChanged(){
@@ -359,5 +362,42 @@ void TournamentCreator::on_unselectAllTeamsButton_clicked()
             team->setChecked(false);
             team->setFont(QFont("Ubuntu", 11, QFont::Normal));
         }
+    }
+}
+
+void TournamentCreator::selectedTeamsChanged(){
+
+    auto total = std::count_if(teams.cbegin(), teams.cend(), [](QCheckBox *box){
+        return box->isChecked();
+    });
+
+    ui->teamsCounterLabel->setText(
+        "Selected teams total: " +
+        QString::number(total) + " / " +
+        selected_tour_net_type
+    );
+
+    // check teams amount limits
+
+    if(constexpr int min_teams_amount{8}; total == min_teams_amount){
+        // make save button available when user selected 8 teams (minimum)
+        ui->addButton->setDisabled(false);
+    }
+    // when user achieves teams amount limit make all unchecked checkboxes disabled
+    else if(total >= selected_tour_net_type.toInt()){
+        std::for_each(teams.begin(), teams.end(), [](QCheckBox *box){
+            if(!box->isChecked()){
+                box->setDisabled(true);
+            }
+
+        });
+    }
+    else{
+        // if user is in range and doesn't cross limits
+        // he is allowed to add teams
+        std::for_each(teams.begin(), teams.end(), [](QCheckBox *box){
+            if(!box->isEnabled())
+            box->setEnabled(true);
+        });
     }
 }

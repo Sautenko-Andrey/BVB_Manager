@@ -26,6 +26,7 @@ TourDraw::TourDraw(QSqlDatabase &database,
     : QDialog(parent)
     , draw_type{net_type}
     , tournament{completed_tournament}
+    , parent_dialog{parent}
     , ui(new Ui::TourDraw)
 {
     ui->setupUi(this);
@@ -41,20 +42,18 @@ TourDraw::TourDraw(QSqlDatabase &database,
     loser_btn->hide();
 
     // initialize all W buttons with nullptr
-    constexpr int total_w_buttons{28};
-    for(int i{0}; i < total_w_buttons; ++i){
+    for(int i{0}, total_w_buttons{28}; i < total_w_buttons; ++i){
         W_buttons.append(nullptr);
     }
 
     // initialize all game result buttons
-    constexpr int total_game_res_btns = 30;
-    for(int i{0}; i < total_game_res_btns; ++i){
+    for(int i{0}, total_game_res_btns = 30; i < total_game_res_btns; ++i){
         game_result_buttons.append(nullptr);
     }
 
     // drawing a tournament schema
     // 16 teams buttons (1st column) on the left side
-    QList<int> rank_baskets{
+    const QList<int> rank_baskets{
         0, 15, 8, 7, 4, 11, 12, 3, 2, 13, 10, 5, 6, 9, 14, 1
     };
     for(int i{0}, y{static_cast<int>(Geometry::coordYStartBtn)};
@@ -438,6 +437,10 @@ void TourDraw::paintEvent(QPaintEvent *event)
 
     // drawing a tournament title
     painter.setFont(QFont("Times", 15));
+
+    // make text and lines black color
+    // color is #2e3440
+    painter.setPen(QColor(46, 52, 64));
 
     // final text
     painter.setFont(QFont("Times", 12));

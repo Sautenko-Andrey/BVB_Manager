@@ -15,8 +15,6 @@ AddTournament::AddTournament(QSqlDatabase *database, QWidget *parent)
 
     // fill ganders mode
     ui->genderComboBox->addItems(genders);
-
-
 }
 
 AddTournament::~AddTournament()

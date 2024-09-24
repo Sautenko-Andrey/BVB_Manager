@@ -8,6 +8,8 @@
 #include <memory>
 #include "utils.h"
 #include "gameresult.h"
+#include <QMessageBox>
+#include <QCloseEvent>
 
 
 namespace Ui {
@@ -64,9 +66,19 @@ private:
 
     QPushButton *loser_btn{nullptr};
 
+    QWidget *parent_dialog{nullptr};
+
     QPushButton* drawGameResultBtn(const int x, const int y);
     QPushButton* drawTeamBtn(const int x, const int y,
                              const QString &team_name, bool is_disabled = false);
+
+    // Overriding method closeEvent for actions before closing a dialog window
+    void closeEvent(QCloseEvent *event) override {
+
+        // close parent and sub widgets
+        parent_dialog->close();
+        event->accept();
+    }
 };
 
 #endif // TOURDRAW_H

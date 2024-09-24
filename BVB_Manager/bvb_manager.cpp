@@ -95,9 +95,6 @@ BVB_Manager::BVB_Manager(QWidget *parent)
     updateTime();
 
     // fill players list widget
-    // ui->playersListWidget->setStyleSheet(
-    //     "QListWidget::item{border-bottom: 1px solid grey;}");
-
     QSqlQuery players_query(database_manager.getDatabase());
 
     if(!players_query.exec("SELECT id, first_name, last_name, hometown"
@@ -420,6 +417,7 @@ void BVB_Manager::on_actionAdd_a_new_player_triggered()
                                              this, true, "", "", ui->playersListWidget);
 
     add_player->setWindowTitle("New player");
+    add_player->setFixedSize(685, 342);
     add_player->show();
 }
 
@@ -863,9 +861,6 @@ int BVB_Manager::getTrainings(const QDate &date) {
 
 
 void BVB_Manager::dateClicked(){
-
-    // ui->trainings_count_label->setText("trainings: "
-    //         + QString::number(getTrainings(ui->calendarWidget->selectedDate())));
 
     ui->lcdNumber->display(getTrainings(ui->calendarWidget->selectedDate()));
 }

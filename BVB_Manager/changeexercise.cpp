@@ -19,6 +19,9 @@ ChangeExercise::ChangeExercise(QSqlDatabase &database, QWidget *parent)
     ui->tableWidget->setColumnCount(header_labels.size());
     ui->tableWidget->setHorizontalHeaderLabels(header_labels);
 
+    // change color and make font-size bold
+    changeTableItemStyle(ui->tableWidget, QColor("aqua"), true);
+
     QSqlQuery query(database);
 
     if(!query.exec("SELECT "

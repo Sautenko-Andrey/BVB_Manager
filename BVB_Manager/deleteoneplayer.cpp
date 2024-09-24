@@ -23,14 +23,22 @@ DeleteOnePlayer::DeleteOnePlayer(QSqlDatabase &database, QWidget *parent)
     // allow table header occupy full line
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    model->setHorizontalHeaderItem(0, new QStandardItem(QString("ID")));
-    model->setHorizontalHeaderItem(1, new QStandardItem(QString("First name")));
-    model->setHorizontalHeaderItem(2, new QStandardItem(QString("Last name")));
-    model->setHorizontalHeaderItem(3, new QStandardItem(QString("Age")));
-    model->setHorizontalHeaderItem(4, new QStandardItem(QString("Gender")));
-    model->setHorizontalHeaderItem(5, new QStandardItem(QString("Height")));
-    model->setHorizontalHeaderItem(6, new QStandardItem(QString("Hometown")));
-    model->setHorizontalHeaderItem(7, new QStandardItem(QString("Phone")));
+    // Make headers for the table
+    const QStringList headers = {
+        "ID", "First name", "Last name", "Age", "Gender", "Height", "Hometown", "Phone"
+    };
+
+    for(int i{0}; i < headers.size(); ++i){
+        auto item = new QStandardItem(headers[i]);
+        item->setForeground(QBrush(QColor("aqua")));
+        // Get the current font
+        QFont font = item->font();
+        font.setBold(true);
+        item->setFont(font);
+
+        // add to the model
+        model->setHorizontalHeaderItem(i, item);
+    }
 
     ui->tableView->setModel(model);
 

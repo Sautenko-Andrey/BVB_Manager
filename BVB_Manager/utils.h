@@ -7,6 +7,7 @@
 #include <QSqlDatabase>
 #include <QCheckBox>
 #include <QPushButton>
+#include <QTableWidget>
 
 enum class Sizes {
     MainWindowWidth = 1366,
@@ -104,6 +105,9 @@ void createPlayersTable(QStandardItemModel *model, QTableView *tableView,
                         QDialog *dialog);
 
 void fontAdapter(QPushButton *btn);
+
+void changeTableItemStyle(QTableWidget *table, const QColor color,
+                          bool is_bold = false);
 
 
 #endif // UTILS_H
