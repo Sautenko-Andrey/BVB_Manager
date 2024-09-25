@@ -31,6 +31,13 @@ TourDraw::TourDraw(QSqlDatabase &database,
 {
     ui->setupUi(this);
 
+    // Tour for 24 and 32 teams are not available (temporary)
+    if(net_type == Net::TwentyFour || net_type == Net::ThirtyTwo){
+        QMessageBox::warning(this, "Warning",
+                             "Modes for 24 or 32 teams are not available at this moment.");
+        return;
+    }
+
     // change dialog's background color
     this->setStyleSheet("background-color: azure;");
 
@@ -241,6 +248,14 @@ TourDraw::TourDraw(QSqlDatabase &database,
         y += 50;
     }
 
+    // Operation buttons
+    // button for move forward to the next tour and skip "empty" games
+    QPushButton *forward_btn = new QPushButton(this);
+    forward_btn->setGeometry(QRect(500, 50, 100, 20));
+    forward_btn->setText("Forward >>");
+    forward_btn->setStyleSheet("background-color: red; color : black");
+
+
     // Signals & slots
 
     //W1
@@ -424,12 +439,75 @@ TourDraw::TourDraw(QSqlDatabase &database,
                 final_silver_bronze_buttons[0], final_silver_bronze_buttons[1],
                 game_result_buttons[28]);
     });
+
+    // connect(forward_btn, &QPushButton::clicked, this, [this](){
+    //     moveForward(first_round_team_btns[0], first_round_team_btns[1], W_buttons[0]);
+    // });
+
+    connect(forward_btn, &QPushButton::clicked, this, [this](){
+
+        //make a list of W1 - W8 buttons
+        QList<QPushButton *> W1_W8_btns = W_buttons.mid(0, 8);
+
+        // make a list of L1 - L7 buttons
+        QList<QPushButton *> L1_L8_btns = L1_L12_buttons.mid(0, 8);
+        moveTeams(first_round_team_btns, W1_W8_btns, L1_L8_btns);
+
+        // make a list W13,W14,W15,W16
+        //QList<QPushButton *> W13_W16_btns = W_buttons.mid(12, 4);
+        // QList<QPushButton *> W13_W16_btns;
+        // W13_W16_btns.append(W_buttons[12]);
+        // W13_W16_btns.append(W_buttons[13]);
+        // W13_W16_btns.append(W_buttons[14]);
+        // W13_W16_btns.append(W_buttons[15]);
+        // moveTeams(L1_L8_btns, W13_W16_btns, L1_L8_btns);   works bad!!!!! FIX!
+    });
 }
+
+
 
 TourDraw::~TourDraw()
 {
     delete ui;
 }
+
+
+void TourDraw::moveForward(QPushButton *teamA, QPushButton *teamB,
+                           QPushButton *win_btn, QPushButton *los_btn){
+
+    if(teamA->text() == "None, None, None"){
+        win_btn->setText(teamB->text());
+        los_btn->setText(teamA->text());
+    }
+    else if(teamB->text() == "None, None, None"){
+        win_btn->setText(teamA->text());
+        los_btn->setText(teamB->text());
+    }
+    else{
+        return;
+    }
+
+    fontAdapter(win_btn);
+    fontAdapter(los_btn);
+}
+
+
+void TourDraw::moveTeams(const QList<QPushButton *> &teams,
+                         const QList<QPushButton *> win_btns,
+                         const QList<QPushButton *> loosers_btns){
+
+    // if(teams.size() / 2 != win_btns.size() || win_btns.size() != loosers_btns.size()){
+    //     QMessageBox::warning(this, "Move teams forward issue",
+    //                          "Couldn't move teams forward. Amount is innapropriate.");
+    //     return;
+    // }
+
+    // use moveTeam()
+    for(int i{0}, j{0}; i < teams.size(); i += 2, ++j){
+        moveForward(teams[i], teams[i + 1], win_btns[j], loosers_btns[j]);
+    }
+}
+
 
 void TourDraw::paintEvent(QPaintEvent *event)
 {

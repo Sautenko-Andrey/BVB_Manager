@@ -13,7 +13,7 @@
 #include "utils.h"
 #include "doubleeliminationtournament.h"
 #include "tourdraw.h"
-#include <QCloseEvent>
+
 
 namespace Ui {
 class TournamentCreator;

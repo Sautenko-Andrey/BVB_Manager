@@ -16,7 +16,7 @@ namespace Ui {
 class TourDraw;
 }
 
-enum class Net{ Sixteen = 16, ThirtyTwo = 32, SixtyFour = 64 };
+enum class Net{ Sixteen = 16, TwentyFour = 24, ThirtyTwo = 32 };
 
 class TourDraw : public QDialog
 {
@@ -36,6 +36,11 @@ private slots:
     void click_game(QPushButton *team_1, QPushButton *team_2,
                     QPushButton *winner_basket, QPushButton *loser_basket,
                     QPushButton *game_result_btn);
+
+
+    void moveTeams(const QList<QPushButton *> &teams,
+                   const QList<QPushButton *> win_btns,
+                   const QList<QPushButton *> loosers_btns);
 
 private:
     Ui::TourDraw *ui;
@@ -79,6 +84,9 @@ private:
         parent_dialog->close();
         event->accept();
     }
+
+    void moveForward(QPushButton *teamA, QPushButton *teamB,
+                     QPushButton *win_btn, QPushButton *los_btn);
 };
 
 #endif // TOURDRAW_H

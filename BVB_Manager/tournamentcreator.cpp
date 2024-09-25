@@ -196,16 +196,19 @@ void TournamentCreator::on_addButton_clicked()
     completed_tournament.selected_teams = selected_teams;
 
     if(selected_tour_net_type.toInt() == static_cast<int>(Net::Sixteen)){
+
         tour_draw =
             std::make_unique<TourDraw>(*db, Net::Sixteen,
                                        completed_tournament, this);
     }
-    else if(selected_tour_net_type.toInt() == static_cast<int>(Net::ThirtyTwo)){
+    else if(selected_tour_net_type.toInt() == static_cast<int>(Net::TwentyFour)){
+
         tour_draw =
-            std::make_unique<TourDraw>(*db, Net::ThirtyTwo,
+            std::make_unique<TourDraw>(*db, Net::TwentyFour,
                                        completed_tournament, this);
     }
     else{
+
         tour_draw =
             std::make_unique<TourDraw>(*db, Net::ThirtyTwo,
                                        completed_tournament, this);
@@ -221,13 +224,22 @@ void TournamentCreator::on_addButton_clicked()
     tour_draw->show();
 
     // make all child widget disabled for security purpose
-    QList<QWidget*> sub_widgets = this->findChildren<QWidget *>();
+    // Get all child widgets of the parent
+    const QObjectList &children = this->children();
 
-    std::for_each(sub_widgets.begin(), sub_widgets.end(), [](QWidget *widget){
-        widget->setDisabled(true);
-    });
+    for (QObject *child : children)
+    {
+        // Convert QObject to QWidget to access widget-specific functions
+        QWidget *widget = qobject_cast<QWidget *>(child);
 
+        // Skip null objects and the exception widget (managed by shared_ptr)
+        if (widget && widget != tour_draw.get())
+        {
+            widget->setEnabled(false);  // Disable the widget
+        }
+    }
 }
+
 
 void TournamentCreator::tourChanged(){
     selected_tournament = ui->tourComboBox->currentText();
