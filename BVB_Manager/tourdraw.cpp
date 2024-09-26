@@ -7,6 +7,7 @@
 #include <QVector>
 #include <QMessageBox>
 #include <QStringList>
+#include <QPropertyAnimation>
 
 enum class Geometry{
     coordXStartBtn = 10,
@@ -58,6 +59,15 @@ TourDraw::TourDraw(QSqlDatabase &database,
         game_result_buttons.append(nullptr);
     }
 
+    // initialize loosers buttons
+    for(int i{0}; i < 4; ++i){
+        auto looser_btn = new QPushButton(this);
+        // dummy sizes
+        looser_btn->setGeometry(5000, 5000, 1, 1);
+        looser_btn->hide();
+        loosers.append(looser_btn);
+    }
+
     // drawing a tournament schema
     // 16 teams buttons (1st column) on the left side
     const QList<int> rank_baskets{
@@ -80,6 +90,15 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
         // add button to the list
         first_round_team_btns.push_back(btn);
+
+        // // make red color of buttons text where team name is None
+        // std::for_each(first_round_team_btns.begin(), first_round_team_btns.end(),
+        //               [](auto btn){
+
+        //     if(btn->text() == "None, None, None"){
+        //         btn->setStyleSheet("color : red");
+        //     }
+        // });
 
         y += static_cast<int>(Geometry::Step);
     }
@@ -250,10 +269,17 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
     // Operation buttons
     // button for move forward to the next tour and skip "empty" games
-    QPushButton *forward_btn = new QPushButton(this);
-    forward_btn->setGeometry(QRect(500, 50, 100, 20));
-    forward_btn->setText("Forward >>");
-    forward_btn->setStyleSheet("background-color: red; color : black");
+    // left side button
+    QPushButton *forward_left = new QPushButton(this);
+    forward_left->setGeometry(QRect(500, 50, 100, 20));
+    forward_left->setText("Forward >>");
+    forward_left->setStyleSheet("background-color: red; color : black");
+
+    //right side button
+    QPushButton *forward_right_1 = new QPushButton(this);
+    forward_right_1->setGeometry(QRect(650, 50, 100, 20));
+    forward_right_1->setText("<< Forward");
+    forward_right_1->setStyleSheet("background-color: green; color : black");
 
 
     // Signals & slots
@@ -440,27 +466,29 @@ TourDraw::TourDraw(QSqlDatabase &database,
                 game_result_buttons[28]);
     });
 
-    // connect(forward_btn, &QPushButton::clicked, this, [this](){
-    //     moveForward(first_round_team_btns[0], first_round_team_btns[1], W_buttons[0]);
-    // });
-
-    connect(forward_btn, &QPushButton::clicked, this, [this](){
-
+    // left forward button
+    connect(forward_left, &QPushButton::clicked, this, [this](){
         //make a list of W1 - W8 buttons
         QList<QPushButton *> W1_W8_btns = W_buttons.mid(0, 8);
 
         // make a list of L1 - L7 buttons
         QList<QPushButton *> L1_L8_btns = L1_L12_buttons.mid(0, 8);
         moveTeams(first_round_team_btns, W1_W8_btns, L1_L8_btns);
+    });
 
-        // make a list W13,W14,W15,W16
-        //QList<QPushButton *> W13_W16_btns = W_buttons.mid(12, 4);
-        // QList<QPushButton *> W13_W16_btns;
-        // W13_W16_btns.append(W_buttons[12]);
-        // W13_W16_btns.append(W_buttons[13]);
-        // W13_W16_btns.append(W_buttons[14]);
-        // W13_W16_btns.append(W_buttons[15]);
-        // moveTeams(L1_L8_btns, W13_W16_btns, L1_L8_btns);   works bad!!!!! FIX!
+    //right 1st column forward button
+    connect(forward_right_1, &QPushButton::clicked, this, [this](){
+
+        // make a list of W13,W14,W15,W16
+        QList<QPushButton *> W13_W16_btns;
+        for(int i{0}; i < 4; ++i){
+            W13_W16_btns.push_front(W_buttons[i + 12]);
+        }
+
+        // make a list of L1 - L7 buttons
+        QList<QPushButton *> L1_L8_btns = L1_L12_buttons.mid(0, 8);
+
+        moveTeams(L1_L8_btns, W13_W16_btns, loosers);
     });
 }
 
@@ -475,17 +503,75 @@ TourDraw::~TourDraw()
 void TourDraw::moveForward(QPushButton *teamA, QPushButton *teamB,
                            QPushButton *win_btn, QPushButton *los_btn){
 
-    if(teamA->text() == "None, None, None"){
+    const QString no_team = "None, None, None";
+
+    if(teamA->text() == no_team && teamB->text() != no_team){
         win_btn->setText(teamB->text());
         los_btn->setText(teamA->text());
     }
-    else if(teamB->text() == "None, None, None"){
+    else if(teamB->text() == no_team && teamA->text() != no_team){
+        win_btn->setText(teamA->text());
+        los_btn->setText(teamB->text());
+    }
+    else if(teamA->text() == no_team && teamB->text() == no_team){
+        // no matter
         win_btn->setText(teamA->text());
         los_btn->setText(teamB->text());
     }
     else{
-        return;
+        //return;
+
+        // make both buttons pullsing
+
+        win_btn->setStyleSheet(team_btn_pulsing_style);
+        los_btn->setStyleSheet(team_btn_pulsing_style);
+
+        QPropertyAnimation *win_animation = new QPropertyAnimation(win_btn, "geometry");
+        QPropertyAnimation *los_animation = new QPropertyAnimation(los_btn, "geometry");
+
+        win_animation->setDuration(1200);  // 1200 ms duration
+        los_animation->setDuration(1200);
+
+
+        // get current button's position
+        QPoint win_btn_position = win_btn->pos();
+        QPoint los_btn_position = los_btn->pos();
+
+        //animation for the win button
+        win_animation->setStartValue(QRect(win_btn_position.x(), win_btn_position.y(),
+                                       static_cast<int>(Geometry::BtnWidth),
+                                       static_cast<int>(Geometry::BtnHeight))); // initial size
+        win_animation->setEndValue(QRect(win_btn_position.x(), win_btn_position.y(),
+                                     static_cast<int>(Geometry::BtnWidth) + 10,
+                                     static_cast<int>(Geometry::BtnHeight) +10));
+        //animation for the los button
+        los_animation->setStartValue(QRect(los_btn_position.x(), los_btn_position.y(),
+                                       static_cast<int>(Geometry::BtnWidth),
+                                       static_cast<int>(Geometry::BtnHeight))); // initial size
+        los_animation->setEndValue(QRect(los_btn_position.x(), los_btn_position.y(),
+                                     static_cast<int>(Geometry::BtnWidth) + 10,
+                                     static_cast<int>(Geometry::BtnHeight) +10));
+
+        // larger size
+        // Bounce effect with easing curve
+        win_animation->setEasingCurve(QEasingCurve::OutBounce);
+        los_animation->setEasingCurve(QEasingCurve::OutBounce);
+        win_animation->setLoopCount(-1);  // Loop indefinitely
+        los_animation->setLoopCount(-1);
+
+        // Start animation
+        win_animation->start();
+        los_animation->start();
     }
+
+    if(los_btn->text() == no_team){
+        los_btn->setStyleSheet(team_btn_style_for_none);
+    }
+
+    if(win_btn->text() == no_team){
+        win_btn->setStyleSheet(team_btn_style_for_none);
+    }
+
 
     fontAdapter(win_btn);
     fontAdapter(los_btn);
@@ -493,14 +579,8 @@ void TourDraw::moveForward(QPushButton *teamA, QPushButton *teamB,
 
 
 void TourDraw::moveTeams(const QList<QPushButton *> &teams,
-                         const QList<QPushButton *> win_btns,
-                         const QList<QPushButton *> loosers_btns){
-
-    // if(teams.size() / 2 != win_btns.size() || win_btns.size() != loosers_btns.size()){
-    //     QMessageBox::warning(this, "Move teams forward issue",
-    //                          "Couldn't move teams forward. Amount is innapropriate.");
-    //     return;
-    // }
+                         QList<QPushButton *> &win_btns,
+                         QList<QPushButton *> &loosers_btns){
 
     // use moveTeam()
     for(int i{0}, j{0}; i < teams.size(); i += 2, ++j){
@@ -703,7 +783,13 @@ QPushButton* TourDraw::drawTeamBtn(const int x, const int y,
 
     team_btn->setDisabled(is_disabled);
 
-    team_btn->setStyleSheet(team_btn_style);
+    // change team name's color if it is None
+    if(team_btn->text() == "None, None, None"){
+        team_btn->setStyleSheet(team_btn_style_for_none);
+    }
+    else{
+        team_btn->setStyleSheet(team_btn_style);
+    }
 
     // change button's font if necessary
     fontAdapter(team_btn);

@@ -41,7 +41,7 @@ void SearchPlayer::on_searchButton_clicked()
         player_window = std::make_unique<AddPlayer>(*db, this, false,
                                                     splitted_name[0],
                                                     splitted_name[1]);
-        player_window->setWindowTitle(user_input);
+        player_window->setWindowTitle(std::move(user_input));
         player_window->show();
 
         // clear edit line and set focus on it

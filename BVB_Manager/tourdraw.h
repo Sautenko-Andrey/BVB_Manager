@@ -10,6 +10,7 @@
 #include "gameresult.h"
 #include <QMessageBox>
 #include <QCloseEvent>
+#include <QVarLengthArray>
 
 
 namespace Ui {
@@ -39,8 +40,9 @@ private slots:
 
 
     void moveTeams(const QList<QPushButton *> &teams,
-                   const QList<QPushButton *> win_btns,
-                   const QList<QPushButton *> loosers_btns);
+                   QList<QPushButton *> &win_btns,
+                   QList<QPushButton *> &loosers_btns);
+
 
 private:
     Ui::TourDraw *ui;
@@ -52,6 +54,7 @@ private:
     Net draw_type = Net::Sixteen;
 
     QVector<QPushButton *> first_round_team_btns;
+    // QVarLengthArray<QPushButton *> first_round_team_btns;
 
     QList<QPushButton *> L1_L12_buttons;
 
@@ -66,6 +69,8 @@ private:
     QList<QPushButton *> final_silver_bronze_buttons;
 
     QList<QPushButton *> game_result_buttons;
+
+    QList<QPushButton *> loosers;
 
     std::unique_ptr<GameResult> game_result{nullptr};
 

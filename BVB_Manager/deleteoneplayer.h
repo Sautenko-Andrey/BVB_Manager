@@ -11,16 +11,6 @@ namespace Ui {
 class DeleteOnePlayer;
 }
 
-// struct Player {
-//     int id;
-//     QString first_name;
-//     QString last_name;
-//     int age;
-//     int gender;
-//     int height;
-//     QString hometown;
-//     QString phone;
-// };
 
 class DeleteOnePlayer : public QDialog
 {
@@ -61,6 +51,10 @@ private:
     int db_index_for_del{0};
 
     QString name_for_del{"Unknown"};
+
+    inline static const QStringList headers = {
+        "ID", "First name", "Last name", "Age", "Gender", "Height", "Hometown", "Phone"
+    };
 };
 
 #endif // DELETEONEPLAYER_H

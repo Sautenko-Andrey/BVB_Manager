@@ -24,13 +24,14 @@ DeleteOnePlayer::DeleteOnePlayer(QSqlDatabase &database, QWidget *parent)
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     // Make headers for the table
-    const QStringList headers = {
-        "ID", "First name", "Last name", "Age", "Gender", "Height", "Hometown", "Phone"
-    };
+    // const QStringList headers = {
+    //     "ID", "First name", "Last name", "Age", "Gender", "Height", "Hometown", "Phone"
+    // };
 
     for(int i{0}; i < headers.size(); ++i){
         auto item = new QStandardItem(headers[i]);
         item->setForeground(QBrush(QColor("aqua")));
+
         // Get the current font
         QFont font = item->font();
         font.setBold(true);
@@ -66,7 +67,7 @@ DeleteOnePlayer::DeleteOnePlayer(QSqlDatabase &database, QWidget *parent)
     // filling the table
 
     // counter
-    int i = 0;
+    int i{0};
 
     for(auto const &player : all_players){
         auto id = new QStandardItem(QString::number(player.id));

@@ -21,7 +21,7 @@ void createPlayersTable(QStandardItemModel *model, QTableView *tableView,
     // allow table header occupy full line
     tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    QStringList labels{
+    const QStringList labels{
         "ID", "First name", "Last name", "Age", "Gender", "Height", "Hometown", "Phone"
     };
 
@@ -158,6 +158,38 @@ const QString team_btn_style = "QPushButton {"
                                "QPushButton:pressed {"
                                "background-color: #1abc9c;"  // Background color when pressed
                                "}";
+
+const QString team_btn_style_for_none = "QPushButton {"
+                                        "background-color: DarkSlateGray;" // Normal background color
+                                        "color: red;"
+                                        "font-weight: bold;"
+                                        "border-radius: 10px;"
+                                        "padding: 20px 5px;"
+                                        "}"
+                                        "QPushButton:hover {"
+                                        "background-color: black;" // Background color when hovered
+                                        "color: DeepPink;"
+                                        "}"
+                                        "QPushButton:pressed {"
+                                        "background-color: #1abc9c;"  // Background color when pressed
+                                        "}";
+
+const QString team_btn_pulsing_style = "QPushButton {"
+                                       "background-color: DarkSlateGray;" // Normal background color
+                                       "color: Aqua;"
+                                       "font-weight: bold;"
+                                       "border-radius: 10px;"
+                                       // "padding: 20px 5px;"
+                                       "padding: 30px 5px;"
+                                       "}"
+                                       "QPushButton:hover {"
+                                       "background-color: black;" // Background color when hovered
+                                       "color: DeepPink;"
+                                       "}"
+                                       "QPushButton:pressed {"
+                                       "background-color: #1abc9c;"  // Background color when pressed
+                                       "}";
+
 
 const QString ok_button_style = "QPushButton {"
                                 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, "

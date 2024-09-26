@@ -126,7 +126,7 @@ void UpdatePlayer::picClicked(){
                 name = name.trimmed().replace(" ", "_");
 
                 const QString image_name = QDir::homePath() +
-                                           "/Players_images/" + name + ".jpeg";
+                                           "/Players_images/" + std::move(name) + ".jpeg";
 
                 if(!image.save(image_name)){
                     QMessageBox::warning(this, "Saving image error!", "Couldn't save an image!");

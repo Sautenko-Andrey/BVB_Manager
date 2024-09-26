@@ -108,7 +108,6 @@ AddPlayer::AddPlayer(QSqlDatabase &database,
                 ui->maleRadioButton->setDisabled(true);
                 ui->phoneLine->setDisabled(true);
                 ui->firstNameLine->setDisabled(true);
-                //ui->frame->hide(); // frame under the image
             }
         }
     // regular adding a new player

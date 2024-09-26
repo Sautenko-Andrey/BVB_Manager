@@ -297,11 +297,11 @@ QString BVB_Manager::timeToString(){
         minutes = "0" + QString::number(minute);
     }
 
-    QString time_str = "Time: " + QString::number(hour) + ":" + minutes;
+    QString time_str = "Time: " + QString::number(hour) + ":" + std::move(minutes);
 
     ui->timeSelectedLabel->setText(time_str);
 
-    return time_str;
+    return std::move(time_str);
 }
 
 void BVB_Manager::selectedDateChanged(){
@@ -452,7 +452,9 @@ void BVB_Manager::on_actionDelete_all_players_triggered()
         // deleting all pics from pics folder
         // deleting recursevly all images and folder
         // and then create the empty folder again
-        const QString dir_name = "/Players_images";
+
+        // const QString dir_name = "/Players_images";
+        QString dir_name = "/Players_images";
         QDir dir(QDir::homePath() + dir_name);
 
         if(dir.exists()){
@@ -460,7 +462,8 @@ void BVB_Manager::on_actionDelete_all_players_triggered()
             dir.removeRecursively();
 
             // create a new empty folder for players pics
-            dir.mkpath(QDir::homePath() + dir_name);
+            // dir.mkpath(QDir::homePath() + dir_name);
+            dir.mkpath(QDir::homePath() + std::move(dir_name));
         }
         else{
             QMessageBox::warning(this, "Error", "Folder for pics doesn't exist.");
@@ -679,7 +682,7 @@ void BVB_Manager::on_addToscheduleButton_clicked()
     ++trainings_counter;
 
     // creatin a new folder with txt files
-    const QString folder_name = "/Trainings";
+    QString folder_name = "/Trainings";
 
     QDir dir;
 
@@ -695,7 +698,9 @@ void BVB_Manager::on_addToscheduleButton_clicked()
     file_name = file_name.trimmed().replace(" ", "_").replace(".", "_");
 
     // make a txt file with a training schema
-    const QString txt_file(QDir::homePath() + folder_name +file_name + ".txt");
+    const QString txt_file(QDir::homePath() +
+                           std::move(folder_name) +
+                           std::move(file_name) + ".txt");
 
     // create a text for the pdf file
 
@@ -718,7 +723,7 @@ void BVB_Manager::on_addToscheduleButton_clicked()
 
         query.prepare("INSERT INTO Trainings (description) VALUES (:descr);");
 
-        qDebug() << labels.join("\n");
+        //qDebug() << labels.join("\n");
 
         query.bindValue(":descr", labels.join("\n"));
 
