@@ -7,18 +7,19 @@
 #include <QVector>
 #include <QMessageBox>
 #include <QStringList>
-#include <QPropertyAnimation>
+// #include <QPropertyAnimation>
+#include <QRegularExpression>
 
-enum class Geometry{
-    coordXStartBtn = 10,
-    coordYStartBtn = 15,
-    BtnWidth = 115,
-    BtnHeight = 23,
-    BtnResWidth = 45,
-    BtnResHeight = 17,
-    Step = 44,
-    StepX = 121
-};
+// enum class Geometry{
+//     coordXStartBtn = 10,
+//     coordYStartBtn = 15,
+//     BtnWidth = 115,
+//     BtnHeight = 23,
+//     BtnResWidth = 45,
+//     BtnResHeight = 17,
+//     Step = 44,
+//     StepX = 121
+// };
 
 TourDraw::TourDraw(QSqlDatabase &database,
                    Net net_type,
@@ -90,15 +91,6 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
         // add button to the list
         first_round_team_btns.push_back(btn);
-
-        // // make red color of buttons text where team name is None
-        // std::for_each(first_round_team_btns.begin(), first_round_team_btns.end(),
-        //               [](auto btn){
-
-        //     if(btn->text() == "None, None, None"){
-        //         btn->setStyleSheet("color : red");
-        //     }
-        // });
 
         y += static_cast<int>(Geometry::Step);
     }
@@ -280,6 +272,21 @@ TourDraw::TourDraw(QSqlDatabase &database,
     forward_right_1->setGeometry(QRect(650, 50, 100, 20));
     forward_right_1->setText("<< Forward");
     forward_right_1->setStyleSheet("background-color: green; color : black");
+
+    // create animations for butoons W1 - W8
+    for(int i{0}; i < 8; ++i){
+        QPropertyAnimation *animation = new QPropertyAnimation(W_buttons[i], "geometry");
+        animation->setDuration(1200);
+        QPoint btn_position = W_buttons[i]->pos();
+        animation->setStartValue(QRect(btn_position.x(), btn_position.y(),
+                                       static_cast<int>(Geometry::BtnWidth),
+                                       static_cast<int>(Geometry::BtnHeight)));
+        animation->setEndValue(QRect(btn_position.x(), btn_position.y(),
+                                     static_cast<int>(Geometry::BtnWidth) + 10,
+                                     static_cast<int>(Geometry::BtnHeight) + 10));
+
+        animations.push_back(animation);
+    }
 
 
     // Signals & slots
@@ -519,49 +526,48 @@ void TourDraw::moveForward(QPushButton *teamA, QPushButton *teamB,
         los_btn->setText(teamB->text());
     }
     else{
-        //return;
 
         // make both buttons pullsing
 
-        win_btn->setStyleSheet(team_btn_pulsing_style);
-        los_btn->setStyleSheet(team_btn_pulsing_style);
+        //win_btn->setStyleSheet(team_btn_pulsing_style);
+        //los_btn->setStyleSheet(team_btn_pulsing_style);
 
-        QPropertyAnimation *win_animation = new QPropertyAnimation(win_btn, "geometry");
-        QPropertyAnimation *los_animation = new QPropertyAnimation(los_btn, "geometry");
+        // win_animation = new QPropertyAnimation(win_btn, "geometry");
+        // los_animation = new QPropertyAnimation(los_btn, "geometry");
 
-        win_animation->setDuration(1200);  // 1200 ms duration
-        los_animation->setDuration(1200);
+        // win_animation->setDuration(1200);  // 1200 ms duration
+        // los_animation->setDuration(1200);
 
 
-        // get current button's position
-        QPoint win_btn_position = win_btn->pos();
-        QPoint los_btn_position = los_btn->pos();
+        // // get current button's position
+        // QPoint win_btn_position = win_btn->pos();
+        // QPoint los_btn_position = los_btn->pos();
 
-        //animation for the win button
-        win_animation->setStartValue(QRect(win_btn_position.x(), win_btn_position.y(),
-                                       static_cast<int>(Geometry::BtnWidth),
-                                       static_cast<int>(Geometry::BtnHeight))); // initial size
-        win_animation->setEndValue(QRect(win_btn_position.x(), win_btn_position.y(),
-                                     static_cast<int>(Geometry::BtnWidth) + 10,
-                                     static_cast<int>(Geometry::BtnHeight) +10));
-        //animation for the los button
-        los_animation->setStartValue(QRect(los_btn_position.x(), los_btn_position.y(),
-                                       static_cast<int>(Geometry::BtnWidth),
-                                       static_cast<int>(Geometry::BtnHeight))); // initial size
-        los_animation->setEndValue(QRect(los_btn_position.x(), los_btn_position.y(),
-                                     static_cast<int>(Geometry::BtnWidth) + 10,
-                                     static_cast<int>(Geometry::BtnHeight) +10));
+        // //animation for the win button
+        // win_animation->setStartValue(QRect(win_btn_position.x(), win_btn_position.y(),
+        //                                static_cast<int>(Geometry::BtnWidth),
+        //                                static_cast<int>(Geometry::BtnHeight))); // initial size
+        // win_animation->setEndValue(QRect(win_btn_position.x(), win_btn_position.y(),
+        //                              static_cast<int>(Geometry::BtnWidth) + 10,
+        //                              static_cast<int>(Geometry::BtnHeight) +10));
+        // //animation for the los button
+        // los_animation->setStartValue(QRect(los_btn_position.x(), los_btn_position.y(),
+        //                                static_cast<int>(Geometry::BtnWidth),
+        //                                static_cast<int>(Geometry::BtnHeight))); // initial size
+        // los_animation->setEndValue(QRect(los_btn_position.x(), los_btn_position.y(),
+        //                              static_cast<int>(Geometry::BtnWidth) + 10,
+        //                              static_cast<int>(Geometry::BtnHeight) +10));
 
-        // larger size
-        // Bounce effect with easing curve
-        win_animation->setEasingCurve(QEasingCurve::OutBounce);
-        los_animation->setEasingCurve(QEasingCurve::OutBounce);
-        win_animation->setLoopCount(-1);  // Loop indefinitely
-        los_animation->setLoopCount(-1);
+        // // larger size
+        // // Bounce effect with easing curve
+        // win_animation->setEasingCurve(QEasingCurve::OutBounce);
+        // los_animation->setEasingCurve(QEasingCurve::OutBounce);
+        // win_animation->setLoopCount(-1);  // Loop indefinitely
+        // los_animation->setLoopCount(-1);
 
-        // Start animation
-        win_animation->start();
-        los_animation->start();
+        // // Start animation
+        // win_animation->start();
+        // los_animation->start();
     }
 
     if(los_btn->text() == no_team){
@@ -750,7 +756,29 @@ void TourDraw::click_game(QPushButton *team_1, QPushButton *team_2,
 
     game_result = std::make_unique<GameResult>(team_1, team_2,
                                                winner_basket, loser_basket,
-                                               game_result_btn, this);
+                                               game_result_btn,
+                                               this);
+
+
+    // stop animation
+    // if(win_animation->state() == QAbstractAnimation::Running &&
+    //     los_animation->state() == QAbstractAnimation::Running){
+    if(win_animation->state() == QAbstractAnimation::Running){
+
+
+        win_animation->stop();
+        //los_animation->stop();
+
+        // apply old style and size for buttons
+        winner_basket->setStyleSheet(team_btn_style);
+
+        //loser_basket->setStyleSheet(team_btn_style);
+
+        winner_basket->resize(static_cast<int>(Geometry::BtnWidth),
+                              static_cast<int>(Geometry::BtnHeight));
+        // loser_basket->resize(static_cast<int>(Geometry::BtnWidth),
+        //                       static_cast<int>(Geometry::BtnHeight));
+    }
 
     game_result->show();
 }

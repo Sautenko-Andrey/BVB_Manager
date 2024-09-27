@@ -21,6 +21,17 @@ enum class Sizes {
     SearchPlayerWindowHeight = 280
 };
 
+enum class Geometry{
+    coordXStartBtn = 10,
+    coordYStartBtn = 15,
+    BtnWidth = 115,
+    BtnHeight = 23,
+    BtnResWidth = 45,
+    BtnResHeight = 17,
+    Step = 44,
+    StepX = 121
+};
+
 enum class TrainingTypeIndexes {
     Warm_up, Gym, Cardio, Tactical_technical
 };

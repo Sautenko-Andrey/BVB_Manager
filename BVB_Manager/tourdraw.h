@@ -11,6 +11,7 @@
 #include <QMessageBox>
 #include <QCloseEvent>
 #include <QVarLengthArray>
+#include <QPropertyAnimation>
 
 
 namespace Ui {
@@ -78,7 +79,13 @@ private:
 
     QWidget *parent_dialog{nullptr};
 
+    QPropertyAnimation *win_animation{nullptr};
+    QPropertyAnimation *los_animation{nullptr};
+
+    QList<QPropertyAnimation *> animations;
+
     QPushButton* drawGameResultBtn(const int x, const int y);
+
     QPushButton* drawTeamBtn(const int x, const int y,
                              const QString &team_name, bool is_disabled = false);
 
