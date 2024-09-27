@@ -31,7 +31,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         databasemanager.h databasemanager.cpp
         addplayer.h addplayer.cpp addplayer.ui
         deleteoneplayer.h deleteoneplayer.cpp deleteoneplayer.ui
-        changeplayer.h changeplayer.cpp changeplayer.ui
+
         addexercise.h addexercise.cpp addexercise.ui
         deleteexercise.h deleteexercise.cpp deleteexercise.ui
         changeexercise.h changeexercise.cpp changeexercise.ui

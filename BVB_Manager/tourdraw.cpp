@@ -7,19 +7,8 @@
 #include <QVector>
 #include <QMessageBox>
 #include <QStringList>
-// #include <QPropertyAnimation>
 #include <QRegularExpression>
 
-// enum class Geometry{
-//     coordXStartBtn = 10,
-//     coordYStartBtn = 15,
-//     BtnWidth = 115,
-//     BtnHeight = 23,
-//     BtnResWidth = 45,
-//     BtnResHeight = 17,
-//     Step = 44,
-//     StepX = 121
-// };
 
 TourDraw::TourDraw(QSqlDatabase &database,
                    Net net_type,
@@ -294,49 +283,51 @@ TourDraw::TourDraw(QSqlDatabase &database,
     //W1
     connect(W_buttons[0], &QPushButton::clicked, this, [this](){
         click_game(first_round_team_btns[0], first_round_team_btns[1],
-                W_buttons[0], L1_L12_buttons[0], game_result_buttons[0]);
+                W_buttons[0], L1_L12_buttons[0], game_result_buttons[0],
+                animations[0]);
     });
 
     //W2
     connect(W_buttons[1], &QPushButton::clicked, this, [this](){
         click_game(first_round_team_btns[2], first_round_team_btns[3],
-                W_buttons[1], L1_L12_buttons[1], game_result_buttons[1]);
+                W_buttons[1], L1_L12_buttons[1], game_result_buttons[1],
+                animations[1]);
     });
 
     //W3
     connect(W_buttons[2], &QPushButton::clicked, this, [this](){
         click_game(first_round_team_btns[4], first_round_team_btns[5],
-                W_buttons[2], L1_L12_buttons[2], game_result_buttons[2]);
+                W_buttons[2], L1_L12_buttons[2], game_result_buttons[2], animations[2]);
     });
 
     //W4
     connect(W_buttons[3], &QPushButton::clicked, this, [this](){
         click_game(first_round_team_btns[6], first_round_team_btns[7],
-                W_buttons[3], L1_L12_buttons[3], game_result_buttons[3]);
+                W_buttons[3], L1_L12_buttons[3], game_result_buttons[3], animations[3]);
     });
 
     //W5
     connect(W_buttons[4], &QPushButton::clicked, this, [this](){
         click_game(first_round_team_btns[8], first_round_team_btns[9],
-                W_buttons[4],L1_L12_buttons[4], game_result_buttons[4]);
+                W_buttons[4],L1_L12_buttons[4], game_result_buttons[4], animations[4]);
     });
 
     //W6
     connect(W_buttons[5], &QPushButton::clicked, this, [this](){
         click_game(first_round_team_btns[10], first_round_team_btns[11],
-                W_buttons[5], L1_L12_buttons[5], game_result_buttons[5]);
+                W_buttons[5], L1_L12_buttons[5], game_result_buttons[5], animations[5]);
     });
 
     //W7
     connect(W_buttons[6], &QPushButton::clicked, this, [this](){
         click_game(first_round_team_btns[12], first_round_team_btns[13],
-                W_buttons[6], L1_L12_buttons[6], game_result_buttons[6]);
+                W_buttons[6], L1_L12_buttons[6], game_result_buttons[6], animations[6]);
     });
 
     //W8
     connect(W_buttons[7], &QPushButton::clicked, this, [this](){
         click_game(first_round_team_btns[14], first_round_team_btns[15],
-                W_buttons[7], L1_L12_buttons[7], game_result_buttons[7]);
+                W_buttons[7], L1_L12_buttons[7], game_result_buttons[7], animations[7]);
     });
 
     //W9
@@ -480,23 +471,23 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
         // make a list of L1 - L7 buttons
         QList<QPushButton *> L1_L8_btns = L1_L12_buttons.mid(0, 8);
-        moveTeams(first_round_team_btns, W1_W8_btns, L1_L8_btns);
+        moveTeams(first_round_team_btns, W1_W8_btns, L1_L8_btns, animations);
     });
 
     //right 1st column forward button
-    connect(forward_right_1, &QPushButton::clicked, this, [this](){
+    // connect(forward_right_1, &QPushButton::clicked, this, [this](){
 
-        // make a list of W13,W14,W15,W16
-        QList<QPushButton *> W13_W16_btns;
-        for(int i{0}; i < 4; ++i){
-            W13_W16_btns.push_front(W_buttons[i + 12]);
-        }
+    //     // make a list of W13,W14,W15,W16
+    //     QList<QPushButton *> W13_W16_btns;
+    //     for(int i{0}; i < 4; ++i){
+    //         W13_W16_btns.push_front(W_buttons[i + 12]);
+    //     }
 
-        // make a list of L1 - L7 buttons
-        QList<QPushButton *> L1_L8_btns = L1_L12_buttons.mid(0, 8);
+    //     // make a list of L1 - L7 buttons
+    //     QList<QPushButton *> L1_L8_btns = L1_L12_buttons.mid(0, 8);
 
-        moveTeams(L1_L8_btns, W13_W16_btns, loosers);
-    });
+    //     moveTeams(L1_L8_btns, W13_W16_btns, loosers);
+    // });
 }
 
 
@@ -508,7 +499,8 @@ TourDraw::~TourDraw()
 
 
 void TourDraw::moveForward(QPushButton *teamA, QPushButton *teamB,
-                           QPushButton *win_btn, QPushButton *los_btn){
+                           QPushButton *win_btn, QPushButton *los_btn,
+                           QPropertyAnimation *animation){
 
     const QString no_team = "None, None, None";
 
@@ -532,6 +524,9 @@ void TourDraw::moveForward(QPushButton *teamA, QPushButton *teamB,
         //win_btn->setStyleSheet(team_btn_pulsing_style);
         //los_btn->setStyleSheet(team_btn_pulsing_style);
 
+        win_btn->setStyleSheet(team_btn_pulsing_style);
+
+
         // win_animation = new QPropertyAnimation(win_btn, "geometry");
         // los_animation = new QPropertyAnimation(los_btn, "geometry");
 
@@ -539,9 +534,10 @@ void TourDraw::moveForward(QPushButton *teamA, QPushButton *teamB,
         // los_animation->setDuration(1200);
 
 
-        // // get current button's position
+        // get current button's position
         // QPoint win_btn_position = win_btn->pos();
         // QPoint los_btn_position = los_btn->pos();
+        //QPoint win_btn_position = win_btn->pos();
 
         // //animation for the win button
         // win_animation->setStartValue(QRect(win_btn_position.x(), win_btn_position.y(),
@@ -557,6 +553,13 @@ void TourDraw::moveForward(QPushButton *teamA, QPushButton *teamB,
         // los_animation->setEndValue(QRect(los_btn_position.x(), los_btn_position.y(),
         //                              static_cast<int>(Geometry::BtnWidth) + 10,
         //                              static_cast<int>(Geometry::BtnHeight) +10));
+
+
+        animation->setEasingCurve(QEasingCurve::OutBounce);
+        animation->setLoopCount(-1);  // Loop indefinitely
+
+        animation->start();
+
 
         // // larger size
         // // Bounce effect with easing curve
@@ -586,11 +589,12 @@ void TourDraw::moveForward(QPushButton *teamA, QPushButton *teamB,
 
 void TourDraw::moveTeams(const QList<QPushButton *> &teams,
                          QList<QPushButton *> &win_btns,
-                         QList<QPushButton *> &loosers_btns){
+                         QList<QPushButton *> &loosers_btns,
+                         QList<QPropertyAnimation *> &animations){
 
     // use moveTeam()
     for(int i{0}, j{0}; i < teams.size(); i += 2, ++j){
-        moveForward(teams[i], teams[i + 1], win_btns[j], loosers_btns[j]);
+        moveForward(teams[i], teams[i + 1], win_btns[j], loosers_btns[j], animations[j]);
     }
 }
 
@@ -752,7 +756,7 @@ void TourDraw::paintEvent(QPaintEvent *event)
 
 void TourDraw::click_game(QPushButton *team_1, QPushButton *team_2,
                           QPushButton *winner_basket, QPushButton *loser_basket,
-                          QPushButton *game_result_btn){
+                          QPushButton *game_result_btn, QPropertyAnimation *animation){
 
     game_result = std::make_unique<GameResult>(team_1, team_2,
                                                winner_basket, loser_basket,
@@ -760,24 +764,33 @@ void TourDraw::click_game(QPushButton *team_1, QPushButton *team_2,
                                                this);
 
 
+    // // stop animation
+    // // if(win_animation->state() == QAbstractAnimation::Running &&
+    // //     los_animation->state() == QAbstractAnimation::Running){
+    // if(win_animation->state() == QAbstractAnimation::Running){
+
+
+    //     win_animation->stop();
+    //     //los_animation->stop();
+
+    //     // apply old style and size for buttons
+    //     winner_basket->setStyleSheet(team_btn_style);
+
+    //     //loser_basket->setStyleSheet(team_btn_style);
+
+    //     winner_basket->resize(static_cast<int>(Geometry::BtnWidth),
+    //                           static_cast<int>(Geometry::BtnHeight));
+    //     // loser_basket->resize(static_cast<int>(Geometry::BtnWidth),
+    //     //                       static_cast<int>(Geometry::BtnHeight));
+
+    // }
+
     // stop animation
-    // if(win_animation->state() == QAbstractAnimation::Running &&
-    //     los_animation->state() == QAbstractAnimation::Running){
-    if(win_animation->state() == QAbstractAnimation::Running){
-
-
-        win_animation->stop();
-        //los_animation->stop();
-
-        // apply old style and size for buttons
+    if(animation != nullptr && animation->state() == QAbstractAnimation::Running){
+        animation->stop();
         winner_basket->setStyleSheet(team_btn_style);
-
-        //loser_basket->setStyleSheet(team_btn_style);
-
         winner_basket->resize(static_cast<int>(Geometry::BtnWidth),
                               static_cast<int>(Geometry::BtnHeight));
-        // loser_basket->resize(static_cast<int>(Geometry::BtnWidth),
-        //                       static_cast<int>(Geometry::BtnHeight));
     }
 
     game_result->show();

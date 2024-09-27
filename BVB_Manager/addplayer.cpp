@@ -40,9 +40,6 @@ AddPlayer::AddPlayer(QSqlDatabase &database,
     // save mode for future purpose
     mode = add_mode;
 
-    //save player's index
-    //index = player_index;
-
     // if flag add_mode is false it means this widget will be filling
     // with arguments
     if(!add_mode){

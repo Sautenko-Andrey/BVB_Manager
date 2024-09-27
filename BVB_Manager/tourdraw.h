@@ -37,12 +37,13 @@ private slots:
 
     void click_game(QPushButton *team_1, QPushButton *team_2,
                     QPushButton *winner_basket, QPushButton *loser_basket,
-                    QPushButton *game_result_btn);
+                    QPushButton *game_result_btn, QPropertyAnimation *animation = nullptr);
 
 
     void moveTeams(const QList<QPushButton *> &teams,
                    QList<QPushButton *> &win_btns,
-                   QList<QPushButton *> &loosers_btns);
+                   QList<QPushButton *> &loosers_btns,
+                   QList<QPropertyAnimation *> &animations);
 
 
 private:
@@ -55,7 +56,6 @@ private:
     Net draw_type = Net::Sixteen;
 
     QVector<QPushButton *> first_round_team_btns;
-    // QVarLengthArray<QPushButton *> first_round_team_btns;
 
     QList<QPushButton *> L1_L12_buttons;
 
@@ -98,7 +98,8 @@ private:
     }
 
     void moveForward(QPushButton *teamA, QPushButton *teamB,
-                     QPushButton *win_btn, QPushButton *los_btn);
+                     QPushButton *win_btn, QPushButton *los_btn,
+                     QPropertyAnimation *animation);
 };
 
 #endif // TOURDRAW_H

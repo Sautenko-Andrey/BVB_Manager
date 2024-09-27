@@ -93,32 +93,20 @@ private slots:
 
     void dateClicked();
 
-    void on_actionTournament_16_triggered();
-
-    void on_actionTournament_32_triggered();
-
-    void on_actionTournament_64_triggered();
-
     void on_actionRegister_a_team_triggered();
 
     void on_actionAdd_a_new_tournament_triggered();
 
     void on_actionCreate_a_tournament_triggered();
 
-    //void on_actionDraw_triggered();
-
 private:
     Ui::BVB_Manager *ui;
-
-    //DatabaseManager database_manager;
 
     DatabaseManager &database_manager = DatabaseManager::getInstance();
 
     std::unique_ptr<AddPlayer> add_player{nullptr};
 
     std::unique_ptr<DeleteOnePlayer> delete_player{nullptr};
-
-    //std::unique_ptr<ChangePlayer> change_player{nullptr};
 
     std::unique_ptr<UpdatePlayer> update_player{nullptr};
 

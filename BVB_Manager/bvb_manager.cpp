@@ -313,7 +313,7 @@ void BVB_Manager::selectedTimeChanged(){
     updateTime();
 }
 
-void BVB_Manager::markItem(QListWidgetItem *item,const QBrush &color, bool is_bold){
+void BVB_Manager::markItem(QListWidgetItem *item, const QBrush &color, bool is_bold){
 
     QFont item_font;
 
@@ -380,8 +380,8 @@ void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QStringList &containe
 
         // when double clicked change current row text color to red
         markItem(list_widget->currentItem(), Qt::red);
+
         // add marked item to the container
-        //container.insert(current_item);
         container.append(current_item);
     }
 
@@ -462,7 +462,6 @@ void BVB_Manager::on_actionDelete_all_players_triggered()
             dir.removeRecursively();
 
             // create a new empty folder for players pics
-            // dir.mkpath(QDir::homePath() + dir_name);
             dir.mkpath(QDir::homePath() + std::move(dir_name));
         }
         else{
@@ -477,15 +476,6 @@ void BVB_Manager::on_actionDelete_all_players_triggered()
 void BVB_Manager::on_actionChange_a_player_triggered()
 {
     // player editor
-    // change_player = std::make_unique<ChangePlayer>(database_manager.getDatabase(), this);
-    // change_player->setWindowTitle("Change a player/players");
-    // change_player->setGeometry(0, 0,
-    //                           static_cast<int>(Sizes::ChangePlayerWindowWidth),
-    //                           static_cast<int>(Sizes::ChangePlayerWindowHeight));
-    // change_player->setMaximumWidth(static_cast<int>(Sizes::ChangePlayerWindowWidth));
-    // change_player->setMinimumWidth(static_cast<int>(Sizes::ChangePlayerWindowWidth));
-    // change_player->show();
-
     update_player = std::make_unique<UpdatePlayer>(database_manager.getDatabase(), this);
     update_player->setWindowTitle("Change a player/players");
     update_player->setGeometry(0, 0,
@@ -592,7 +582,6 @@ void BVB_Manager::on_addAllPlayersButton_clicked()
                  Qt::red);
 
         //add player to the marked_players container
-        //marked_players.insert(ui->playersListWidget->item(i)->text());
         marked_players.append(ui->playersListWidget->item(i)->text());
     }
 
@@ -723,8 +712,6 @@ void BVB_Manager::on_addToscheduleButton_clicked()
 
         query.prepare("INSERT INTO Trainings (description) VALUES (:descr);");
 
-        //qDebug() << labels.join("\n");
-
         query.bindValue(":descr", labels.join("\n"));
 
         if(!query.exec()){
@@ -801,8 +788,8 @@ void BVB_Manager::comboLangChanged(){
 void BVB_Manager::dateActivated(){
 
     // double click / enter /return on calendar widget's date
-    // QString selected_date = ui->calendarWidget->selectedDate().toString("dd.MM.yyyy");
     auto selected_date = ui->calendarWidget->selectedDate();
+
     // make a query to getting all trainings on this date
     QSqlQuery query(database_manager.getDatabase());
 
@@ -871,45 +858,6 @@ void BVB_Manager::dateClicked(){
 }
 
 
-void BVB_Manager::on_actionTournament_16_triggered()
-{
-    // tournament of 16
-    // double_elim_tour =
-    //     std::make_unique<DoubleEliminationTournament>(database_manager.getDatabase(),
-    //                                                   TournamentMode::ofSixteen,
-    //                                                   this);
-
-    // double_elim_tour->setWindowTitle("Double elimination tournament of 16 teams");
-    // double_elim_tour->show();
-}
-
-
-void BVB_Manager::on_actionTournament_32_triggered()
-{
-    // tournament of 32
-    // double_elim_tour =
-    //     std::make_unique<DoubleEliminationTournament>(database_manager.getDatabase(),
-    //                                                   TournamentMode::ofThirtyTwo,
-    //                                                   this);
-
-    // double_elim_tour->setWindowTitle("Double elimination tournament of 32 teams");
-    // double_elim_tour->show();
-}
-
-
-void BVB_Manager::on_actionTournament_64_triggered()
-{
-    // tournament of 64
-    // double_elim_tour =
-    //     std::make_unique<DoubleEliminationTournament>(database_manager.getDatabase(),
-    //                                                   TournamentMode::ofSixtyFour,
-    //                                                   this);
-
-    // double_elim_tour->setWindowTitle("Double elimination tournament of 64 teams");
-    // double_elim_tour->show();
-}
-
-
 void BVB_Manager::on_actionRegister_a_team_triggered()
 {
     // team registration
@@ -941,17 +889,3 @@ void BVB_Manager::on_actionCreate_a_tournament_triggered()
     tournament_creator->show();
 
 }
-
-
-// TourDraw(QSqlDatabase &database,
-//          Net net_type,
-//          Tournament completed_tournament,
-//          QWidget *parent = nullptr);
-
-// void BVB_Manager::on_actionDraw_triggered()
-// {
-//     // test tournament draw.
-//     tour_draw = std::make_unique<TourDraw>(Net::Sixteen, this);
-//     tour_draw->setWindowTitle("Tournament draw");
-//     tour_draw->show();
-// }

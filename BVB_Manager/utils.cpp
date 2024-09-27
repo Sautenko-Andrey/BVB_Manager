@@ -96,7 +96,6 @@ void changeTableItemStyle(QTableWidget *table, const QColor color,
 
     // make  aqua color and bold text of horizontal headers
     for(int i{0}; i < table->columnCount(); ++i){
-        // auto header_item = table->horizontalHeaderItem(i);
         if(auto header_item = table->horizontalHeaderItem(i); header_item){
             // change color
             header_item->setForeground(color);

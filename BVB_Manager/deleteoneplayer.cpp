@@ -14,20 +14,13 @@ DeleteOnePlayer::DeleteOnePlayer(QSqlDatabase &database, QWidget *parent)
 
     db = &database;
 
-    // creating and filling a table of players
-    //createPlayersTable(model, ui->tableView, db, all_players, this);
-
     // adding header to a table
     model = new QStandardItemModel();
 
     // allow table header occupy full line
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    // Make headers for the table
-    // const QStringList headers = {
-    //     "ID", "First name", "Last name", "Age", "Gender", "Height", "Hometown", "Phone"
-    // };
-
+    // Headers for the table
     for(int i{0}; i < headers.size(); ++i){
         auto item = new QStandardItem(headers[i]);
         item->setForeground(QBrush(QColor("aqua")));

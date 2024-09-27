@@ -79,8 +79,6 @@ private:
 
     Tournament completed_tournament;
 
-    //std::unique_ptr<DoubleEliminationTournament> tour_draw{nullptr};
-
     std::unique_ptr<TourDraw> tour_draw{nullptr};
 
 };
