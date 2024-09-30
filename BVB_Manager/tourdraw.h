@@ -20,6 +20,14 @@ class TourDraw;
 
 enum class Net{ Sixteen = 16, TwentyFour = 24, ThirtyTwo = 32 };
 
+struct Match {
+    QPushButton *team_1;
+    QPushButton *team_2;
+    QPushButton *winner_basket;
+    QPushButton *loser_basket;
+    QPushButton *game_result_btn;
+};
+
 class TourDraw : public QDialog
 {
     Q_OBJECT
@@ -38,6 +46,9 @@ private slots:
     void click_game(QPushButton *team_1, QPushButton *team_2,
                     QPushButton *winner_basket, QPushButton *loser_basket,
                     QPushButton *game_result_btn, QPropertyAnimation *animation = nullptr);
+
+    // alternative option
+    void click_game(Match &game_participants, QPropertyAnimation *animation = nullptr);
 
 
     void moveTeams(const QList<QPushButton *> &teams,
@@ -83,6 +94,8 @@ private:
     QPropertyAnimation *los_animation{nullptr};
 
     QList<QPropertyAnimation *> animations;
+    QList<QPropertyAnimation *> animations_right_1;
+    QList<QPropertyAnimation *> animations_right_2;
 
     QPushButton* drawGameResultBtn(const int x, const int y);
 
