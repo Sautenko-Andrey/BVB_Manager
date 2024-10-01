@@ -143,6 +143,27 @@ const QString game_result_spinbox_style = "QSpinBox {"
                                           "padding: 5px;"       // Padding around the content
                                           "}";
 
+const QString ops_btn_style = "QPushButton {"
+                              "background-color: transparent;"            // Transparent background
+                              "color: black;"                           // Text color
+                              "font-weight: bold;"
+                              /*"border: 1px solid black;"*/                // Border with custom color
+                              "border: none;"
+                              "border-radius: 5px;"                       // Rounded corners
+                              "padding: 5px 3px;"                       // Padding
+                              "font-size: 16px;"
+                              "}"
+
+                              "QPushButton:hover {"
+                              "background-color: azure;"                // Background fills on hover
+                              "color: DeepPink;"                             // Text turns white on hover
+                              "}"
+
+                              "QPushButton:pressed {"
+                              "color: Aqua;"
+                              "background-color: azure;"                // Darker background when pressed
+                              "}";
+
 const QString team_btn_style = "QPushButton {"
                                "background-color: DarkSlateGray;" // Normal background color
                                "color: Aqua;"

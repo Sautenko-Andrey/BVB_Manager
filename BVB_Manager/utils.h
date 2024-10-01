@@ -47,6 +47,8 @@ extern const QString game_result_style_2;
 
 extern const QString game_result_spinbox_style;
 
+extern const QString ops_btn_style;
+
 extern const QString team_btn_style;
 
 extern const QString team_btn_style_for_none;

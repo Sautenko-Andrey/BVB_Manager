@@ -251,76 +251,24 @@ TourDraw::TourDraw(QSqlDatabase &database,
     // Operation buttons
     // button for move forward to the next tour and skip "empty" games
     // left side button
-    QPushButton *forward_left = new QPushButton(this);
-    forward_left->setGeometry(QRect(500, 50, 100, 20));
-    forward_left->setText("Forward >>");
-    forward_left->setStyleSheet("background-color: red; color : black");
 
-    //right side button
-    QPushButton *forward_right_1 = new QPushButton(this);
-    forward_right_1->setGeometry(QRect(650, 50, 100, 20));
-    forward_right_1->setText("<< Forward");
-    forward_right_1->setStyleSheet("background-color: green; color : black");
+    // left side button
+    auto forward_left = makeOpsBtn(QRect(540, 15, 40, 20), ">>", ops_btn_style);
 
-    //right side button
-    QPushButton *forward_right_2 = new QPushButton(this);
-    forward_right_2->setGeometry(QRect(800, 50, 100, 20));
-    forward_right_2->setText("<< Forward");
-    forward_right_2->setStyleSheet("background-color: blue; color : black");
+    //right side button 2nd column
+    auto forward_right_1 = makeOpsBtn(QRect(590, 15, 40, 20), "<<", ops_btn_style);
+
+    //right side button 3rd column
+    auto forward_right_2 = makeOpsBtn(QRect(640, 15, 40, 20), "<<<", ops_btn_style);
 
     // create animations for butoons W1 - W8
-    for(int i{0}; i < 8; ++i){
-        QPropertyAnimation *animation = new QPropertyAnimation(W_buttons[i], "geometry");
-        if (animation == nullptr){
-            qDebug() << "NULL!";
-        }
-        animation->setDuration(1200);
-        QPoint btn_position = W_buttons[i]->pos();
-        animation->setStartValue(QRect(btn_position.x(), btn_position.y(),
-                                       static_cast<int>(Geometry::BtnWidth),
-                                       static_cast<int>(Geometry::BtnHeight)));
-        animation->setEndValue(QRect(btn_position.x(), btn_position.y(),
-                                     static_cast<int>(Geometry::BtnWidth) + 10,
-                                     static_cast<int>(Geometry::BtnHeight) + 10));
-
-        animations.push_back(animation);
-    }
+    createAnimation(std::move(std::make_pair(0, 8)), W_buttons, animations, 1200);
 
     // create animations for buttons W13, W14, W15, W16
-    for(int i{0}; i < 4; ++i){
-        QPropertyAnimation *animation = new QPropertyAnimation(W_buttons[i + 12],
-                                                               "geometry");
-        animation->setDuration(1200);
-        QPoint btn_position = W_buttons[i + 12]->pos();
-        animation->setStartValue(QRect(btn_position.x(), btn_position.y(),
-                                       static_cast<int>(Geometry::BtnWidth),
-                                       static_cast<int>(Geometry::BtnHeight)));
-        animation->setEndValue(QRect(btn_position.x(), btn_position.y(),
-                                     static_cast<int>(Geometry::BtnWidth) + 10,
-                                     static_cast<int>(Geometry::BtnHeight) + 10));
-
-        animations_right_1.push_back(animation);
-    }
+    createAnimation(std::move(std::make_pair(12, 16)), W_buttons, animations_right_1, 1200);
 
     // create animations for buttons W17, W18, W19, W20
-    for(int i{0}; i < 4; ++i){
-
-        QPropertyAnimation *animation = new QPropertyAnimation(W_buttons[i + 16],
-                                                               "geometry");
-        if (animation == nullptr){
-            qDebug() << "NULL!";
-        }
-        animation->setDuration(1200);
-        QPoint btn_position = W_buttons[i + 16]->pos();
-        animation->setStartValue(QRect(btn_position.x(), btn_position.y(),
-                                       static_cast<int>(Geometry::BtnWidth),
-                                       static_cast<int>(Geometry::BtnHeight)));
-        animation->setEndValue(QRect(btn_position.x(), btn_position.y(),
-                                     static_cast<int>(Geometry::BtnWidth) + 10,
-                                     static_cast<int>(Geometry::BtnHeight) + 10));
-
-        animations_right_2.push_back(animation);
-    }
+    createAnimation(std::move(std::make_pair(16, 20)), W_buttons, animations_right_2, 1200);
 
 
     // Signals & slots
@@ -402,49 +350,49 @@ TourDraw::TourDraw(QSqlDatabase &database,
     //W13
     connect(W_buttons[12], &QPushButton::clicked, this, [this](){
         click_game(L1_L12_buttons[7], L1_L12_buttons[6],
-                W_buttons[12], loser_btn, game_result_buttons[12]);
+                W_buttons[12], loser_btn, game_result_buttons[12], animations_right_1[0]);
     });
 
     //W14
     connect(W_buttons[13], &QPushButton::clicked, this, [this](){
         click_game(L1_L12_buttons[5], L1_L12_buttons[4],
-                W_buttons[13], loser_btn, game_result_buttons[13]);
+                W_buttons[13], loser_btn, game_result_buttons[13], animations_right_1[1]);
     });
 
     //W15
     connect(W_buttons[14], &QPushButton::clicked, this, [this](){
         click_game(L1_L12_buttons[3], L1_L12_buttons[2],
-                W_buttons[14], loser_btn, game_result_buttons[14]);
+                W_buttons[14], loser_btn, game_result_buttons[14], animations_right_1[2]);
     });
 
     //W16
     connect(W_buttons[15], &QPushButton::clicked, this, [this](){
         click_game(L1_L12_buttons[1], L1_L12_buttons[0],
-                W_buttons[15], loser_btn, game_result_buttons[15]);
+                W_buttons[15], loser_btn, game_result_buttons[15], animations_right_1[3]);
     });
 
     //W17
     connect(W_buttons[16], &QPushButton::clicked, this, [this](){
         click_game(W_buttons[12], L1_L12_buttons[8],
-                W_buttons[16], loser_btn, game_result_buttons[16]);
+                W_buttons[16], loser_btn, game_result_buttons[16], animations_right_2[0]);
     });
 
     //W18
     connect(W_buttons[17], &QPushButton::clicked, this, [this](){
         click_game(W_buttons[13], L1_L12_buttons[9],
-                W_buttons[17], loser_btn, game_result_buttons[17]);
+                W_buttons[17], loser_btn, game_result_buttons[17], animations_right_2[1]);
     });
 
     //W19
     connect(W_buttons[18], &QPushButton::clicked, this, [this](){
         click_game(W_buttons[14], L1_L12_buttons[10],
-                W_buttons[18], loser_btn, game_result_buttons[18]);
+                W_buttons[18], loser_btn, game_result_buttons[18], animations_right_2[2]);
     });
 
     //W20
     connect(W_buttons[19], &QPushButton::clicked, this, [this](){
         click_game(W_buttons[15], L1_L12_buttons[11],
-                W_buttons[19], loser_btn, game_result_buttons[19]);
+                W_buttons[19], loser_btn, game_result_buttons[19], animations_right_2[3]);
     });
 
     //W21
@@ -541,14 +489,11 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
         // make a list of W13, L10, W14, L9, W15, L12, W16, L11
         QList<QPushButton *> WL_btns;
-        WL_btns.push_back(W_buttons[12]);
-        WL_btns.push_back(L1_L12_buttons[8]);
-        WL_btns.push_back(W_buttons[13]);
-        WL_btns.push_back(L1_L12_buttons[9]);
-        WL_btns.push_back(W_buttons[14]);
-        WL_btns.push_back(L1_L12_buttons[10]);
-        WL_btns.push_back(W_buttons[15]);
-        WL_btns.push_back(L1_L12_buttons[11]);
+
+        for(int i{12}, j{8}; i < 16; ++i, ++j){
+            WL_btns.push_back(W_buttons[i]);
+            WL_btns.push_back(L1_L12_buttons[j]);
+        }
 
         moveTeams(WL_btns, W17_W20_btns, loosers, animations_right_2);
 
@@ -560,6 +505,38 @@ TourDraw::TourDraw(QSqlDatabase &database,
 TourDraw::~TourDraw()
 {
     delete ui;
+}
+
+
+QPushButton* TourDraw::makeOpsBtn(const QRect &&geom, const QString &&text,
+                                  const QString &style){
+    auto btn = new QPushButton(this);
+    btn->setGeometry(geom);
+    btn->setText(text);
+    btn->setStyleSheet(style);
+
+    return btn;
+}
+
+// create animations for butoons
+void TourDraw::createAnimation(std::pair<int,int> &&range,
+                               const QList<QPushButton *> &buttons,
+                               QList<QPropertyAnimation *> &animations,
+                               int duration){
+
+    for(int i{range.first}; i < range.second; ++i){
+        auto animation = new QPropertyAnimation(buttons[i], "geometry");
+        animation->setDuration(duration);
+        QPoint btn_pos = buttons[i]->pos();
+        animation->setStartValue(QRect(btn_pos.x(), btn_pos.y(),
+                                 static_cast<int>(Geometry::BtnWidth),
+                                 static_cast<int>(Geometry::BtnHeight)));
+        animation->setEndValue(QRect(btn_pos.x(), btn_pos.y(),
+                               static_cast<int>(Geometry::BtnWidth) + 10,
+                               static_cast<int>(Geometry::BtnHeight) + 10));
+
+        animations.push_back(animation);
+    }
 }
 
 
@@ -598,7 +575,6 @@ void TourDraw::moveForward(QPushButton *teamA, QPushButton *teamB,
     if(win_btn->text() == no_team){
         win_btn->setStyleSheet(team_btn_style_for_none);
     }
-
 
     fontAdapter(win_btn);
     fontAdapter(los_btn);
@@ -772,42 +748,6 @@ void TourDraw::paintEvent(QPaintEvent *event)
     painter.drawLine(QPoint(x2, 570), QPoint(x2, 659));
 }
 
-// struct Match {
-//     QPushButton *team_1;
-//     QPushButton *team_2;
-//     QPushButton *winner_basket;
-//     QPushButton *loser_basket;
-//     QPushButton *game_result_btn;
-// };
-// This should be a good alternative for 5 arguments below
-
-void TourDraw::click_game(Match &game_participants, QPropertyAnimation *animation){
-
-    game_result = std::make_unique<GameResult>(
-        game_participants.team_1, game_participants.team_2,
-        game_participants.winner_basket, game_participants.loser_basket,
-        game_participants.game_result_btn, this
-    );
-
-    // stop animation
-    if(animation != nullptr && animation->state() == QAbstractAnimation::Running){
-        animation->stop();
-        game_participants.winner_basket->setStyleSheet(team_btn_style);
-        game_participants.winner_basket->resize(static_cast<int>(Geometry::BtnWidth),
-                              static_cast<int>(Geometry::BtnHeight));
-    }
-    else if(animation == nullptr){
-        qDebug() << "NULL!";
-    }
-    else if(!animation->state() == QAbstractAnimation::Running){
-        qDebug() << "Not running!";
-    }
-    else{
-        qDebug() << "Unknown...";
-    }
-
-    game_result->show();
-}
 
 
 void TourDraw::click_game(QPushButton *team_1, QPushButton *team_2,
@@ -819,28 +759,6 @@ void TourDraw::click_game(QPushButton *team_1, QPushButton *team_2,
                                                game_result_btn,
                                                this);
 
-
-    // // stop animation
-    // // if(win_animation->state() == QAbstractAnimation::Running &&
-    // //     los_animation->state() == QAbstractAnimation::Running){
-    // if(win_animation->state() == QAbstractAnimation::Running){
-
-
-    //     win_animation->stop();
-    //     //los_animation->stop();
-
-    //     // apply old style and size for buttons
-    //     winner_basket->setStyleSheet(team_btn_style);
-
-    //     //loser_basket->setStyleSheet(team_btn_style);
-
-    //     winner_basket->resize(static_cast<int>(Geometry::BtnWidth),
-    //                           static_cast<int>(Geometry::BtnHeight));
-    //     // loser_basket->resize(static_cast<int>(Geometry::BtnWidth),
-    //     //                       static_cast<int>(Geometry::BtnHeight));
-
-    // }
-
     // stop animation
     if(animation != nullptr && animation->state() == QAbstractAnimation::Running){
         animation->stop();
@@ -848,7 +766,6 @@ void TourDraw::click_game(QPushButton *team_1, QPushButton *team_2,
         winner_basket->resize(static_cast<int>(Geometry::BtnWidth),
                               static_cast<int>(Geometry::BtnHeight));
     }
-
 
     game_result->show();
 }
