@@ -29,8 +29,9 @@ TourDraw::TourDraw(QSqlDatabase &database,
         return;
     }
 
+
     // change dialog's background color
-    this->setStyleSheet("background-color: azure;");
+    this->setStyleSheet("background-color: azure; color : black");
 
     // pointer on database
     db = &database;
@@ -63,12 +64,23 @@ TourDraw::TourDraw(QSqlDatabase &database,
     const QList<int> rank_baskets{
         0, 15, 8, 7, 4, 11, 12, 3, 2, 13, 10, 5, 6, 9, 14, 1
     };
+
     for(int i{0}, y{static_cast<int>(Geometry::coordYStartBtn)};
         i < static_cast<int>(net_type); ++i){
 
         // drawing 16 teams buttons
 
-        // getting team's name
+        // get players names
+        auto startIndex = tournament.selected_teams[rank_baskets[i]]->text().indexOf('(');  // Find the first '('
+        auto endIndex = tournament.selected_teams[rank_baskets[i]]->text().indexOf(')');    // Find the first ')'
+
+        // Check if both indices were found
+        QString names;
+        if (startIndex != -1 && endIndex != -1 && endIndex > startIndex) {
+            // Extract the substring including parentheses
+            names = tournament.selected_teams[rank_baskets[i]]->text().mid(startIndex, endIndex - startIndex + 1);
+        }
+
         auto comma_index =
             tournament.selected_teams[rank_baskets[i]]->text().indexOf("(");
 
@@ -76,7 +88,7 @@ TourDraw::TourDraw(QSqlDatabase &database,
             tournament.selected_teams[rank_baskets[i]]->text().left(comma_index - 1);
 
         auto btn = drawTeamBtn(static_cast<int>(Geometry::coordXStartBtn), y,
-                               team_name, true);
+                               team_name, true, names);
 
         // add button to the list
         first_round_team_btns.push_back(btn);
@@ -548,16 +560,22 @@ void TourDraw::moveForward(QPushButton *teamA, QPushButton *teamB,
 
     if(teamA->text() == no_team && teamB->text() != no_team){
         win_btn->setText(teamB->text());
+        win_btn->setToolTip(teamB->text());
         los_btn->setText(teamA->text());
+        los_btn->setToolTip(teamA->text());
     }
     else if(teamB->text() == no_team && teamA->text() != no_team){
         win_btn->setText(teamA->text());
+        win_btn->setToolTip(teamA->text());
         los_btn->setText(teamB->text());
+        los_btn->setToolTip(teamB->text());
     }
     else if(teamA->text() == no_team && teamB->text() == no_team){
         // no matter
         win_btn->setText(teamA->text());
+        win_btn->setToolTip(teamA->text());
         los_btn->setText(teamB->text());
+        los_btn->setToolTip(teamB->text());
     }
     else{
 
@@ -785,7 +803,8 @@ QPushButton* TourDraw::drawGameResultBtn(const int x, const int y){
 }
 
 QPushButton* TourDraw::drawTeamBtn(const int x, const int y,
-                                   const QString &team_name, bool is_disabled){
+                                   const QString &team_name, bool is_disabled,
+                                   const QString &names){
 
     // drawing a team button
     QPushButton *team_btn = new QPushButton(this);
@@ -805,6 +824,8 @@ QPushButton* TourDraw::drawTeamBtn(const int x, const int y,
     else{
         team_btn->setStyleSheet(team_btn_style);
     }
+
+    team_btn->setToolTip(names);
 
     // change button's font if necessary
     fontAdapter(team_btn);

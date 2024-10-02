@@ -3,10 +3,12 @@
 #include <QApplication>
 #include <QRect>
 #include "utils.h"
+#include <QToolTip>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
+
     BVB_Manager manager;
     manager.setWindowTitle("BVB Manager");
     manager.setStyleSheet("background-color: #2c3e50; color : white");
@@ -15,5 +17,5 @@ int main(int argc, char *argv[])
                               static_cast<int>(Sizes::MainWindowWidth),
                               static_cast<int>(Sizes::MainWindowHeight)));
     manager.show();
-    return a.exec();
+    return app.exec();
 }

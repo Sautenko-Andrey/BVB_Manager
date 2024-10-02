@@ -90,7 +90,8 @@ private:
     QPushButton* drawGameResultBtn(const int x, const int y);
 
     QPushButton* drawTeamBtn(const int x, const int y,
-                             const QString &team_name, bool is_disabled = false);
+                             const QString &team_name, bool is_disabled = false,
+                             const QString &names = "Unknown");
 
     // Overriding method closeEvent for actions before closing a dialog window
     void closeEvent(QCloseEvent *event) override {

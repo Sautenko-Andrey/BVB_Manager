@@ -83,11 +83,15 @@ void GameResult::on_okButton_clicked()
 
     if(first_team_score == 2){
         winner->setText(first_team->text());
+        winner->setToolTip(first_team->text());
         loser->setText(second_team->text());
+        loser->setToolTip(second_team->text());
     }
     else{
         winner->setText(second_team->text());
+        winner->setToolTip(second_team->text());
         loser->setText(first_team->text());
+        loser->setToolTip(first_team->text());
     }
 
     // change font if necessary
