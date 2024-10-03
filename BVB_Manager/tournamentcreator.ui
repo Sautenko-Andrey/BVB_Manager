@@ -273,13 +273,20 @@
               </widget>
              </item>
              <item>
+              <widget class="QPushButton" name="updateListButton">
+               <property name="text">
+                <string>update list</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <spacer name="horizontalSpacer_4">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
-                 <width>248</width>
+                 <width>118</width>
                  <height>20</height>
                 </size>
                </property>

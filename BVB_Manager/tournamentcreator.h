@@ -52,6 +52,8 @@ private slots:
 
     void selectedTeamsChanged();
 
+    void on_updateListButton_clicked();
+
 private:
     Ui::TournamentCreator *ui;
 

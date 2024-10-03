@@ -167,7 +167,7 @@ void TournamentCreator::netModeChanged(){
     // change teams counter value
     ui->teamsCounterLabel->setText("Selected teams total: 0 / " + selected_tour_net_type);
 
-    // drop all previous actions  ??? HERE IS A BUG!!!!FIX IT!
+    // drop all previous actions
     std::for_each(teams.begin(), teams.end(), [](QCheckBox *box){
         box->setChecked(false);
     });
@@ -287,9 +287,8 @@ void TournamentCreator::tabChanged(){
                     }
                 }
 
-                vbox->addWidget(checkbox);
-
                 teams.push_back(checkbox);
+                vbox->addWidget(checkbox);
             }
 
             ui->groupBox->setLayout(vbox);
@@ -413,3 +412,58 @@ void TournamentCreator::selectedTeamsChanged(){
         });
     }
 }
+
+void TournamentCreator::on_updateListButton_clicked()
+{
+    // THIS ALOMOST WORKS!!!! FIX IT EVENTUALLY!-----------------------------
+    // clean vbox
+    QLayoutItem* item{nullptr};
+    while ((item = vbox->takeAt(0)) != nullptr) {
+        // Remove the widget associated with the item
+        if (item->widget()) {
+            delete item->widget(); // This deletes the widget
+        }
+        // Delete the layout item itself
+        delete item;
+    }
+
+    //clean teams container
+    teams.clear();
+    //-------------------------------------------------------------------------
+
+
+    // make a query
+    QSqlQuery teams_query(*db);
+    if(!teams_query.exec("SELECT"
+                          " team_name, rank, first_player_name, second_player_name,"
+                          " first_player_city, second_player_city"
+                          " FROM Teams"
+                          " ORDER BY rank DESC;")){
+        QMessageBox::warning(this, "Database error",
+                             "Couldn't load teams from the database");
+        return;
+    }
+    else{
+        //vbox = new QVBoxLayout(ui->teamsScrollArea);
+
+        while(teams_query.next()){
+
+            QCheckBox *checkbox = new QCheckBox(teams_query.value(0).toString() +
+                                                    " ( " +
+                                                    teams_query.value(2).toString() +
+                                                    " / " +
+                                                    teams_query.value(3).toString() +
+                                                    " ) , " +
+                                                    teams_query.value(4).toString() +
+                                                    " / " +
+                                                    teams_query.value(5).toString() +
+                                                    " , rank: " +
+                                                    teams_query.value(1).toString(),
+                                                this);
+
+            vbox->addWidget(checkbox);
+            teams.push_back(checkbox);
+        }
+    }
+}
+
