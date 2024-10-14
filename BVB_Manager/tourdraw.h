@@ -12,6 +12,8 @@
 #include <QCloseEvent>
 #include <QVarLengthArray>
 #include <QPropertyAnimation>
+#include "drawschema.h"
+#include "draw24.h"
 
 
 namespace Ui {
@@ -111,6 +113,8 @@ private:
                          int duration);
 
     QPushButton* makeOpsBtn(const QRect &&geom, const QString &&text, const QString &style);
+
+    std::unique_ptr<DrawSchema> draw_schema{nullptr};
 };
 
 #endif // TOURDRAW_H

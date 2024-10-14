@@ -1,0 +1,4256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Draw24</class>
+ <widget class="QDialog" name="Draw24">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1366</width>
+    <height>768</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Tab 1</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_15">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_11">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_221">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_222">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_197">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_223">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_224">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_152">
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_177">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_138">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_129">
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_139">
+                             <item>
+                              <spacer name="horizontalSpacer_53">
+                               <property name="orientation">
+                                <enum>Qt::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>78</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="team_1_btn">
+                               <property name="text">
+                                <string>1</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_140">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <layout class="QHBoxLayout" name="horizontalLayout_178">
+                               <property name="spacing">
+                                <number>0</number>
+                               </property>
+                               <item>
+                                <layout class="QVBoxLayout" name="verticalLayout_27">
+                                 <item>
+                                  <widget class="QPushButton" name="team_16_btn">
+                                   <property name="text">
+                                    <string>16</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <spacer name="verticalSpacer_174">
+                                   <property name="orientation">
+                                    <enum>Qt::Vertical</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>20</width>
+                                     <height>17</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item>
+                                  <widget class="QPushButton" name="team_17_btn">
+                                   <property name="text">
+                                    <string>17</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </item>
+                               <item>
+                                <widget class="Line" name="line_78">
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>60</height>
+                                  </size>
+                                 </property>
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>16777215</width>
+                                   <height>60</height>
+                                  </size>
+                                 </property>
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="W1_btn">
+                               <property name="text">
+                                <string>W 1</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_130">
+                           <item>
+                            <widget class="Line" name="line_79">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>80</height>
+                              </size>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <spacer name="verticalSpacer_193">
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>0</width>
+                               <height>28</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_131">
+                         <item>
+                          <spacer name="verticalSpacer_194">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>17</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="W9_btn">
+                           <property name="text">
+                            <string>W 9</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_195">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>58</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_196">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_179">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_180">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_153">
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_181">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <layout class="QHBoxLayout" name="horizontalLayout_182">
+                               <property name="spacing">
+                                <number>0</number>
+                               </property>
+                               <item>
+                                <layout class="QVBoxLayout" name="verticalLayout_132">
+                                 <item>
+                                  <widget class="QPushButton" name="team_24_btn">
+                                   <property name="text">
+                                    <string>24</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <spacer name="verticalSpacer_197">
+                                   <property name="orientation">
+                                    <enum>Qt::Vertical</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>20</width>
+                                     <height>17</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item>
+                                  <widget class="QPushButton" name="team_9_btn">
+                                   <property name="text">
+                                    <string>9</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </item>
+                               <item>
+                                <widget class="Line" name="line_80">
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>60</height>
+                                  </size>
+                                 </property>
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>16777215</width>
+                                   <height>60</height>
+                                  </size>
+                                 </property>
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="W2_btn">
+                               <property name="text">
+                                <string>W 2</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_183">
+                             <item>
+                              <spacer name="horizontalSpacer_54">
+                               <property name="orientation">
+                                <enum>Qt::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>78</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="team_8_btn">
+                               <property name="text">
+                                <string>8</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_133">
+                           <item>
+                            <spacer name="verticalSpacer_198">
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                           <item>
+                            <widget class="Line" name="line_81">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>80</height>
+                              </size>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_154">
+                         <item>
+                          <spacer name="verticalSpacer_199">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>58</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="W10_btn">
+                           <property name="text">
+                            <string>W 10</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_200">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>17</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_198">
+                     <item>
+                      <spacer name="verticalSpacer_201">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>0</width>
+                         <height>17</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="Line" name="line_82">
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>180</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>180</height>
+                        </size>
+                       </property>
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_202">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>0</width>
+                         <height>17</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="W25_btn">
+                   <property name="text">
+                    <string>W 25</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_203">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_225">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_226">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_199">
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_184">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_185">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_155">
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_186">
+                             <item>
+                              <spacer name="horizontalSpacer_55">
+                               <property name="orientation">
+                                <enum>Qt::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>78</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="team_5_btn">
+                               <property name="text">
+                                <string>5</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_187">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <layout class="QHBoxLayout" name="horizontalLayout_188">
+                               <property name="spacing">
+                                <number>0</number>
+                               </property>
+                               <item>
+                                <layout class="QVBoxLayout" name="verticalLayout_156">
+                                 <item>
+                                  <widget class="QPushButton" name="team_12_btn">
+                                   <property name="text">
+                                    <string>12</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <spacer name="verticalSpacer_204">
+                                   <property name="orientation">
+                                    <enum>Qt::Vertical</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>20</width>
+                                     <height>17</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item>
+                                  <widget class="QPushButton" name="team_21_btn">
+                                   <property name="text">
+                                    <string>21</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </item>
+                               <item>
+                                <widget class="Line" name="line_83">
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>60</height>
+                                  </size>
+                                 </property>
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>16777215</width>
+                                   <height>60</height>
+                                  </size>
+                                 </property>
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="W3_btn">
+                               <property name="text">
+                                <string>W 3</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_157">
+                           <item>
+                            <widget class="Line" name="line_84">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>80</height>
+                              </size>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <spacer name="verticalSpacer_205">
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>0</width>
+                               <height>28</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_158">
+                         <item>
+                          <spacer name="verticalSpacer_206">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>17</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="W11_btn">
+                           <property name="text">
+                            <string>W 11</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_207">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>58</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_208">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_189">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_190">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_159">
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_191">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <layout class="QHBoxLayout" name="horizontalLayout_192">
+                               <property name="spacing">
+                                <number>0</number>
+                               </property>
+                               <item>
+                                <layout class="QVBoxLayout" name="verticalLayout_160">
+                                 <item>
+                                  <widget class="QPushButton" name="team_20_btn">
+                                   <property name="text">
+                                    <string>20</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <spacer name="verticalSpacer_209">
+                                   <property name="orientation">
+                                    <enum>Qt::Vertical</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>20</width>
+                                     <height>17</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item>
+                                  <widget class="QPushButton" name="team_13_btn">
+                                   <property name="text">
+                                    <string>13</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </item>
+                               <item>
+                                <widget class="Line" name="line_85">
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>60</height>
+                                  </size>
+                                 </property>
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>16777215</width>
+                                   <height>60</height>
+                                  </size>
+                                 </property>
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="W4_btn">
+                               <property name="text">
+                                <string>W 4</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_193">
+                             <item>
+                              <spacer name="horizontalSpacer_56">
+                               <property name="orientation">
+                                <enum>Qt::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>78</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="team_4_btn">
+                               <property name="text">
+                                <string>4</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_161">
+                           <item>
+                            <spacer name="verticalSpacer_210">
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                           <item>
+                            <widget class="Line" name="line_86">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>80</height>
+                              </size>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_162">
+                         <item>
+                          <spacer name="verticalSpacer_211">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>58</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="W12_btn">
+                           <property name="text">
+                            <string>W 12</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_212">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>17</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_200">
+                     <item>
+                      <spacer name="verticalSpacer_213">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>0</width>
+                         <height>17</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="Line" name="line_87">
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>180</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>180</height>
+                        </size>
+                       </property>
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_214">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>0</width>
+                         <height>17</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="W26_btn">
+                   <property name="text">
+                    <string>W 26</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_201">
+               <item>
+                <spacer name="verticalSpacer_215">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>0</width>
+                   <height>115</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="Line" name="line_88">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>270</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_216">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>0</width>
+                   <height>115</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QPushButton" name="W37_btn">
+             <property name="text">
+              <string>W 37</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_12">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="Line" name="line_89">
+             <property name="minimumSize">
+              <size>
+               <width>115</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="W43_btn">
+             <property name="text">
+              <string>W 43</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="Line" name="line_90">
+             <property name="minimumSize">
+              <size>
+               <width>115</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_194">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_163">
+             <item>
+              <spacer name="verticalSpacer_217">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>233</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="W41_btn">
+               <property name="text">
+                <string>W 41</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_218">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>233</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_195">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_164">
+               <item>
+                <spacer name="verticalSpacer_219">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>0</width>
+                   <height>275</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="Line" name="line_91">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>30</height>
+                  </size>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_220">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>0</width>
+                   <height>275</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_196">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_165">
+                 <item>
+                  <spacer name="verticalSpacer_221">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>195</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_166">
+                   <item>
+                    <widget class="QPushButton" name="L38_btn">
+                     <property name="text">
+                      <string>L 38</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer_222">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeType">
+                      <enum>QSizePolicy::Fixed</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="W39_btn">
+                     <property name="text">
+                      <string>W 39</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_223">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>191</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_197">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_167">
+                   <item>
+                    <spacer name="verticalSpacer_224">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeType">
+                      <enum>QSizePolicy::Fixed</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>0</width>
+                       <height>153</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="Line" name="line_92">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>275</height>
+                      </size>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer_225">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeType">
+                      <enum>QSizePolicy::Fixed</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>0</width>
+                       <height>58</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_168">
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_198">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <layout class="QVBoxLayout" name="verticalLayout_169">
+                       <item>
+                        <spacer name="verticalSpacer_226">
+                         <property name="orientation">
+                          <enum>Qt::Vertical</enum>
+                         </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::Fixed</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>20</width>
+                           <height>146</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="W33_btn">
+                         <property name="text">
+                          <string>W 33</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <spacer name="verticalSpacer_227">
+                         <property name="orientation">
+                          <enum>Qt::Vertical</enum>
+                         </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::Fixed</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>20</width>
+                           <height>52</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_199">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_170">
+                         <item>
+                          <spacer name="verticalSpacer_228">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>0</width>
+                             <height>95</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="Line" name="line_93">
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>118</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>16777215</width>
+                             <height>118</height>
+                            </size>
+                           </property>
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_171">
+                         <item>
+                          <layout class="QHBoxLayout" name="horizontalLayout_200">
+                           <property name="spacing">
+                            <number>0</number>
+                           </property>
+                           <item>
+                            <widget class="QPushButton" name="W29_btn">
+                             <property name="text">
+                              <string>W 29</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_201">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <layout class="QVBoxLayout" name="verticalLayout_172">
+                               <item>
+                                <spacer name="verticalSpacer_229">
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                 <property name="sizeType">
+                                  <enum>QSizePolicy::Fixed</enum>
+                                 </property>
+                                 <property name="sizeHint" stdset="0">
+                                  <size>
+                                   <width>0</width>
+                                   <height>17</height>
+                                  </size>
+                                 </property>
+                                </spacer>
+                               </item>
+                               <item>
+                                <widget class="Line" name="line_94">
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>148</height>
+                                  </size>
+                                 </property>
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>16777215</width>
+                                   <height>148</height>
+                                  </size>
+                                 </property>
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item>
+                                <spacer name="verticalSpacer_230">
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                 <property name="sizeType">
+                                  <enum>QSizePolicy::Fixed</enum>
+                                 </property>
+                                 <property name="sizeHint" stdset="0">
+                                  <size>
+                                   <width>0</width>
+                                   <height>17</height>
+                                  </size>
+                                 </property>
+                                </spacer>
+                               </item>
+                              </layout>
+                             </item>
+                             <item>
+                              <layout class="QVBoxLayout" name="verticalLayout_173">
+                               <item>
+                                <layout class="QHBoxLayout" name="horizontalLayout_202">
+                                 <property name="spacing">
+                                  <number>0</number>
+                                 </property>
+                                 <item>
+                                  <widget class="QPushButton" name="W24_btn">
+                                   <property name="text">
+                                    <string>W 24</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <layout class="QHBoxLayout" name="horizontalLayout_13">
+                                   <property name="spacing">
+                                    <number>0</number>
+                                   </property>
+                                   <item>
+                                    <widget class="Line" name="line_95">
+                                     <property name="orientation">
+                                      <enum>Qt::Vertical</enum>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item>
+                                    <layout class="QVBoxLayout" name="verticalLayout_5">
+                                     <item>
+                                      <widget class="QPushButton" name="L16_btn">
+                                       <property name="text">
+                                        <string>L 16</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                     <item>
+                                      <spacer name="verticalSpacer_231">
+                                       <property name="orientation">
+                                        <enum>Qt::Vertical</enum>
+                                       </property>
+                                       <property name="sizeHint" stdset="0">
+                                        <size>
+                                         <width>20</width>
+                                         <height>17</height>
+                                        </size>
+                                       </property>
+                                      </spacer>
+                                     </item>
+                                     <item>
+                                      <widget class="QPushButton" name="L1_btn">
+                                       <property name="text">
+                                        <string>L 1</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                    </layout>
+                                   </item>
+                                  </layout>
+                                 </item>
+                                </layout>
+                               </item>
+                               <item>
+                                <spacer name="verticalSpacer_232">
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                 <property name="sizeHint" stdset="0">
+                                  <size>
+                                   <width>20</width>
+                                   <height>18</height>
+                                  </size>
+                                 </property>
+                                </spacer>
+                               </item>
+                               <item>
+                                <layout class="QHBoxLayout" name="horizontalLayout_227">
+                                 <property name="spacing">
+                                  <number>0</number>
+                                 </property>
+                                 <item>
+                                  <widget class="QPushButton" name="W23_btn">
+                                   <property name="text">
+                                    <string>W 23</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <layout class="QHBoxLayout" name="horizontalLayout_228">
+                                   <property name="spacing">
+                                    <number>0</number>
+                                   </property>
+                                   <item>
+                                    <widget class="Line" name="line_96">
+                                     <property name="orientation">
+                                      <enum>Qt::Vertical</enum>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item>
+                                    <layout class="QVBoxLayout" name="verticalLayout_174">
+                                     <item>
+                                      <widget class="QPushButton" name="L2_btn">
+                                       <property name="text">
+                                        <string>L 2</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                     <item>
+                                      <spacer name="verticalSpacer_233">
+                                       <property name="orientation">
+                                        <enum>Qt::Vertical</enum>
+                                       </property>
+                                       <property name="sizeHint" stdset="0">
+                                        <size>
+                                         <width>20</width>
+                                         <height>17</height>
+                                        </size>
+                                       </property>
+                                      </spacer>
+                                     </item>
+                                     <item>
+                                      <widget class="QPushButton" name="L15_btn">
+                                       <property name="text">
+                                        <string>L 15</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                    </layout>
+                                   </item>
+                                  </layout>
+                                 </item>
+                                </layout>
+                               </item>
+                              </layout>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QHBoxLayout" name="horizontalLayout_229">
+                           <item>
+                            <widget class="QPushButton" name="L26_btn">
+                             <property name="text">
+                              <string>L 26</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <spacer name="horizontalSpacer_5">
+                             <property name="orientation">
+                              <enum>Qt::Horizontal</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>168</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer_234">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>17</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_230">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <layout class="QVBoxLayout" name="verticalLayout_175">
+                       <item>
+                        <spacer name="verticalSpacer_235">
+                         <property name="orientation">
+                          <enum>Qt::Vertical</enum>
+                         </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::Fixed</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>20</width>
+                           <height>146</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="W34_btn">
+                         <property name="text">
+                          <string>W 34</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <spacer name="verticalSpacer_236">
+                         <property name="orientation">
+                          <enum>Qt::Vertical</enum>
+                         </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::Fixed</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>20</width>
+                           <height>52</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_231">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_176">
+                         <item>
+                          <spacer name="verticalSpacer_237">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>0</width>
+                             <height>95</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="Line" name="line_97">
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>118</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>16777215</width>
+                             <height>118</height>
+                            </size>
+                           </property>
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_177">
+                         <item>
+                          <layout class="QHBoxLayout" name="horizontalLayout_232">
+                           <property name="spacing">
+                            <number>0</number>
+                           </property>
+                           <item>
+                            <widget class="QPushButton" name="W30_btn">
+                             <property name="text">
+                              <string>W 30</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_233">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <layout class="QVBoxLayout" name="verticalLayout_178">
+                               <item>
+                                <spacer name="verticalSpacer_238">
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                 <property name="sizeType">
+                                  <enum>QSizePolicy::Fixed</enum>
+                                 </property>
+                                 <property name="sizeHint" stdset="0">
+                                  <size>
+                                   <width>0</width>
+                                   <height>17</height>
+                                  </size>
+                                 </property>
+                                </spacer>
+                               </item>
+                               <item>
+                                <widget class="Line" name="line_98">
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>148</height>
+                                  </size>
+                                 </property>
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>16777215</width>
+                                   <height>148</height>
+                                  </size>
+                                 </property>
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item>
+                                <spacer name="verticalSpacer_239">
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                 <property name="sizeType">
+                                  <enum>QSizePolicy::Fixed</enum>
+                                 </property>
+                                 <property name="sizeHint" stdset="0">
+                                  <size>
+                                   <width>0</width>
+                                   <height>17</height>
+                                  </size>
+                                 </property>
+                                </spacer>
+                               </item>
+                              </layout>
+                             </item>
+                             <item>
+                              <layout class="QVBoxLayout" name="verticalLayout_179">
+                               <item>
+                                <layout class="QHBoxLayout" name="horizontalLayout_234">
+                                 <property name="spacing">
+                                  <number>0</number>
+                                 </property>
+                                 <item>
+                                  <widget class="QPushButton" name="W22_btn">
+                                   <property name="text">
+                                    <string>W 22</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <layout class="QHBoxLayout" name="horizontalLayout_235">
+                                   <property name="spacing">
+                                    <number>0</number>
+                                   </property>
+                                   <item>
+                                    <widget class="Line" name="line_99">
+                                     <property name="orientation">
+                                      <enum>Qt::Vertical</enum>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item>
+                                    <layout class="QVBoxLayout" name="verticalLayout_180">
+                                     <item>
+                                      <widget class="QPushButton" name="L14_btn">
+                                       <property name="text">
+                                        <string>L 14</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                     <item>
+                                      <spacer name="verticalSpacer_240">
+                                       <property name="orientation">
+                                        <enum>Qt::Vertical</enum>
+                                       </property>
+                                       <property name="sizeHint" stdset="0">
+                                        <size>
+                                         <width>20</width>
+                                         <height>17</height>
+                                        </size>
+                                       </property>
+                                      </spacer>
+                                     </item>
+                                     <item>
+                                      <widget class="QPushButton" name="L3_btn">
+                                       <property name="text">
+                                        <string>L 3</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                    </layout>
+                                   </item>
+                                  </layout>
+                                 </item>
+                                </layout>
+                               </item>
+                               <item>
+                                <spacer name="verticalSpacer_241">
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                 <property name="sizeHint" stdset="0">
+                                  <size>
+                                   <width>20</width>
+                                   <height>18</height>
+                                  </size>
+                                 </property>
+                                </spacer>
+                               </item>
+                               <item>
+                                <layout class="QHBoxLayout" name="horizontalLayout_236">
+                                 <property name="spacing">
+                                  <number>0</number>
+                                 </property>
+                                 <item>
+                                  <widget class="QPushButton" name="W21_btn">
+                                   <property name="text">
+                                    <string>W 21</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <layout class="QHBoxLayout" name="horizontalLayout_237">
+                                   <property name="spacing">
+                                    <number>0</number>
+                                   </property>
+                                   <item>
+                                    <widget class="Line" name="line_100">
+                                     <property name="orientation">
+                                      <enum>Qt::Vertical</enum>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item>
+                                    <layout class="QVBoxLayout" name="verticalLayout_181">
+                                     <item>
+                                      <widget class="QPushButton" name="L4_btn">
+                                       <property name="text">
+                                        <string>L 4</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                     <item>
+                                      <spacer name="verticalSpacer_242">
+                                       <property name="orientation">
+                                        <enum>Qt::Vertical</enum>
+                                       </property>
+                                       <property name="sizeHint" stdset="0">
+                                        <size>
+                                         <width>20</width>
+                                         <height>17</height>
+                                        </size>
+                                       </property>
+                                      </spacer>
+                                     </item>
+                                     <item>
+                                      <widget class="QPushButton" name="L13_btn">
+                                       <property name="text">
+                                        <string>L 13</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                    </layout>
+                                   </item>
+                                  </layout>
+                                 </item>
+                                </layout>
+                               </item>
+                              </layout>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QHBoxLayout" name="horizontalLayout_238">
+                           <item>
+                            <widget class="QPushButton" name="L25_btn">
+                             <property name="text">
+                              <string>L 25</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <spacer name="horizontalSpacer_17">
+                             <property name="orientation">
+                              <enum>Qt::Horizontal</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>168</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>Tab 2</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_14">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_208">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_207">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_185">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_204">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_203">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_139">
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_141">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_56">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_72">
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_55">
+                             <item>
+                              <spacer name="horizontalSpacer_41">
+                               <property name="orientation">
+                                <enum>Qt::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>78</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="pushButton_153">
+                               <property name="text">
+                                <string>3</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_98">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <layout class="QHBoxLayout" name="horizontalLayout_54">
+                               <property name="spacing">
+                                <number>0</number>
+                               </property>
+                               <item>
+                                <layout class="QVBoxLayout" name="verticalLayout_24">
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_151">
+                                   <property name="text">
+                                    <string>14</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <spacer name="verticalSpacer_85">
+                                   <property name="orientation">
+                                    <enum>Qt::Vertical</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>20</width>
+                                     <height>17</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_152">
+                                   <property name="text">
+                                    <string>19</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </item>
+                               <item>
+                                <widget class="Line" name="line_10">
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>60</height>
+                                  </size>
+                                 </property>
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>16777215</width>
+                                   <height>60</height>
+                                  </size>
+                                 </property>
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="pushButton_173">
+                               <property name="text">
+                                <string>W 5</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_73">
+                           <item>
+                            <widget class="Line" name="line">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>80</height>
+                              </size>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <spacer name="verticalSpacer_23">
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>0</width>
+                               <height>28</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_95">
+                         <item>
+                          <spacer name="verticalSpacer_72">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>17</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="pushButton_157">
+                           <property name="text">
+                            <string>W 13</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_71">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>58</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_29">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_144">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_143">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_134">
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_146">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <layout class="QHBoxLayout" name="horizontalLayout_147">
+                               <property name="spacing">
+                                <number>0</number>
+                               </property>
+                               <item>
+                                <layout class="QVBoxLayout" name="verticalLayout_98">
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_176">
+                                   <property name="text">
+                                    <string>22</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <spacer name="verticalSpacer_87">
+                                   <property name="orientation">
+                                    <enum>Qt::Vertical</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>20</width>
+                                     <height>17</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_177">
+                                   <property name="text">
+                                    <string>11</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </item>
+                               <item>
+                                <widget class="Line" name="line_12">
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>60</height>
+                                  </size>
+                                 </property>
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>16777215</width>
+                                   <height>60</height>
+                                  </size>
+                                 </property>
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="pushButton_178">
+                               <property name="text">
+                                <string>W 6</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_145">
+                             <item>
+                              <spacer name="horizontalSpacer_43">
+                               <property name="orientation">
+                                <enum>Qt::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>78</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="pushButton_175">
+                               <property name="text">
+                                <string>6</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_99">
+                           <item>
+                            <spacer name="verticalSpacer_88">
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                           <item>
+                            <widget class="Line" name="line_4">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>80</height>
+                              </size>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_97">
+                         <item>
+                          <spacer name="verticalSpacer_97">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>58</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="pushButton_179">
+                           <property name="text">
+                            <string>W 14</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_96">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>17</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_182">
+                     <item>
+                      <spacer name="verticalSpacer_175">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>0</width>
+                         <height>17</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="Line" name="line_38">
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>180</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>180</height>
+                        </size>
+                       </property>
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_176">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>0</width>
+                         <height>17</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_238">
+                   <property name="text">
+                    <string>W 27</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_31">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_205">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_206">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_183">
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_142">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_90">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_74">
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_99">
+                             <item>
+                              <spacer name="horizontalSpacer_42">
+                               <property name="orientation">
+                                <enum>Qt::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>78</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="pushButton_154">
+                               <property name="text">
+                                <string>7</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_100">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <layout class="QHBoxLayout" name="horizontalLayout_101">
+                               <property name="spacing">
+                                <number>0</number>
+                               </property>
+                               <item>
+                                <layout class="QVBoxLayout" name="verticalLayout_93">
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_155">
+                                   <property name="text">
+                                    <string>10</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <spacer name="verticalSpacer_86">
+                                   <property name="orientation">
+                                    <enum>Qt::Vertical</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>20</width>
+                                     <height>17</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_156">
+                                   <property name="text">
+                                    <string>23</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </item>
+                               <item>
+                                <widget class="Line" name="line_11">
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>60</height>
+                                  </size>
+                                 </property>
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>16777215</width>
+                                   <height>60</height>
+                                  </size>
+                                 </property>
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="pushButton_174">
+                               <property name="text">
+                                <string>W 7</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_94">
+                           <item>
+                            <widget class="Line" name="line_3">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>80</height>
+                              </size>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <spacer name="verticalSpacer_70">
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>0</width>
+                               <height>28</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_96">
+                         <item>
+                          <spacer name="verticalSpacer_79">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>17</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="pushButton_158">
+                           <property name="text">
+                            <string>W 15</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_81">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>58</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_30">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_148">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_149">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_135">
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_150">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <layout class="QHBoxLayout" name="horizontalLayout_151">
+                               <property name="spacing">
+                                <number>0</number>
+                               </property>
+                               <item>
+                                <layout class="QVBoxLayout" name="verticalLayout_136">
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_180">
+                                   <property name="text">
+                                    <string>18</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <spacer name="verticalSpacer_98">
+                                   <property name="orientation">
+                                    <enum>Qt::Vertical</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>20</width>
+                                     <height>17</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_234">
+                                   <property name="text">
+                                    <string>15</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </item>
+                               <item>
+                                <widget class="Line" name="line_13">
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>60</height>
+                                  </size>
+                                 </property>
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>16777215</width>
+                                   <height>60</height>
+                                  </size>
+                                 </property>
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="pushButton_235">
+                               <property name="text">
+                                <string>W 8</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_152">
+                             <item>
+                              <spacer name="horizontalSpacer_44">
+                               <property name="orientation">
+                                <enum>Qt::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>78</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="pushButton_236">
+                               <property name="text">
+                                <string>2</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_137">
+                           <item>
+                            <spacer name="verticalSpacer_99">
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                           <item>
+                            <widget class="Line" name="line_9">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>80</height>
+                              </size>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_138">
+                         <item>
+                          <spacer name="verticalSpacer_135">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>58</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="pushButton_237">
+                           <property name="text">
+                            <string>W 16</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_136">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>17</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_184">
+                     <item>
+                      <spacer name="verticalSpacer_177">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>0</width>
+                         <height>17</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="Line" name="line_39">
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>180</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>180</height>
+                        </size>
+                       </property>
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_178">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>0</width>
+                         <height>17</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_305">
+                   <property name="text">
+                    <string>W 28</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_186">
+               <item>
+                <spacer name="verticalSpacer_179">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>0</width>
+                   <height>115</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="Line" name="line_40">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>270</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_180">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>0</width>
+                   <height>115</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_306">
+             <property name="text">
+              <string>W 38</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="Line" name="line_27">
+             <property name="minimumSize">
+              <size>
+               <width>115</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_85">
+             <property name="text">
+              <string>W 44</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="Line" name="line_28">
+             <property name="minimumSize">
+              <size>
+               <width>115</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_74">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_60">
+             <item>
+              <spacer name="verticalSpacer_67">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>233</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_84">
+               <property name="text">
+                <string>W 42</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_68">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>233</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_73">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_59">
+               <item>
+                <spacer name="verticalSpacer_65">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>0</width>
+                   <height>275</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="Line" name="line_26">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>30</height>
+                  </size>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_66">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>0</width>
+                   <height>275</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_72">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_58">
+                 <item>
+                  <spacer name="verticalSpacer_62">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>195</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_57">
+                   <item>
+                    <widget class="QPushButton" name="pushButton_83">
+                     <property name="text">
+                      <string>L 37</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer_64">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeType">
+                      <enum>QSizePolicy::Fixed</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="pushButton_82">
+                     <property name="text">
+                      <string>W 40</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_63">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>191</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_71">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_56">
+                   <item>
+                    <spacer name="verticalSpacer_60">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeType">
+                      <enum>QSizePolicy::Fixed</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>0</width>
+                       <height>153</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="Line" name="line_25">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>275</height>
+                      </size>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer_61">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeType">
+                      <enum>QSizePolicy::Fixed</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>0</width>
+                       <height>58</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_55">
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_40">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <layout class="QVBoxLayout" name="verticalLayout_33">
+                       <item>
+                        <spacer name="verticalSpacer_33">
+                         <property name="orientation">
+                          <enum>Qt::Vertical</enum>
+                         </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::Fixed</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>20</width>
+                           <height>146</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="pushButton_54">
+                         <property name="text">
+                          <string>W 35</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <spacer name="verticalSpacer_34">
+                         <property name="orientation">
+                          <enum>Qt::Vertical</enum>
+                         </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::Fixed</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>20</width>
+                           <height>52</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_39">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_32">
+                         <item>
+                          <spacer name="verticalSpacer_32">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>0</width>
+                             <height>95</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="Line" name="line_7">
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>118</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>16777215</width>
+                             <height>118</height>
+                            </size>
+                           </property>
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_31">
+                         <item>
+                          <layout class="QHBoxLayout" name="horizontalLayout_37">
+                           <property name="spacing">
+                            <number>0</number>
+                           </property>
+                           <item>
+                            <widget class="QPushButton" name="pushButton_52">
+                             <property name="text">
+                              <string>W 31</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_36">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <layout class="QVBoxLayout" name="verticalLayout_30">
+                               <item>
+                                <spacer name="verticalSpacer_27">
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                 <property name="sizeType">
+                                  <enum>QSizePolicy::Fixed</enum>
+                                 </property>
+                                 <property name="sizeHint" stdset="0">
+                                  <size>
+                                   <width>0</width>
+                                   <height>17</height>
+                                  </size>
+                                 </property>
+                                </spacer>
+                               </item>
+                               <item>
+                                <widget class="Line" name="line_6">
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>148</height>
+                                  </size>
+                                 </property>
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>16777215</width>
+                                   <height>148</height>
+                                  </size>
+                                 </property>
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item>
+                                <spacer name="verticalSpacer_26">
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                 <property name="sizeType">
+                                  <enum>QSizePolicy::Fixed</enum>
+                                 </property>
+                                 <property name="sizeHint" stdset="0">
+                                  <size>
+                                   <width>0</width>
+                                   <height>17</height>
+                                  </size>
+                                 </property>
+                                </spacer>
+                               </item>
+                              </layout>
+                             </item>
+                             <item>
+                              <layout class="QVBoxLayout" name="verticalLayout_29">
+                               <item>
+                                <layout class="QHBoxLayout" name="horizontalLayout_33">
+                                 <property name="spacing">
+                                  <number>0</number>
+                                 </property>
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_7">
+                                   <property name="text">
+                                    <string>W 20</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <layout class="QHBoxLayout" name="horizontalLayout_4">
+                                   <property name="spacing">
+                                    <number>0</number>
+                                   </property>
+                                   <item>
+                                    <widget class="Line" name="line_2">
+                                     <property name="orientation">
+                                      <enum>Qt::Vertical</enum>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item>
+                                    <layout class="QVBoxLayout" name="verticalLayout_2">
+                                     <item>
+                                      <widget class="QPushButton" name="pushButton_5">
+                                       <property name="text">
+                                        <string>L 12</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                     <item>
+                                      <spacer name="verticalSpacer_24">
+                                       <property name="orientation">
+                                        <enum>Qt::Vertical</enum>
+                                       </property>
+                                       <property name="sizeHint" stdset="0">
+                                        <size>
+                                         <width>20</width>
+                                         <height>17</height>
+                                        </size>
+                                       </property>
+                                      </spacer>
+                                     </item>
+                                     <item>
+                                      <widget class="QPushButton" name="pushButton_6">
+                                       <property name="text">
+                                        <string>L 5</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                    </layout>
+                                   </item>
+                                  </layout>
+                                 </item>
+                                </layout>
+                               </item>
+                               <item>
+                                <spacer name="verticalSpacer_28">
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                 <property name="sizeHint" stdset="0">
+                                  <size>
+                                   <width>20</width>
+                                   <height>18</height>
+                                  </size>
+                                 </property>
+                                </spacer>
+                               </item>
+                               <item>
+                                <layout class="QHBoxLayout" name="horizontalLayout_34">
+                                 <property name="spacing">
+                                  <number>0</number>
+                                 </property>
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_49">
+                                   <property name="text">
+                                    <string>W 19</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <layout class="QHBoxLayout" name="horizontalLayout_35">
+                                   <property name="spacing">
+                                    <number>0</number>
+                                   </property>
+                                   <item>
+                                    <widget class="Line" name="line_5">
+                                     <property name="orientation">
+                                      <enum>Qt::Vertical</enum>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item>
+                                    <layout class="QVBoxLayout" name="verticalLayout_28">
+                                     <item>
+                                      <widget class="QPushButton" name="pushButton_50">
+                                       <property name="text">
+                                        <string>L 6</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                     <item>
+                                      <spacer name="verticalSpacer_25">
+                                       <property name="orientation">
+                                        <enum>Qt::Vertical</enum>
+                                       </property>
+                                       <property name="sizeHint" stdset="0">
+                                        <size>
+                                         <width>20</width>
+                                         <height>17</height>
+                                        </size>
+                                       </property>
+                                      </spacer>
+                                     </item>
+                                     <item>
+                                      <widget class="QPushButton" name="pushButton_51">
+                                       <property name="text">
+                                        <string>L 11</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                    </layout>
+                                   </item>
+                                  </layout>
+                                 </item>
+                                </layout>
+                               </item>
+                              </layout>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QHBoxLayout" name="horizontalLayout_38">
+                           <item>
+                            <widget class="QPushButton" name="pushButton_53">
+                             <property name="text">
+                              <string>L 28</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <spacer name="horizontalSpacer_2">
+                             <property name="orientation">
+                              <enum>Qt::Horizontal</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>168</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer_59">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>17</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_62">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <layout class="QVBoxLayout" name="verticalLayout_48">
+                       <item>
+                        <spacer name="verticalSpacer_51">
+                         <property name="orientation">
+                          <enum>Qt::Vertical</enum>
+                         </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::Fixed</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>20</width>
+                           <height>146</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="pushButton_73">
+                         <property name="text">
+                          <string>W 36</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <spacer name="verticalSpacer_52">
+                         <property name="orientation">
+                          <enum>Qt::Vertical</enum>
+                         </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::Fixed</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>20</width>
+                           <height>52</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_63">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_49">
+                         <item>
+                          <spacer name="verticalSpacer_53">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeType">
+                            <enum>QSizePolicy::Fixed</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>0</width>
+                             <height>95</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="Line" name="line_21">
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>118</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>16777215</width>
+                             <height>118</height>
+                            </size>
+                           </property>
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_50">
+                         <item>
+                          <layout class="QHBoxLayout" name="horizontalLayout_64">
+                           <property name="spacing">
+                            <number>0</number>
+                           </property>
+                           <item>
+                            <widget class="QPushButton" name="pushButton_74">
+                             <property name="text">
+                              <string>W 32</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_65">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <layout class="QVBoxLayout" name="verticalLayout_51">
+                               <item>
+                                <spacer name="verticalSpacer_54">
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                 <property name="sizeType">
+                                  <enum>QSizePolicy::Fixed</enum>
+                                 </property>
+                                 <property name="sizeHint" stdset="0">
+                                  <size>
+                                   <width>0</width>
+                                   <height>17</height>
+                                  </size>
+                                 </property>
+                                </spacer>
+                               </item>
+                               <item>
+                                <widget class="Line" name="line_22">
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>0</width>
+                                   <height>148</height>
+                                  </size>
+                                 </property>
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>16777215</width>
+                                   <height>148</height>
+                                  </size>
+                                 </property>
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item>
+                                <spacer name="verticalSpacer_55">
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                 <property name="sizeType">
+                                  <enum>QSizePolicy::Fixed</enum>
+                                 </property>
+                                 <property name="sizeHint" stdset="0">
+                                  <size>
+                                   <width>0</width>
+                                   <height>17</height>
+                                  </size>
+                                 </property>
+                                </spacer>
+                               </item>
+                              </layout>
+                             </item>
+                             <item>
+                              <layout class="QVBoxLayout" name="verticalLayout_52">
+                               <item>
+                                <layout class="QHBoxLayout" name="horizontalLayout_66">
+                                 <property name="spacing">
+                                  <number>0</number>
+                                 </property>
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_75">
+                                   <property name="text">
+                                    <string>W 18</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <layout class="QHBoxLayout" name="horizontalLayout_67">
+                                   <property name="spacing">
+                                    <number>0</number>
+                                   </property>
+                                   <item>
+                                    <widget class="Line" name="line_23">
+                                     <property name="orientation">
+                                      <enum>Qt::Vertical</enum>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item>
+                                    <layout class="QVBoxLayout" name="verticalLayout_53">
+                                     <item>
+                                      <widget class="QPushButton" name="pushButton_76">
+                                       <property name="text">
+                                        <string>L 10</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                     <item>
+                                      <spacer name="verticalSpacer_56">
+                                       <property name="orientation">
+                                        <enum>Qt::Vertical</enum>
+                                       </property>
+                                       <property name="sizeHint" stdset="0">
+                                        <size>
+                                         <width>20</width>
+                                         <height>17</height>
+                                        </size>
+                                       </property>
+                                      </spacer>
+                                     </item>
+                                     <item>
+                                      <widget class="QPushButton" name="pushButton_77">
+                                       <property name="text">
+                                        <string>L 7</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                    </layout>
+                                   </item>
+                                  </layout>
+                                 </item>
+                                </layout>
+                               </item>
+                               <item>
+                                <spacer name="verticalSpacer_57">
+                                 <property name="orientation">
+                                  <enum>Qt::Vertical</enum>
+                                 </property>
+                                 <property name="sizeHint" stdset="0">
+                                  <size>
+                                   <width>20</width>
+                                   <height>18</height>
+                                  </size>
+                                 </property>
+                                </spacer>
+                               </item>
+                               <item>
+                                <layout class="QHBoxLayout" name="horizontalLayout_68">
+                                 <property name="spacing">
+                                  <number>0</number>
+                                 </property>
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_78">
+                                   <property name="text">
+                                    <string>W 17</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <layout class="QHBoxLayout" name="horizontalLayout_69">
+                                   <property name="spacing">
+                                    <number>0</number>
+                                   </property>
+                                   <item>
+                                    <widget class="Line" name="line_24">
+                                     <property name="orientation">
+                                      <enum>Qt::Vertical</enum>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item>
+                                    <layout class="QVBoxLayout" name="verticalLayout_54">
+                                     <item>
+                                      <widget class="QPushButton" name="pushButton_79">
+                                       <property name="text">
+                                        <string>L 8</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                     <item>
+                                      <spacer name="verticalSpacer_58">
+                                       <property name="orientation">
+                                        <enum>Qt::Vertical</enum>
+                                       </property>
+                                       <property name="sizeHint" stdset="0">
+                                        <size>
+                                         <width>20</width>
+                                         <height>17</height>
+                                        </size>
+                                       </property>
+                                      </spacer>
+                                     </item>
+                                     <item>
+                                      <widget class="QPushButton" name="pushButton_80">
+                                       <property name="text">
+                                        <string>L 9</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                    </layout>
+                                   </item>
+                                  </layout>
+                                 </item>
+                                </layout>
+                               </item>
+                              </layout>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QHBoxLayout" name="horizontalLayout_70">
+                           <item>
+                            <widget class="QPushButton" name="pushButton_81">
+                             <property name="text">
+                              <string>L 27</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <spacer name="horizontalSpacer_14">
+                             <property name="orientation">
+                              <enum>Qt::Horizontal</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>168</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Final</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_22">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_21">
+         <item>
+          <spacer name="horizontalSpacer_10">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>68</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <item>
+            <spacer name="verticalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>68</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_20">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_18">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_16">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout">
+                   <item>
+                    <widget class="QPushButton" name="pushButton">
+                     <property name="text">
+                      <string>W 43</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="pushButton_2">
+                     <property name="text">
+                      <string>W 44</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="Line" name="line_101">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_3">
+                 <property name="text">
+                  <string>1st place</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>38</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_19">
+               <property name="text">
+                <string>2nd place</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>38</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_19">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QPushButton" name="pushButton_4">
+                 <property name="text">
+                  <string>3rd place</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_17">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="Line" name="line_102">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_6">
+                   <item>
+                    <widget class="QPushButton" name="pushButton_17">
+                     <property name="text">
+                      <string>L 43</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer_2">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="pushButton_18">
+                     <property name="text">
+                      <string>L 44</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>68</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_8">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>68</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
