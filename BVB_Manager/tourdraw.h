@@ -20,7 +20,7 @@ namespace Ui {
 class TourDraw;
 }
 
-enum class Net{ Sixteen = 16, TwentyFour = 24, ThirtyTwo = 32 };
+// enum class Net{ Sixteen = 16, TwentyFour = 24, ThirtyTwo = 32 };
 
 class TourDraw : public QDialog
 {

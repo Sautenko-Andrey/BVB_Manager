@@ -13,6 +13,9 @@
 #include "utils.h"
 #include "doubleeliminationtournament.h"
 #include "tourdraw.h"
+#include "drawschema.h"
+#include "draw24.h"
+#include "draw32.h"
 
 
 namespace Ui {
@@ -82,6 +85,8 @@ private:
     Tournament completed_tournament;
 
     std::unique_ptr<TourDraw> tour_draw{nullptr};
+
+    std::unique_ptr<DrawSchema> draw_schema{nullptr};
 
 };
 

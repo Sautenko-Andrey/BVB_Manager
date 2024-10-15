@@ -3,7 +3,12 @@
 
 DrawSchema::DrawSchema(QWidget* parent): QDialog(parent), parent_dialog{parent}
 {
+    // change dialog's background color
+    this->setStyleSheet("background-color: azure; color : black");
 
+    // pointer on nowhere for out team
+    loser_btn = new QPushButton(this);
+    loser_btn->hide();
 }
 
 void DrawSchema::moveForward(QPushButton *teamA, QPushButton *teamB,
@@ -50,6 +55,13 @@ void DrawSchema::moveForward(QPushButton *teamA, QPushButton *teamB,
 
     fontAdapter(win_btn);
     fontAdapter(los_btn);
+}
+
+void DrawSchema::setDB(QSqlDatabase *db)
+{
+    if(db != nullptr){
+        this->db = db;
+    }
 }
 
 

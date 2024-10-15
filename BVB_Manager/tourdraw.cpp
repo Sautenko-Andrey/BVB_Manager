@@ -22,19 +22,6 @@ TourDraw::TourDraw(QSqlDatabase &database,
 {
     ui->setupUi(this);
 
-    // Tour for 24 and 32 teams are not available (temporary)
-    // if(net_type == Net::TwentyFour || net_type == Net::ThirtyTwo){
-    //     QMessageBox::warning(this, "Warning",
-    //                          "Modes for 24 or 32 teams are not available at this moment.");
-    //     return;
-    // }
-
-    // needs a test-------------------------------------------------
-    if(net_type == Net::TwentyFour){
-        draw_schema = std::make_unique<Draw24>(this);
-    }
-    //--------------------------------------------------------------
-
     // change dialog's background color
     this->setStyleSheet("background-color: azure; color : black");
 

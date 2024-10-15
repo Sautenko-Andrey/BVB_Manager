@@ -5,8 +5,9 @@
 #include <QObject>
 #include <QPropertyAnimation>
 #include <QAbstractAnimation>
-#include"utils.h"
+#include "utils.h"
 #include "gameresult.h"
+#include <QSqlDatabase>
 
 class DrawSchema : public QDialog
 {
@@ -18,6 +19,20 @@ public:
     void moveForward(QPushButton *teamA, QPushButton *teamB,
                      QPushButton *win_btn, QPushButton *los_btn,
                      QPropertyAnimation *animation);
+
+    QPushButton *loser_btn{nullptr};
+
+    void setDB(QSqlDatabase *db);
+
+    QSqlDatabase* getDB(){ return db; }
+
+    void setTournament(Tournament *tournament){
+        if(tournament != nullptr){
+            this->tournament = tournament;
+        }
+    }
+
+    Tournament* getTournament(){ return tournament; }
 
 private slots:
 
@@ -45,6 +60,11 @@ private:
         parent_dialog->close();
         event->accept();
     }
+
+private:
+    QSqlDatabase *db{nullptr};
+
+    Tournament *tournament{nullptr};
 };
 
 #endif // DRAWSCHEMA_H

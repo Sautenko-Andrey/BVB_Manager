@@ -200,44 +200,72 @@ void TournamentCreator::on_addButton_clicked()
         tour_draw =
             std::make_unique<TourDraw>(*db, Net::Sixteen,
                                        completed_tournament, this);
+
+        tour_draw->setWindowTitle(completed_tournament.tour_title +
+                                  " ( " +
+                                  completed_tournament.date_begin +
+                                  " - " +
+                                  completed_tournament.date_end +
+                                  " ) ");
+
+        tour_draw->show();
+
+        // make all child widget disabled for security purpose
+        // Get all child widgets of the parent
+        const QObjectList &children = this->children();
+
+        for (QObject *child : children)
+        {
+            // Convert QObject to QWidget to access widget-specific functions
+            QWidget *widget = qobject_cast<QWidget *>(child);
+
+            // Skip null objects and the exception widget (managed by shared_ptr)
+            if (widget && widget != tour_draw.get())
+            {
+                widget->setEnabled(false);  // Disable the widget
+            }
+        }
     }
     else if(selected_tour_net_type.toInt() == static_cast<int>(Net::TwentyFour)){
 
-        tour_draw =
-            std::make_unique<TourDraw>(*db, Net::TwentyFour,
-                                       completed_tournament, this);
+        // drawing a schema for 24 teams
+        draw_schema = std::make_unique<Draw24>(*db,
+                                               &completed_tournament, this);
+        draw_schema->show();
+
     }
     else{
-
-        tour_draw =
-            std::make_unique<TourDraw>(*db, Net::ThirtyTwo,
-                                       completed_tournament, this);
+        // drawing a schema for 32 teams
+        draw_schema = std::make_unique<Draw32>(*db,
+                                               &completed_tournament, this);
+        draw_schema->show();
     }
 
-    tour_draw->setWindowTitle(completed_tournament.tour_title +
-                              " ( " +
-                              completed_tournament.date_begin +
-                              " - " +
-                              completed_tournament.date_end +
-                              " ) ");
 
-    tour_draw->show();
+    // tour_draw->setWindowTitle(completed_tournament.tour_title +
+    //                           " ( " +
+    //                           completed_tournament.date_begin +
+    //                           " - " +
+    //                           completed_tournament.date_end +
+    //                           " ) ");
 
-    // make all child widget disabled for security purpose
-    // Get all child widgets of the parent
-    const QObjectList &children = this->children();
+    // tour_draw->show();
 
-    for (QObject *child : children)
-    {
-        // Convert QObject to QWidget to access widget-specific functions
-        QWidget *widget = qobject_cast<QWidget *>(child);
+    // // make all child widget disabled for security purpose
+    // // Get all child widgets of the parent
+    // const QObjectList &children = this->children();
 
-        // Skip null objects and the exception widget (managed by shared_ptr)
-        if (widget && widget != tour_draw.get())
-        {
-            widget->setEnabled(false);  // Disable the widget
-        }
-    }
+    // for (QObject *child : children)
+    // {
+    //     // Convert QObject to QWidget to access widget-specific functions
+    //     QWidget *widget = qobject_cast<QWidget *>(child);
+
+    //     // Skip null objects and the exception widget (managed by shared_ptr)
+    //     if (widget && widget != tour_draw.get())
+    //     {
+    //         widget->setEnabled(false);  // Disable the widget
+    //     }
+    // }
 }
 
 

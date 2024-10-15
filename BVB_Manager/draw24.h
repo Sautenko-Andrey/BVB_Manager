@@ -13,7 +13,8 @@ class Draw24 : public DrawSchema
     Q_OBJECT
 
 public:
-    explicit Draw24(QWidget *parent = nullptr);
+    Draw24(QSqlDatabase &db,
+           Tournament *tour, QWidget *parent = nullptr);
     ~Draw24();
 
 private:

@@ -2084,7 +2084,7 @@
                               </spacer>
                              </item>
                              <item>
-                              <widget class="QPushButton" name="pushButton_153">
+                              <widget class="QPushButton" name="team_3_btn">
                                <property name="text">
                                 <string>3</string>
                                </property>
@@ -2105,7 +2105,7 @@
                                <item>
                                 <layout class="QVBoxLayout" name="verticalLayout_24">
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_151">
+                                  <widget class="QPushButton" name="team_14_btn">
                                    <property name="text">
                                     <string>14</string>
                                    </property>
@@ -2125,7 +2125,7 @@
                                   </spacer>
                                  </item>
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_152">
+                                  <widget class="QPushButton" name="team_19_btn">
                                    <property name="text">
                                     <string>19</string>
                                    </property>
@@ -2155,7 +2155,7 @@
                               </layout>
                              </item>
                              <item>
-                              <widget class="QPushButton" name="pushButton_173">
+                              <widget class="QPushButton" name="W5_btn">
                                <property name="text">
                                 <string>W 5</string>
                                </property>
@@ -2216,7 +2216,7 @@
                           </spacer>
                          </item>
                          <item>
-                          <widget class="QPushButton" name="pushButton_157">
+                          <widget class="QPushButton" name="W13_btn">
                            <property name="text">
                             <string>W 13</string>
                            </property>
@@ -2280,7 +2280,7 @@
                                <item>
                                 <layout class="QVBoxLayout" name="verticalLayout_98">
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_176">
+                                  <widget class="QPushButton" name="team_22_btn">
                                    <property name="text">
                                     <string>22</string>
                                    </property>
@@ -2300,7 +2300,7 @@
                                   </spacer>
                                  </item>
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_177">
+                                  <widget class="QPushButton" name="team_11_btn">
                                    <property name="text">
                                     <string>11</string>
                                    </property>
@@ -2330,7 +2330,7 @@
                               </layout>
                              </item>
                              <item>
-                              <widget class="QPushButton" name="pushButton_178">
+                              <widget class="QPushButton" name="W6_btn">
                                <property name="text">
                                 <string>W 6</string>
                                </property>
@@ -2354,7 +2354,7 @@
                               </spacer>
                              </item>
                              <item>
-                              <widget class="QPushButton" name="pushButton_175">
+                              <widget class="QPushButton" name="team_6_btn">
                                <property name="text">
                                 <string>6</string>
                                </property>
@@ -2415,7 +2415,7 @@
                           </spacer>
                          </item>
                          <item>
-                          <widget class="QPushButton" name="pushButton_179">
+                          <widget class="QPushButton" name="W14_btn">
                            <property name="text">
                             <string>W 14</string>
                            </property>
@@ -2501,7 +2501,7 @@
                   </layout>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_238">
+                  <widget class="QPushButton" name="W27_btn">
                    <property name="text">
                     <string>W 27</string>
                    </property>
@@ -2562,7 +2562,7 @@
                               </spacer>
                              </item>
                              <item>
-                              <widget class="QPushButton" name="pushButton_154">
+                              <widget class="QPushButton" name="team_7_btn">
                                <property name="text">
                                 <string>7</string>
                                </property>
@@ -2583,7 +2583,7 @@
                                <item>
                                 <layout class="QVBoxLayout" name="verticalLayout_93">
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_155">
+                                  <widget class="QPushButton" name="team_10_btn">
                                    <property name="text">
                                     <string>10</string>
                                    </property>
@@ -2603,7 +2603,7 @@
                                   </spacer>
                                  </item>
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_156">
+                                  <widget class="QPushButton" name="team_23_btn">
                                    <property name="text">
                                     <string>23</string>
                                    </property>
@@ -2633,7 +2633,7 @@
                               </layout>
                              </item>
                              <item>
-                              <widget class="QPushButton" name="pushButton_174">
+                              <widget class="QPushButton" name="W7_btn">
                                <property name="text">
                                 <string>W 7</string>
                                </property>
@@ -2694,7 +2694,7 @@
                           </spacer>
                          </item>
                          <item>
-                          <widget class="QPushButton" name="pushButton_158">
+                          <widget class="QPushButton" name="W15_btn">
                            <property name="text">
                             <string>W 15</string>
                            </property>
@@ -2758,7 +2758,7 @@
                                <item>
                                 <layout class="QVBoxLayout" name="verticalLayout_136">
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_180">
+                                  <widget class="QPushButton" name="team_18_btn">
                                    <property name="text">
                                     <string>18</string>
                                    </property>
@@ -2778,7 +2778,7 @@
                                   </spacer>
                                  </item>
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_234">
+                                  <widget class="QPushButton" name="team_15_btn">
                                    <property name="text">
                                     <string>15</string>
                                    </property>
@@ -2808,7 +2808,7 @@
                               </layout>
                              </item>
                              <item>
-                              <widget class="QPushButton" name="pushButton_235">
+                              <widget class="QPushButton" name="W8_btn">
                                <property name="text">
                                 <string>W 8</string>
                                </property>
@@ -2832,7 +2832,7 @@
                               </spacer>
                              </item>
                              <item>
-                              <widget class="QPushButton" name="pushButton_236">
+                              <widget class="QPushButton" name="team_2_btn">
                                <property name="text">
                                 <string>2</string>
                                </property>
@@ -2893,7 +2893,7 @@
                           </spacer>
                          </item>
                          <item>
-                          <widget class="QPushButton" name="pushButton_237">
+                          <widget class="QPushButton" name="W16_btn">
                            <property name="text">
                             <string>W 16</string>
                            </property>
@@ -2979,7 +2979,7 @@
                   </layout>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_305">
+                  <widget class="QPushButton" name="W28_btn">
                    <property name="text">
                     <string>W 28</string>
                    </property>
@@ -3047,7 +3047,7 @@
             </layout>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_306">
+            <widget class="QPushButton" name="W38_btn">
              <property name="text">
               <string>W 38</string>
              </property>
@@ -3074,7 +3074,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_85">
+            <widget class="QPushButton" name="W44_btn">
              <property name="text">
               <string>W 44</string>
              </property>
@@ -3119,7 +3119,7 @@
               </spacer>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_84">
+              <widget class="QPushButton" name="W42_btn">
                <property name="text">
                 <string>W 42</string>
                </property>
@@ -3223,7 +3223,7 @@
                  <item>
                   <layout class="QVBoxLayout" name="verticalLayout_57">
                    <item>
-                    <widget class="QPushButton" name="pushButton_83">
+                    <widget class="QPushButton" name="L37_btn">
                      <property name="text">
                       <string>L 37</string>
                      </property>
@@ -3246,7 +3246,7 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="pushButton_82">
+                    <widget class="QPushButton" name="W40_btn">
                      <property name="text">
                       <string>W 40</string>
                      </property>
@@ -3352,7 +3352,7 @@
                         </spacer>
                        </item>
                        <item>
-                        <widget class="QPushButton" name="pushButton_54">
+                        <widget class="QPushButton" name="W35_btn">
                          <property name="text">
                           <string>W 35</string>
                          </property>
@@ -3428,7 +3428,7 @@
                             <number>0</number>
                            </property>
                            <item>
-                            <widget class="QPushButton" name="pushButton_52">
+                            <widget class="QPushButton" name="W31_btn">
                              <property name="text">
                               <string>W 31</string>
                              </property>
@@ -3502,7 +3502,7 @@
                                   <number>0</number>
                                  </property>
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_7">
+                                  <widget class="QPushButton" name="W20_btn">
                                    <property name="text">
                                     <string>W 20</string>
                                    </property>
@@ -3523,7 +3523,7 @@
                                    <item>
                                     <layout class="QVBoxLayout" name="verticalLayout_2">
                                      <item>
-                                      <widget class="QPushButton" name="pushButton_5">
+                                      <widget class="QPushButton" name="L12_btn">
                                        <property name="text">
                                         <string>L 12</string>
                                        </property>
@@ -3543,7 +3543,7 @@
                                       </spacer>
                                      </item>
                                      <item>
-                                      <widget class="QPushButton" name="pushButton_6">
+                                      <widget class="QPushButton" name="L5_btn">
                                        <property name="text">
                                         <string>L 5</string>
                                        </property>
@@ -3574,7 +3574,7 @@
                                   <number>0</number>
                                  </property>
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_49">
+                                  <widget class="QPushButton" name="W19_btn">
                                    <property name="text">
                                     <string>W 19</string>
                                    </property>
@@ -3595,7 +3595,7 @@
                                    <item>
                                     <layout class="QVBoxLayout" name="verticalLayout_28">
                                      <item>
-                                      <widget class="QPushButton" name="pushButton_50">
+                                      <widget class="QPushButton" name="L6_btn">
                                        <property name="text">
                                         <string>L 6</string>
                                        </property>
@@ -3615,7 +3615,7 @@
                                       </spacer>
                                      </item>
                                      <item>
-                                      <widget class="QPushButton" name="pushButton_51">
+                                      <widget class="QPushButton" name="L11_btn">
                                        <property name="text">
                                         <string>L 11</string>
                                        </property>
@@ -3636,7 +3636,7 @@
                          <item>
                           <layout class="QHBoxLayout" name="horizontalLayout_38">
                            <item>
-                            <widget class="QPushButton" name="pushButton_53">
+                            <widget class="QPushButton" name="L28_btn">
                              <property name="text">
                               <string>L 28</string>
                              </property>
@@ -3700,7 +3700,7 @@
                         </spacer>
                        </item>
                        <item>
-                        <widget class="QPushButton" name="pushButton_73">
+                        <widget class="QPushButton" name="W36_btn">
                          <property name="text">
                           <string>W 36</string>
                          </property>
@@ -3776,7 +3776,7 @@
                             <number>0</number>
                            </property>
                            <item>
-                            <widget class="QPushButton" name="pushButton_74">
+                            <widget class="QPushButton" name="W32_btn">
                              <property name="text">
                               <string>W 32</string>
                              </property>
@@ -3850,7 +3850,7 @@
                                   <number>0</number>
                                  </property>
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_75">
+                                  <widget class="QPushButton" name="W18_btn">
                                    <property name="text">
                                     <string>W 18</string>
                                    </property>
@@ -3871,7 +3871,7 @@
                                    <item>
                                     <layout class="QVBoxLayout" name="verticalLayout_53">
                                      <item>
-                                      <widget class="QPushButton" name="pushButton_76">
+                                      <widget class="QPushButton" name="L10_btn">
                                        <property name="text">
                                         <string>L 10</string>
                                        </property>
@@ -3891,7 +3891,7 @@
                                       </spacer>
                                      </item>
                                      <item>
-                                      <widget class="QPushButton" name="pushButton_77">
+                                      <widget class="QPushButton" name="L7_btn">
                                        <property name="text">
                                         <string>L 7</string>
                                        </property>
@@ -3922,7 +3922,7 @@
                                   <number>0</number>
                                  </property>
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_78">
+                                  <widget class="QPushButton" name="W17_btn">
                                    <property name="text">
                                     <string>W 17</string>
                                    </property>
@@ -3943,7 +3943,7 @@
                                    <item>
                                     <layout class="QVBoxLayout" name="verticalLayout_54">
                                      <item>
-                                      <widget class="QPushButton" name="pushButton_79">
+                                      <widget class="QPushButton" name="L8_btn">
                                        <property name="text">
                                         <string>L 8</string>
                                        </property>
@@ -3963,7 +3963,7 @@
                                       </spacer>
                                      </item>
                                      <item>
-                                      <widget class="QPushButton" name="pushButton_80">
+                                      <widget class="QPushButton" name="L9_btn">
                                        <property name="text">
                                         <string>L 9</string>
                                        </property>
@@ -3984,7 +3984,7 @@
                          <item>
                           <layout class="QHBoxLayout" name="horizontalLayout_70">
                            <item>
-                            <widget class="QPushButton" name="pushButton_81">
+                            <widget class="QPushButton" name="L27_btn">
                              <property name="text">
                               <string>L 27</string>
                              </property>
@@ -4075,7 +4075,7 @@
                  <item>
                   <layout class="QVBoxLayout" name="verticalLayout">
                    <item>
-                    <widget class="QPushButton" name="pushButton">
+                    <widget class="QPushButton" name="W43_btn_2">
                      <property name="text">
                       <string>W 43</string>
                      </property>
@@ -4095,7 +4095,7 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="pushButton_2">
+                    <widget class="QPushButton" name="W44_btn_2">
                      <property name="text">
                       <string>W 44</string>
                      </property>
@@ -4113,7 +4113,7 @@
                 </layout>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_3">
+                <widget class="QPushButton" name="firstPlaceBtn">
                  <property name="text">
                   <string>1st place</string>
                  </property>
@@ -4135,7 +4135,7 @@
               </spacer>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_19">
+              <widget class="QPushButton" name="secondPlaceBtn">
                <property name="text">
                 <string>2nd place</string>
                </property>
@@ -4160,7 +4160,7 @@
                 <number>0</number>
                </property>
                <item>
-                <widget class="QPushButton" name="pushButton_4">
+                <widget class="QPushButton" name="thirdPlaceBtn">
                  <property name="text">
                   <string>3rd place</string>
                  </property>
@@ -4181,7 +4181,7 @@
                  <item>
                   <layout class="QVBoxLayout" name="verticalLayout_6">
                    <item>
-                    <widget class="QPushButton" name="pushButton_17">
+                    <widget class="QPushButton" name="L43_btn">
                      <property name="text">
                       <string>L 43</string>
                      </property>
@@ -4201,7 +4201,7 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="pushButton_18">
+                    <widget class="QPushButton" name="L44_btn">
                      <property name="text">
                       <string>L 44</string>
                      </property>

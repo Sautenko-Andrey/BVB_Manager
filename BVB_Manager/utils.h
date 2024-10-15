@@ -36,6 +36,8 @@ enum class TrainingTypeIndexes {
     Warm_up, Gym, Cardio, Tactical_technical
 };
 
+enum class Net{ Sixteen = 16, TwentyFour = 24, ThirtyTwo = 32 };
+
 // Styles-----------------------------------
 extern const QStringList training_types;
 

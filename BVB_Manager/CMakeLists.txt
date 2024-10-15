@@ -46,6 +46,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         gameresult.h gameresult.cpp gameresult.ui
         draw24.h draw24.cpp draw24.ui
         drawschema.h drawschema.cpp
+        draw32.h draw32.cpp draw32.ui
 
 
 
