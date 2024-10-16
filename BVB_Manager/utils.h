@@ -25,6 +25,7 @@ enum class Geometry{
     coordXStartBtn = 10,
     coordYStartBtn = 15,
     BtnWidth = 115,
+    BtnWidthShort = 80,
     BtnHeight = 23,
     BtnResWidth = 45,
     BtnResHeight = 17,

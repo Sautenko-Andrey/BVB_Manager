@@ -8,6 +8,7 @@
 #include "utils.h"
 #include "gameresult.h"
 #include <QSqlDatabase>
+#include <QPropertyAnimation>
 
 class DrawSchema : public QDialog
 {
@@ -22,6 +23,10 @@ public:
 
     QPushButton *loser_btn{nullptr};
 
+    QList<QPropertyAnimation *> animations_left_1;
+
+    QList<QPropertyAnimation *> animations_left_2;
+
     void setDB(QSqlDatabase *db);
 
     QSqlDatabase* getDB(){ return db; }
@@ -33,6 +38,16 @@ public:
     }
 
     Tournament* getTournament(){ return tournament; }
+
+    void fillTeamBtns(Net net, const QList<QPushButton *> &all_teams,
+                      const QSize &btn_size);
+
+    void changeBtnStyle(QPushButton *btn, const QSize &size, const QString &css_style);
+
+    void createAnimation(std::pair<int,int> &&range,
+                         const QList<QPushButton *> &buttons,
+                         QList<QPropertyAnimation *> &animations,
+                         int duration);
 
 private slots:
 

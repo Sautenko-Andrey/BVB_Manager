@@ -96,3 +96,66 @@ void DrawSchema::click_game(QPushButton *team_1, QPushButton *team_2,
 
     game_result->show();
 }
+
+void DrawSchema::fillTeamBtns(Net net, const QList<QPushButton *> &all_teams,
+                          const QSize &btn_size)
+{
+    if(all_teams.empty()){
+        throw std::invalid_argument{"Teams list is empty."};
+    }
+
+    for(int i{0}; i < static_cast<int>(net); ++i){
+        // get players names
+
+        auto comma_index =
+            getTournament()->selected_teams[i]->text().indexOf("(");
+
+        QString team_name =
+            getTournament()->selected_teams[i]->text().left(comma_index - 1);
+
+        all_teams[i]->setFixedSize(btn_size);
+
+        all_teams[i]->setDisabled(true);
+
+        all_teams[i]->setText(team_name);
+
+        fontAdapter(all_teams[i]);
+
+        if(all_teams[i]->text() == "None, None, None"){
+            all_teams[i]->setStyleSheet(team_btn_style_for_none);
+        }
+        else{
+            all_teams[i]->setStyleSheet(team_btn_style);
+        }
+    }
+}
+
+void DrawSchema::changeBtnStyle(QPushButton *btn, const QSize &size,
+                            const QString &css_style)
+{
+    if(btn != nullptr){
+        btn->setFixedSize(size);
+        btn->setStyleSheet(css_style);
+    }
+}
+
+// create animations for butoons
+void DrawSchema::createAnimation(std::pair<int,int> &&range,
+                               const QList<QPushButton *> &buttons,
+                               QList<QPropertyAnimation *> &animations,
+                               int duration){
+
+    for(int i{range.first}; i < range.second; ++i){
+        auto animation = new QPropertyAnimation(buttons[i], "geometry");
+        animation->setDuration(duration);
+        QPoint btn_pos = buttons[i]->pos();
+        animation->setStartValue(QRect(btn_pos.x(), btn_pos.y(),
+                                       static_cast<int>(Geometry::BtnWidth),
+                                       static_cast<int>(Geometry::BtnHeight)));
+        animation->setEndValue(QRect(btn_pos.x(), btn_pos.y(),
+                                     static_cast<int>(Geometry::BtnWidth) + 10,
+                                     static_cast<int>(Geometry::BtnHeight) + 10));
+
+        animations.push_back(animation);
+    }
+}
