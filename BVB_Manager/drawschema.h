@@ -49,11 +49,13 @@ public:
                          QList<QPropertyAnimation *> &animations,
                          int duration);
 
-private slots:
+public slots:
 
     void click_game(QPushButton *team_1, QPushButton *team_2,
                     QPushButton *winner_basket, QPushButton *loser_basket,
-                    QPushButton *game_result_btn, QPropertyAnimation *animation = nullptr);
+                    QPushButton *game_result_btn = nullptr,
+                    QPropertyAnimation *animation = nullptr);
+
 
 
 

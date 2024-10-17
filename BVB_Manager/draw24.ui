@@ -4219,7 +4219,7 @@
                  <item>
                   <layout class="QVBoxLayout" name="verticalLayout">
                    <item>
-                    <widget class="QPushButton" name="W43_btn_2">
+                    <widget class="QPushButton" name="W43_btn_final">
                      <property name="text">
                       <string>W 43</string>
                      </property>
@@ -4239,7 +4239,7 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="W44_btn_2">
+                    <widget class="QPushButton" name="W44_btn_final">
                      <property name="text">
                       <string>W 44</string>
                      </property>

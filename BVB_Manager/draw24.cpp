@@ -56,11 +56,12 @@ Draw24::Draw24(QSqlDatabase &db, Tournament *tour, QWidget *parent)
         ui->W29_btn,ui->W30_btn,ui->W31_btn,ui->W32_btn,
         ui->W33_btn,ui->W34_btn,ui->W35_btn,ui->W36_btn,
         ui->W37_btn,ui->W38_btn,ui->W39_btn,ui->W40_btn,
-        ui->W41_btn,ui->W42_btn,ui->W43_btn,ui->W44_btn
+        ui->W41_btn,ui->W42_btn,ui->W43_btn,ui->W44_btn,
+        ui->W43_btn_final, ui->W44_btn_final
     };
 
     // set style for W buttons
-    std::for_each(W_btns.begin(), W_btns.end(), [this](QPushButton *btn){
+    std::for_each(W_btns.begin(), W_btns.end(), [this](QPushButton *btn)->void{
         changeBtnStyle(btn, QSize(static_cast<int>(Geometry::BtnWidthShort),
                                   static_cast<int>(Geometry::BtnHeight)), team_btn_style);
     });
@@ -73,23 +74,23 @@ Draw24::Draw24(QSqlDatabase &db, Tournament *tour, QWidget *parent)
 
     // collect all L buttons
     QList<QPushButton *> L_btns{
-        ui->L1_btn,ui->L2_btn,ui->L3_btn,ui->L4_btn,
-        ui->L5_btn,ui->L6_btn,ui->L7_btn,ui->L8_btn,
-        ui->L9_btn,ui->L10_btn,ui->L11_btn,ui->L12_btn,
-        ui->L13_btn,ui->L14_btn,ui->L15_btn,ui->L16_btn,
-        ui->L17_btn,ui->L18_btn,ui->L19_btn,ui->L20_btn,
-        ui->L21_btn,ui->L22_btn,ui->L23_btn,ui->L24_btn,
-        ui->L25_btn,ui->L26_btn,ui->L27_btn,ui->L28_btn,
-        ui->L29_btn,ui->L30_btn,ui->L31_btn,ui->L32_btn,
-        ui->L33_btn,ui->L34_btn,ui->L35_btn,ui->L36_btn,
-        ui->L37_btn,ui->L38_btn,ui->L39_btn,ui->L40_btn,
-        ui->L41_btn,ui->L42_btn,ui->L43_btn,ui->L44_btn
+        ui->L16_btn, ui->L1_btn, ui->L2_btn, ui->L15_btn, ui->L26_btn, ui->L38_btn,
+        ui->L14_btn, ui->L3_btn, ui->L4_btn, ui->L13_btn, ui->L25_btn, ui->L12_btn,
+        ui->L5_btn, ui->L6_btn, ui->L11_btn, ui->L28_btn, ui->L37_btn, ui->L10_btn,
+        ui->L7_btn, ui->L8_btn, ui->L9_btn, ui->L27_btn, ui->L43_btn, ui->L44_btn
     };
 
     // set style for L buttons
     std::for_each(L_btns.begin(), L_btns.end(), [this](QPushButton *btn){
         changeBtnStyle(btn, QSize(static_cast<int>(Geometry::BtnWidthShort),
                                   static_cast<int>(Geometry::BtnHeight)), team_btn_style);
+    });
+
+    //W1
+    connect(ui->W1_btn, &QPushButton::clicked, this, [this](){
+        click_game(ui->team_16_btn, ui->team_17_btn,
+                   ui->W1_btn, ui->L1_btn, nullptr,
+                   animations_left_1[0]);
     });
 }
 

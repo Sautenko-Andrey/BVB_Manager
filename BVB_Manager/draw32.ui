@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1366</width>
+    <width>1370</width>
     <height>768</height>
    </rect>
   </property>
@@ -490,9 +490,9 @@
                           </spacer>
                          </item>
                          <item>
-                          <widget class="QPushButton" name="W17_btn_2">
+                          <widget class="QPushButton" name="W18_btn">
                            <property name="text">
-                            <string>W 17</string>
+                            <string>W 18</string>
                            </property>
                           </widget>
                          </item>
@@ -832,9 +832,9 @@
                           </spacer>
                          </item>
                          <item>
-                          <widget class="QPushButton" name="W17_btn_3">
+                          <widget class="QPushButton" name="W19_btn">
                            <property name="text">
-                            <string>W 17</string>
+                            <string>W 19</string>
                            </property>
                           </widget>
                          </item>
@@ -929,9 +929,9 @@
                                 </layout>
                                </item>
                                <item>
-                                <widget class="QPushButton" name="W6_btn_2">
+                                <widget class="QPushButton" name="W7_btn">
                                  <property name="text">
-                                  <string>W 6</string>
+                                  <string>W 7</string>
                                  </property>
                                 </widget>
                                </item>
@@ -1067,9 +1067,9 @@
                           </spacer>
                          </item>
                          <item>
-                          <widget class="QPushButton" name="W17_btn_4">
+                          <widget class="QPushButton" name="W20_btn">
                            <property name="text">
-                            <string>W 17</string>
+                            <string>W 20</string>
                            </property>
                           </widget>
                          </item>
@@ -5568,7 +5568,7 @@
                  <item>
                   <layout class="QVBoxLayout" name="verticalLayout_63">
                    <item>
-                    <widget class="QPushButton" name="W59_btn_2">
+                    <widget class="QPushButton" name="W59_btn_final">
                      <property name="text">
                       <string>W 59</string>
                      </property>
@@ -5588,7 +5588,7 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="W60_btn_2">
+                    <widget class="QPushButton" name="W60_btn_final">
                      <property name="text">
                       <string>W 60</string>
                      </property>

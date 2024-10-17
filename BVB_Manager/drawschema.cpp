@@ -81,10 +81,16 @@ void DrawSchema::click_game(QPushButton *team_1, QPushButton *team_2,
                           QPushButton *winner_basket, QPushButton *loser_basket,
                           QPushButton *game_result_btn, QPropertyAnimation *animation){
 
-    game_result = std::make_unique<GameResult>(team_1, team_2,
-                                               winner_basket, loser_basket,
-                                               game_result_btn,
-                                               this);
+    if(game_result_btn != nullptr){
+        game_result = std::make_unique<GameResult>(team_1, team_2,
+                                                   winner_basket, loser_basket,
+                                                   game_result_btn,
+                                                   this);
+
+        game_result->show();
+        // I have to do something with game result buttons....
+    }
+
 
     // stop animation
     if(animation != nullptr && animation->state() == QAbstractAnimation::Running){
@@ -94,8 +100,9 @@ void DrawSchema::click_game(QPushButton *team_1, QPushButton *team_2,
                               static_cast<int>(Geometry::BtnHeight));
     }
 
-    game_result->show();
+    // game_result->show();
 }
+
 
 void DrawSchema::fillTeamBtns(Net net, const QList<QPushButton *> &all_teams,
                           const QSize &btn_size)
@@ -136,6 +143,7 @@ void DrawSchema::changeBtnStyle(QPushButton *btn, const QSize &size,
     if(btn != nullptr){
         btn->setFixedSize(size);
         btn->setStyleSheet(css_style);
+        btn->setToolTip(btn->text());
     }
 }
 
