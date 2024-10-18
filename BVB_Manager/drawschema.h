@@ -27,6 +27,10 @@ public:
 
     QList<QPropertyAnimation *> animations_left_2;
 
+    QList<QPropertyAnimation *> animations_right_1;
+
+    QList<QPropertyAnimation *> animations_right_2;
+
     void setDB(QSqlDatabase *db);
 
     QSqlDatabase* getDB(){ return db; }
@@ -49,14 +53,14 @@ public:
                          QList<QPropertyAnimation *> &animations,
                          int duration);
 
+    QStringList* getAllGamesResults() { return &all_games_results; }
+
 public slots:
 
     void click_game(QPushButton *team_1, QPushButton *team_2,
                     QPushButton *winner_basket, QPushButton *loser_basket,
                     QPushButton *game_result_btn = nullptr,
                     QPropertyAnimation *animation = nullptr);
-
-
 
 
     void moveTeams(const QList<QPushButton *> &teams,
@@ -82,6 +86,8 @@ private:
     QSqlDatabase *db{nullptr};
 
     Tournament *tournament{nullptr};
+
+    QStringList all_games_results;
 };
 
 #endif // DRAWSCHEMA_H

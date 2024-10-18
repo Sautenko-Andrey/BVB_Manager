@@ -764,9 +764,10 @@ void TourDraw::click_game(QPushButton *team_1, QPushButton *team_2,
                           QPushButton *winner_basket, QPushButton *loser_basket,
                           QPushButton *game_result_btn, QPropertyAnimation *animation){
 
+    QStringList *empty_list{nullptr};  // new
     game_result = std::make_unique<GameResult>(team_1, team_2,
                                                winner_basket, loser_basket,
-                                               game_result_btn,
+                                               empty_list, game_result_btn,   // new
                                                this);
 
     // stop animation

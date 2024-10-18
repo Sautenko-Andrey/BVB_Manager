@@ -8,6 +8,7 @@ GameResult::GameResult(QPushButton *team_1,
                        QPushButton *team_2,
                        QPushButton *winer_basket,
                        QPushButton *loser_basket,
+                       QStringList *results_list,
                        QPushButton *game_res_btn,
                        QWidget *parent)
     : QDialog(parent)
@@ -15,6 +16,7 @@ GameResult::GameResult(QPushButton *team_1,
     , loser{loser_basket}
     , first_team{team_1}
     , second_team{team_2}
+    , games_results_list{results_list}
     , game_result{game_res_btn}
     , ui(new Ui::GameResult)
 {
@@ -98,10 +100,21 @@ void GameResult::on_okButton_clicked()
     fontAdapter(winner);
     fontAdapter(loser);
 
-    game_result->setText(QString::number(first_team_score) +
-                         " : " +
-                         QString::number(second_team_score));
-    game_result->setStyleSheet(game_result_style_2);
+    // if user use push button for game result
+    if(game_result != nullptr){
+        game_result->setText(QString::number(first_team_score) +
+                             " : " +
+                             QString::number(second_team_score));
+        game_result->setStyleSheet(game_result_style_2);
+    }
+    else{
+        // if we just save result in a container as a string
+        games_results_list->push_back(first_team->text() + " vs " +
+                                     second_team->text() + " ( " +
+                                     QString::number(first_team_score) +
+                                     " : " +
+                                     QString::number(second_team_score) + " )");
+    }
 
     QDialog::accept();
 }

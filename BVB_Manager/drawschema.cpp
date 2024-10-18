@@ -1,4 +1,5 @@
 #include "drawschema.h"
+#include <QGraphicsOpacityEffect>
 
 
 DrawSchema::DrawSchema(QWidget* parent): QDialog(parent), parent_dialog{parent}
@@ -78,29 +79,28 @@ void DrawSchema::moveTeams(const QList<QPushButton *> &teams,
 
 
 void DrawSchema::click_game(QPushButton *team_1, QPushButton *team_2,
-                          QPushButton *winner_basket, QPushButton *loser_basket,
-                          QPushButton *game_result_btn, QPropertyAnimation *animation){
+                            QPushButton *winner_basket, QPushButton *loser_basket,
+                            QPushButton *game_result_btn,
+                            QPropertyAnimation *animation){
 
-    if(game_result_btn != nullptr){
-        game_result = std::make_unique<GameResult>(team_1, team_2,
-                                                   winner_basket, loser_basket,
-                                                   game_result_btn,
-                                                   this);
 
-        game_result->show();
-        // I have to do something with game result buttons....
-    }
-
+    game_result = std::make_unique<GameResult>(team_1, team_2,
+                                               winner_basket, loser_basket,
+                                               getAllGamesResults(),
+                                               game_result_btn, this);
 
     // stop animation
     if(animation != nullptr && animation->state() == QAbstractAnimation::Running){
+
         animation->stop();
+
+        // Remove the opacity effect (return button to its original state)
+        winner_basket->setGraphicsEffect(nullptr);
+        // return previous style
         winner_basket->setStyleSheet(team_btn_style);
-        winner_basket->resize(static_cast<int>(Geometry::BtnWidth),
-                              static_cast<int>(Geometry::BtnHeight));
     }
 
-    // game_result->show();
+    game_result->show();
 }
 
 
@@ -154,16 +154,21 @@ void DrawSchema::createAnimation(std::pair<int,int> &&range,
                                int duration){
 
     for(int i{range.first}; i < range.second; ++i){
-        auto animation = new QPropertyAnimation(buttons[i], "geometry");
-        animation->setDuration(duration);
-        QPoint btn_pos = buttons[i]->pos();
-        animation->setStartValue(QRect(btn_pos.x(), btn_pos.y(),
-                                       static_cast<int>(Geometry::BtnWidth),
-                                       static_cast<int>(Geometry::BtnHeight)));
-        animation->setEndValue(QRect(btn_pos.x(), btn_pos.y(),
-                                     static_cast<int>(Geometry::BtnWidth) + 10,
-                                     static_cast<int>(Geometry::BtnHeight) + 10));
 
+        //Create an opacity effect and apply it to the button
+        QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect;
+        buttons[i]->setGraphicsEffect(opacityEffect);
+
+        // Ensure the button starts with full opacity
+        opacityEffect->setOpacity(1.0);  // Full opacity, button is fully visible at start
+
+        // Create a QPropertyAnimation for opacity
+        QPropertyAnimation *animation = new QPropertyAnimation(opacityEffect, "opacity");
+        animation->setDuration(duration);  // 2 seconds
+        animation->setStartValue(1.0);  // Full opacity
+        animation->setEndValue(0.1);    // Fully transparent (invisible)
+        animation->setLoopCount(-1);    // Infinite loop
+        animation->setEasingCurve(QEasingCurve::InOutQuad);  // Smooth easing
         animations.push_back(animation);
     }
 }
