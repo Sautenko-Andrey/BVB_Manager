@@ -76,8 +76,16 @@ Draw24::Draw24(QSqlDatabase &db, Tournament *tour, QWidget *parent)
     // create animations for buttons W9 - W16
     createAnimation(std::move(std::make_pair(8, 16)), W_btns, animations_left_2, 2000);
 
-    // create animations for buttons W17 - W24
-    createAnimation(std::move(std::make_pair(17, 24)), W_btns, animations_right_1, 2000);
+    // create animations for buttons W24 - W17
+    // fill container
+    for(int i{16}; i < 24; ++i){
+        W24_W17_btns.push_front(W_btns[i]);
+    }
+
+    createAnimation(std::move(std::make_pair(0, 8)), W24_W17_btns, animations_right_1, 2000);
+
+    // create animations for buttons W29 - W32
+    createAnimation(std::move(std::make_pair(28, 32)), W_btns, animations_right_2, 2000);
 
     // collect all L buttons
     QList<QPushButton *> L_btns{
@@ -93,7 +101,19 @@ Draw24::Draw24(QSqlDatabase &db, Tournament *tour, QWidget *parent)
     std::for_each(L_btns.begin(), L_btns.end(), [this](QPushButton *btn){
         changeBtnStyle(btn, QSize(static_cast<int>(Geometry::BtnWidthShort),
                                   static_cast<int>(Geometry::BtnHeight)), team_btn_style);
+
+        // make them unclickable
+        btn->setDisabled(true);
     });
+
+    // set style for final buttons
+    ui->firstPlaceBtn->setStyleSheet(team_btn_style);
+    ui->secondPlaceBtn->setStyleSheet(team_btn_style);
+    ui->secondPlaceBtn->setDisabled(true);
+    ui->thirdPlaceBtn->setStyleSheet(team_btn_style);
+    ui->W43_btn_final->setDisabled(true);
+    ui->W44_btn_final->setDisabled(true);
+
 
     // Signals & slots
 
@@ -294,6 +314,103 @@ Draw24::Draw24(QSqlDatabase &db, Tournament *tour, QWidget *parent)
                    ui->W17_btn, loser_btn, nullptr, animations_right_1[7]);
     });
 
+    // W29 button
+    connect(ui->W29_btn, &QPushButton::clicked, this, [this](){
+        click_game(ui->W24_btn, ui->W23_btn,
+                   ui->W29_btn, loser_btn, nullptr, animations_right_2[0]);
+    });
+
+    // W30 button
+    connect(ui->W30_btn, &QPushButton::clicked, this, [this](){
+        click_game(ui->W22_btn, ui->W21_btn,
+                   ui->W30_btn, loser_btn, nullptr, animations_right_2[1]);
+    });
+
+    // W31 button
+    connect(ui->W31_btn, &QPushButton::clicked, this, [this](){
+        click_game(ui->W20_btn, ui->W19_btn,
+                   ui->W31_btn, loser_btn, nullptr, animations_right_2[2]);
+    });
+
+    // W32 button
+    connect(ui->W32_btn, &QPushButton::clicked, this, [this](){
+        click_game(ui->W18_btn, ui->W17_btn,
+                   ui->W32_btn, loser_btn, nullptr, animations_right_2[3]);
+    });
+
+    // W33 button
+    connect(ui->W33_btn, &QPushButton::clicked, this, [this](){
+        click_game(ui->W29_btn, ui->L26_btn,
+                   ui->W33_btn, loser_btn);
+    });
+
+    // W34 button
+    connect(ui->W34_btn, &QPushButton::clicked, this, [this](){
+        click_game(ui->W30_btn, ui->L25_btn,
+                   ui->W34_btn, loser_btn);
+    });
+
+    // W35 button
+    connect(ui->W35_btn, &QPushButton::clicked, this, [this](){
+        click_game(ui->W31_btn, ui->L28_btn,
+                   ui->W35_btn, loser_btn);
+    });
+
+    // W36 button
+    connect(ui->W36_btn, &QPushButton::clicked, this, [this](){
+        click_game(ui->W32_btn, ui->L27_btn,
+                   ui->W36_btn, loser_btn);
+    });
+
+    // W39 button
+    connect(ui->W39_btn, &QPushButton::clicked, this, [this](){
+        click_game(ui->W33_btn, ui->W34_btn,
+                   ui->W39_btn, loser_btn);
+    });
+
+    // W40 button
+    connect(ui->W40_btn, &QPushButton::clicked, this, [this](){
+        click_game(ui->W35_btn, ui->W36_btn,
+                   ui->W40_btn, loser_btn);
+    });
+
+    // W41 button
+    connect(ui->W41_btn, &QPushButton::clicked, this, [this](){
+        click_game(ui->L38_btn, ui->W39_btn,
+                   ui->W41_btn, loser_btn);
+    });
+
+    // W42 button
+    connect(ui->W42_btn, &QPushButton::clicked, this, [this](){
+        click_game(ui->L37_btn, ui->W40_btn,
+                   ui->W42_btn, loser_btn);
+    });
+
+    // W43 button
+    connect(ui->W43_btn, &QPushButton::clicked, this, [this](){
+        click_game(ui->W37_btn, ui->W41_btn,
+                   ui->W43_btn_final, ui->L43_btn);
+    });
+
+    // W44 button
+    connect(ui->W44_btn, &QPushButton::clicked, this, [this](){
+        click_game(ui->W38_btn, ui->W42_btn,
+                   ui->W44_btn_final, ui->L44_btn);
+    });
+
+    // 1st place button
+    connect(ui->firstPlaceBtn, &QPushButton::clicked, this, [this](){
+        click_game(ui->W43_btn_final, ui->W44_btn_final,
+                   ui->firstPlaceBtn, ui->secondPlaceBtn);
+    });
+
+    // 3rd place button
+    connect(ui->thirdPlaceBtn, &QPushButton::clicked, this, [this](){
+        click_game(ui->L43_btn, ui->L44_btn,
+                   ui->thirdPlaceBtn, loser_btn);
+    });
+
+
 
     // left forward button >
     connect(ui->forward_left_1, &QPushButton::clicked, this, [this, W_btns, L_btns](){
@@ -323,7 +440,7 @@ Draw24::Draw24(QSqlDatabase &db, Tournament *tour, QWidget *parent)
         //make a list of W9 - W16 buttons
         QList<QPushButton *> W9_W16_btns = W_btns.mid(8, 16);
 
-        // make a list of L1 - L8 buttons
+        // make a list of L9 - L16 buttons
         QList<QPushButton *> L9_L16_btns = L_btns.mid(8, 16);
 
         // make second round team buttons
@@ -342,17 +459,9 @@ Draw24::Draw24(QSqlDatabase &db, Tournament *tour, QWidget *parent)
     });
 
     // right forward button >
-    connect(ui->forward_right_1, &QPushButton::clicked, this, [this, W_btns, L_btns](){
+    connect(ui->forward_right_1, &QPushButton::clicked, this, [this, W_btns](){
 
-        //make a list of W17 - W24 buttons
-        QList<QPushButton *> W17_W24_btns = W_btns.mid(16, 24);
-        qDebug() << "Step 1";
-
-        // make a list of 8 loosers buttons
-        QList<QPushButton *> loosers_btns(8, nullptr);
-        qDebug() << "Step 2";
-
-        // make first round team buttons
+        // make play-off team buttons
         QList<QPushButton *> play_off_round_btns{
             ui->L16_btn, ui->L1_btn,   // 1st pair
             ui->L2_btn, ui->L15_btn,    // 2nd pair
@@ -363,11 +472,22 @@ Draw24::Draw24(QSqlDatabase &db, Tournament *tour, QWidget *parent)
             ui->L10_btn, ui->L7_btn,   // 7th pair
             ui->L8_btn, ui->L9_btn,    // 8th pair
         };
-        qDebug() << "Step 3";
 
-        // CRASHES HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        moveTeams(play_off_round_btns, W17_W24_btns, loosers_btns, animations_right_1);
-        qDebug() << "Step 4";
+        moveTeams(play_off_round_btns, W24_W17_btns, loosers_btns, animations_right_1);
+    });
+
+    // right forward button >>
+    connect(ui->forward_right_2, &QPushButton::clicked, this, [this, W_btns](){
+
+        //make play-off team buttons
+        QList<QPushButton *> play_off_round_btns;
+        for(int i{16}; i < 24; ++i){
+            play_off_round_btns.push_front(W_btns[i]);
+        }
+
+        QList<QPushButton *> W29_W32_btns = W_btns.mid(28, 4);
+
+        moveTeams(play_off_round_btns, W29_W32_btns, loosers_btns, animations_right_2);
     });
 }
 

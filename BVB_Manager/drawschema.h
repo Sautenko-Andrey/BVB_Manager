@@ -31,6 +31,8 @@ public:
 
     QList<QPropertyAnimation *> animations_right_2;
 
+    QList<QPushButton *> loosers_btns;
+
     void setDB(QSqlDatabase *db);
 
     QSqlDatabase* getDB(){ return db; }

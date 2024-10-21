@@ -2,7 +2,9 @@
 #include <QGraphicsOpacityEffect>
 
 
-DrawSchema::DrawSchema(QWidget* parent): QDialog(parent), parent_dialog{parent}
+DrawSchema::DrawSchema(QWidget* parent)
+    : QDialog(parent),
+      parent_dialog{parent}
 {
     // change dialog's background color
     this->setStyleSheet("background-color: azure; color : black");
@@ -10,6 +12,14 @@ DrawSchema::DrawSchema(QWidget* parent): QDialog(parent), parent_dialog{parent}
     // pointer on nowhere for out team
     loser_btn = new QPushButton(this);
     loser_btn->hide();
+
+    // 8 loser buttons
+    for(int i{0}; i < 8; ++i){
+        QPushButton *loser_btn = new QPushButton(this);
+        loser_btn->setGeometry(5000, 5000, 1, 1);
+        loser_btn->hide();
+        loosers_btns.push_back(loser_btn);
+    }
 }
 
 void DrawSchema::moveForward(QPushButton *teamA, QPushButton *teamB,

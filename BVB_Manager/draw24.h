@@ -22,6 +22,8 @@ private slots:
 
 private:
     Ui::Draw24 *ui;
+
+    QList<QPushButton *> W24_W17_btns;
 };
 
 #endif // DRAW24_H
