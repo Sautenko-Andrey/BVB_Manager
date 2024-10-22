@@ -1333,6 +1333,13 @@
               </layout>
              </item>
              <item>
+              <widget class="QPushButton" name="allResultsBtn">
+               <property name="text">
+                <string>all results</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <spacer name="verticalSpacer_69">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>

@@ -17,6 +17,9 @@ public:
                     Tournament *tour, QWidget *parent = nullptr);
     ~Draw32();
 
+private slots:
+    void on_allResultsBtn_clicked();
+
 private:
     Ui::Draw32 *ui;
 };

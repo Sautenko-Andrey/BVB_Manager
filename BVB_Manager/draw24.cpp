@@ -114,7 +114,6 @@ Draw24::Draw24(QSqlDatabase &db, Tournament *tour, QWidget *parent)
     ui->W43_btn_final->setDisabled(true);
     ui->W44_btn_final->setDisabled(true);
 
-
     // Signals & slots
 
     // W1 button
