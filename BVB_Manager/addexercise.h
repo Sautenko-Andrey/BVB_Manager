@@ -24,7 +24,7 @@ public:
 private slots:
     void trainingTypeChanged();
 
-    void on_pushButton_clicked();
+    void on_addButton_clicked();
 
 private:
     Ui::AddExercise *ui;

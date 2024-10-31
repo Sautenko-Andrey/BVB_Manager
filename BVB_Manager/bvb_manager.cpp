@@ -5,7 +5,6 @@
 #include <QListWidget>
 #include <QFile>
 #include <QInputDialog>
-#include <QDebug>
 #include "choosedate.h"
 
 BVB_Manager::BVB_Manager(QWidget *parent)
@@ -217,6 +216,9 @@ BVB_Manager::~BVB_Manager()
 }
 
 
+/*
+    Function shows list of exercises depending on user's choice type
+*/
 void BVB_Manager::getExercises(const QString &type){
 
     QSqlQuery exercises_query(database_manager.getDatabase());
@@ -243,6 +245,9 @@ void BVB_Manager::getExercises(const QString &type){
 }
 
 
+/*
+    Function shows to user a list of available players
+*/
 void BVB_Manager::getPlayers(bool gender){
 
     QSqlQuery query(database_manager.getDatabase());
@@ -273,19 +278,29 @@ void BVB_Manager::getPlayers(bool gender){
     }
 }
 
+
+/*
+    Function updates training date in the schedule area
+*/
 void BVB_Manager::updateDate(){
-    // update training date
 
     selected_date = ui->calendarWidget->selectedDate();
     const QString training_date = "Date: " + selected_date.toString("dd.MM.yyyy");
     ui->dateSelectedLabel->setText(training_date);
 }
 
+
+/*
+    Function updates training time in the schedule area
+*/
 void BVB_Manager::updateTime(){
-    // update training time
     timeToString();
 }
 
+
+/*
+    Function converts time to QString type
+*/
 QString BVB_Manager::timeToString(){
 
     int hour = ui->trainingTime->time().hour();
@@ -304,112 +319,144 @@ QString BVB_Manager::timeToString(){
     return std::move(time_str);
 }
 
+
+/*
+    Function gets a new date and updates training date label
+*/
 void BVB_Manager::selectedDateChanged(){
-    // get a new date and update training date label
     updateDate();
 }
 
+
+/*
+    Function gets a new time and updates training date label
+*/
 void BVB_Manager::selectedTimeChanged(){
     updateTime();
 }
 
+
+
+/*
+    Function marks an item when user double clicks on it
+*/
 void BVB_Manager::markItem(QListWidgetItem *item, const QBrush &color, bool is_bold){
 
     QFont item_font;
 
-    item->setForeground(color);
+    if(item != nullptr){
+        item->setForeground(color);
 
-    // when marking item we apply this
-    if (is_bold){
-        item_font.setBold(true);
-        item_font.setItalic(true);
-        item_font.setPointSize(12);
+        // when marking item we apply this
+        if (is_bold){
+            item_font.setBold(true);
+            item_font.setItalic(true);
+            item_font.setPointSize(12);
+        }
+
+        item->setFont(item_font);
     }
-
-    item->setFont(item_font);
-
 }
 
 
+/*
+    Function allows a user to mark and unmark item (player or exercise)
+    when it neccessary.
+*/
 void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QStringList &container,
                                  QString &text, QLabel *label){
 
-    QString current_item = list_widget->currentItem()->text();
+    if(list_widget != nullptr && label != nullptr){
 
-    // unmark
-    if(container.contains(current_item)){
+        QString current_item = list_widget->currentItem()->text();
 
-        // if this is a gym exercise
-        if(current_item.contains("( Gym )")){
-            // return the original name of the gymexercise
-            list_widget->currentItem()->setText(original_gym_exercise_name);
-        }
+        // unmark
+        if(container.contains(current_item)){
 
-        // when double clicked change current row text color to black
-        markItem(list_widget->currentItem(), Qt::black, false);
-
-        // remove the item from the container
-        container.removeAll(current_item);
-    }
-    // mark
-    else{
-        int sets{0};   // sets amount
-        int reps{0};   // reps amount
-
-        if(current_item.right(6) == "Gym ) "){
-            // save an original name of the exercise
-            original_gym_exercise_name = current_item;
-
-            bool status_1, status_2;
-            // 20 sets maximum
-            sets = QInputDialog::getInt(this, "Sets", "How many sets ?",
-                                            1, 1, 20, 1, &status_1);
-            // 100 reps maximum
-            reps = QInputDialog::getInt(this, "Reps", "How many reps ?",
-                                        1, 1, 100, 1, &status_2);
-
-            if(status_1 && status_2){
-                // change current_item (adding sets and reps)
-                current_item += (" " + QString::number(sets) +
-                                 " x " +QString::number(reps));
-
-                // changing current item text
-                list_widget->currentItem()->setText(current_item);
+            // if this is a gym exercise
+            if(current_item.contains("( Gym )")){
+                // return the original name of the gymexercise
+                list_widget->currentItem()->setText(original_gym_exercise_name);
             }
+
+            // when double clicked change current row text color to black
+            markItem(list_widget->currentItem(), Qt::black, false);
+
+            // remove the item from the container
+            container.removeAll(current_item);
+        }
+        // mark
+        else{
+            int sets{0};   // sets amount
+            int reps{0};   // reps amount
+
+            if(current_item.right(6) == "Gym ) "){
+                // save an original name of the exercise
+                original_gym_exercise_name = current_item;
+
+                bool status_1, status_2;
+                // 20 sets maximum
+                sets = QInputDialog::getInt(this, "Sets", "How many sets ?",
+                                            1, 1, 20, 1, &status_1);
+                // 100 reps maximum
+                reps = QInputDialog::getInt(this, "Reps", "How many reps ?",
+                                            1, 1, 100, 1, &status_2);
+
+                if(status_1 && status_2){
+                    // change current_item (adding sets and reps)
+                    current_item += (" " + QString::number(sets) +
+                                     " x " +QString::number(reps));
+
+                    // changing current item text
+                    list_widget->currentItem()->setText(current_item);
+                }
+            }
+
+            // when double clicked change current row text color to red
+            markItem(list_widget->currentItem(), Qt::red);
+
+            // add marked item to the container
+            container.append(current_item);
         }
 
-        // when double clicked change current row text color to red
-        markItem(list_widget->currentItem(), Qt::red);
+        // clear items string
+        text.clear();
 
-        // add marked item to the container
-        container.append(current_item);
+        // add players to the label
+        for(const auto &item : container){
+            text += (item + "\n");
+        }
+
+        // update the label
+        label->setText(text);
     }
-
-    // clear items string
-    text.clear();
-
-    // add players to the label
-    for(const auto &item : container){
-        text += (item + "\n");
-    }
-
-    // update the label
-    label->setText(text);
 }
 
-// when double clicked on the player in players list widget
+
+
+/*
+    Function is called when double clicked on the player in players list widget
+*/
 void BVB_Manager::selectedPlayer(){
 
     markUnmarkItem(ui->playersListWidget, marked_players,
                    combined_players, ui->playerNameLabel);
 }
 
+
+/*
+    Function is called when double clicked on the exercise in exercises list widget
+*/
 void BVB_Manager::selectedExercise(){
 
     markUnmarkItem(ui->exercisesListWidget, marked_exercises,
                    combined_exercises, ui->exerciseLabel);
 }
 
+
+/*
+    Function creates the AddPlayerWidget
+*/
 void BVB_Manager::on_actionAdd_a_new_player_triggered()
 {
     // add a new player
@@ -422,6 +469,9 @@ void BVB_Manager::on_actionAdd_a_new_player_triggered()
 }
 
 
+/*
+    Function creates the DeleteOnePlayer
+*/
 void BVB_Manager::on_actionDelete_a_player_triggered()
 {
     // delete a desired player
@@ -431,9 +481,11 @@ void BVB_Manager::on_actionDelete_a_player_triggered()
 }
 
 
+/*
+    Function deletes all players from the database
+*/
 void BVB_Manager::on_actionDelete_all_players_triggered()
 {
-    // delete all players from the database
     QMessageBox::StandardButton reply;
 
     reply = QMessageBox::question(this, "Delete all players",
@@ -473,6 +525,10 @@ void BVB_Manager::on_actionDelete_all_players_triggered()
     }
 }
 
+
+/*
+    Function calls the UpdatePlayer widget
+*/
 void BVB_Manager::on_actionChange_a_player_triggered()
 {
     // player editor
@@ -487,6 +543,9 @@ void BVB_Manager::on_actionChange_a_player_triggered()
 }
 
 
+/*
+    Function calls the AddExercise widget
+*/
 void BVB_Manager::on_actionAdd_a_new_exercise_triggered()
 {
     // adding a new exercise
@@ -497,6 +556,9 @@ void BVB_Manager::on_actionAdd_a_new_exercise_triggered()
 }
 
 
+/*
+    Function calls the DeleteExercise widget
+*/
 void BVB_Manager::on_actionDelete_an_exercise_triggered()
 {
     // deleting an exercise
@@ -511,6 +573,9 @@ void BVB_Manager::on_actionDelete_an_exercise_triggered()
 }
 
 
+/*
+    Function calls the ChangeExercise widget
+*/
 void BVB_Manager::on_actionChange_an_exercise_triggered()
 {
     // upgrading an exercise
@@ -521,6 +586,9 @@ void BVB_Manager::on_actionChange_an_exercise_triggered()
 }
 
 
+/*
+    Function calls the SearchPlayer widget
+*/
 void BVB_Manager::on_actionSearch_a_player_triggered()
 {
     // Search a player tool
@@ -536,34 +604,48 @@ void BVB_Manager::on_actionSearch_a_player_triggered()
 }
 
 
+
+/*
+    Function make undo for added to list exercises/players
+*/
 void BVB_Manager::removeListWidgetItems(QLabel *label, QListWidget *widget,
                                         QStringList &container){
-    // clear label
-    label->clear();
 
-    // make all wigets on QListWidget unmarked again
-    for(auto i{0}; i < widget->count(); ++i){
+    if(label != nullptr && widget != nullptr){
+        // clear label
+        label->clear();
 
-        // for all gym exercises return their original names
-        if(widget->item(i)->text().contains("( Gym )")){
-            // remove sets and reps from exercise name(getting name as original)
-            QString correct_name = widget->item(i)->text().left((widget->item(i)->text().indexOf(")")) + 2);
-            widget->item(i)->setText(correct_name);
+        // make all wigets on QListWidget unmarked again
+        for(auto i{0}; i < widget->count(); ++i){
+
+            // for all gym exercises return their original names
+            if(widget->item(i)->text().contains("( Gym )")){
+                // remove sets and reps from exercise name(getting name as original)
+                QString correct_name = widget->item(i)->text().left((widget->item(i)->text().indexOf(")")) + 2);
+                widget->item(i)->setText(correct_name);
+            }
+            markItem(widget->item(i),
+                     Qt::black, false);
         }
-        markItem(widget->item(i),
-                 Qt::black, false);
-    }
 
-    // clear container
-    container.clear();
+        // clear container
+        container.clear();
+    }
 }
 
+
+/*
+    Function removes all selected players from the schedule
+*/
 void BVB_Manager::on_removeAllPlayersButton_clicked()
 {
     removeListWidgetItems(ui->playerNameLabel, ui->playersListWidget, marked_players);
 }
 
 
+/*
+    Function adds all available players into the schedule list
+*/
 void BVB_Manager::on_addAllPlayersButton_clicked()
 {
     // first of all clear current label data
@@ -590,11 +672,18 @@ void BVB_Manager::on_addAllPlayersButton_clicked()
 }
 
 
+/*
+    Function removes all selected exercises from the schedule
+*/
 void BVB_Manager::on_removeAllExercisesButton_clicked()
 {
     removeListWidgetItems(ui->exerciseLabel, ui->exercisesListWidget, marked_exercises);
 }
 
+
+/*
+    Function drops down all settings and selected players/exercises
+*/
 void BVB_Manager::on_resetCurrentSettingButton_clicked()
 {
     // ask the user
@@ -611,8 +700,11 @@ void BVB_Manager::on_resetCurrentSettingButton_clicked()
     }
 }
 
+
+/*
+    Function makes the schedule list blank
+*/
 void BVB_Manager::clearEditor(){
-    // make a training list blank
 
     removeListWidgetItems(ui->playerNameLabel, ui->playersListWidget, marked_players);
 
@@ -625,6 +717,10 @@ void BVB_Manager::clearEditor(){
     ui->NotesTextEdit->clear();
 }
 
+
+/*
+    Function changes list of exercises depending on user's choice
+*/
 void BVB_Manager::exerciseCheckBoxChanged(){
 
     // first of all clear data
@@ -650,6 +746,9 @@ void BVB_Manager::exerciseCheckBoxChanged(){
 }
 
 
+/*
+    Function changes list of players depending on user's choice
+*/
 void BVB_Manager::playersCheckBoxChanged(){
 
     // first of all take away data from widget
@@ -665,6 +764,11 @@ void BVB_Manager::playersCheckBoxChanged(){
     }
 }
 
+
+/*
+    Function saves all setings into database and moreover create a txt file
+    with all selected players, date, time, exercises and coach comments.
+*/
 void BVB_Manager::on_addToscheduleButton_clicked()
 {
     // increase counter's value
@@ -728,6 +832,10 @@ void BVB_Manager::on_addToscheduleButton_clicked()
     clearEditor();
 }
 
+
+/*
+    Function clears comment area
+*/
 void BVB_Manager::on_eraseButton_clicked()
 {
     // erase all text in comments area
@@ -735,17 +843,27 @@ void BVB_Manager::on_eraseButton_clicked()
 }
 
 
+/*
+    Function do the same thing as redo
+*/
 void BVB_Manager::on_redoButton_clicked()
 {
     ui->NotesTextEdit->redo();
 }
 
 
+/*
+    Function do the same thing as undo
+*/
 void BVB_Manager::on_undoButton_clicked()
 {
     ui->NotesTextEdit->undo();
 }
 
+
+/*
+    Function add or hide grid on a calendar widget
+*/
 void BVB_Manager::changeGridCheckBox(){
 
     if(!ui->gridCheckBox->isChecked()){
@@ -756,6 +874,10 @@ void BVB_Manager::changeGridCheckBox(){
     }
 }
 
+
+/*
+    Function adds/removes vertical header for the calendar
+*/
 void BVB_Manager::changeWeekNumsCheckBox(){
 
     if(ui->weekNumsCheckBox->isChecked()){
@@ -766,6 +888,10 @@ void BVB_Manager::changeWeekNumsCheckBox(){
     }
 }
 
+
+/*
+    Function changes language for the calendar widget
+*/
 void BVB_Manager::comboLangChanged(){
 
     if(ui->langComboBox->currentText() == "eng"){
@@ -785,6 +911,10 @@ void BVB_Manager::comboLangChanged(){
     }
 }
 
+
+/*
+    Function is called when user make double click on a date in the calendar widget
+*/
 void BVB_Manager::dateActivated(){
 
     // double click / enter /return on calendar widget's date
@@ -825,6 +955,9 @@ void BVB_Manager::dateActivated(){
 }
 
 
+/*
+    Function calculates training amounts for a particular date
+*/
 int BVB_Manager::getTrainings(const QDate &date) {
 
     int counter{0};
@@ -852,12 +985,18 @@ int BVB_Manager::getTrainings(const QDate &date) {
 }
 
 
+/*
+    Function uses logic above
+*/
 void BVB_Manager::dateClicked(){
 
     ui->lcdNumber->display(getTrainings(ui->calendarWidget->selectedDate()));
 }
 
 
+/*
+    Function calls the TeamRegistration widget
+*/
 void BVB_Manager::on_actionRegister_a_team_triggered()
 {
     // team registration
@@ -869,6 +1008,9 @@ void BVB_Manager::on_actionRegister_a_team_triggered()
 }
 
 
+/*
+    Function calls the AddTournament widget
+*/
 void BVB_Manager::on_actionAdd_a_new_tournament_triggered()
 {
     // add a new tournament to the database
@@ -880,6 +1022,9 @@ void BVB_Manager::on_actionAdd_a_new_tournament_triggered()
 }
 
 
+/*
+    Function calls the TournamentCreator widget
+*/
 void BVB_Manager::on_actionCreate_a_tournament_triggered()
 {
     // create a tournament
@@ -887,5 +1032,4 @@ void BVB_Manager::on_actionCreate_a_tournament_triggered()
                                                          this);
     tournament_creator->setWindowTitle("Create a new tournament");
     tournament_creator->show();
-
 }

@@ -2,7 +2,6 @@
 #include "ui_addexercise.h"
 #include <QSqlQuery>
 #include <QMessageBox>
-#include <QDebug>
 
 AddExercise::AddExercise(QSqlDatabase &database,
                          QWidget *parent,
@@ -33,41 +32,51 @@ AddExercise::~AddExercise()
     delete ui;
 }
 
-
+/*
+    trainingTypeChanged - function calls when user changes training type,
+    for example from Gym to Warm-up.
+*/
 void AddExercise::trainingTypeChanged(){
 
+    /*  Depending of current index function
+        changes class variable current_training_type
+        for a future purposes
+    */
     switch (ui->typeComboBox->currentIndex()) {
 
-    case static_cast<int>(TrainingTypeIndexes::Warm_up):
-        current_training_type =
-            training_types[static_cast<int>(TrainingTypeIndexes::Warm_up)];
-        break;
+        case static_cast<int>(TrainingTypeIndexes::Warm_up):
+            current_training_type =
+                training_types[static_cast<int>(TrainingTypeIndexes::Warm_up)];
+            break;
 
-    case static_cast<int>(TrainingTypeIndexes::Gym):
-        current_training_type =
-            training_types[static_cast<int>(TrainingTypeIndexes::Gym)];
-        break;
+        case static_cast<int>(TrainingTypeIndexes::Gym):
+            current_training_type =
+                training_types[static_cast<int>(TrainingTypeIndexes::Gym)];
+            break;
 
-    case static_cast<int>(TrainingTypeIndexes::Cardio):
-        current_training_type =
-            training_types[static_cast<int>(TrainingTypeIndexes::Cardio)];
-        break;
+        case static_cast<int>(TrainingTypeIndexes::Cardio):
+            current_training_type =
+                training_types[static_cast<int>(TrainingTypeIndexes::Cardio)];
+            break;
 
-    case static_cast<int>(TrainingTypeIndexes::Tactical_technical):
-        current_training_type =
-            training_types[static_cast<int>(TrainingTypeIndexes::Tactical_technical)];
-        break;
+        case static_cast<int>(TrainingTypeIndexes::Tactical_technical):
+            current_training_type =
+                training_types[static_cast<int>(TrainingTypeIndexes::Tactical_technical)];
+            break;
     }
 }
 
-void AddExercise::on_pushButton_clicked()
+
+/*
+    Function saves exercise data in the database
+*/
+void AddExercise::on_addButton_clicked()
 {
-    // save data in the database
     QSqlQuery query(*db);
 
     query.prepare("INSERT "
-                   "INTO Exercises(title, description, exercise_type)"
-                   " VALUES(:ex_title, :ex_description, :ex_type)");
+                  "INTO Exercises(title, description, exercise_type)"
+                  " VALUES(:ex_title, :ex_description, :ex_type)");
 
     query.bindValue(":ex_title", ui->titleLine->text());
     query.bindValue(":ex_description", ui->description->toPlainText());
@@ -95,8 +104,8 @@ void AddExercise::on_pushButton_clicked()
     QSqlQuery update_query(*db);
 
     if(!update_query.exec("SELECT title, description, exercise_type"
-                          " FROM Exercises"
-                          " ORDER BY title ASC;"))
+                           " FROM Exercises"
+                           " ORDER BY title ASC;"))
     {
         QMessageBox::warning(this, "Exrcise List error", "Couldn't update exrcises list");
         return;
@@ -113,3 +122,4 @@ void AddExercise::on_pushButton_clicked()
         }
     }
 }
+

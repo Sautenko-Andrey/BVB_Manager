@@ -22,6 +22,10 @@ AddTournament::~AddTournament()
     delete ui;
 }
 
+
+/*
+    Function clears all data in the widget (doesn't delete it from database)
+*/
 void AddTournament::clear_window(){
     // clear lines
     ui->titleLine->clear();
@@ -35,6 +39,7 @@ void AddTournament::clear_window(){
     ui->titleLine->setFocus();
 }
 
+
 void AddTournament::on_clearButton_clicked()
 {
     // make all lines blanked
@@ -42,6 +47,9 @@ void AddTournament::on_clearButton_clicked()
 }
 
 
+/*
+    Function saves all tournament data into database
+*/
 void AddTournament::on_saveButton_clicked()
 {
     // save tournament to the database
@@ -72,6 +80,9 @@ void AddTournament::on_saveButton_clicked()
 }
 
 
+/*
+    Function simply clears title
+*/
 void AddTournament::on_clearTitleButton_clicked()
 {
     // clear title line
@@ -80,7 +91,9 @@ void AddTournament::on_clearTitleButton_clicked()
     ui->titleLine->setFocus();
 }
 
-
+/*
+    Function simply clears location line
+*/
 void AddTournament::on_clearLocationButton_clicked()
 {
     // clear location line
@@ -90,6 +103,9 @@ void AddTournament::on_clearLocationButton_clicked()
 }
 
 
+/*
+    Function simply clears description line
+*/
 void AddTournament::on_clearDescriptionButton_clicked()
 {
     // clear description line

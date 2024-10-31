@@ -120,7 +120,10 @@ AddPlayer::~AddPlayer()
     delete ui;
 }
 
-// Preview settings for all lines
+
+/*
+    Function makes all preview settings for all lines in the widget
+*/
 void AddPlayer::previewSettings(bool regular){
 
     if(regular){
@@ -144,12 +147,19 @@ void AddPlayer::previewSettings(bool regular){
     ui->heightSpinBox->setMaximum(static_cast<int>(DefaultWidgetValues::MaximumHeight));
 }
 
+
+/*
+    Function delete current loaded image in the image (not from the database)
+*/
 void AddPlayer::on_deleteImageButton_clicked()
 {
     ui->imageLabel->clear();
 }
 
 
+/*
+    Function loads an player image in the widget (image is not in database yet)
+*/
 void AddPlayer::on_addImageButton_clicked()
 {
     const QString player_img_path = QFileDialog::getOpenFileName(this,
@@ -165,8 +175,13 @@ void AddPlayer::on_addImageButton_clicked()
     ui->imageLabel->setScaledContents(true);
 }
 
+
+/*
+    Function clears all lines (a user is allowed to
+    start filling them from scratch)
+*/
 void AddPlayer::clearAllLines(){
-    // clear all input data in the form
+
     ui->firstNameLine->clear();
     ui->lastNameLine->clear();
     ui->ageSpinBox->setValue(static_cast<int>(DefaultWidgetValues::DefaultAge));
@@ -181,26 +196,41 @@ void AddPlayer::clearAllLines(){
 }
 
 
+/*
+    Function clears all data what have been inputed at this moment
+    (a user is allowed to start filling the widget from scratch)
+*/
 void AddPlayer::on_clearAllButton_clicked()
 {
     clearAllLines();
 }
 
 
+/*
+    Function saves all player data in the database
+    and creates folder on user's computer where
+    saves player image.
+*/
 void AddPlayer::on_savePlayerButton_clicked()
 {
-    // save all player's data in database
-    // getting data from the dialog
+
     QString player_first_name = ui->firstNameLine->text();
+
     QString player_last_name = ui->lastNameLine->text();
+
     int player_age = ui->ageSpinBox->value();
+
     int player_height = ui->heightSpinBox->value();
+
     int player_sex{0};
+
     ui->femaleRadioButton->isChecked() ? player_sex : player_sex = 1;
+
     QString player_hometown = ui->hometownLine->text();
+
     QString player_phone = ui->phoneLine->text();
 
-    // creating a new folder with players images( if doesn't exist )
+    // creating a new folder with players images( if it doesn't exist )
     QDir dir;
 
     // creating a players images directory
@@ -219,7 +249,6 @@ void AddPlayer::on_savePlayerButton_clicked()
     if(!image.save(image_name)){
         QMessageBox::warning(this, "Image error!", "Couldn't save an image!");
     }
-
 
     // making a query
     QSqlQuery query(*db);
@@ -296,4 +325,3 @@ void AddPlayer::on_savePlayerButton_clicked()
         }
     }
 }
-

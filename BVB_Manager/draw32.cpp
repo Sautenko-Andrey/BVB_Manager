@@ -73,12 +73,6 @@ Draw32::Draw32(QSqlDatabase &db, Tournament *tour, QWidget *parent)
                                   static_cast<int>(Geometry::BtnHeight)), team_btn_style);
     });
 
-    // create animations for butoons W1 - W16
-    createAnimation(std::move(std::make_pair(0, 16)), W_btns, animations_left_1, 1200);
-
-    // create animations for buttons W17 - W24
-    createAnimation(std::move(std::make_pair(7, 24)), W_btns, animations_left_2, 1200);
-
     // collect all L buttons
     QList<QPushButton *> L_btns{
         ui->L1_btn, ui->L2_btn, ui->L3_btn, ui->L4_btn, ui->L5_btn, ui->L6_btn,
@@ -136,7 +130,7 @@ Draw32::Draw32(QSqlDatabase &db, Tournament *tour, QWidget *parent)
 
     // W2 button
     connect(ui->W2_btn, &QPushButton::clicked, this, [this](){
-        click_game(ui->team_17_btn, ui->team_6_btn,
+        click_game(ui->team_17_btn, ui->team_16_btn,
                    ui->W2_btn, ui->L2_btn,
                    nullptr, animations_left_1[1]);
     });
@@ -583,10 +577,45 @@ Draw32::Draw32(QSqlDatabase &db, Tournament *tour, QWidget *parent)
         // make a list of L17 - L24 buttons
         QList<QPushButton *> L17_L24_btns = L_btns.mid(16, 24);
 
-        // make first round team buttons
+        // make second round team buttons
         QList<QPushButton *> second_round_team_btns = W_btns.mid(0, 16);
 
         moveTeams(second_round_team_btns, W17_W24_btns, L17_L24_btns, animations_left_2);
+    });
+
+    // right forward button >
+    connect(ui->forward_right_1, &QPushButton::clicked, this, [this, W_btns, L_btns](){
+
+        //make a list of W25 - W32 buttons
+        QList<QPushButton *> W25_W32_btns = W_btns.mid(24, 32);
+
+        // make first round play-off team buttons
+        QList<QPushButton *> first_round_playoff_team_btns = L_btns.mid(0, 16);
+
+        moveTeams(first_round_playoff_team_btns, W25_W32_btns,
+                  loosers_btns, animations_right_1);
+    });
+
+    // right forward button >>
+    connect(ui->forward_right_2, &QPushButton::clicked, this, [this, W_btns, L_btns](){
+
+        //make a list of W33 - W40 buttons
+        QList<QPushButton *> W33_W40_btns = W_btns.mid(32, 40);
+
+        // make first round play-off team buttons
+        QList<QPushButton *> second_round_playoff_team_btns = {
+            ui->W25_btn, ui->L24_btn,
+            ui->W26_btn, ui->L23_btn,
+            ui->W27_btn, ui->L22_btn,
+            ui->W28_btn, ui->L21_btn,
+            ui->W29_btn, ui->L20_btn,
+            ui->W30_btn, ui->L19_btn,
+            ui->W31_btn, ui->L18_btn,
+            ui->W32_btn, ui->L17_btn
+        };
+
+        moveTeams(second_round_playoff_team_btns, W33_W40_btns,
+                  loosers_btns, animations_right_2);
     });
 
 }

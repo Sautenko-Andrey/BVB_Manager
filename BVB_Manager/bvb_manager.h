@@ -168,24 +168,27 @@ private:
 
     // Event filter to catch hover events
     bool eventFilter(QObject *obj, QEvent *event) override {
-        QLabel *label = qobject_cast<QLabel*>(obj);  // Cast the object to QLabel
-        if (label) {
-            if (event->type() == QEvent::Enter) {
-                // Mouse hover event
-                QFont font = label->font();
-                font.setPointSize(12);  // Increase font size
-                label->setFont(font);
-                label->setStyleSheet("background-color: #a0a0ff; color: black; font-weight: bold; padding: 10px; border-radius: 5px;");
-            } else if (event->type() == QEvent::Leave) {
-                // Mouse leave event
-                QFont font = label->font();
-                font.setPointSize(11);  // Reset font size
-                label->setFont(font);
-                label->setStyleSheet("background-color: AntiqueWhite; color: black; padding: 10px; border-radius: 5px;");
+
+        if(obj != nullptr && event != nullptr){
+            QLabel *label = qobject_cast<QLabel*>(obj);  // Cast the object to QLabel
+            if (label) {
+                if (event->type() == QEvent::Enter) {
+                    // Mouse hover event
+                    QFont font = label->font();
+                    font.setPointSize(12);  // Increase font size
+                    label->setFont(font);
+                    label->setStyleSheet("background-color: #a0a0ff; color: black; font-weight: bold; padding: 10px; border-radius: 5px;");
+                } else if (event->type() == QEvent::Leave) {
+                    // Mouse leave event
+                    QFont font = label->font();
+                    font.setPointSize(11);  // Reset font size
+                    label->setFont(font);
+                    label->setStyleSheet("background-color: AntiqueWhite; color: black; padding: 10px; border-radius: 5px;");
+                }
             }
+            // Pass the event on to the base class
+            return QWidget::eventFilter(obj, event);
         }
-        // Pass the event on to the base class
-        return QWidget::eventFilter(obj, event);
     }
 };
 #endif // BVB_MANAGER_H

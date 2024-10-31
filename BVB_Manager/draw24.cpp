@@ -413,6 +413,7 @@ Draw24::Draw24(QSqlDatabase &db, Tournament *tour, QWidget *parent)
 
     // left forward button >
     connect(ui->forward_left_1, &QPushButton::clicked, this, [this, W_btns, L_btns](){
+
         //make a list of W1 - W8 buttons
         QList<QPushButton *> W1_W8_btns = W_btns.mid(0, 8);
 
