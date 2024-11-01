@@ -37,7 +37,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         changeexercise.h changeexercise.cpp changeexercise.ui
         updateplayer.h updateplayer.cpp updateplayer.ui
         searchplayer.h searchplayer.cpp searchplayer.ui
-        doubleeliminationtournament.h doubleeliminationtournament.cpp doubleeliminationtournament.ui
+
         teamregistration.h teamregistration.cpp teamregistration.ui
         addtournament.h addtournament.cpp addtournament.ui
         tournamentcreator.h tournamentcreator.cpp tournamentcreator.ui

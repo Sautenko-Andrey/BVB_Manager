@@ -512,6 +512,9 @@ TourDraw::~TourDraw()
 }
 
 
+/*
+    Function creates a custom operation button with a specific style
+*/
 QPushButton* TourDraw::makeOpsBtn(const QRect &&geom, const QString &&text,
                                   const QString &style){
     auto btn = new QPushButton(this);
@@ -522,7 +525,11 @@ QPushButton* TourDraw::makeOpsBtn(const QRect &&geom, const QString &&text,
     return btn;
 }
 
-// create animations for butoons
+
+
+/*
+    Function creates animation for buttons
+*/
 void TourDraw::createAnimation(std::pair<int,int> &&range,
                                const QList<QPushButton *> &buttons,
                                QList<QPropertyAnimation *> &animations,
@@ -544,51 +551,59 @@ void TourDraw::createAnimation(std::pair<int,int> &&range,
 }
 
 
+/*
+    Function moves teams forward through the tournament
+    if it neccessary (when team doesn't occur a real competitor
+    or both teams slots are 'blank')
+*/
 void TourDraw::moveForward(QPushButton *teamA, QPushButton *teamB,
                            QPushButton *win_btn, QPushButton *los_btn,
                            QPropertyAnimation *animation){
 
-    const QString no_team = "None, None, None";
+    if(teamA && teamB && win_btn && los_btn && animation){
+        const QString no_team = "None, None, None";
 
-    if(teamA->text() == no_team && teamB->text() != no_team){
-        win_btn->setText(teamB->text());
-        win_btn->setToolTip(teamB->text());
-        los_btn->setText(teamA->text());
-        los_btn->setToolTip(teamA->text());
-    }
-    else if(teamB->text() == no_team && teamA->text() != no_team){
-        win_btn->setText(teamA->text());
-        win_btn->setToolTip(teamA->text());
-        los_btn->setText(teamB->text());
-        los_btn->setToolTip(teamB->text());
-    }
-    else if(teamA->text() == no_team && teamB->text() == no_team){
-        // no matter
-        win_btn->setText(teamA->text());
-        win_btn->setToolTip(teamA->text());
-        los_btn->setText(teamB->text());
-        los_btn->setToolTip(teamB->text());
-    }
-    else{
+        if(teamA->text() == no_team && teamB->text() != no_team){
+            win_btn->setText(teamB->text());
+            win_btn->setToolTip(teamB->text());
+            los_btn->setText(teamA->text());
+            los_btn->setToolTip(teamA->text());
+        }
+        else if(teamB->text() == no_team && teamA->text() != no_team){
+            win_btn->setText(teamA->text());
+            win_btn->setToolTip(teamA->text());
+            los_btn->setText(teamB->text());
+            los_btn->setToolTip(teamB->text());
+        }
+        else if(teamA->text() == no_team && teamB->text() == no_team){
+            // no matter
+            win_btn->setText(teamA->text());
+            win_btn->setToolTip(teamA->text());
+            los_btn->setText(teamB->text());
+            los_btn->setToolTip(teamB->text());
+        }
+        else{
 
-        // make the button pulsing
-        win_btn->setStyleSheet(team_btn_pulsing_style);
-        animation->setEasingCurve(QEasingCurve::OutBounce);
-        animation->setLoopCount(-1);  // Loop indefinitely
-        animation->start();
-    }
+            // make the button pulsing
+            win_btn->setStyleSheet(team_btn_pulsing_style);
+            animation->setEasingCurve(QEasingCurve::OutBounce);
+            animation->setLoopCount(-1);  // Loop indefinitely
+            animation->start();
+        }
 
-    if(los_btn->text() == no_team){
-        los_btn->setStyleSheet(team_btn_style_for_none);
-    }
+        if(los_btn->text() == no_team){
+            los_btn->setStyleSheet(team_btn_style_for_none);
+        }
 
-    if(win_btn->text() == no_team){
-        win_btn->setStyleSheet(team_btn_style_for_none);
-    }
+        if(win_btn->text() == no_team){
+            win_btn->setStyleSheet(team_btn_style_for_none);
+        }
 
-    fontAdapter(win_btn);
-    fontAdapter(los_btn);
+        fontAdapter(win_btn);
+        fontAdapter(los_btn);
+    }
 }
+
 
 
 void TourDraw::moveTeams(const QList<QPushButton *> &teams,
@@ -603,6 +618,9 @@ void TourDraw::moveTeams(const QList<QPushButton *> &teams,
 }
 
 
+/*
+    Function paints lines
+*/
 void TourDraw::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
@@ -759,28 +777,38 @@ void TourDraw::paintEvent(QPaintEvent *event)
 }
 
 
-
+/*
+    Function triggers when user clicks on game button
+*/
 void TourDraw::click_game(QPushButton *team_1, QPushButton *team_2,
                           QPushButton *winner_basket, QPushButton *loser_basket,
                           QPushButton *game_result_btn, QPropertyAnimation *animation){
 
-    QStringList *empty_list{nullptr};  // new
-    game_result = std::make_unique<GameResult>(team_1, team_2,
-                                               winner_basket, loser_basket,
-                                               empty_list, game_result_btn,   // new
-                                               this);
+    if(team_1 && team_2 && winner_basket &&
+       loser_basket && game_result_btn && animation){
 
-    // stop animation
-    if(animation != nullptr && animation->state() == QAbstractAnimation::Running){
-        animation->stop();
-        winner_basket->setStyleSheet(team_btn_style);
-        winner_basket->resize(static_cast<int>(Geometry::BtnWidth),
-                              static_cast<int>(Geometry::BtnHeight));
+        QStringList *empty_list{nullptr};  // new
+        game_result = std::make_unique<GameResult>(team_1, team_2,
+                                                   winner_basket, loser_basket,
+                                                   empty_list, game_result_btn,   // new
+                                                   this);
+
+        // stop animation
+        if(animation != nullptr && animation->state() == QAbstractAnimation::Running){
+            animation->stop();
+            winner_basket->setStyleSheet(team_btn_style);
+            winner_basket->resize(static_cast<int>(Geometry::BtnWidth),
+                                  static_cast<int>(Geometry::BtnHeight));
+        }
+
+        game_result->show();
     }
-
-    game_result->show();
 }
 
+
+/*
+    Function draws game result button with a specific stylesheet
+*/
 QPushButton* TourDraw::drawGameResultBtn(const int x, const int y){
 
     // drawing game result button
@@ -795,6 +823,10 @@ QPushButton* TourDraw::drawGameResultBtn(const int x, const int y){
     return game_result_btn;
 }
 
+
+/*
+    Function draws team button with a specific stylesheet
+*/
 QPushButton* TourDraw::drawTeamBtn(const int x, const int y,
                                    const QString &team_name, bool is_disabled,
                                    const QString &names){

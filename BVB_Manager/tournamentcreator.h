@@ -11,7 +11,6 @@
 #include "teamregistration.h"
 #include <QBoxLayout>
 #include "utils.h"
-#include "doubleeliminationtournament.h"
 #include "tourdraw.h"
 #include "drawschema.h"
 #include "draw24.h"

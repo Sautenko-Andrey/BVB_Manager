@@ -53,9 +53,13 @@ DeleteExercise::~DeleteExercise()
     delete ui;
 }
 
+
+/*
+    Function triggers when user clicks on an exercise in the table
+    and saves exercise name for further purposes
+*/
 void DeleteExercise::clickOnItem(){
 
-    // getting exercise name for further purposes
     current_index = ui->listWidget->currentRow();
     auto current_name = ui->listWidget->currentItem()->text();
 
@@ -64,6 +68,10 @@ void DeleteExercise::clickOnItem(){
     exercise_name.chop(1);
 }
 
+
+/*
+    Function deletes exercise from the table and database
+*/
 void DeleteExercise::on_deleteButton_clicked()
 {
     // deleting item from list widget

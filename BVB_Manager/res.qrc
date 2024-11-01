@@ -1,8 +1,5 @@
 <RCC>
     <qresource prefix="/images">
-        <file>ball.png</file>
-        <file>pdf.png</file>
-        <file>exit.png</file>
         <file>add_player.png</file>
         <file>change_player.png</file>
         <file>delete_all_players.png</file>
@@ -16,9 +13,6 @@
         <file>copy.png</file>
         <file>forward.png</file>
         <file>tournament.png</file>
-        <file>tournament_of_16.png</file>
-        <file>tournament_of_32.png</file>
-        <file>tournament_of_64.png</file>
         <file>team_registration.png</file>
         <file>add_tournament.png</file>
         <file>calendar.png</file>

@@ -1,7 +1,5 @@
 #include "draw24.h"
 #include "ui_draw24.h"
-#include <QDebug>
-#include <QMessageBox>
 
 
 Draw24::Draw24(QSqlDatabase &db, Tournament *tour, QWidget *parent)
@@ -497,14 +495,12 @@ Draw24::~Draw24()
     delete ui;
 }
 
+
+/*
+    Function simply show all games results
+*/
 void Draw24::on_allResultsBtn_clicked()
 {
-    QString result;
-    for(auto it{getAllGamesResults()->begin()}; it != getAllGamesResults()->end();++it){
-        result += *it + "\n";
-    }
-
-    QMessageBox::information(this, "Games results", std::move(result));
-
+    showAllGamesResults();
 }
 

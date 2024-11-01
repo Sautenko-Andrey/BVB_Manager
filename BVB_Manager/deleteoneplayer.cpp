@@ -3,7 +3,6 @@
 #include <QStandardItem>
 #include <QSqlQuery>
 #include <QMessageBox>
-#include <QDebug>
 #include <QDir>
 
 DeleteOnePlayer::DeleteOnePlayer(QSqlDatabase &database, QWidget *parent)
@@ -100,6 +99,11 @@ DeleteOnePlayer::~DeleteOnePlayer()
     delete ui;
 }
 
+
+/*
+    Function triggers when delete mode changes
+    and it change class variable 'mode'
+*/
 void DeleteOnePlayer::deleteModeChanged(){
     if(ui->deleteModeComboBox->currentText() == "delete one"){
         mode = true;
@@ -110,6 +114,10 @@ void DeleteOnePlayer::deleteModeChanged(){
 }
 
 
+/*
+    Function saves one or many players into the databse
+    depending on selected mode.
+*/
 void DeleteOnePlayer::on_markButton_clicked()
 {
     // make del button available again
@@ -195,6 +203,10 @@ void DeleteOnePlayer::on_markButton_clicked()
 }
 
 
+/*
+    Function deletes one or many players from the databse
+    depending on selected mode.
+*/
 void DeleteOnePlayer::on_deleteButton_clicked()
 {
     // make mark button available again
@@ -283,6 +295,10 @@ void DeleteOnePlayer::on_deleteButton_clicked()
     }
 }
 
+
+/*
+    Function simply calls messeage box with info for user (helping information)
+*/
 void DeleteOnePlayer::on_helpButton_clicked()
 {
     // help info
@@ -290,4 +306,3 @@ void DeleteOnePlayer::on_helpButton_clicked()
                 "For marking a desired player/row please click on the ID cell "
                 "and push button 'Mark ID', then push 'Delete'.");
 }
-

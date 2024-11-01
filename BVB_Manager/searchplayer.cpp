@@ -1,6 +1,5 @@
 #include "searchplayer.h"
 #include "ui_searchplayer.h"
-#include <QDebug>
 #include <QSqlQuery>
 #include <QStringList>
 #include <QMessageBox>
@@ -49,6 +48,10 @@ void SearchPlayer::on_searchButton_clicked()
     }
 }
 
+
+/*
+    Function clears line edit and return focus on it again
+*/
 void SearchPlayer::clearLineAndSetFocus(){
     // clears line edit and sets focus on it
     ui->lineEdit->clear();

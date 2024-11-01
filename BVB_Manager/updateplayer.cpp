@@ -88,8 +88,11 @@ UpdatePlayer::~UpdatePlayer()
 }
 
 
+/*
+    Function triggers when a user double clicks on an image column
+*/
 void UpdatePlayer::picClicked(){
-    // when user double clicks on image column
+
     if(ui->tableWidget->currentColumn() == static_cast<int>(Headers::Image)){
 
         const QString player_image_path = QFileDialog::getOpenFileName(this,
@@ -156,10 +159,20 @@ void UpdatePlayer::picClicked(){
     }
 }
 
+
+/*
+    Functions saves id in players_id variable for the further purposes
+*/
 void UpdatePlayer::saveID(){
     player_id = ui->tableWidget->item(ui->tableWidget->currentRow(), 0)->text();
 }
 
+
+
+/*
+    Function allows user to change ant cell in the players table
+    and saves changed data in the database.
+*/
 void UpdatePlayer::changeCell(){
 
     // getting a new data

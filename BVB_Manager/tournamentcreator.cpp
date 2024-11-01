@@ -1,6 +1,5 @@
 #include "tournamentcreator.h"
 #include "ui_tournamentcreator.h"
-#include <QDebug>
 #include <QSqlQuery>
 #include <QMessageBox>
 #include <QCheckBox>
@@ -131,15 +130,21 @@ TournamentCreator::~TournamentCreator()
     delete ui;
 }
 
+
+/*
+    Function triggers when user changes tournament date
+*/
 void TournamentCreator::tournamentDateChanged()
 {
-    // change last tournament day date
     auto duration = ui->drationSpinBox->value();
 
     ui->endDate->setDate(ui->beginDate->date().addDays(duration == 0 ? duration : --duration));
 }
 
 
+/*
+    Function opens calendar widget
+*/
 void TournamentCreator::on_openCalendarButton_clicked()
 {
     // open calendar widget
@@ -148,6 +153,10 @@ void TournamentCreator::on_openCalendarButton_clicked()
     calendar->show();
 }
 
+
+/*
+    Function triggers when user changes tournament type(gender)
+*/
 void TournamentCreator::tourTypeChanged(){
     if(ui->menRadioButton->isChecked()){
         selected_tour_gender_type = tour_gender_types[0];
@@ -160,6 +169,10 @@ void TournamentCreator::tourTypeChanged(){
     }
 }
 
+
+/*
+    Function triggers when user changes tournament type(16, 24, 32 net)
+*/
 void TournamentCreator::netModeChanged(){
 
     selected_tour_net_type = ui->netComboBox->currentText();
@@ -173,6 +186,10 @@ void TournamentCreator::netModeChanged(){
     });
 }
 
+
+/*
+    Function adds a team to the tournament
+*/
 void TournamentCreator::on_addButton_clicked()
 {
     // add teams to the tournament
@@ -240,32 +257,6 @@ void TournamentCreator::on_addButton_clicked()
                                                &completed_tournament, this);
         draw_schema->show();
     }
-
-
-    // tour_draw->setWindowTitle(completed_tournament.tour_title +
-    //                           " ( " +
-    //                           completed_tournament.date_begin +
-    //                           " - " +
-    //                           completed_tournament.date_end +
-    //                           " ) ");
-
-    // tour_draw->show();
-
-    // // make all child widget disabled for security purpose
-    // // Get all child widgets of the parent
-    // const QObjectList &children = this->children();
-
-    // for (QObject *child : children)
-    // {
-    //     // Convert QObject to QWidget to access widget-specific functions
-    //     QWidget *widget = qobject_cast<QWidget *>(child);
-
-    //     // Skip null objects and the exception widget (managed by shared_ptr)
-    //     if (widget && widget != tour_draw.get())
-    //     {
-    //         widget->setEnabled(false);  // Disable the widget
-    //     }
-    // }
 }
 
 
@@ -274,6 +265,9 @@ void TournamentCreator::tourChanged(){
 }
 
 
+/*
+    Function triggers when user change pages on the tab
+*/
 void TournamentCreator::tabChanged(){
     if(ui->tabWidget->currentIndex() == 0){
         team_registration = std::make_unique<TeamRegistration>(*db, this);
@@ -325,6 +319,9 @@ void TournamentCreator::tabChanged(){
 }
 
 
+/*
+    Function for searhing player in database
+*/
 void TournamentCreator::searchPlayer(){
     // every time print all teams widgets
     for(auto team: teams){
@@ -364,6 +361,10 @@ void TournamentCreator::searchPlayer(){
     }
 }
 
+
+/*
+    Function simply clears player searching line
+*/
 void TournamentCreator::on_clearSearchLineButton_clicked()
 {
     ui->searchByNameLine->clear();
@@ -382,7 +383,9 @@ void TournamentCreator::on_clearSearchLineButton_clicked()
     }
 }
 
-
+/*
+    Function selects all teams when in neccessary
+*/
 void TournamentCreator::on_selectAllTeamsButton_clicked()
 {
     // select all teams
@@ -392,7 +395,9 @@ void TournamentCreator::on_selectAllTeamsButton_clicked()
     }
 }
 
-
+/*
+    Function unselects all teams when in neccessary
+*/
 void TournamentCreator::on_unselectAllTeamsButton_clicked()
 {
     // unselect all teams
@@ -404,6 +409,11 @@ void TournamentCreator::on_unselectAllTeamsButton_clicked()
     }
 }
 
+
+/*
+    Function counts selected teams, compare it to the limit
+    and if everything is ok it allows user to push confirm button
+*/
 void TournamentCreator::selectedTeamsChanged(){
 
     auto total = std::count_if(teams.cbegin(), teams.cend(), [](QCheckBox *box){
@@ -441,9 +451,12 @@ void TournamentCreator::selectedTeamsChanged(){
     }
 }
 
+
+/*
+    Function updates teams list
+*/
 void TournamentCreator::on_updateListButton_clicked()
 {
-    // THIS ALOMOST WORKS!!!! FIX IT EVENTUALLY!-----------------------------
     // clean vbox
     QLayoutItem* item{nullptr};
     while ((item = vbox->takeAt(0)) != nullptr) {
@@ -457,8 +470,6 @@ void TournamentCreator::on_updateListButton_clicked()
 
     //clean teams container
     teams.clear();
-    //-------------------------------------------------------------------------
-
 
     // make a query
     QSqlQuery teams_query(*db);
@@ -494,4 +505,3 @@ void TournamentCreator::on_updateListButton_clicked()
         }
     }
 }
-

@@ -131,6 +131,7 @@ access.txt
 # My folders
 build-BVB_Manager-Desktop_Qt_6_7_0-Debug/
 build-BVB_Manager-Desktop_Qt_6_7_0-Profile/
+build-BVB_Manager-Desktop_Qt_6_7_0-Release/
 
 #images
 *.jpeg

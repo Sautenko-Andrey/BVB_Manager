@@ -67,10 +67,18 @@ ChangeExercise::~ChangeExercise()
     delete ui;
 }
 
+
+/*
+    Function saves an old title of the exercise
+*/
 void ChangeExercise::saveOldTitle(){
     original_title = ui->tableWidget->item(ui->tableWidget->currentRow(), 0)->text();
 }
 
+
+/*
+    Function allows user to change exercise data through the cell of the table
+*/
 void ChangeExercise::changeCell(){
 
     // getting a new data

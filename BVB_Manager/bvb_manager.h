@@ -15,7 +15,6 @@
 #include "changeexercise.h"
 #include "updateplayer.h"
 #include "searchplayer.h"
-#include "doubleeliminationtournament.h"
 #include "teamregistration.h"
 #include "addtournament.h"
 #include "tournamentcreator.h"
@@ -118,8 +117,6 @@ private:
 
     std::unique_ptr<SearchPlayer> search_player{nullptr};
 
-    std::unique_ptr<DoubleEliminationTournament> double_elim_tour{nullptr};
-
     std::unique_ptr<TeamRegistration> team_registration{nullptr};
 
     std::unique_ptr<AddTournament> add_tournament{nullptr};
@@ -189,6 +186,8 @@ private:
             // Pass the event on to the base class
             return QWidget::eventFilter(obj, event);
         }
+
+        return false;
     }
 };
 #endif // BVB_MANAGER_H

@@ -57,6 +57,8 @@ public:
 
     QStringList* getAllGamesResults() { return &all_games_results; }
 
+    void showAllGamesResults();
+
 public slots:
 
     void click_game(QPushButton *team_1, QPushButton *team_2,

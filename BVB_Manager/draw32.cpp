@@ -1,7 +1,6 @@
 #include "draw32.h"
 #include "ui_draw32.h"
-#include <QDebug>
-#include <QMessageBox>
+
 
 Draw32::Draw32(QSqlDatabase &db, Tournament *tour, QWidget *parent)
     : DrawSchema(parent)
@@ -625,13 +624,12 @@ Draw32::~Draw32()
     delete ui;
 }
 
+
+/*
+    Function simply show all games results
+*/
 void Draw32::on_allResultsBtn_clicked()
 {
-    QString result;
-    for(auto it{getAllGamesResults()->begin()}; it != getAllGamesResults()->end();++it){
-        result += *it + "\n";
-    }
-
-    QMessageBox::information(this, "Games results", std::move(result));
+    showAllGamesResults();
 }
 

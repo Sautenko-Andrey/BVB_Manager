@@ -27,7 +27,6 @@ private slots:
 
     void resultTeam1Changed();
     void resultTeam2Changed();
-
     void on_okButton_clicked();
 
 private:
@@ -35,17 +34,16 @@ private:
 
     QPushButton *winner;
     QPushButton *loser;
-
     QPushButton *first_team;
     QPushButton *second_team;
-
     QPushButton *game_result;
-
     QStringList *games_results_list{nullptr};
 
     // Overriding method closeEvent for forbidding close event via button
     void closeEvent(QCloseEvent *event) override {
-        event->ignore();
+        if(event){
+            event->ignore();
+        }
     }
 };
 

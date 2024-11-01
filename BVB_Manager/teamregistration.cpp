@@ -2,7 +2,6 @@
 #include "ui_teamregistration.h"
 #include <QMessageBox>
 #include <QSqlQuery>
-#include <QDebug>
 
 
 enum class RegValues {
@@ -49,6 +48,10 @@ TeamRegistration::~TeamRegistration()
     delete ui;
 }
 
+
+/*
+    Function removes away all data from the widget
+*/
 void TeamRegistration::dropAllData(){
     ui->teamNameLine->clear();
     ui->teamRankSpinBox->setValue(0);
@@ -68,6 +71,10 @@ void TeamRegistration::dropAllData(){
     ui->teamNameLine->setFocus();
 }
 
+
+/*
+    Function removes away only player's data
+*/
 void TeamRegistration::dropPlayerData(QLineEdit *player_name,
                     QLineEdit *player_city,
                     QSpinBox *player_height,
@@ -83,10 +90,13 @@ void TeamRegistration::dropPlayerData(QLineEdit *player_name,
     }
 }
 
+
+/*
+    Function removes all player's data
+    and asks user for confirmation.
+*/
 void TeamRegistration::on_clearAllButton_clicked()
 {
-    // drop all data
-    // ask the user
     QMessageBox::StandardButton reply;
 
     reply = QMessageBox::question(this, "Dropping all team indo",
@@ -101,6 +111,9 @@ void TeamRegistration::on_clearAllButton_clicked()
 }
 
 
+/*
+    Function clears only #1 player data
+*/
 void TeamRegistration::on_clearPlayer_1Button_clicked()
 {
     // clear player #1 info
@@ -111,6 +124,9 @@ void TeamRegistration::on_clearPlayer_1Button_clicked()
 }
 
 
+/*
+    Function clears only #2 player data
+*/
 void TeamRegistration::on_clearPlayer_2Button_clicked()
 {
     // clear player #2 info
@@ -121,9 +137,13 @@ void TeamRegistration::on_clearPlayer_2Button_clicked()
 }
 
 
+/*
+    Function registers a team and save it into the database,
+    moreover it clears widget and get it ready for the next
+    registration.
+*/
 void TeamRegistration::on_registerButton_clicked()
 {
-    // register a team
     QSqlQuery reg_query(*db);
 
     reg_query.prepare("INSERT INTO Teams"

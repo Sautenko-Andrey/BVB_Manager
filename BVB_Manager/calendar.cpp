@@ -10,7 +10,7 @@ Calendar::Calendar(QDateEdit *start_date,
 {
     ui->setupUi(this);
 
-    if(start_date != nullptr && end_date != nullptr && duration != nullptr){
+    if(start_date && end_date && duration){
         start_tour_date = start_date;
         end_tour_date = end_date;
         tour_duration = duration;
@@ -29,9 +29,12 @@ Calendar::~Calendar()
     delete ui;
 }
 
+
+/*
+    Function gets selected date and change desired date widgets
+*/
 void Calendar::on_pushButton_clicked()
 {
-    // get selected date and change desired date widgets
     auto date = ui->calendarWidget->selectedDate();
 
     start_tour_date->setDate(date);

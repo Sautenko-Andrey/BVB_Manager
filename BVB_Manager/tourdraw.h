@@ -12,15 +12,11 @@
 #include <QCloseEvent>
 #include <QVarLengthArray>
 #include <QPropertyAnimation>
-#include "drawschema.h"
-#include "draw24.h"
 
 
 namespace Ui {
 class TourDraw;
 }
-
-// enum class Net{ Sixteen = 16, TwentyFour = 24, ThirtyTwo = 32 };
 
 class TourDraw : public QDialog
 {
@@ -113,8 +109,6 @@ private:
                          int duration);
 
     QPushButton* makeOpsBtn(const QRect &&geom, const QString &&text, const QString &style);
-
-    std::unique_ptr<DrawSchema> draw_schema{nullptr};
 };
 
 #endif // TOURDRAW_H

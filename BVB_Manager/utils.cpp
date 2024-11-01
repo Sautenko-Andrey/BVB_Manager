@@ -11,86 +11,100 @@ const QStringList training_types{
 };
 
 
+/*
+    Function creates a players table
+*/
 void createPlayersTable(QStandardItemModel *model, QTableView *tableView,
                         QSqlDatabase *db, QVector<Player> &all_players,
                         QDialog *dialog)
 {
-    // adding header to a table
-    model = new QStandardItemModel();
 
-    // allow table header occupy full line
-    tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    if(model && tableView && db && dialog){
+        // adding header to a table
+        model = new QStandardItemModel();
 
-    const QStringList labels{
-        "ID", "First name", "Last name", "Age", "Gender", "Height", "Hometown", "Phone"
-    };
+        // allow table header occupy full line
+        tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    // add header labels for the table
-    model->setHorizontalHeaderLabels(labels);
-    tableView->setModel(model);
+        const QStringList labels{
+            "ID", "First name", "Last name", "Age", "Gender", "Height", "Hometown", "Phone"
+        };
 
-    // adding players data to the table
-    QSqlQuery query(*db);
+        // add header labels for the table
+        model->setHorizontalHeaderLabels(labels);
+        tableView->setModel(model);
 
-    if(!query.exec("SELECT id, first_name, last_name, age, sex, height, hometown, phone"
-                    " FROM Players;")){
-        QMessageBox::warning(dialog, "Database error",
-                             "Couldn't load players data. Try one more time.");
-        return;
-    }
+        // adding players data to the table
+        QSqlQuery query(*db);
 
-    // filling the container
-    while(query.next()){
-        Player player(query.value(0).toInt(), query.value(1).toString(),
-                      query.value(2).toString(),query.value(3).toInt(),
-                      query.value(4).toInt(),query.value(5).toInt(),
-                      query.value(6).toString(),query.value(7).toString());
+        if(!query.exec("SELECT id, first_name, last_name, age, sex, height, hometown, phone"
+                        " FROM Players;")){
+            QMessageBox::warning(dialog, "Database error",
+                                 "Couldn't load players data. Try one more time.");
+            return;
+        }
+
+        // filling the container
+        while(query.next()){
+            Player player(query.value(0).toInt(), query.value(1).toString(),
+                          query.value(2).toString(),query.value(3).toInt(),
+                          query.value(4).toInt(),query.value(5).toInt(),
+                          query.value(6).toString(),query.value(7).toString());
 
 
-        all_players.push_back(player);
-    }
+            all_players.push_back(player);
+        }
 
-    // filling the table
+        // filling the table
 
-    // counter
-    int i = 0;
+        // counter
+        int i = 0;
 
-    for(auto const &player : all_players){
-        auto id = new QStandardItem(QString::number(player.id));
-        auto name = new QStandardItem(player.first_name);
-        auto surname = new QStandardItem(player.last_name);
-        auto age = new QStandardItem(QString::number(player.age));
-        auto gender = new QStandardItem( player.gender ? "male" : "female" );
-        auto height = new QStandardItem(QString::number(player.height));
-        auto hometown = new QStandardItem(player.hometown);
-        auto phone = new QStandardItem(player.phone);
+        for(auto const &player : all_players){
+            auto id = new QStandardItem(QString::number(player.id));
+            auto name = new QStandardItem(player.first_name);
+            auto surname = new QStandardItem(player.last_name);
+            auto age = new QStandardItem(QString::number(player.age));
+            auto gender = new QStandardItem( player.gender ? "male" : "female" );
+            auto height = new QStandardItem(QString::number(player.height));
+            auto hometown = new QStandardItem(player.hometown);
+            auto phone = new QStandardItem(player.phone);
 
-        model->setItem(i, 0, id);
-        model->setItem(i, 1, name);
-        model->setItem(i, 2, surname);
-        model->setItem(i, 3, age);
-        model->setItem(i, 4, gender);
-        model->setItem(i, 5, height);
-        model->setItem(i, 6, hometown);
-        model->setItem(i, 7, phone);
+            model->setItem(i, 0, id);
+            model->setItem(i, 1, name);
+            model->setItem(i, 2, surname);
+            model->setItem(i, 3, age);
+            model->setItem(i, 4, gender);
+            model->setItem(i, 5, height);
+            model->setItem(i, 6, hometown);
+            model->setItem(i, 7, phone);
 
-        ++i;
+            ++i;
+        }
     }
 }
 
+
+/*
+    Function automatically changes a font of a btn if it's neccessary
+*/
 void fontAdapter(QPushButton *btn){
 
-    //constexpr int max_symbols_amount = 24;
-
-    if(constexpr int max_symbols_amount = 24; btn->text().size() >= max_symbols_amount){
-        btn->setFont(QFont("Ubuntu", 6));
-    }
-    else if(btn->text().size() > max_symbols_amount / 2 + 1 &&
-             btn->text().size() < max_symbols_amount){
-        btn->setFont(QFont("Ubuntu", 9));
+    if(btn){
+        if(constexpr int max_symbols_amount = 24; btn->text().size() >= max_symbols_amount){
+            btn->setFont(QFont("Ubuntu", 6));
+        }
+        else if(btn->text().size() > max_symbols_amount / 2 + 1 &&
+                 btn->text().size() < max_symbols_amount){
+            btn->setFont(QFont("Ubuntu", 9));
+        }
     }
 }
 
+
+/*
+    Function changes stylesheet of table's items
+*/
 void changeTableItemStyle(QTableWidget *table, const QColor color,
                           bool is_bold){
 

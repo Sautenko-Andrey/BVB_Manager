@@ -1,6 +1,5 @@
 #include "gameresult.h"
 #include "ui_gameresult.h"
-#include <QDebug>
 #include <QMessageBox>
 #include "utils.h"
 
@@ -54,6 +53,11 @@ GameResult::~GameResult()
     delete ui;
 }
 
+
+/*
+    Function triggers when user changes result in a match
+    for the team #1
+*/
 void GameResult::resultTeam1Changed(){
     if(ui->firstSpinBox->value() == 2){
         ui->secSpinBox->setValue(1);
@@ -63,6 +67,11 @@ void GameResult::resultTeam1Changed(){
     }
 }
 
+
+/*
+    Function triggers when user changes result in a match
+    for the team #2
+*/
 void GameResult::resultTeam2Changed(){
     if(ui->secSpinBox->value() == 2){
         ui->firstSpinBox->setValue(1);
@@ -72,6 +81,11 @@ void GameResult::resultTeam2Changed(){
     }
 }
 
+
+/*
+    Function triggers when user push "Ok" button
+    and it write general result in the game result button
+*/
 void GameResult::on_okButton_clicked()
 {
     int first_team_score = ui->firstSpinBox->value();

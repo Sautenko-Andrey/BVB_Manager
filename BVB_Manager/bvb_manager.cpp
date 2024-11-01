@@ -5,7 +5,7 @@
 #include <QListWidget>
 #include <QFile>
 #include <QInputDialog>
-#include "choosedate.h"
+
 
 BVB_Manager::BVB_Manager(QWidget *parent)
     : QMainWindow(parent)
@@ -344,7 +344,7 @@ void BVB_Manager::markItem(QListWidgetItem *item, const QBrush &color, bool is_b
 
     QFont item_font;
 
-    if(item != nullptr){
+    if(item){
         item->setForeground(color);
 
         // when marking item we apply this
@@ -366,7 +366,7 @@ void BVB_Manager::markItem(QListWidgetItem *item, const QBrush &color, bool is_b
 void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QStringList &container,
                                  QString &text, QLabel *label){
 
-    if(list_widget != nullptr && label != nullptr){
+    if(list_widget && label){
 
         QString current_item = list_widget->currentItem()->text();
 
@@ -611,7 +611,7 @@ void BVB_Manager::on_actionSearch_a_player_triggered()
 void BVB_Manager::removeListWidgetItems(QLabel *label, QListWidget *widget,
                                         QStringList &container){
 
-    if(label != nullptr && widget != nullptr){
+    if(label && widget){
         // clear label
         label->clear();
 
