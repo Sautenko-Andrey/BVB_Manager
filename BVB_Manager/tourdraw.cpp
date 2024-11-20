@@ -784,25 +784,21 @@ void TourDraw::click_game(QPushButton *team_1, QPushButton *team_2,
                           QPushButton *winner_basket, QPushButton *loser_basket,
                           QPushButton *game_result_btn, QPropertyAnimation *animation){
 
-    if(team_1 && team_2 && winner_basket &&
-       loser_basket && game_result_btn && animation){
+    QStringList *empty_list{nullptr};
+    game_result = std::make_unique<GameResult>(team_1, team_2,
+                                               winner_basket, loser_basket,
+                                               empty_list, game_result_btn,
+                                               this);
 
-        QStringList *empty_list{nullptr};  // new
-        game_result = std::make_unique<GameResult>(team_1, team_2,
-                                                   winner_basket, loser_basket,
-                                                   empty_list, game_result_btn,   // new
-                                                   this);
-
-        // stop animation
-        if(animation != nullptr && animation->state() == QAbstractAnimation::Running){
-            animation->stop();
-            winner_basket->setStyleSheet(team_btn_style);
-            winner_basket->resize(static_cast<int>(Geometry::BtnWidth),
-                                  static_cast<int>(Geometry::BtnHeight));
-        }
-
-        game_result->show();
+    // stop animation
+    if(animation != nullptr && animation->state() == QAbstractAnimation::Running){
+        animation->stop();
+        winner_basket->setStyleSheet(team_btn_style);
+        winner_basket->resize(static_cast<int>(Geometry::BtnWidth),
+                              static_cast<int>(Geometry::BtnHeight));
     }
+
+    game_result->show();
 }
 
 

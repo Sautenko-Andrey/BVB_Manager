@@ -2,6 +2,7 @@
 #include <QGraphicsOpacityEffect>
 #include <QMessageBox>
 
+
 DrawSchema::DrawSchema(QWidget* parent)
     : QDialog(parent),
       parent_dialog{parent}
@@ -113,27 +114,23 @@ void DrawSchema::click_game(QPushButton *team_1, QPushButton *team_2,
                             QPushButton *game_result_btn,
                             QPropertyAnimation *animation){
 
-    if(team_1 && team_2 && winner_basket &&
-       loser_basket && game_result_btn && animation){
+    game_result = std::make_unique<GameResult>(team_1, team_2,
+                                               winner_basket, loser_basket,
+                                               getAllGamesResults(),
+                                               game_result_btn, this);
 
-        game_result = std::make_unique<GameResult>(team_1, team_2,
-                                                   winner_basket, loser_basket,
-                                                   getAllGamesResults(),
-                                                   game_result_btn, this);
+    // stop animation
+    if(animation != nullptr && animation->state() == QAbstractAnimation::Running){
 
-        // stop animation
-        if(animation != nullptr && animation->state() == QAbstractAnimation::Running){
+        animation->stop();
 
-            animation->stop();
-
-            // Remove the opacity effect (return button to its original state)
-            winner_basket->setGraphicsEffect(nullptr);
-            // return previous style
-            winner_basket->setStyleSheet(team_btn_style);
-        }
-
-        game_result->show();
+        // Remove the opacity effect (return button to its original state)
+        winner_basket->setGraphicsEffect(nullptr);
+        // return previous style
+        winner_basket->setStyleSheet(team_btn_style);
     }
+
+    game_result->show();
 }
 
 
