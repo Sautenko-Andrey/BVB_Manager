@@ -508,6 +508,11 @@ TourDraw::TourDraw(QSqlDatabase &database,
 
 TourDraw::~TourDraw()
 {
+    // Deleting animation
+    for (auto animation : animations) {
+        animation->deleteLater();
+    }
+
     delete ui;
 }
 
@@ -536,7 +541,7 @@ void TourDraw::createAnimation(std::pair<int,int> &&range,
                                int duration){
 
     for(int i{range.first}; i < range.second; ++i){
-        auto animation = new QPropertyAnimation(buttons[i], "geometry");
+        auto animation = new QPropertyAnimation(buttons[i], "geometry", buttons[i]);
         animation->setDuration(duration);
         QPoint btn_pos = buttons[i]->pos();
         animation->setStartValue(QRect(btn_pos.x(), btn_pos.y(),

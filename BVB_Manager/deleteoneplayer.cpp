@@ -14,7 +14,7 @@ DeleteOnePlayer::DeleteOnePlayer(QSqlDatabase &database, QWidget *parent)
     db = &database;
 
     // adding header to a table
-    model = new QStandardItemModel();
+    model = new QStandardItemModel(this);
 
     // allow table header occupy full line
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);

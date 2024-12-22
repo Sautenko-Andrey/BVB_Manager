@@ -141,7 +141,8 @@ void DrawSchema::fillTeamBtns(Net net, const QList<QPushButton *> &all_teams,
                           const QSize &btn_size)
 {
     if(all_teams.empty()){
-        throw std::invalid_argument{"Teams list is empty."};
+        QMessageBox::warning(this, "Error!", "Teams list is empty!");
+        return;
     }
 
     for(int i{0}; i < static_cast<int>(net); ++i){
@@ -198,14 +199,14 @@ void DrawSchema::createAnimation(std::pair<int,int> &&range,
         for(int i{range.first}; i < range.second; ++i){
 
             //Create an opacity effect and apply it to the button
-            QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect;
+            QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect(buttons[i]);
             buttons[i]->setGraphicsEffect(opacityEffect);
 
             // Ensure the button starts with full opacity
             opacityEffect->setOpacity(1.0);  // Full opacity, button is fully visible at start
 
             // Create a QPropertyAnimation for opacity
-            QPropertyAnimation *animation = new QPropertyAnimation(opacityEffect, "opacity");
+            QPropertyAnimation *animation = new QPropertyAnimation(opacityEffect, "opacity", buttons[i]);
             animation->setDuration(duration);  // 2 seconds
             animation->setStartValue(1.0);  // Full opacity
             animation->setEndValue(0.1);    // Fully transparent (invisible)

@@ -8,7 +8,7 @@ void DatabaseManager::prepareManager(QWidget *widget){
     if(!m_db.open()){
         QMessageBox::warning(widget, "Error",
                              "Couldn't load the database. Reopen the app");
-        exit(1);
+        return;
     }
 }
 

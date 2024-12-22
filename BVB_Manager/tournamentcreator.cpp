@@ -305,6 +305,7 @@ void TournamentCreator::tabChanged(){
                 // don't add to the teams widget already existed team
                 for(auto team : teams){
                     if(team->text() == checkbox->text()){
+                        delete checkbox;
                         return;
                     }
                 }
@@ -313,7 +314,9 @@ void TournamentCreator::tabChanged(){
                 vbox->addWidget(checkbox);
             }
 
-            ui->groupBox->setLayout(vbox);
+            if (ui->groupBox->layout() != vbox) {
+                ui->groupBox->setLayout(vbox);
+            }
         }
     }
 }
@@ -468,6 +471,11 @@ void TournamentCreator::on_updateListButton_clicked()
         delete item;
     }
 
+    // Clear teams container
+    for (auto team : teams) {
+        delete team;  // Delete every check box
+    }
+
     //clean teams container
     teams.clear();
 
@@ -502,6 +510,14 @@ void TournamentCreator::on_updateListButton_clicked()
 
             vbox->addWidget(checkbox);
             teams.push_back(checkbox);
+        }
+
+        // Remove memory leack
+        if (ui->groupBox->layout() != vbox) {
+            if (ui->groupBox->layout()) {
+                delete ui->groupBox->layout();  // Delete old group box
+            }
+            ui->groupBox->setLayout(vbox);  // set new group box
         }
     }
 }
