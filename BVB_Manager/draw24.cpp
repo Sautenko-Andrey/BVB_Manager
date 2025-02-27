@@ -483,6 +483,7 @@ Draw24::Draw24(QSqlDatabase &db, Tournament *tour, QWidget *parent)
 
         //make play-off team buttons
         QList<QPushButton *> play_off_round_btns;
+
         for(int i{16}; i < 24; ++i){
             play_off_round_btns.push_front(W_btns[i]);
         }

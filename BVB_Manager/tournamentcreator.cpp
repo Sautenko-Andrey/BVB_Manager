@@ -345,7 +345,7 @@ void TournamentCreator::searchPlayer(){
 
         auto text = team->text().left(pos_end - 1);
 
-        auto clear_names = text.right(text.size() - pos_start);
+        const auto &clear_names = text.right(text.size() - pos_start);
 
         // looking for match with search template
         if(clear_names.contains(ui->searchByNameLine->text())){

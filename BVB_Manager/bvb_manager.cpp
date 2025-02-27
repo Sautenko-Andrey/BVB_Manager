@@ -303,8 +303,8 @@ void BVB_Manager::updateTime(){
 */
 QString BVB_Manager::timeToString(){
 
-    int hour = ui->trainingTime->time().hour();
-    int minute = ui->trainingTime->time().minute();
+    const auto &hour = ui->trainingTime->time().hour();
+    const auto &minute = ui->trainingTime->time().minute();
 
     QString minutes = QString::number(minute);
 
@@ -370,7 +370,8 @@ void BVB_Manager::markUnmarkItem(QListWidget *list_widget,
 
     if(list_widget && label){
 
-        QString current_item = list_widget->currentItem()->text();
+        QString current_item =
+            list_widget->currentItem()->text();
 
         // unmark
         if(container.contains(current_item)){
@@ -409,7 +410,7 @@ void BVB_Manager::markUnmarkItem(QListWidget *list_widget,
                 if(status_1 && status_2){
                     // change current_item (adding sets and reps)
                     current_item += (" " + QString::number(sets) +
-                                     " x " +QString::number(reps));
+                                     " x " + QString::number(reps));
 
                     // changing current item text
                     list_widget->currentItem()->setText(current_item);
@@ -625,7 +626,9 @@ void BVB_Manager::removeListWidgetItems(QLabel *label, QListWidget *widget,
             // for all gym exercises return their original names
             if(widget->item(i)->text().contains("( Gym )")){
                 // remove sets and reps from exercise name(getting name as original)
-                QString correct_name = widget->item(i)->text().left((widget->item(i)->text().indexOf(")")) + 2);
+                const QString &correct_name =
+                    widget->item(i)->text().left((widget->item(i)->text().indexOf(")")) + 2);
+
                 widget->item(i)->setText(correct_name);
             }
             markItem(widget->item(i),
@@ -643,7 +646,9 @@ void BVB_Manager::removeListWidgetItems(QLabel *label, QListWidget *widget,
 */
 void BVB_Manager::on_removeAllPlayersButton_clicked()
 {
-    removeListWidgetItems(ui->playerNameLabel, ui->playersListWidget, marked_players);
+    removeListWidgetItems(ui->playerNameLabel,
+                          ui->playersListWidget,
+                          marked_players);
 }
 
 
@@ -661,7 +666,8 @@ void BVB_Manager::on_addAllPlayersButton_clicked()
     // add all players
     for(auto i{0}; i < ui->playersListWidget->count(); ++i){
         // create a players string
-        combined_players += (ui->playersListWidget->item(i)->text() + "\n");
+        combined_players +=
+            (ui->playersListWidget->item(i)->text() + "\n");
 
         // make each player marked
         markItem(ui->playersListWidget->item(i),
@@ -922,7 +928,7 @@ void BVB_Manager::comboLangChanged(){
 void BVB_Manager::dateActivated(){
 
     // double click / enter /return on calendar widget's date
-    auto selected_date = ui->calendarWidget->selectedDate();
+    const auto &selected_date = ui->calendarWidget->selectedDate();
 
     // make a query to getting all trainings on this date
     QSqlQuery query(database_manager.getDatabase());
@@ -934,7 +940,8 @@ void BVB_Manager::dateActivated(){
     query.bindValue(":date", selected_date);
 
     if(!query.exec()){
-        QMessageBox::warning(this, "Database error", "Couldn't load trainings");
+        QMessageBox::warning(this, "Database error",
+                             "Couldn't load trainings");
         return;
     }
     else{

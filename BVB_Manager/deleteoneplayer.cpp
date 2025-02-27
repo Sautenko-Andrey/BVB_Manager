@@ -53,9 +53,9 @@ DeleteOnePlayer::DeleteOnePlayer(QSqlDatabase &database, QWidget *parent)
     while(query.next()){
 
         all_players.emplace_back(Player(query.value(0).toInt(), query.value(1).toString(),
-                                        query.value(2).toString(),query.value(3).toInt(),
-                                        query.value(4).toInt(),query.value(5).toInt(),
-                                        query.value(6).toString(),query.value(7).toString()));
+                query.value(2).toString(),query.value(3).toInt(),
+                query.value(4).toInt(),query.value(5).toInt(),
+                query.value(6).toString(),query.value(7).toString()));
     }
 
     // filling the table
@@ -138,6 +138,7 @@ void DeleteOnePlayer::on_markButton_clicked()
 
         // Make marked row red
         constexpr int columns_amount{8};
+
         for(int i{0}; i < columns_amount; ++i)
         {
             model->setData(model->index(row_for_del, i),

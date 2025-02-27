@@ -97,7 +97,7 @@ void UpdatePlayer::picClicked(){
 
     if(ui->tableWidget->currentColumn() == static_cast<int>(Headers::Image)){
 
-        const QString player_image_path = QFileDialog::getOpenFileName(this,
+        const QString &player_image_path = QFileDialog::getOpenFileName(this,
                                                            "Select an image");
         if(!image.load(player_image_path)){
             QMessageBox::warning(this, "File error!", "Couldn't load an image!");
@@ -130,8 +130,9 @@ void UpdatePlayer::picClicked(){
                 //removing all possible whitespaces
                 name = name.trimmed().replace(" ", "_");
 
-                const QString image_name = QDir::homePath() +
-                                           "/Players_images/" + std::move(name) + ".jpeg";
+                const QString &image_name = QDir::homePath() +
+                                           "/Players_images/" +
+                                           std::move(name) + ".jpeg";
 
                 if(!image.save(image_name)){
                     QMessageBox::warning(this, "Saving image error!", "Couldn't save an image!");
@@ -178,8 +179,8 @@ void UpdatePlayer::saveID(){
 void UpdatePlayer::changeCell(){
 
     // getting a new data
-    auto data = ui->tableWidget->item(ui->tableWidget->currentRow(),
-                                      ui->tableWidget->currentColumn())->text();
+    const auto &data = ui->tableWidget->item(ui->tableWidget->currentRow(),
+                       ui->tableWidget->currentColumn())->text();
 
     // getting a column number
     auto column = ui->tableWidget->currentColumn();
