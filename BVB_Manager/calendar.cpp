@@ -41,7 +41,7 @@ void Calendar::on_pushButton_clicked()
     end_tour_date->setDate(date);
 
     // drop duration value
-    tour_duration->setValue(0);;
+    tour_duration->setValue(0);
 
     QDialog::accept();
 }

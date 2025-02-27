@@ -69,10 +69,12 @@ Draw24::Draw24(QSqlDatabase &db, Tournament *tour, QWidget *parent)
     });
 
     // create animations for butoons W1 - W8
-    createAnimation(std::move(std::make_pair(0, 8)), W_btns, animations_left_1, 2000);
+    createAnimation(std::make_pair(0, 8),
+                    W_btns, animations_left_1, duration_of_anim);
 
     // create animations for buttons W9 - W16
-    createAnimation(std::move(std::make_pair(8, 16)), W_btns, animations_left_2, 2000);
+    createAnimation(std::make_pair(8, 16),
+                    W_btns, animations_left_2, duration_of_anim);
 
     // create animations for buttons W24 - W17
     // fill container
@@ -80,10 +82,12 @@ Draw24::Draw24(QSqlDatabase &db, Tournament *tour, QWidget *parent)
         W24_W17_btns.push_front(W_btns[i]);
     }
 
-    createAnimation(std::move(std::make_pair(0, 8)), W24_W17_btns, animations_right_1, 2000);
+    createAnimation(std::make_pair(0, 8),
+                    W24_W17_btns, animations_right_1, duration_of_anim);
 
     // create animations for buttons W29 - W32
-    createAnimation(std::move(std::make_pair(28, 32)), W_btns, animations_right_2, 2000);
+    createAnimation(std::make_pair(28, 32),
+                    W_btns, animations_right_2, duration_of_anim);
 
     // collect all L buttons
     QList<QPushButton *> L_btns{

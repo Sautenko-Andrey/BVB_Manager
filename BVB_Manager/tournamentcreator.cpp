@@ -13,6 +13,11 @@ TournamentCreator::TournamentCreator(QSqlDatabase *database, QWidget *parent)
 {
     ui->setupUi(this);
 
+    // Reserve memory for 16 teams at least
+    constexpr int possible_teams_amount{16};
+    teams.reserve(possible_teams_amount);
+    selected_teams.reserve(possible_teams_amount);
+
     // make save button disabled till user select at least 8 teams
     ui->addButton->setDisabled(true);
 
@@ -491,7 +496,6 @@ void TournamentCreator::on_updateListButton_clicked()
         return;
     }
     else{
-        //vbox = new QVBoxLayout(ui->teamsScrollArea);
 
         while(teams_query.next()){
 

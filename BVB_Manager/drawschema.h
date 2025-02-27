@@ -33,6 +33,8 @@ public:
 
     QList<QPushButton *> loosers_btns;
 
+    inline static constexpr int duration_of_anim{2000};
+
     void setDB(QSqlDatabase *db);
 
     QSqlDatabase* getDB(){ return db; }
@@ -92,6 +94,7 @@ private:
     Tournament *tournament{nullptr};
 
     QStringList all_games_results;
+
 };
 
 #endif // DRAWSCHEMA_H

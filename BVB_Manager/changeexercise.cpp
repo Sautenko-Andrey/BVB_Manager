@@ -24,6 +24,9 @@ ChangeExercise::ChangeExercise(QSqlDatabase &database, QWidget *parent)
 
     QSqlQuery query(database);
 
+    constexpr int possible_exercises_amount{100};
+    all_exercises.reserve(possible_exercises_amount);
+
     if(!query.exec("SELECT "
                    "title, description, exercise_type"
                    " FROM Exercises ORDER BY exercise_type ASC;")){
@@ -33,11 +36,10 @@ ChangeExercise::ChangeExercise(QSqlDatabase &database, QWidget *parent)
     }
     else{
         while(query.next()){
-            Exercise exercise(query.value(0).toString(),
-                              query.value(1).toString(),
-                              query.value(2).toString());
 
-            all_exercises.push_back(exercise);
+            all_exercises.emplace_back(Exercise(query.value(0).toString(),
+                                                query.value(1).toString(),
+                                                query.value(2).toString()));
         }
     }
 

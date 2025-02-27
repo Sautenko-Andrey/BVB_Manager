@@ -46,13 +46,11 @@ void createPlayersTable(QStandardItemModel *model, QTableView *tableView,
 
         // filling the container
         while(query.next()){
-            Player player(query.value(0).toInt(), query.value(1).toString(),
-                          query.value(2).toString(),query.value(3).toInt(),
-                          query.value(4).toInt(),query.value(5).toInt(),
-                          query.value(6).toString(),query.value(7).toString());
 
-
-            all_players.push_back(player);
+            all_players.emplace_back(Player(query.value(0).toInt(), query.value(1).toString(),
+                                            query.value(2).toString(),query.value(3).toInt(),
+                                            query.value(4).toInt(),query.value(5).toInt(),
+                                            query.value(6).toString(),query.value(7).toString()));
         }
 
         // filling the table
@@ -91,7 +89,9 @@ void createPlayersTable(QStandardItemModel *model, QTableView *tableView,
 void fontAdapter(QPushButton *btn){
 
     if(btn){
-        if(constexpr int max_symbols_amount = 24; btn->text().size() >= max_symbols_amount){
+        if(constexpr int max_symbols_amount{24};
+            btn->text().size() >= max_symbols_amount)
+        {
             btn->setFont(QFont("Ubuntu", 6));
         }
         else if(btn->text().size() > max_symbols_amount / 2 + 1 &&

@@ -31,7 +31,8 @@ void SearchPlayer::on_searchButton_clicked()
 
     QStringList splitted_name = user_input.split(u' ');
 
-    if(splitted_name.size() != 2){
+    if(constexpr int num{2}; splitted_name.size() != num)
+    {
         QMessageBox::warning(this, "Player's name error",
                     "Please input first name and last name separated by one space");
         return;

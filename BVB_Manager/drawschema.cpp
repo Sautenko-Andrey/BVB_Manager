@@ -10,12 +10,16 @@ DrawSchema::DrawSchema(QWidget* parent)
     // change dialog's background color
     this->setStyleSheet("background-color: azure; color : black");
 
+    // reserve memory for loosers_btns list
+    constexpr int possible_btns_num{8};
+    loosers_btns.reserve(possible_btns_num);
+
     // pointer on nowhere for out team
     loser_btn = new QPushButton(this);
     loser_btn->hide();
 
     // 8 loser buttons
-    for(int i{0}; i < 8; ++i){
+    for(int i{0}; i < possible_btns_num; ++i){
         QPushButton *loser_btn = new QPushButton(this);
         loser_btn->setGeometry(5000, 5000, 1, 1);
         loser_btn->hide();

@@ -233,9 +233,11 @@ void AddPlayer::on_savePlayerButton_clicked()
     // creating a new folder with players images( if it doesn't exist )
     QDir dir;
 
+    QString players_img_path{"/Players_images"};
+
     // creating a players images directory
-    if(!dir.exists(QDir::homePath() + "/Players_images")){
-        dir.mkpath(QDir::homePath() + "/Players_images");
+    if(!dir.exists(QDir::homePath() + players_img_path)){
+        dir.mkpath(QDir::homePath() + players_img_path);
     }
 
     // saving an input image in the created folder
@@ -244,10 +246,13 @@ void AddPlayer::on_savePlayerButton_clicked()
     //removing all possible whitespaces
     name = name.trimmed().replace(" ", "_");
 
-    const QString image_name = QDir::homePath() + "/Players_images/" + name + ".jpeg";
+    const QString image_name = QDir::homePath() +
+                               std::move(players_img_path) +
+                               "/" + name + ".jpeg";
 
     if(!image.save(image_name)){
         QMessageBox::warning(this, "Image error!", "Couldn't save an image!");
+        return;
     }
 
     // making a query

@@ -59,11 +59,12 @@ GameResult::~GameResult()
     for the team #1
 */
 void GameResult::resultTeam1Changed(){
-    if(ui->firstSpinBox->value() == 2){
-        ui->secSpinBox->setValue(1);
+
+    if(ui->firstSpinBox->value() == won_two_sets){
+        ui->secSpinBox->setValue(won_one_set);
     }
-    else if(ui->firstSpinBox->value() == 1){
-        ui->secSpinBox->setValue(2);
+    else if(ui->firstSpinBox->value() == won_one_set){
+        ui->secSpinBox->setValue(won_two_sets);
     }
 }
 
@@ -73,11 +74,11 @@ void GameResult::resultTeam1Changed(){
     for the team #2
 */
 void GameResult::resultTeam2Changed(){
-    if(ui->secSpinBox->value() == 2){
-        ui->firstSpinBox->setValue(1);
+    if(ui->secSpinBox->value() == won_two_sets){
+        ui->firstSpinBox->setValue(won_one_set);
     }
-    else if(ui->secSpinBox->value() == 1){
-        ui->firstSpinBox->setValue(2);
+    else if(ui->secSpinBox->value() == won_one_set){
+        ui->firstSpinBox->setValue(won_two_sets);
     }
 }
 
@@ -92,12 +93,16 @@ void GameResult::on_okButton_clicked()
     int second_team_score = ui->secSpinBox->value();
 
     // match result can't be 0 : 0
-    if(first_team_score == 0 && second_team_score == 0){
+    if(constexpr int zero_scored{0};
+        first_team_score == zero_scored &&
+        second_team_score == zero_scored)
+    {
         QMessageBox::warning(this, "Match result error", "Match result can't be 0:0");
         return;
     }
 
-    if(first_team_score == 2){
+    if(constexpr int two_scored{2}; first_team_score == two_scored)
+    {
         winner->setText(first_team->text());
         winner->setToolTip(first_team->text());
         loser->setText(second_team->text());
@@ -123,11 +128,11 @@ void GameResult::on_okButton_clicked()
     }
     else{
         // if we just save result in a container as a string
-        games_results_list->push_back(first_team->text() + " vs " +
-                                     second_team->text() + " ( " +
-                                     QString::number(first_team_score) +
-                                     " : " +
-                                     QString::number(second_team_score) + " )");
+        games_results_list->emplace_back(first_team->text() + " vs " +
+                                         second_team->text() + " ( " +
+                                         QString::number(first_team_score) +
+                                         " : " +
+                                         QString::number(second_team_score) + " )");
     }
 
     QDialog::accept();

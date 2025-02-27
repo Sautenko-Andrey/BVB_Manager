@@ -22,6 +22,16 @@ TourDraw::TourDraw(QSqlDatabase &database,
 {
     ui->setupUi(this);
 
+    // reserve memory for buttons containers
+    L1_L12_buttons.reserve(12);
+    L22_L21_buttons.reserve(2);
+    W25_W26_looser_buttons.reserve(2);
+    L27_L28_buttons.reserve(2);
+    W_buttons.reserve(28);
+    final_silver_bronze_buttons.reserve(2);
+    game_result_buttons.reserve(30);
+    loosers.reserve(4);
+
     // change dialog's background color
     this->setStyleSheet("background-color: azure; color : black");
 
@@ -520,7 +530,8 @@ TourDraw::~TourDraw()
 /*
     Function creates a custom operation button with a specific style
 */
-QPushButton* TourDraw::makeOpsBtn(const QRect &&geom, const QString &&text,
+QPushButton* TourDraw::makeOpsBtn(const QRect &geom,
+                                  const QString &text,
                                   const QString &style){
     auto btn = new QPushButton(this);
     btn->setGeometry(geom);

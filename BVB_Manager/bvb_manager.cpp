@@ -308,7 +308,7 @@ QString BVB_Manager::timeToString(){
 
     QString minutes = QString::number(minute);
 
-    if(minute < 10){
+    if(constexpr int min_minutes{10}; minute < min_minutes){
         minutes = "0" + QString::number(minute);
     }
 
@@ -316,7 +316,7 @@ QString BVB_Manager::timeToString(){
 
     ui->timeSelectedLabel->setText(time_str);
 
-    return std::move(time_str);
+    return time_str;  // NRVO works here with a returning a local variable
 }
 
 
@@ -363,8 +363,10 @@ void BVB_Manager::markItem(QListWidgetItem *item, const QBrush &color, bool is_b
     Function allows a user to mark and unmark item (player or exercise)
     when it neccessary.
 */
-void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QStringList &container,
-                                 QString &text, QLabel *label){
+void BVB_Manager::markUnmarkItem(QListWidget *list_widget,
+                                 QStringList &container,
+                                 QString &text,
+                                 QLabel *label){
 
     if(list_widget && label){
 
@@ -396,10 +398,12 @@ void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QStringList &containe
 
                 bool status_1, status_2;
                 // 20 sets maximum
-                sets = QInputDialog::getInt(this, "Sets", "How many sets ?",
+                sets = QInputDialog::getInt(this, "Sets",
+                                            "How many sets ?",
                                             1, 1, 20, 1, &status_1);
                 // 100 reps maximum
-                reps = QInputDialog::getInt(this, "Reps", "How many reps ?",
+                reps = QInputDialog::getInt(this, "Reps",
+                                            "How many reps ?",
                                             1, 1, 100, 1, &status_2);
 
                 if(status_1 && status_2){
@@ -416,7 +420,7 @@ void BVB_Manager::markUnmarkItem(QListWidget *list_widget, QStringList &containe
             markItem(list_widget->currentItem(), Qt::red);
 
             // add marked item to the container
-            container.append(current_item);
+            container.append(std::move(current_item));
         }
 
         // clear items string
@@ -960,7 +964,7 @@ void BVB_Manager::dateActivated(){
 */
 int BVB_Manager::getTrainings(const QDate &date) {
 
-    int counter{0};
+    constexpr int counter{0};
 
     // make a query
     QSqlQuery query(database_manager.getDatabase());

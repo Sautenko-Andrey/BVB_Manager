@@ -104,18 +104,22 @@ Draw32::Draw32(QSqlDatabase &db, Tournament *tour, QWidget *parent)
     ui->L59_btn->setDisabled(true);
     ui->L60_btn->setDisabled(true);
 
-
+    constexpr int duration_mlsc{2000};
     // create animations for buttons W1 - W16
-    createAnimation(std::move(std::make_pair(0, 16)), W_btns, animations_left_1, 2000);
+    createAnimation(std::make_pair(0, 16),
+                    W_btns, animations_left_1, duration_of_anim);
 
     // create animations for buttons W17 - W24
-    createAnimation(std::move(std::make_pair(16, 24)), W_btns, animations_left_2, 2000);
+    createAnimation(std::make_pair(16, 24),
+                    W_btns, animations_left_2, duration_of_anim);
 
     // create animations for buttons W25 - W32
-    createAnimation(std::move(std::make_pair(24, 32)), W_btns, animations_right_1, 2000);
+    createAnimation(std::make_pair(24, 32),
+                    W_btns, animations_right_1, duration_of_anim);
 
     // create animations for buttons W33 - W40
-    createAnimation(std::move(std::make_pair(32, 40)), W_btns, animations_right_2, 2000);
+    createAnimation(std::make_pair(32, 40),
+                    W_btns, animations_right_2, duration_of_anim);
 
 
     // Signals & slots

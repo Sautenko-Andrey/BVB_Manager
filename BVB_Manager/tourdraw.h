@@ -108,7 +108,9 @@ private:
                          QList<QPropertyAnimation *> &animations,
                          int duration);
 
-    QPushButton* makeOpsBtn(const QRect &&geom, const QString &&text, const QString &style);
+    QPushButton* makeOpsBtn(const QRect &geom,
+                            const QString &text,
+                            const QString &style);
 };
 
 #endif // TOURDRAW_H

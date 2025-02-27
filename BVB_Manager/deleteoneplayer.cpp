@@ -45,15 +45,17 @@ DeleteOnePlayer::DeleteOnePlayer(QSqlDatabase &database, QWidget *parent)
         return;
     }
 
+    // Reverse memory for vectors
+    constexpr int possible_players_amount{100};
+    all_players.reserve(possible_players_amount);
+
     // filling the container
     while(query.next()){
-        Player player(query.value(0).toInt(), query.value(1).toString(),
-                      query.value(2).toString(),query.value(3).toInt(),
-                      query.value(4).toInt(),query.value(5).toInt(),
-                      query.value(6).toString(),query.value(7).toString());
 
-
-        all_players.push_back(player);
+        all_players.emplace_back(Player(query.value(0).toInt(), query.value(1).toString(),
+                                        query.value(2).toString(),query.value(3).toInt(),
+                                        query.value(4).toInt(),query.value(5).toInt(),
+                                        query.value(6).toString(),query.value(7).toString()));
     }
 
     // filling the table
@@ -135,8 +137,9 @@ void DeleteOnePlayer::on_markButton_clicked()
         db_index_for_del = ui->tableView->currentIndex().data().toInt();
 
         // Make marked row red
-        constexpr int columns_amount = 8;
-        for(int i{0}; i < columns_amount; ++i){
+        constexpr int columns_amount{8};
+        for(int i{0}; i < columns_amount; ++i)
+        {
             model->setData(model->index(row_for_del, i),
                            QColor(Qt::red), Qt::BackgroundRole);
         }
@@ -171,13 +174,14 @@ void DeleteOnePlayer::on_markButton_clicked()
         marked_indexes.push_back(db_index);
 
         // Make marked row red
-        constexpr int columns_amount = 8;
+        constexpr int columns_amount{8};
 
-        for(int i{0}; i < columns_amount; ++i){
+        for(int i{0}; i < columns_amount; ++i)
+        {
             model->setData(model->index(marked_row, i),
                            QColor(Qt::red), Qt::BackgroundRole);
         }
-        marked_rows.push_back(marked_row);
+        marked_rows.push_back(std::move(marked_row));
 
         // saving marked names for the next purposes
         QSqlQuery save_query(*db);
@@ -193,10 +197,10 @@ void DeleteOnePlayer::on_markButton_clicked()
         }
         else{
             while(save_query.next()){
-                QString name = save_query.value(0).toString()
-                               + "_" + save_query.value(1).toString() + ".jpeg";
 
-                removed_names.push_back(name);
+                removed_names.emplace_back(
+                    QString(save_query.value(0).toString()
+                            + "_" + save_query.value(1).toString() + ".jpeg"));
             }
         }
     }
@@ -214,6 +218,8 @@ void DeleteOnePlayer::on_deleteButton_clicked()
 
     // make del mode button available again
     ui->deleteModeComboBox->setDisabled(false);
+
+    QString players_images_path{"/Players_images"};
 
     if(mode){   // delete one by one
 
@@ -233,12 +239,13 @@ void DeleteOnePlayer::on_deleteButton_clicked()
         }
 
         // delete an image from the directory
-        QDir dir(QDir::homePath() + "/Players_images");
+        QDir dir(QDir::homePath() + players_images_path);
 
         if(!dir.exists()){
 
             // if folder doesn't exist we create it and warn a user
-            dir.mkpath(QDir::homePath() + "/Players_images");
+            dir.mkpath(QDir::homePath() + std::move(players_images_path));
+
             QMessageBox::warning(this, "Attention!",
             "Folder Players_images was absent. App has made it one more time.");
         }
@@ -261,7 +268,7 @@ void DeleteOnePlayer::on_deleteButton_clicked()
         }
 
         // delete data from database either
-        for(auto const &index : marked_indexes){
+        for(const auto &index : marked_indexes){
             QSqlQuery query(*db);
             query.prepare("DELETE FROM Players WHERE id = :id_for_del;");
             query.bindValue(":id_for_del", index);
@@ -273,19 +280,20 @@ void DeleteOnePlayer::on_deleteButton_clicked()
         }
 
         // delete image/images from the directory
-        QDir dir(QDir::homePath() + "/Players_images");
+        QDir dir(QDir::homePath() + players_images_path);
 
         if(!dir.exists()){
 
             // if folder doesn't exist we create it and warn a user
-            dir.mkpath(QDir::homePath() + "/Players_images");
+            dir.mkpath(QDir::homePath() + std::move(players_images_path));
+
             QMessageBox::warning(this, "Attention!",
                 "Folder Players_images was absent. App has made it one more time.");
         }
         else{
 
             // deleting marked pics from the pics folder
-            for(auto const &name : removed_names){
+            for(const auto &name : removed_names){
                 dir.remove(name);
             }
         }

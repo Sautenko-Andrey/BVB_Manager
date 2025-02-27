@@ -14,6 +14,10 @@ UpdatePlayer::UpdatePlayer(QSqlDatabase &database, QWidget *parent)
     // pointer on database
     db = &database;
 
+    // reserve memory for all_players container
+    constexpr int possible_players_amount{50};
+    all_players.reserve(possible_players_amount);
+
     // filling a table
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableWidget->setColumnCount(header_labels.size());
@@ -39,13 +43,11 @@ UpdatePlayer::UpdatePlayer(QSqlDatabase &database, QWidget *parent)
             QString gender = "male";
             query.value(4).toInt() ? gender : gender = "female";
 
-            Player2 player(query.value(0).toInt(), query.value(1).toString(),
-                           query.value(2).toString(),
-                           query.value(3).toInt(), gender,
-                           query.value(5).toInt(), query.value(6).toString(),
-                           query.value(7).toString(), query.value(8).toString());
-
-            all_players.push_back(player);
+            all_players.emplaceBack(Player2(query.value(0).toInt(), query.value(1).toString(),
+                                            query.value(2).toString(),
+                                            query.value(3).toInt(), gender,
+                                            query.value(5).toInt(), query.value(6).toString(),
+                                            query.value(7).toString(), query.value(8).toString()));
         }
     }
 

@@ -23,6 +23,8 @@ public:
                QWidget *parent = nullptr);
     ~GameResult();
 
+
+
 private slots:
 
     void resultTeam1Changed();
@@ -38,6 +40,9 @@ private:
     QPushButton *second_team;
     QPushButton *game_result;
     QStringList *games_results_list{nullptr};
+
+    inline static constexpr int won_one_set{1};
+    inline static constexpr int won_two_sets{2};
 
     // Overriding method closeEvent for forbidding close event via button
     void closeEvent(QCloseEvent *event) override {
