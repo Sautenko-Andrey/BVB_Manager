@@ -97,7 +97,7 @@ void UpdatePlayer::picClicked(){
 
     if(ui->tableWidget->currentColumn() == static_cast<int>(Headers::Image)){
 
-        const QString &player_image_path = QFileDialog::getOpenFileName(this,
+        const QString player_image_path = QFileDialog::getOpenFileName(this,
                                                            "Select an image");
         if(!image.load(player_image_path)){
             QMessageBox::warning(this, "File error!", "Couldn't load an image!");
@@ -179,7 +179,7 @@ void UpdatePlayer::saveID(){
 void UpdatePlayer::changeCell(){
 
     // getting a new data
-    const auto &data = ui->tableWidget->item(ui->tableWidget->currentRow(),
+    const auto data = ui->tableWidget->item(ui->tableWidget->currentRow(),
                        ui->tableWidget->currentColumn())->text();
 
     // getting a column number

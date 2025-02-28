@@ -285,7 +285,8 @@ void BVB_Manager::getPlayers(bool gender){
 void BVB_Manager::updateDate(){
 
     selected_date = ui->calendarWidget->selectedDate();
-    const QString training_date = "Date: " + selected_date.toString("dd.MM.yyyy");
+    const QString training_date = "Date: " +
+                                  selected_date.toString("dd.MM.yyyy");
     ui->dateSelectedLabel->setText(training_date);
 }
 
@@ -312,7 +313,9 @@ QString BVB_Manager::timeToString(){
         minutes = "0" + QString::number(minute);
     }
 
-    QString time_str = "Time: " + QString::number(hour) + ":" + std::move(minutes);
+    QString time_str = "Time: " +
+                       QString::number(hour) +
+                       ":" + std::move(minutes);
 
     ui->timeSelectedLabel->setText(time_str);
 
@@ -340,7 +343,9 @@ void BVB_Manager::selectedTimeChanged(){
 /*
     Function marks an item when user double clicks on it
 */
-void BVB_Manager::markItem(QListWidgetItem *item, const QBrush &color, bool is_bold){
+void BVB_Manager::markItem(QListWidgetItem *item,
+                           const QBrush &color,
+                           bool is_bold){
 
     QFont item_font;
 
@@ -466,7 +471,8 @@ void BVB_Manager::on_actionAdd_a_new_player_triggered()
 {
     // add a new player
     add_player = std::make_unique<AddPlayer>(database_manager.getDatabase(),
-                                             this, true, "", "", ui->playersListWidget);
+                                             this, true, "", "",
+                                             ui->playersListWidget);
 
     add_player->setWindowTitle("New player");
     add_player->setFixedSize(685, 342);
@@ -480,7 +486,9 @@ void BVB_Manager::on_actionAdd_a_new_player_triggered()
 void BVB_Manager::on_actionDelete_a_player_triggered()
 {
     // delete a desired player
-    delete_player = std::make_unique<DeleteOnePlayer>(database_manager.getDatabase(), this);
+    delete_player =
+        std::make_unique<DeleteOnePlayer>(database_manager.getDatabase(),
+                                                      this);
     delete_player->setWindowTitle("Delete a player");
     delete_player->show();
 }
@@ -493,7 +501,8 @@ void BVB_Manager::on_actionDelete_all_players_triggered()
 {
     QMessageBox::StandardButton reply;
 
-    reply = QMessageBox::question(this, "Delete all players",
+    reply = QMessageBox::question(this,
+                                  "Delete all players",
             "You are going to delete all players data from the database. Are you sure?",
             QMessageBox::Yes | QMessageBox::No);
 
@@ -542,8 +551,10 @@ void BVB_Manager::on_actionChange_a_player_triggered()
     update_player->setGeometry(0, 0,
                                static_cast<int>(Sizes::ChangePlayerWindowWidth),
                                static_cast<int>(Sizes::ChangePlayerWindowHeight));
+
     update_player->setMaximumWidth(static_cast<int>(Sizes::ChangePlayerWindowWidth));
     update_player->setMinimumWidth(static_cast<int>(Sizes::ChangePlayerWindowWidth));
+
     update_player->show();
 }
 
@@ -554,8 +565,11 @@ void BVB_Manager::on_actionChange_a_player_triggered()
 void BVB_Manager::on_actionAdd_a_new_exercise_triggered()
 {
     // adding a new exercise
-    add_exercise = std::make_unique<AddExercise>(database_manager.getDatabase(),
-                                                 this, ui->exercisesListWidget);
+    add_exercise =
+        std::make_unique<AddExercise>(database_manager.getDatabase(),
+                                                 this,
+                                                 ui->exercisesListWidget);
+
     add_exercise->setWindowTitle("Add a new exercise");
     add_exercise->show();
 }
@@ -567,13 +581,18 @@ void BVB_Manager::on_actionAdd_a_new_exercise_triggered()
 void BVB_Manager::on_actionDelete_an_exercise_triggered()
 {
     // deleting an exercise
-    delete_exercise = std::make_unique<DeleteExercise>(database_manager.getDatabase(),
+    delete_exercise =
+        std::make_unique<DeleteExercise>(database_manager.getDatabase(),
                                                        this);
+
     delete_exercise->setWindowTitle("Delete an exercise");
+
     delete_exercise->setGeometry(0,0,
                                  static_cast<int>(Sizes::DeleteExerciseWindowWidth),
                                  static_cast<int>(Sizes::DeleteExerciseWindowHeight));
+
     delete_exercise->setMaximumWidth(static_cast<int>(Sizes::DeleteExerciseWindowMaxWidth));
+
     delete_exercise->show();
 }
 
@@ -584,9 +603,12 @@ void BVB_Manager::on_actionDelete_an_exercise_triggered()
 void BVB_Manager::on_actionChange_an_exercise_triggered()
 {
     // upgrading an exercise
-    change_exercise = std::make_unique<ChangeExercise>(database_manager.getDatabase(),
+    change_exercise =
+        std::make_unique<ChangeExercise>(database_manager.getDatabase(),
                                                        this);
+
     change_exercise->setWindowTitle("Change an exercise");
+
     change_exercise->show();
 }
 
@@ -597,14 +619,19 @@ void BVB_Manager::on_actionChange_an_exercise_triggered()
 void BVB_Manager::on_actionSearch_a_player_triggered()
 {
     // Search a player tool
-    search_player = std::make_unique<SearchPlayer>(database_manager.getDatabase(),
+    search_player =
+        std::make_unique<SearchPlayer>(database_manager.getDatabase(),
                                                    this);
+
     search_player->setWindowTitle("Search a player");
+
     search_player->setGeometry(0, 0,
                                static_cast<int>(Sizes::SearchPlayerWindowWidth),
                                static_cast<int>(Sizes::SearchPlayerWindowHeight));
+
     search_player->setMinimumSize(static_cast<int>(Sizes::SearchPlayerWindowWidth),
                                   static_cast<int>(Sizes::SearchPlayerWindowHeight));
+
     search_player->show();
 }
 
@@ -716,9 +743,13 @@ void BVB_Manager::on_resetCurrentSettingButton_clicked()
 */
 void BVB_Manager::clearEditor(){
 
-    removeListWidgetItems(ui->playerNameLabel, ui->playersListWidget, marked_players);
+    removeListWidgetItems(ui->playerNameLabel,
+                          ui->playersListWidget,
+                          marked_players);
 
-    removeListWidgetItems(ui->exerciseLabel, ui->exercisesListWidget, marked_exercises);
+    removeListWidgetItems(ui->exerciseLabel,
+                          ui->exercisesListWidget,
+                          marked_exercises);
 
     ui->dateSelectedLabel->setText(current_date);
 
@@ -928,7 +959,7 @@ void BVB_Manager::comboLangChanged(){
 void BVB_Manager::dateActivated(){
 
     // double click / enter /return on calendar widget's date
-    const auto &selected_date = ui->calendarWidget->selectedDate();
+    const auto selected_date = ui->calendarWidget->selectedDate();
 
     // make a query to getting all trainings on this date
     QSqlQuery query(database_manager.getDatabase());
@@ -1011,10 +1042,12 @@ void BVB_Manager::dateClicked(){
 void BVB_Manager::on_actionRegister_a_team_triggered()
 {
     // team registration
-    team_registration = std::make_unique<TeamRegistration>(database_manager.getDatabase(),
+    team_registration =
+        std::make_unique<TeamRegistration>(database_manager.getDatabase(),
                                                            this);
 
     team_registration->setWindowTitle("Team registration");
+
     team_registration->show();
 }
 
@@ -1025,10 +1058,12 @@ void BVB_Manager::on_actionRegister_a_team_triggered()
 void BVB_Manager::on_actionAdd_a_new_tournament_triggered()
 {
     // add a new tournament to the database
-    add_tournament = std::make_unique<AddTournament>(&database_manager.getDatabase(),
+    add_tournament =
+        std::make_unique<AddTournament>(&database_manager.getDatabase(),
                                                      this);
 
     add_tournament->setWindowTitle("Add a new tournament");
+
     add_tournament->show();
 }
 
@@ -1041,6 +1076,8 @@ void BVB_Manager::on_actionCreate_a_tournament_triggered()
     // create a tournament
     tournament_creator = std::make_unique<TournamentCreator>(&database_manager.getDatabase(),
                                                          this);
+
     tournament_creator->setWindowTitle("Create a new tournament");
+
     tournament_creator->show();
 }

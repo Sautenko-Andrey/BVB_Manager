@@ -63,7 +63,7 @@ void DeleteExercise::clickOnItem(){
     current_index = ui->listWidget->currentRow();
     auto current_name = ui->listWidget->currentItem()->text();
 
-    const auto &first_brace = current_name.indexOf("(");
+    const auto first_brace = current_name.indexOf("(");
     exercise_name = current_name.left(first_brace);
     exercise_name.chop(1);
 }

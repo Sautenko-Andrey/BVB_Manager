@@ -35,7 +35,7 @@ Calendar::~Calendar()
 */
 void Calendar::on_pushButton_clicked()
 {
-    const auto &date = ui->calendarWidget->selectedDate();
+    const auto date = ui->calendarWidget->selectedDate();
 
     start_tour_date->setDate(date);
     end_tour_date->setDate(date);

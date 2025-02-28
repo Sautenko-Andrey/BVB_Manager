@@ -84,11 +84,11 @@ void ChangeExercise::saveOldTitle(){
 void ChangeExercise::changeCell(){
 
     // getting a new data
-    const auto &data = ui->tableWidget->item(ui->tableWidget->currentRow(),
+    const auto data = ui->tableWidget->item(ui->tableWidget->currentRow(),
                           ui->tableWidget->currentColumn())->text();
 
     // getting a column number
-    const auto &column = ui->tableWidget->currentColumn();
+    const auto column = ui->tableWidget->currentColumn();
 
     // make a query
     QSqlQuery query(*db);

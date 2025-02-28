@@ -214,21 +214,21 @@ void AddPlayer::on_clearAllButton_clicked()
 void AddPlayer::on_savePlayerButton_clicked()
 {
 
-    const QString &player_first_name = ui->firstNameLine->text();
+    const auto player_first_name = ui->firstNameLine->text();
 
-    const QString &player_last_name = ui->lastNameLine->text();
+    const auto player_last_name = ui->lastNameLine->text();
 
-    const int &player_age = ui->ageSpinBox->value();
+    const auto player_age = ui->ageSpinBox->value();
 
-    const int &player_height = ui->heightSpinBox->value();
+    const auto player_height = ui->heightSpinBox->value();
 
     int player_sex{0};
 
     ui->femaleRadioButton->isChecked() ? player_sex : player_sex = 1;
 
-    const QString &player_hometown = ui->hometownLine->text();
+    const auto player_hometown = ui->hometownLine->text();
 
-    const QString &player_phone = ui->phoneLine->text();
+    const auto player_phone = ui->phoneLine->text();
 
     // creating a new folder with players images( if it doesn't exist )
     QDir dir;

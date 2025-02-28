@@ -86,7 +86,7 @@ TourDraw::TourDraw(QSqlDatabase &database,
         auto comma_index =
             tournament.selected_teams[rank_baskets[i]]->text().indexOf("(");
 
-        const QString &team_name =
+        const QString team_name =
             tournament.selected_teams[rank_baskets[i]]->text().left(comma_index - 1);
 
         auto btn = drawTeamBtn(static_cast<int>(Geometry::coordXStartBtn), y,
